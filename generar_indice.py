@@ -41,7 +41,7 @@ BLOQUES = [
    (15, "La evolución de Internet y su impacto social",
       "Cómo ha cambiado Internet desde la consulta de información hasta la red de datos e inteligencia artificial actual.")]),
  ("bloque_e", "Bloque E", "Programación",
-  "Desde los primeros programas en Python con Google Colab hasta las estructuras de control, las listas, las funciones y la depuración con Thonny.",
+  "Desde los primeros programas en Python con Jupyter Notebook hasta las estructuras de control, las listas, las funciones y la depuración con Thonny.",
   [(16, "Del problema al programa: algoritmos y primeros pasos con Python",
       "Cómo se pasa de un problema enunciado en palabras a un programa que funciona, con código ejecutable desde la primera sesión."),
    (17, "Datos, variables, operadores, entrada y salida",

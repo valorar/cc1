@@ -32,14 +32,14 @@ Cómo la mecánica, la electricidad y la electrónica fueron sustituyendo al cá
 - la válvula de vacío y el primer ordenador electrónico (ENIAC, 1943‑1946).
 - el transistor y la miniaturización de los circuitos.
 - el circuito integrado y el chip; generaciones de ordenadores.
-- los sensores, la robótica y los primeros sistemas de inteligencia artificial.
+- los sensores, la robótica y los primeros sistemas de inteligencia artificial como último eslabón de esta cadena de avances.
 
 ### Tema 3. La revolución digital, la era de la información y su impacto social
 
 Cómo el ordenador dejó de ser una máquina de cálculo para convertirse en una infraestructura social, y qué consecuencias tiene ese cambio.
 
 - el comienzo de la revolución digital y la era de la información.
-- el nacimiento de Internet y el acceso globalizado al conocimiento.
+- el nacimiento de Internet como hito de la revolución digital; su evolución como red de servicios se estudia en el Tema 15.
 - evolución de los lenguajes de programación.
 - la computación gráfica y los simuladores.
 - computación y sociedad: impacto en el desarrollo social y económico.
@@ -81,7 +81,7 @@ Cómo se conectan físicamente los componentes, de dónde obtienen energía y qu
 
 - la placa base (mainboard): función e integración de los componentes.
 - conectores de alimentación, zócalo de CPU y ranuras de RAM.
-- chipset: puente norte y puente sur.
+- chipset: el modelo histórico de puente norte y puente sur y su integración actual en el procesador y en un único chip.
 - reloj del sistema y memoria de configuración CMOS.
 - firmware: BIOS y UEFI.
 - buses de expansión, conectores y puertos más frecuentes en los equipos.
@@ -200,7 +200,7 @@ Cómo se construye y se publica un sitio web y qué condiciones debe cumplir par
 
 Cómo ha cambiado Internet desde la consulta de información hasta la red de datos e inteligencia artificial actual.
 
-- de la red de redes a la Web: conceptos básicos.
+- de la red de redes a la Web: qué aporta la Web sobre la Internet ya presentada en el Tema 3.
 - la web 1.0: acceso instantáneo a la información y sociedad de la información y la comunicación.
 - la web 2.0: interoperabilidad, creación colaborativa de contenidos y web social.
 - usos y riesgos de las redes sociales y sus aplicaciones.
@@ -218,8 +218,10 @@ Cómo se pasa de un problema enunciado en palabras a un programa que funciona, t
 - elementos de programación: programa, algoritmo, código fuente y ejecución.
 - conceptos básicos: ingeniería de software y evolución de la programación.
 - propiedades de un algoritmo y tipos: estáticos, probabilísticos y adaptativos.
-- resolución de problemas mediante programación: descomposición de un problema mayor en otros más pequeños.
-- representación de algoritmos: diagramas de flujo y pseudocódigo como notaciones que hay que saber leer.
+- pensamiento computacional: descomposición de un problema mayor en otros más pequeños, reconocimiento de patrones y abstracción.
+- resolución de problemas mediante programación: del enunciado al programa.
+- diagramas de flujo: símbolos y lectura de un diagrama sencillo, de forma breve.
+- descripción de algoritmos en lenguaje natural, sin notaciones formales de pseudocódigo.
 - Python en Jupyter Notebook con Google Colab: celdas, ejecución y estado de la sesión.
 - primer programa: salida por pantalla, comentarios y errores más frecuentes.
 - método de trabajo: ejemplos, entradas, salidas esperadas y comprobación de resultados.
@@ -281,7 +283,7 @@ Cómo dividir un programa en piezas con nombre propio, reutilizables y fáciles 
 Dónde se escribe y se ejecuta un programa, qué ocurre cuando falla y cómo se demuestra que una corrección funciona.
 
 - componentes de un entorno de programación: editor, ejecución, consola, depurador y bibliotecas.
-- Google Colab como entorno principal: notebooks, estado de la sesión y archivos.
+- Jupyter Notebook, con Google Colab, como entorno principal: celdas, estado de la sesión y archivos.
 - Thonny como entorno local sencillo: archivos `.py`, ejecución y consola.
 - ensamblaje o compilación frente a interpretación: qué ocurre al ejecutar un programa.
 - tipos de error: sintaxis, ejecución (excepciones) y errores lógicos.
@@ -301,7 +303,21 @@ Los cinco bloques del programa reproducen los cinco bloques de contenidos oficia
 
 **Bloque D (temas 11–15).** Los cinco temas cubren la ofimática y la documentación electrónica, las funciones avanzadas, el software de comunicación, la gestión de archivos y el almacenamiento en la nube, las herramientas de gestión de proyectos colaborativos, el diseño, la edición y la publicación de páginas web con sus estándares de accesibilidad, y la evolución de Internet en sus tres etapas con su impacto social. La orden señala expresamente que debe prestarse mayor atención a las herramientas de gestión de proyectos colaborativos y a las funciones avanzadas de la ofimática, por lo que ambas reciben epígrafes propios.
 
-**Bloque E (temas 16–21).** Los seis temas cubren los elementos de programación, los conceptos básicos, los tipos de algoritmos, los diagramas de flujo y el pseudocódigo, la resolución de problemas por descomposición, las estructuras básicas de la programación estructurada, los entornos de programación y la metodología de desarrollo completa: sentencias simples y estructuradas, sintaxis y codificación con variables, vectores, expresiones condicionales, selección, bucles y funciones, ensamblaje o compilación y prueba y depuración del programa. Los diagramas de flujo y el pseudocódigo se estudian como notaciones que el alumnado debe reconocer e interpretar, pero el trabajo se realiza siempre escribiendo y ejecutando Python.
+**Bloque E (temas 16–21).** Los seis temas cubren los elementos de programación, los conceptos básicos, los tipos de algoritmos, los diagramas de flujo y el pseudocódigo, la resolución de problemas por descomposición, las estructuras básicas de la programación estructurada, los entornos de programación y la metodología de desarrollo completa: sentencias simples y estructuradas, sintaxis y codificación con variables, vectores, expresiones condicionales, selección, bucles y funciones, ensamblaje o compilación y prueba y depuración del programa. Los diagramas de flujo se presentan de forma breve para que el alumnado sepa leerlos, y los algoritmos se describen en lenguaje natural; el trabajo se realiza siempre escribiendo y ejecutando Python.
+
+### Contenidos de ampliación
+
+Los siguientes contenidos no figuran literalmente en el texto oficial y se incorporan de forma deliberada porque sostienen otros saberes del propio curso o actualizan el currículo. Se señalan aquí para que puedan distinguirse en cualquier momento de los saberes básicos:
+
+- representación binaria de la información y unidades de medida (Tema 4).
+- formatos actuales de equipos —portátiles, dispositivos móviles, sistemas embebidos y servidores en la nube— y máquinas virtuales (temas 4 y 8).
+- mantenimiento básico, consumo energético y ciclo de vida del hardware (Tema 7).
+- normas de presentación de trabajos académicos (Tema 11).
+- contraste y verificación de la información, derechos de autor y licencias libres (Tema 15).
+- codificación de caracteres ASCII y Unicode (Tema 19).
+- documentación de funciones y uso de módulos de la biblioteca estándar (Tema 20).
+
+Todo lo demás procede de los contenidos enumerados en el Anexo IV: la máquina de Turing, los problemas indecidibles, el álgebra de Boole, el chipset, la memoria CMOS, el firmware, el gestor de arranque, los sistemas de protección ante fallos, la programación orientada a objetos y a eventos, los diagramas de flujo, el pseudocódigo y la compilación aparecen en el texto oficial y no son añadidos de este programa.
 
 ## Alineación con los criterios de evaluación
 

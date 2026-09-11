@@ -117,7 +117,7 @@ La secuencia responde a cinco preguntas consecutivas:
 
 La secuencia responde a seis preguntas consecutivas:
 
-1. **¿Cómo se pasa de un problema a un programa?** Algoritmos, descomposición y primer código en Colab.
+1. **¿Cómo se pasa de un problema a un programa?** Pensamiento computacional, descomposición y primer código en Jupyter Notebook.
 2. **¿Con qué datos trabaja un programa?** Variables, tipos, operadores, entrada y salida.
 3. **¿Cómo decide y cómo repite?** Condicionales y bucles.
 4. **¿Cómo se manejan muchos datos a la vez?** Listas y cadenas.
@@ -135,7 +135,8 @@ La secuencia responde a seis preguntas consecutivas:
 - **Python desde la primera sesión.** El lenguaje es único durante todo el curso. La orden permite escoger cualquier lenguaje y Python es el que da continuidad al Bloque D de Ciencias de la Computación II.
 - **Jupyter Notebook con Google Colab como entorno principal.** No requiere instalación, funciona desde cualquier equipo del centro o de casa y permite alternar explicación y código ejecutable en el mismo documento.
 - **Thonny como segundo entorno.** Se utiliza de forma acotada en el Tema 21 para mostrar la ejecución de programas en archivos `.py` y, sobre todo, para la depuración paso a paso con puntos de interrupción e inspección de variables, que un notebook no facilita igual de bien.
-- **No se trabaja con pseudocódigo ni se elaboran diagramas de flujo.** El currículo oficial los enumera como contenido, de modo que se estudian al nivel de reconocimiento: el alumnado debe saber identificar los símbolos de un diagrama de flujo e interpretar un fragmento de pseudocódigo ajeno, porque son notaciones frecuentes en la bibliografía y en las pruebas. Pero la planificación de los programas se concreta siempre con ejemplos, entradas, salidas esperadas, casos de prueba y código Python incremental, y los algoritmos se explican oralmente y en Python en lugar de en una notación intermedia. La alternativa —convertir el pseudocódigo en método de trabajo— duplicaría el esfuerzo de aprendizaje y retrasaría el contacto con código ejecutable.
+- **Diagramas de flujo: tratamiento breve.** El currículo oficial los enumera como contenido, así que se presentan sus símbolos y se practica la lectura de un diagrama sencillo. Es suficiente para que el alumnado reconozca la notación cuando aparezca en un libro, en una prueba o en un esquema ajeno. No se convierten en método de diseño ni se exige elaborarlos para cada programa.
+- **Pseudocódigo en lenguaje natural, nunca en un lenguaje formal.** Los algoritmos se describen de viva voz o por escrito en español corriente, con ejemplos, entradas y salidas esperadas. No se enseña ninguna notación formal de pseudocódigo ni herramientas del tipo PSeInt: obligan a aprender una sintaxis intermedia, con sus propias reglas y sus propios errores, que después hay que abandonar. Ese esfuerzo se invierte en Python, que es ejecutable desde el primer día y da continuidad a Ciencias de la Computación II. El paso del enunciado al programa se hace directamente en Python, apoyado en casos de prueba y en desarrollo incremental.
 - **Los vectores del texto oficial se estudian como listas de Python**, que es su realización natural en el lenguaje elegido.
 - **La compilación se explica, no se practica.** El criterio 4.3 menciona la compilación; en un curso basado en Python se aborda como concepto, comparando compiladores, intérpretes y máquinas virtuales en los temas 9 y 21.
 - **Las pruebas y la depuración aparecen desde el Tema 16** como hábito de trabajo y se formalizan en el Tema 21.
@@ -149,4 +150,5 @@ El programa se ha escrito comprobando el de 2.º curso para evitar solapamientos
 - La seguridad, el malware y la criptografía no se tratan en 1.º.
 - La edición de imagen, sonido y vídeo pertenece al Bloque C de CC II.
 - El Bloque E deja asentados variables, tipos, operadores, entrada y salida, condicionales, bucles, listas, cadenas y funciones, que el Tema 14 de CC II reactiva programando en lugar de reexplicar.
-- Colecciones avanzadas, ficheros, clases, excepciones y entornos móviles corresponden a CC II.
+- Los diccionarios, las tuplas y los conjuntos no se estudian en 1.º: el texto oficial habla de «variables y vectores», y el Tema 15 de CC II los presenta juntos para enseñar a escoger la colección adecuada. Adelantarlos aquí, sin ficheros ni JSON en los que resulten necesarios, los convertiría en memorización.
+- Ficheros, clases, excepciones y entornos móviles corresponden también a CC II.
