@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Tema 9 del Bloque C de Ciencias de la Computación I: cómo se traduce una idea a instrucciones que la máquina ejecuta y qué enfoques existen para escribir programas.">
+<title>Tema 9. Lenguajes de programación y tipos de programación · CC1</title><link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/estilos.css"><script src="assets/navegacion.js" defer></script></head>
+<body><a class="skip" href="#contenido">Saltar al contenido</a>
+<div class="progress" aria-hidden="true"><span></span></div>
+<header class="site-header"><div class="header-inner">
+  <a class="brand" href="index.html"><span class="brand-mark">CC1</span><span>Ciencias de la Computación I<small>1.º de Bachillerato · 2026–2027</small></span></a>
+  <nav class="top-nav" aria-label="Navegación principal"><a href="index.html">Índice</a></nav>
+</div></header>
+<main id="contenido">
+<section class="hero"><div class="hero-inner"><div><p class="kicker">Tema 9 · Bloque C · Software de sistema y de utilidad</p><h1>Lenguajes de programación y tipos de programación</h1><p class="hero-lead">Cómo se traduce una idea a instrucciones que la máquina ejecuta y qué enfoques existen para escribir programas.</p></div><aside class="hero-note"><strong>Pregunta guía</strong><p>¿Por qué existen cientos de lenguajes de programación en lugar de uno solo que sirva para todo?</p></aside></div></section>
+<div class="layout"><nav class="toc" aria-label="Índice del tema"><strong>En este tema</strong><ol>
+<li><a href="#niveles">Niveles de abstracción: de la máquina a las personas</a></li>
+<li><a href="#sintaxis">Sintaxis, semántica y errores</a></li>
+<li><a href="#traduccion">Compiladores, intérpretes y máquinas virtuales</a></li>
+<li><a href="#python">Dónde encaja Python</a></li>
+<li><a href="#imperativa">Imperativa frente a declarativa</a></li>
+<li><a href="#estructurada">Estructurada, modular y orientada a objetos</a></li>
+<li><a href="#eventos">Programación orientada a eventos</a></li>
+<li><a href="#elegir">Cómo se elige un lenguaje</a></li>
+<li><a href="#glosario">Glosario</a></li>
+<li><a href="#resumen">Resumen</a></li>
+<li><a href="#fuentes">Fuentes</a></li>
+</ol></nav><article class="paper">
+<p class="lesson-intro">Cómo se traduce una idea a instrucciones que la máquina ejecuta y qué enfoques existen para escribir programas.</p>
+<div class="question"><strong>Antes de empezar:</strong> ¿por qué existen cientos de lenguajes de programación en lugar de uno solo que sirva para todo?</div>
+<div class="objectives"><strong>Al terminar serás capaz de…</strong><ul>
+<li>situar un lenguaje en su nivel de abstracción y explicar qué gana y qué pierde</li>
+<li>distinguir sintaxis y semántica, y relacionarlas con los tipos de error</li>
+<li>explicar cómo se ejecuta un programa compilado, uno interpretado y uno sobre máquina virtual</li>
+<li>reconocer los principales tipos de programación y qué problema resuelve cada uno</li>
+<li>justificar la elección de un lenguaje para una tarea concreta</li>
+</ul></div>
+
+<p>En el <a href="tema03.html">Tema 3</a> viste la historia de los lenguajes; en el <a href="tema08.html">Tema 8</a>, las capas de software. Este tema cierra el Bloque C explicando <strong>cómo se le dan instrucciones a la máquina</strong>, y es el puente directo hacia el Bloque E, donde empezarás a programar en Python.</p>
+
+<h2 id="niveles">1. Niveles de abstracción: de la máquina a las personas</h2>
+<p>Un procesador solo entiende <strong>código máquina</strong>: secuencias de bits que interpreta como instrucciones. Programar así es posible y es lo que se hacía al principio, pero resulta lentísimo, ilegible y atado a un modelo concreto de procesador.</p>
+<div class="tabla_responsiva"><table class="cc1-table">
+<tr><th>Nivel</th><th>Qué es</th><th>Ventaja</th><th>Inconveniente</th></tr>
+<tr><td><strong>Código máquina</strong></td><td>Los bits que ejecuta directamente la CPU.</td><td>Control absoluto; no necesita traducción.</td><td>Ilegible y válido solo para una arquitectura.</td></tr>
+<tr><td><strong>Ensamblador</strong></td><td>Los mismos bits, escritos con abreviaturas legibles: <code>MOV</code>, <code>ADD</code>, <code>JMP</code>.</td><td>Legible por una persona, conservando el control.</td><td>Sigue atado al procesador; una línea por instrucción.</td></tr>
+<tr><td><strong>Alto nivel</strong></td><td>Lenguajes que expresan datos, decisiones y repeticiones sin gestionar el procesador: C, Python, Java.</td><td>Legible, portable y mucho más rápido de escribir.</td><td>Se delega el control de detalles a un traductor.</td></tr>
+</table></div>
+<div class="cc1-concept"><strong class="cc1-concept-tag">Concepto clave</strong>Subir de nivel de abstracción significa <strong>delegar decisiones</strong>. En ensamblador decides en qué registro va cada valor; en Python escribes <code>total = a + b</code> y no te preocupas de dónde vive nada. Ganas velocidad de desarrollo y legibilidad; pierdes control fino sobre la máquina. Elegir lenguaje es, sobre todo, <strong>elegir qué detalles quieres controlar y cuáles prefieres delegar</strong>.</div>
+<div class="cc1-curio">⚙️ <strong>¿Sabías que…?</strong> Una sola línea de un lenguaje de alto nivel puede convertirse en decenas de instrucciones máquina. Y hoy los traductores generan, en la mayoría de los casos, código más eficiente que el que escribiría a mano una persona experta, porque conocen al detalle el comportamiento del procesador. Programar en ensamblador se reserva para casos muy concretos: arranque de sistemas, controladores y rutinas críticas.</div>
+
+<h2 id="sintaxis">2. Sintaxis, semántica y errores</h2>
+<p>Todo lenguaje de programación tiene dos dimensiones, igual que una lengua natural:</p>
+<div class="cc1-grid">
+<div class="cc1-card"><h3>Sintaxis</h3><p>Las <strong>formas válidas</strong>: dónde van los paréntesis, los dos puntos, la sangría. Si no se cumple, el traductor no puede ni analizar el programa.</p></div>
+<div class="cc1-card"><h3>Semántica</h3><p>Lo que cada construcción <strong>significa</strong>: qué hace exactamente un bucle o una asignación. Un programa puede ser correcto de forma y equivocado de sentido.</p></div>
+</div>
+<p>De esa distinción salen los dos grandes tipos de error con los que convivirás todo el curso:</p>
+<div class="tabla_responsiva"><table class="cc1-table">
+<tr><th>Tipo de error</th><th>Qué ocurre</th><th>Cuándo se detecta</th></tr>
+<tr><td><strong>De sintaxis</strong></td><td>El texto no cumple las reglas del lenguaje.</td><td>Antes de ejecutar: el traductor se niega y señala la línea.</td></tr>
+<tr><td><strong>De ejecución</strong></td><td>La forma es correcta, pero al ejecutar ocurre algo imposible: dividir entre cero, abrir un archivo que no existe.</td><td>Durante la ejecución, con un mensaje de error.</td></tr>
+<tr><td><strong>De lógica</strong></td><td>El programa se ejecuta sin quejarse y produce un resultado equivocado.</td><td><strong>Solo si alguien lo comprueba.</strong> Es el más peligroso de los tres.</td></tr>
+</table></div>
+<div class="cc1-note">💡 Un error de sintaxis es molesto pero inofensivo: el traductor te para y te dice dónde. Un error de lógica pasa desapercibido y puede sobrevivir años en un programa. Esa es la razón de que las pruebas y la depuración sean contenido propio del curso y no un apéndice.</div>
+
+<h2 id="traduccion">3. Compiladores, intérpretes y máquinas virtuales</h2>
+<p>Entre el código que escribes y las instrucciones que ejecuta el procesador hace falta una traducción. Hay tres estrategias.</p>
+<h3>3.1. Compilar</h3>
+<p>Un <strong>compilador</strong> lee el programa entero, lo analiza y produce un archivo ejecutable en código máquina. La traducción se hace <strong>una sola vez</strong>; después el ejecutable se lanza directamente, sin intermediarios. Es la estrategia de C y C++.</p>
+<h3>3.2. Interpretar</h3>
+<p>Un <strong>intérprete</strong> es un programa que lee el código fuente y lo va ejecutando sobre la marcha, instrucción a instrucción. No se genera ningún ejecutable: hace falta tener el intérprete instalado para poder ejecutar el programa.</p>
+<h3>3.3. Máquinas virtuales y código intermedio</h3>
+<p>La estrategia intermedia, y hoy la más extendida: el código fuente se compila a un <strong>código intermedio</strong> (o <em>bytecode</em>) que no corresponde a ningún procesador real, y una <strong>máquina virtual</strong> instalada en cada equipo lo ejecuta. Así se compila una vez y se ejecuta en cualquier sistema que tenga esa máquina virtual. Es el modelo de Java y de C#.</p>
+<div class="tabla_responsiva"><table class="cc1-table">
+<tr><th></th><th>Compilado</th><th>Interpretado</th><th>Máquina virtual</th></tr>
+<tr><td><strong>Velocidad de ejecución</strong></td><td>Máxima</td><td>Menor</td><td>Intermedia y buena en la práctica</td></tr>
+<tr><td><strong>Portabilidad</strong></td><td>Hay que recompilar para cada sistema</td><td>Alta: basta con tener el intérprete</td><td>Alta: basta con tener la máquina virtual</td></tr>
+<tr><td><strong>Ciclo de trabajo</strong></td><td>Escribir, compilar, ejecutar</td><td>Escribir y ejecutar; muy ágil para probar</td><td>Escribir, compilar rápido, ejecutar</td></tr>
+<tr><td><strong>Se distribuye…</strong></td><td>Un ejecutable, sin el código fuente</td><td>El código fuente</td><td>El código intermedio</td></tr>
+<tr><td><strong>Ejemplos</strong></td><td>C, C++, Rust</td><td>Python, JavaScript</td><td>Java, C#</td></tr>
+</table></div>
+<div class="aviso"><strong>La frontera es más borrosa de lo que parece</strong>Casi ningún lenguaje actual es puramente una cosa u otra. Muchos intérpretes traducen el código a una forma intermedia antes de ejecutarlo, y varias máquinas virtuales compilan a código máquina <em>durante</em> la ejecución las partes que más se repiten, una técnica llamada compilación <em>al vuelo</em>. Compilado e interpretado describen mejor una <strong>forma de ejecutar</strong> que una propiedad fija del lenguaje.</div>
+
+<h2 id="python">4. Dónde encaja Python</h2>
+<p>Python, el lenguaje del Bloque E, se sitúa así:</p>
+<div class="tabla_responsiva"><table class="cc1-table">
+<tr><th>Característica</th><th>Qué significa para ti</th></tr>
+<tr><td><strong>Alto nivel</strong></td><td>No gestionas memoria ni registros; te concentras en el problema.</td></tr>
+<tr><td><strong>Interpretado</strong></td><td>Escribes y ejecutas al momento, sin paso de compilación. Ideal para aprender y para probar ideas.</td></tr>
+<tr><td><strong>Propósito general</strong></td><td>Sirve para cálculo, web, datos, automatización o inteligencia artificial; no está atado a un dominio.</td></tr>
+<tr><td><strong>Multiparadigma</strong></td><td>Admite programación estructurada, modular y orientada a objetos: puedes usar el enfoque que convenga.</td></tr>
+<tr><td><strong>Legibilidad como prioridad</strong></td><td>Su sintaxis obliga a sangrar el código, de modo que la forma del programa refleja su estructura.</td></tr>
+</table></div>
+<div class="cc1-note">💡 Que Python sea «lento» comparado con C es cierto y casi siempre irrelevante. En la mayoría de los programas, el tiempo que se ahorra escribiéndolos vale mucho más que los milisegundos que se pierden ejecutándolos. Y cuando la velocidad importa de verdad, las partes críticas suelen estar escritas en C por debajo, aunque se usen desde Python.</div>
+
+<h2 id="imperativa">5. Imperativa frente a declarativa</h2>
+<p>Los <strong>tipos de programación</strong> —o paradigmas— son formas distintas de plantear la solución. La primera división es la más profunda:</p>
+<div class="cc1-grid">
+<div class="cc1-card"><h3>Imperativa</h3><p>Se describe <strong>cómo</strong> hacerlo: una secuencia de pasos que van cambiando el estado hasta llegar al resultado. Es la forma en que programarás en el Bloque E.</p></div>
+<div class="cc1-card"><h3>Declarativa</h3><p>Se describe <strong>qué</strong> se quiere obtener, y el sistema decide cómo conseguirlo. El programador especifica el resultado, no el procedimiento.</p></div>
+</div>
+<p>El ejemplo más claro es una consulta a una base de datos. En SQL se escribe algo parecido a «dame los alumnos de segundo ordenados por apellido»: no se dice cómo recorrer los datos, ni en qué orden, ni con qué método ordenar. El gestor decide la estrategia. Lo estudiarás en el Tema 12.</p>
+<div class="tabla_responsiva"><table class="cc1-table">
+<tr><th></th><th>Imperativa</th><th>Declarativa</th></tr>
+<tr><td><strong>El programador indica</strong></td><td>La secuencia de pasos.</td><td>El resultado deseado.</td></tr>
+<tr><td><strong>Control</strong></td><td>Total sobre el procedimiento.</td><td>Se delega en el sistema.</td></tr>
+<tr><td><strong>Ejemplos</strong></td><td>Python, C, Java</td><td>SQL, Prolog, HTML, hojas de cálculo</td></tr>
+</table></div>
+<div class="cc1-curio">📊 <strong>¿Sabías que…?</strong> Una hoja de cálculo es declarativa y casi nadie lo piensa. Al escribir <code>=SUMA(A1:A10)</code> no ordenas «recorre las celdas y ve acumulando»: declaras que esa celda <em>vale</em> la suma de ese rango, y el programa se ocupa de recalcularla cuando cambie cualquier dato. Millones de personas programan de forma declarativa a diario sin saber que están programando.</div>
+
+<h2 id="estructurada">6. Estructurada, modular y orientada a objetos</h2>
+<p>Dentro del enfoque imperativo hay varias formas de organizar el código, y aparecieron históricamente como respuesta a un problema concreto: <strong>a medida que los programas crecen, se vuelven imposibles de entender</strong>.</p>
+<h3>6.1. Programación estructurada</h3>
+<p>En los años sesenta era normal usar saltos incondicionales para ir de un punto a otro del programa. El resultado era el llamado <em>código espagueti</em>: imposible de seguir. La <strong>programación estructurada</strong> demostró que todo programa puede escribirse con solo tres construcciones:</p>
+<ul>
+<li><strong>Secuencia:</strong> una instrucción después de otra.</li>
+<li><strong>Selección:</strong> elegir entre alternativas según una condición.</li>
+<li><strong>Iteración:</strong> repetir mientras se cumpla una condición.</li>
+</ul>
+<p>Son exactamente las estructuras que aprenderás en el Tema 18. Al eliminar los saltos arbitrarios, el flujo del programa se puede seguir leyendo de arriba abajo.</p>
+<h3>6.2. Programación modular</h3>
+<p>El siguiente paso es dividir el programa en <strong>partes con nombre propio</strong> —funciones, procedimientos, módulos— que resuelven una tarea concreta y se pueden probar por separado. Cada módulo esconde sus detalles internos y ofrece una interfaz clara, de modo que quien lo usa no necesita saber cómo está hecho por dentro. Es el contenido del Tema 20.</p>
+<h3>6.3. Programación orientada a objetos</h3>
+<p>La modularidad separa el código en funciones, pero los datos siguen sueltos. La <strong>programación orientada a objetos</strong> reúne en una misma unidad, el <strong>objeto</strong>, los datos y las operaciones que actúan sobre ellos.</p>
+<div class="tabla_responsiva"><table class="cc1-table">
+<tr><th>Concepto</th><th>Qué es</th><th>Ejemplo</th></tr>
+<tr><td><strong>Clase</strong></td><td>La plantilla que define qué datos y qué operaciones tendrá un tipo de objeto.</td><td>La clase <em>Alumno</em>.</td></tr>
+<tr><td><strong>Objeto</strong></td><td>Un ejemplar concreto creado a partir de la clase, con sus propios valores.</td><td>Un alumno concreto con su nombre y sus notas.</td></tr>
+<tr><td><strong>Atributo</strong></td><td>Cada dato que guarda el objeto.</td><td>Nombre, curso, notas.</td></tr>
+<tr><td><strong>Método</strong></td><td>Cada operación que el objeto sabe hacer.</td><td>Calcular su media.</td></tr>
+</table></div>
+<div class="aviso"><strong>Este curso no programa con objetos</strong>La orientación a objetos aparece aquí como <strong>tipo de programación que hay que reconocer</strong>, porque el currículo lo pide y porque es el enfoque dominante en la industria. Programar con clases y objetos es contenido de Ciencias de la Computación II. En 1.º trabajarás con programación estructurada y modular, que es la base sobre la que se apoya todo lo demás.</div>
+
+<h2 id="eventos">7. Programación orientada a eventos</h2>
+<p>Los programas vistos hasta ahora siguen un guion: empiezan, hacen lo suyo y terminan. Pero una aplicación con ventanas no funciona así. <strong>No sabe qué va a pasar ni cuándo</strong>: el usuario puede pulsar un botón, mover el ratón, redimensionar la ventana o no hacer nada durante diez minutos.</p>
+<p>En la <strong>programación orientada a eventos</strong>, el programa se organiza como un conjunto de <strong>manejadores</strong>: trozos de código asociados a un suceso concreto. El programa espera en un bucle, y cuando ocurre algo —un clic, la llegada de un dato por la red, el vencimiento de un temporizador— ejecuta el manejador correspondiente y vuelve a esperar.</p>
+<div class="cc1-concept"><strong class="cc1-concept-tag">El cambio de mentalidad</strong>En un programa clásico, <strong>tú decides el orden</strong> de lo que ocurre. En uno orientado a eventos, el orden lo decide el mundo exterior y tú solo defines <em>qué hacer en cada caso</em>. Es el modelo de cualquier interfaz gráfica, de las páginas web interactivas y de las aplicaciones móviles.</div>
+<div class="cc1-think">🤔 <strong>Para pensar:</strong> estos enfoques no son excluyentes. Una aplicación móvil actual es orientada a eventos en su interfaz, orientada a objetos en su organización, estructurada dentro de cada método y usa consultas declarativas para acceder a sus datos. ¿Tiene sentido preguntar «de qué paradigma es» un programa real?</div>
+
+<h2 id="elegir">8. Cómo se elige un lenguaje</h2>
+<p>Ya puedes responder a la pregunta guía: existen cientos de lenguajes porque <strong>cada uno resuelve bien un tipo de problema</strong> y ninguno los resuelve todos.</p>
+<div class="tabla_responsiva"><table class="cc1-table">
+<tr><th>Criterio</th><th>Pregunta que hay que hacerse</th></tr>
+<tr><td><strong>Dominio</strong></td><td>¿Es para web, cálculo, sistemas, móvil, datos? Cada campo tiene lenguajes asentados.</td></tr>
+<tr><td><strong>Rendimiento</strong></td><td>¿Importan los milisegundos, o importa más terminar antes de escribirlo?</td></tr>
+<tr><td><strong>Control</strong></td><td>¿Necesito gestionar memoria y hardware, o prefiero delegarlo?</td></tr>
+<tr><td><strong>Ecosistema</strong></td><td>¿Existen bibliotecas que ya resuelvan parte del problema? Suele pesar más que el lenguaje en sí.</td></tr>
+<tr><td><strong>Equipo</strong></td><td>¿Qué sabe usar y mantener la gente que trabajará en ello?</td></tr>
+<tr><td><strong>Ejecución</strong></td><td>¿Dónde tiene que funcionar? Un navegador, un servidor y un microcontrolador imponen cosas distintas.</td></tr>
+</table></div>
+<div class="tabla_responsiva"><table class="cc1-table">
+<tr><th>Lenguaje</th><th>Nivel y ejecución</th><th>Se usa sobre todo para</th></tr>
+<tr><td><strong>C</strong></td><td>Alto nivel próximo a la máquina; compilado</td><td>Sistemas operativos, controladores, sistemas embebidos.</td></tr>
+<tr><td><strong>Python</strong></td><td>Alto nivel; interpretado</td><td>Automatización, ciencia de datos, IA, web, enseñanza.</td></tr>
+<tr><td><strong>Java</strong></td><td>Alto nivel; máquina virtual</td><td>Aplicaciones empresariales y Android.</td></tr>
+<tr><td><strong>JavaScript</strong></td><td>Alto nivel; interpretado en el navegador</td><td>Interactividad en páginas web; también servidores.</td></tr>
+<tr><td><strong>SQL</strong></td><td>Declarativo, de dominio específico</td><td>Consultar y modificar bases de datos.</td></tr>
+</table></div>
+<div class="cc1-concept"><strong class="cc1-concept-tag">Criterio clave</strong>Lo que de verdad se transfiere de un lenguaje a otro no es la sintaxis, sino <strong>saber descomponer un problema, elegir estructuras de datos y comprobar que la solución funciona</strong>. Quien domina eso aprende un lenguaje nuevo en semanas. Por eso este curso enseña a programar usando Python, y no «enseña Python».</div>
+
+<h2 id="glosario">Glosario del tema</h2>
+<dl class="cc1-glosario">
+<dt>Código máquina</dt><dd>Instrucciones en binario que ejecuta directamente el procesador.</dd>
+<dt>Ensamblador</dt><dd>Lenguaje de bajo nivel que representa las instrucciones máquina con abreviaturas legibles.</dd>
+<dt>Lenguaje de alto nivel</dt><dd>Lenguaje próximo al razonamiento humano e independiente del procesador.</dd>
+<dt>Sintaxis</dt><dd>Reglas que determinan qué construcciones son válidas en un lenguaje.</dd>
+<dt>Semántica</dt><dd>Significado de cada construcción del lenguaje.</dd>
+<dt>Compilador</dt><dd>Programa que traduce todo el código fuente a un ejecutable antes de la ejecución.</dd>
+<dt>Intérprete</dt><dd>Programa que lee y ejecuta el código fuente instrucción a instrucción.</dd>
+<dt>Código intermedio</dt><dd>Representación entre el código fuente y el código máquina, ejecutada por una máquina virtual.</dd>
+<dt>Paradigma</dt><dd>Forma general de plantear la organización de un programa.</dd>
+<dt>Programación imperativa</dt><dd>Enfoque que describe la secuencia de pasos que hay que ejecutar.</dd>
+<dt>Programación declarativa</dt><dd>Enfoque que describe el resultado deseado y delega el procedimiento.</dd>
+<dt>Programación estructurada</dt><dd>Organización del código mediante secuencia, selección e iteración, sin saltos arbitrarios.</dd>
+<dt>Programación modular</dt><dd>División del programa en partes con nombre propio que se pueden probar por separado.</dd>
+<dt>Orientada a objetos</dt><dd>Enfoque que reúne datos y operaciones en objetos creados a partir de clases.</dd>
+<dt>Orientada a eventos</dt><dd>Enfoque en el que el programa responde a sucesos externos mediante manejadores.</dd>
+</dl>
+
+<section class="summary"><h2 id="resumen">Resumen esencial</h2><ol>
+<li>Subir de nivel de abstracción es delegar decisiones: se gana legibilidad y portabilidad, se pierde control fino.</li>
+<li>La sintaxis dice qué formas son válidas y la semántica qué significan; de ahí salen los errores de sintaxis, de ejecución y de lógica.</li>
+<li>El error de lógica es el más peligroso porque no se manifiesta solo: hay que comprobarlo.</li>
+<li>Compilar traduce una vez y produce un ejecutable; interpretar ejecuta sobre la marcha; la máquina virtual combina ambos con código intermedio.</li>
+<li>Python es de alto nivel, interpretado, de propósito general y multiparadigma, y prioriza la legibilidad.</li>
+<li>La programación imperativa describe cómo; la declarativa describe qué, como hacen SQL o una hoja de cálculo.</li>
+<li>Estructurada, modular y orientada a objetos son respuestas sucesivas al mismo problema: que los programas grandes se vuelven incomprensibles.</li>
+<li>En la programación orientada a eventos, el orden lo decide el mundo exterior y el programa solo define qué hacer en cada caso.</li>
+<li>Lo que se transfiere de un lenguaje a otro no es la sintaxis, sino saber descomponer, elegir estructuras y comprobar.</li>
+</ol></section>
+
+<section aria-labelledby="fuentes">
+<h2 id="fuentes">Fuentes y recursos fiables</h2>
+<ul>
+<li id="fuente_1">[1] <a href="https://www.bocm.es/boletin/CM_Orden_BOCM/2023/05/31/BOCM-20230531-18.PDF">Orden 1736/2023, de 19 de mayo, Anexo IV</a> — currículo oficial de Ciencias de la Computación en Bachillerato (PDF).</li>
+<li id="fuente_2">[2] <a href="https://docs.python.org/es/3/tutorial/">Tutorial oficial de Python, en español</a>.</li>
+<li id="fuente_3">[3] <a href="https://www.python.org/doc/essays/blurb/">Python Software Foundation — Qué es Python</a>.</li>
+<li id="fuente_4">[4] <a href="https://www.computerhistory.org/timeline/software-languages/">Computer History Museum — Cronología de los lenguajes de programación</a>.</li>
+<li id="fuente_5">[5] <a href="https://www.picuino.com/es/ley-ciencias-computacion-bach.html">Picuino — transcripción navegable del currículo</a>.</li>
+</ul>
+</section>
+</article></div></main>
+<nav class="topic-footer" aria-label="Navegación entre temas"><a href="tema08.html">← Tema 8</a><a href="tema10.html">Tema 10 →</a></nav>
+<footer class="site-footer">Ciencias de la Computación I · 1.º de Bachillerato · Comunidad de Madrid</footer>
+</body></html>

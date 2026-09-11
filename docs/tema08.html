@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Tema 8 del Bloque C de Ciencias de la Computación I: qué hace el software que gestiona la máquina y cómo se organiza el trabajo del usuario sobre él.">
+<title>Tema 8. El sistema operativo · CC1</title><link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/estilos.css"><script src="assets/navegacion.js" defer></script></head>
+<body><a class="skip" href="#contenido">Saltar al contenido</a>
+<div class="progress" aria-hidden="true"><span></span></div>
+<header class="site-header"><div class="header-inner">
+  <a class="brand" href="index.html"><span class="brand-mark">CC1</span><span>Ciencias de la Computación I<small>1.º de Bachillerato · 2026–2027</small></span></a>
+  <nav class="top-nav" aria-label="Navegación principal"><a href="index.html">Índice</a></nav>
+</div></header>
+<main id="contenido">
+<section class="hero"><div class="hero-inner"><div><p class="kicker">Tema 8 · Bloque C · Software de sistema y de utilidad</p><h1>El sistema operativo</h1><p class="hero-lead">Qué hace el software que gestiona la máquina y cómo se organiza el trabajo del usuario sobre él.</p></div><aside class="hero-note"><strong>Pregunta guía</strong><p>¿Qué tiene que ocurrir para que dos personas usen el mismo ordenador sin perder ni revelar sus archivos?</p></aside></div></section>
+<div class="layout"><nav class="toc" aria-label="Índice del tema"><strong>En este tema</strong><ol>
+<li><a href="#capas">Software de sistema y software de aplicación</a></li>
+<li><a href="#funciones">Las cinco funciones de un sistema operativo</a></li>
+<li><a href="#componentes">Componentes: núcleo, intérprete y sistema de archivos</a></li>
+<li><a href="#archivos">Archivos y rutas: dónde está cada cosa</a></li>
+<li><a href="#usuarios">Usuarios y permisos</a></li>
+<li><a href="#interfaces">Las interfaces: línea de comandos y gráfica</a></li>
+<li><a href="#tipos">Tipos de sistemas operativos</a></li>
+<li><a href="#virtual">Arranque múltiple, máquinas virtuales y contenedores</a></li>
+<li><a href="#gestion">Gestión básica de un equipo</a></li>
+<li><a href="#glosario">Glosario</a></li>
+<li><a href="#resumen">Resumen</a></li>
+<li><a href="#fuentes">Fuentes</a></li>
+</ol></nav><article class="paper">
+<p class="lesson-intro">Qué hace el software que gestiona la máquina y cómo se organiza el trabajo del usuario sobre él.</p>
+<div class="question"><strong>Antes de empezar:</strong> ¿qué tiene que ocurrir para que dos personas usen el mismo ordenador sin perder ni revelar sus archivos?</div>
+<div class="objectives"><strong>Al terminar serás capaz de…</strong><ul>
+<li>situar el sistema operativo entre el hardware y las aplicaciones</li>
+<li>enumerar y explicar las funciones que gestiona un sistema operativo</li>
+<li>distinguir programa y proceso, y núcleo, intérprete de comandos y sistema de archivos</li>
+<li>escribir e interpretar rutas absolutas y relativas</li>
+<li>aplicar el principio de mínimo privilegio a usuarios y permisos</li>
+<li>clasificar un sistema operativo y explicar para qué sirve una máquina virtual</li>
+</ul></div>
+
+<h2 id="capas">1. Software de sistema y software de aplicación</h2>
+<p>En el <a href="tema04.html">Tema 4</a> dividiste el sistema informático en hardware, software y personas. Ahora toca abrir la segunda caja: el software no es un bloque único, sino <strong>capas que se apoyan unas en otras</strong>.</p>
+<div class="tabla_responsiva"><table class="cc1-table">
+<tr><th>Capa</th><th>De qué se ocupa</th><th>Ejemplos</th></tr>
+<tr><td><strong>Firmware</strong></td><td>Arrancar el equipo y controlar lo más cercano al hardware.</td><td>La UEFI del <a href="tema06.html">Tema 6</a></td></tr>
+<tr><td><strong>Sistema operativo</strong></td><td>Administrar procesos, memoria, dispositivos, archivos y usuarios.</td><td>Windows, GNU/Linux, macOS, Android</td></tr>
+<tr><td><strong>Bibliotecas y servicios</strong></td><td>Ofrecer funciones ya resueltas que muchas aplicaciones reutilizan.</td><td>Cifrado, lectura de imágenes, dibujo de ventanas</td></tr>
+<tr><td><strong>Aplicaciones</strong></td><td>Resolver la tarea concreta que interesa a una persona.</td><td>Navegador, editor de texto, hoja de cálculo</td></tr>
+</table></div>
+<p>El <strong>software de sistema</strong> comprende las tres primeras capas: no resuelve ningún problema del usuario, sino que crea las condiciones para que otros programas puedan resolverlo. El <strong>software de aplicación</strong> es el que usas de forma consciente.</p>
+<div class="cc1-concept"><strong class="cc1-concept-tag">Definición</strong>Un <strong>sistema operativo</strong> es el programa que administra los recursos del equipo y ofrece a las aplicaciones y a las personas una forma cómoda y segura de usarlos, ocultando los detalles del hardware.</div>
+<p>La palabra clave es <strong>ocultar</strong>. Un procesador de textos no sabe si estás guardando en un SSD NVMe, en un disco duro o en una carpeta de red: le pide al sistema «guarda este archivo» y el sistema se ocupa. Esa abstracción hace posible que un mismo programa funcione en miles de configuraciones distintas.</p>
+<div class="cc1-note">💡 La clasificación no siempre es rígida. Un navegador web es una aplicación, pero también ejecuta aplicaciones web dentro de él y ofrece servicios a sus extensiones: se comporta como una plataforma. Las capas son un modelo útil, no compartimentos estancos.</div>
+
+<h2 id="funciones">2. Las cinco funciones de un sistema operativo</h2>
+<h3>2.1. Gestión de procesos</h3>
+<p>Un <strong>programa</strong> es un archivo con instrucciones guardado en el disco. Cuando lo ejecutas, el sistema crea un <strong>proceso</strong>: una ejecución concreta con su propia memoria, su estado y sus recursos abiertos. Un mismo programa puede dar lugar a varios procesos a la vez —tres ventanas del navegador—, y cada proceso puede tener varios <strong>hilos</strong> trabajando en paralelo dentro de él.</p>
+<div class="cc1-concept"><strong class="cc1-concept-tag">Distinción observable</strong>El <strong>programa</strong> es código almacenado; el <strong>proceso</strong> es una ejecución concreta con estado y recursos. Por eso puedes cerrar una ventana sin desinstalar la aplicación, y por eso el administrador de tareas muestra procesos, no programas.</div>
+<p>Como hay muchos más procesos que núcleos, el <strong>planificador</strong> reparte el tiempo de CPU en porciones minúsculas y va alternando entre ellos. La sensación de que todo ocurre a la vez es una ilusión muy bien construida.</p>
+<h3>2.2. Gestión de memoria</h3>
+<p>El sistema asigna a cada proceso un espacio de memoria y, sobre todo, <strong>impide que un proceso lea o escriba en el espacio de otro</strong>. Sin esa protección, cualquier programa con un fallo podría corromper los datos de los demás, y cualquier programa malicioso podría espiarlos. Cuando la RAM se agota, entra en juego la memoria virtual que viste en el <a href="tema05.html">Tema 5</a>.</p>
+<h3>2.3. Gestión de dispositivos</h3>
+<p>El sistema habla con cada periférico a través de su <strong>controlador</strong>, y ofrece a las aplicaciones una interfaz uniforme. Gracias a eso, «imprimir» significa lo mismo para el programa aunque haya cientos de modelos de impresora distintos.</p>
+<h3>2.4. Gestión de archivos</h3>
+<p>El almacenamiento físico son bloques numerados. El sistema los convierte en algo manejable: <strong>archivos con nombre organizados en carpetas</strong>, con fechas, tamaños y permisos.</p>
+<h3>2.5. Gestión de usuarios y seguridad</h3>
+<p>El sistema identifica quién está usando el equipo, guarda sus datos separados de los demás y decide qué puede hacer cada uno. Es la función que responde a la pregunta guía de este tema.</p>
+
+<h2 id="componentes">3. Componentes: núcleo, intérprete y sistema de archivos</h2>
+<div class="cc1-grid">
+<div class="cc1-card"><h3>Núcleo (<em>kernel</em>)</h3><p>La parte central, que se ejecuta con privilegios máximos. Planifica procesos, administra la memoria, controla los dispositivos y hace cumplir la protección. Es lo primero que se carga y lo último que se descarga.</p></div>
+<div class="cc1-card"><h3>Intérprete de comandos</h3><p>El programa que recibe las órdenes del usuario y las traduce en peticiones al núcleo. Puede ser una consola de texto o la propia interfaz gráfica.</p></div>
+<div class="cc1-card"><h3>Sistema de archivos</h3><p>Las reglas que determinan cómo se organizan los datos en el soporte: dónde está cada archivo, cuánto ocupa, quién puede abrirlo y cómo se recupera tras un apagón.</p></div>
+</div>
+<h3>3.1. Los sistemas de archivos más habituales</h3>
+<div class="tabla_responsiva"><table class="cc1-table">
+<tr><th>Sistema</th><th>Dónde se usa</th><th>Qué conviene saber</th></tr>
+<tr><td><strong>NTFS</strong></td><td>Windows</td><td>Permisos detallados, registro de cambios, archivos de gran tamaño.</td></tr>
+<tr><td><strong>ext4</strong></td><td>GNU/Linux</td><td>El estándar habitual en Linux; robusto y muy probado.</td></tr>
+<tr><td><strong>APFS</strong></td><td>macOS e iOS</td><td>Optimizado para SSD, con instantáneas y cifrado integrado.</td></tr>
+<tr><td><strong>exFAT</strong></td><td>Memorias USB y tarjetas</td><td>Lo entienden casi todos los sistemas; es la opción para intercambiar.</td></tr>
+<tr><td><strong>FAT32</strong></td><td>Dispositivos antiguos</td><td>Compatibilidad máxima, pero <strong>no admite archivos de más de 4 GB</strong>.</td></tr>
+</table></div>
+<div class="cc1-curio">💾 <strong>¿Sabías que…?</strong> Ese límite de 4 GB de FAT32 es la causa de un error clásico: copiar una película o una imagen de disco a un pendrive y recibir un «no hay espacio suficiente» cuando el pendrive está prácticamente vacío. No falta espacio: el sistema de archivos no sabe representar un tamaño mayor. Se resuelve formateando en exFAT. Y el número no es casual: 4 GiB es exactamente 2<sup>32</sup> bytes, el mismo límite aritmético que viste en los buses del <a href="tema05.html">Tema 5</a>.</div>
+
+<h2 id="archivos">4. Archivos y rutas: dónde está cada cosa</h2>
+<p>Los archivos se organizan en una <strong>jerarquía de carpetas</strong> en forma de árbol. Para indicar dónde está uno se usa una <strong>ruta</strong>.</p>
+<div class="tabla_responsiva"><table class="cc1-table">
+<tr><th>Ruta</th><th>Tipo</th><th>Cómo se interpreta</th></tr>
+<tr><td><code>/home/ana/proyecto/datos.csv</code></td><td>Absoluta</td><td>Ubicación completa desde la raíz del sistema.</td></tr>
+<tr><td><code>C:\Usuarios\ana\datos.csv</code></td><td>Absoluta</td><td>Lo mismo en Windows, que numera los volúmenes con letras.</td></tr>
+<tr><td><code>imagenes/logo.svg</code></td><td>Relativa</td><td>Una subcarpeta de la carpeta en la que estás ahora.</td></tr>
+<tr><td><code>../compartido/guia.pdf</code></td><td>Relativa</td><td><code>..</code> sube un nivel; luego entra en <code>compartido</code>.</td></tr>
+</table></div>
+<p>Dos convenciones que conviene tener claras: <code>.</code> significa «la carpeta actual» y <code>..</code> significa «la carpeta superior». Y Windows separa con barra invertida <code>\</code> mientras que Linux y macOS usan la barra normal <code>/</code>.</p>
+<h3>4.1. Extensión, formato y aplicación no son lo mismo</h3>
+<div class="cc1-concept"><strong class="cc1-concept-tag">Tres cosas distintas</strong>El <strong>formato</strong> es cómo están organizados los bytes dentro del archivo. La <strong>extensión</strong> es solo una pista escrita en el nombre. La <strong>aplicación</strong> es el programa que sabe interpretar ese formato. Cambiar <code>.jpg</code> por <code>.pdf</code> no convierte nada: solo cambia la etiqueta y consigue que el sistema abra el programa equivocado.</div>
+<h3>4.2. Nombrar archivos con criterio</h3>
+<p>Un nombre debe permitir encontrar el archivo dentro de seis meses. <code>informe_2026-09-11_v2.pdf</code> informa; <code>nuevo definitivo bueno (1).pdf</code> no. Conviene además evitar acentos, espacios y caracteres raros si el archivo va a viajar entre sistemas distintos, y usar fechas en formato <code>AAAA-MM-DD</code>, que ordena cronológicamente por sí solo.</p>
+<div class="aviso"><strong>Los metadatos también viajan</strong>Muchos archivos guardan información adicional que no se ve al abrirlos: quién los creó, con qué programa, cuándo y, en el caso de las fotos, con frecuencia <strong>las coordenadas exactas del lugar donde se tomaron</strong>. Antes de publicar o enviar un archivo conviene saber qué metadatos lleva dentro.</div>
+
+<h2 id="usuarios">5. Usuarios y permisos</h2>
+<p>Aquí está la respuesta a la pregunta guía. Para que dos personas compartan un equipo sin pisarse hacen falta tres mecanismos:</p>
+<ol>
+<li><strong>Identificación:</strong> cada persona tiene una cuenta y demuestra que es ella al iniciar sesión.</li>
+<li><strong>Separación:</strong> cada cuenta tiene su propia carpeta personal y su propia configuración.</li>
+<li><strong>Autorización:</strong> unos <strong>permisos</strong> determinan qué puede hacer cada cuenta sobre cada archivo.</li>
+</ol>
+<p>Los permisos clásicos distinguen tres acciones —<strong>leer</strong>, <strong>escribir</strong> y <strong>ejecutar</strong>— y se asignan a usuarios y a <strong>grupos</strong>, que son conjuntos de usuarios con las mismas necesidades. Es mucho más manejable dar permiso al grupo «profesorado» que a cuarenta cuentas una por una.</p>
+<div class="cc1-concept"><strong class="cc1-concept-tag">Principio de mínimo privilegio</strong>Cada cuenta debe tener <strong>exactamente los permisos que necesita para su trabajo, y ni uno más</strong>. Si alguien solo consulta una carpeta compartida, no debe poder modificarla. No es desconfianza: reduce el daño de un error y limita lo que puede hacer un atacante si consigue esa cuenta.</div>
+<div class="aviso"><strong>Por qué no se trabaja como administrador</strong>La cuenta de administrador puede modificar el sistema entero. Si navegas y abres correo con ella, cualquier programa que ejecutes por error hereda ese poder. Por eso los sistemas actuales te hacen trabajar con una cuenta normal y piden confirmación explícita cuando algo necesita privilegios. Ese cuadro de diálogo molesto es una medida de seguridad, no un trámite.</div>
+
+<h2 id="interfaces">6. Las interfaces: línea de comandos y gráfica</h2>
+<div class="tabla_responsiva"><table class="cc1-table">
+<tr><th></th><th>Interfaz de línea de comandos</th><th>Interfaz gráfica (GUI)</th></tr>
+<tr><td><strong>Cómo se usa</strong></td><td>Escribiendo órdenes de texto.</td><td>Señalando ventanas, iconos y menús.</td></tr>
+<tr><td><strong>Aprendizaje</strong></td><td>Hay que conocer los comandos.</td><td>Se descubre explorando.</td></tr>
+<tr><td><strong>Precisión</strong></td><td>Muy alta: la orden dice exactamente qué hacer.</td><td>Depende de las opciones que ofrezca el programa.</td></tr>
+<tr><td><strong>Repetible</strong></td><td>Sí: una orden se guarda, se comparte y se automatiza.</td><td>Difícil: hay que repetir los clics.</td></tr>
+<tr><td><strong>Trabajo masivo</strong></td><td>Renombrar mil archivos es una línea.</td><td>Renombrar mil archivos son mil operaciones.</td></tr>
+<tr><td><strong>Uso remoto</strong></td><td>Funciona con conexiones lentas.</td><td>Necesita mucho más ancho de banda.</td></tr>
+</table></div>
+<p>No compiten: conviven. La interfaz gráfica es mejor para explorar, comparar y trabajar con contenido visual; la línea de comandos es mejor para repetir, automatizar y administrar. Casi todos los administradores de sistemas usan las dos según la tarea.</p>
+<div class="cc1-think">🤔 <strong>Para pensar:</strong> una ventaja poco evidente de la línea de comandos es que la orden queda escrita. Si mañana alguien pregunta qué hiciste exactamente para arreglar un problema, puedes enseñar la línea. Con una interfaz gráfica tendrías que reconstruir de memoria una secuencia de clics. ¿Qué relación tiene esto con el método de diagnóstico del <a href="tema06.html">Tema 6</a>?</div>
+
+<h2 id="tipos">7. Tipos de sistemas operativos</h2>
+<p>La misma máquina admite clasificaciones distintas según el criterio:</p>
+<div class="tabla_responsiva"><table class="cc1-table">
+<tr><th>Criterio</th><th>Categorías</th><th>Ejemplo</th></tr>
+<tr><td><strong>Usuarios simultáneos</strong></td><td>Monousuario / multiusuario</td><td>Un móvil frente a un servidor con decenas de sesiones abiertas.</td></tr>
+<tr><td><strong>Tareas simultáneas</strong></td><td>Monotarea / multitarea</td><td>Un microondas frente a cualquier ordenador actual.</td></tr>
+<tr><td><strong>Ámbito de uso</strong></td><td>Escritorio / servidor / móvil / embebido</td><td>Windows, Windows Server, Android, el sistema de un router.</td></tr>
+<tr><td><strong>Exigencia temporal</strong></td><td>De propósito general / de tiempo real</td><td>Un portátil frente al control de frenada de un coche.</td></tr>
+</table></div>
+<div class="cc1-concept"><strong class="cc1-concept-tag">Qué significa «tiempo real»</strong>Un sistema de <strong>tiempo real</strong> no es un sistema rápido: es un sistema que <strong>garantiza</strong> responder antes de un plazo determinado, siempre, sin excepciones. En el airbag de un coche, una respuesta correcta que llega veinte milisegundos tarde es una respuesta inútil. Un ordenador de escritorio es muy rápido de media, pero no garantiza nada: cualquier proceso puede retrasar a otro.</div>
+<h3>7.1. Los sistemas actuales</h3>
+<p>En equipos de escritorio predomina Windows, seguido de macOS y de las distintas distribuciones de GNU/Linux. En dispositivos móviles, Android e iOS se reparten prácticamente todo el mercado. En servidores y sistemas embebidos, Linux es dominante.</p>
+<div class="cc1-curio">🐧 <strong>¿Sabías que…?</strong> Los <strong>500 supercomputadores más potentes del mundo</strong> funcionan con Linux, sin una sola excepción, y así ocurre de forma ininterrumpida desde 2017. El MareNostrum 5 del <a href="tema04.html">Tema 4</a> también. La razón es práctica: cuando cada instalación es única, tener el código fuente para adaptarlo deja de ser una cuestión ideológica y se convierte en un requisito técnico.</div>
+<div class="aviso"><strong>Cuidado con los porcentajes de cuota</strong>Las cifras de reparto de sistemas operativos varían mucho según la fuente, porque casi todas se miden contando visitas a páginas web, no dispositivos. Eso deja fuera servidores, sistemas embebidos y equipos sin navegar. Son órdenes de magnitud útiles, no censos: úsalas con esa cautela y cita siempre de dónde salen y de cuándo.</div>
+
+<h2 id="virtual">8. Arranque múltiple, máquinas virtuales y contenedores</h2>
+<p>Nada obliga a usar un solo sistema operativo. Hay tres formas de convivir con varios:</p>
+<div class="tabla_responsiva"><table class="cc1-table">
+<tr><th>Técnica</th><th>Cómo funciona</th><th>Cuándo conviene</th></tr>
+<tr><td><strong>Arranque múltiple</strong></td><td>Varios sistemas instalados en particiones distintas; el gestor de arranque del <a href="tema06.html">Tema 6</a> pregunta al encender.</td><td>Cuando se necesita todo el rendimiento del equipo en cada sistema.</td></tr>
+<tr><td><strong>Máquina virtual</strong></td><td>Un programa simula un ordenador completo y dentro se instala otro sistema, que funciona en una ventana.</td><td>Para probar, aprender o aislar algo sin tocar el equipo real.</td></tr>
+<tr><td><strong>Contenedor</strong></td><td>Se aísla una aplicación con lo que necesita, pero compartiendo el núcleo del sistema anfitrión.</td><td>Para desplegar servicios de forma reproducible; muy usado en servidores.</td></tr>
+</table></div>
+<div class="cc1-note">💡 Una máquina virtual es la mejor herramienta para experimentar sin miedo: puedes romperla del todo y volver a empezar en un minuto. Además, muchas permiten guardar <em>instantáneas</em> del estado y regresar a ellas, lo que resulta utilísimo para probar una instalación o una configuración nueva.</div>
+
+<h2 id="gestion">9. Gestión básica de un equipo</h2>
+<div class="cc1-grid">
+<div class="cc1-card"><h3>Cuentas</h3><p>Una cuenta por persona, con contraseña propia. La cuenta de administrador, solo para administrar. Revisar y retirar las cuentas que ya no se usan.</p></div>
+<div class="cc1-card"><h3>Actualizaciones</h3><p>La mayoría de las actualizaciones del sistema corrigen fallos de seguridad ya conocidos y publicados. Retrasarlas no es prudencia: es dejar abierta una puerta que otros ya conocen.</p></div>
+<div class="cc1-card"><h3>Copias de seguridad</h3><p>La regla 3-2-1 del <a href="tema07.html">Tema 7</a>. Y una copia que nunca se ha probado a restaurar no cuenta como copia.</p></div>
+<div class="cc1-card"><h3>Espacio y rendimiento</h3><p>Vigilar el espacio libre, revisar qué programas arrancan solos y mirar el uso de CPU, memoria y disco antes de diagnosticar «va lento».</p></div>
+</div>
+<div class="cc1-think">🤔 <strong>Para pensar:</strong> vuelve a la pregunta guía y respóndela con lo aprendido. ¿Cuántos mecanismos distintos del sistema operativo han tenido que intervenir para que dos personas compartan un equipo sin ver los archivos de la otra? Enuméralos y di qué pasaría si faltara cada uno.</div>
+
+<h2 id="glosario">Glosario del tema</h2>
+<dl class="cc1-glosario">
+<dt>Sistema operativo</dt><dd>Programa que administra los recursos del equipo y ofrece una forma cómoda y segura de usarlos.</dd>
+<dt>Software de sistema</dt><dd>Software que crea las condiciones para que funcionen las aplicaciones, sin resolver tareas del usuario.</dd>
+<dt>Núcleo</dt><dd>Parte central del sistema operativo, con privilegios máximos sobre procesos, memoria y dispositivos.</dd>
+<dt>Proceso</dt><dd>Ejecución concreta de un programa, con su memoria, su estado y sus recursos.</dd>
+<dt>Hilo</dt><dd>Secuencia de ejecución dentro de un proceso; varios hilos comparten su memoria.</dd>
+<dt>Planificador</dt><dd>Componente que reparte el tiempo de CPU entre los procesos en ejecución.</dd>
+<dt>Intérprete de comandos</dt><dd>Programa que recibe las órdenes del usuario y las traduce en peticiones al núcleo.</dd>
+<dt>Sistema de archivos</dt><dd>Conjunto de reglas que organiza los datos del soporte en archivos y carpetas.</dd>
+<dt>Ruta absoluta</dt><dd>Localización de un archivo desde la raíz del sistema o del volumen.</dd>
+<dt>Ruta relativa</dt><dd>Localización a partir de la carpeta actual, usando <code>.</code> y <code>..</code>.</dd>
+<dt>Permiso</dt><dd>Autorización para leer, escribir o ejecutar un archivo, asignada a usuarios o grupos.</dd>
+<dt>Mínimo privilegio</dt><dd>Criterio que concede a cada cuenta solo los permisos imprescindibles.</dd>
+<dt>Interfaz de línea de comandos</dt><dd>Interfaz textual en la que se escriben órdenes; repetible y automatizable.</dd>
+<dt>Tiempo real</dt><dd>Sistema que garantiza responder antes de un plazo máximo determinado.</dd>
+<dt>Máquina virtual</dt><dd>Ordenador simulado por software dentro de otro, con su propio sistema operativo.</dd>
+</dl>
+
+<section class="summary"><h2 id="resumen">Resumen esencial</h2><ol>
+<li>El software se organiza en capas: firmware, sistema operativo, bibliotecas y aplicaciones.</li>
+<li>El sistema operativo administra procesos, memoria, dispositivos, archivos y usuarios, y oculta los detalles del hardware.</li>
+<li>Un programa es código guardado; un proceso es una ejecución concreta con estado y recursos.</li>
+<li>Sus componentes son el núcleo, el intérprete de comandos y el sistema de archivos.</li>
+<li>Extensión, formato y aplicación son tres cosas distintas: renombrar un archivo no lo convierte.</li>
+<li>Compartir un equipo con seguridad exige identificación, separación y permisos, guiados por el mínimo privilegio.</li>
+<li>La línea de comandos y la interfaz gráfica no compiten: una es repetible y automatizable, la otra explorable.</li>
+<li>Un sistema de tiempo real no es rápido: garantiza responder antes de un plazo.</li>
+<li>Arranque múltiple, máquinas virtuales y contenedores permiten convivir con varios sistemas a la vez.</li>
+</ol></section>
+
+<section aria-labelledby="fuentes">
+<h2 id="fuentes">Fuentes y recursos fiables</h2>
+<ul>
+<li id="fuente_1">[1] <a href="https://www.bocm.es/boletin/CM_Orden_BOCM/2023/05/31/BOCM-20230531-18.PDF">Orden 1736/2023, de 19 de mayo, Anexo IV</a> — currículo oficial de Ciencias de la Computación en Bachillerato (PDF).</li>
+<li id="fuente_2">[2] <a href="https://learn.microsoft.com/es-es/windows/">Microsoft Learn — Documentación de Windows</a>.</li>
+<li id="fuente_3">[3] <a href="https://www.kernel.org/doc/html/latest/">Documentación del núcleo Linux</a>.</li>
+<li id="fuente_4">[4] <a href="https://www.top500.org/statistics/list/">TOP500 — Estadísticas de sistemas operativos en supercomputación</a>.</li>
+<li id="fuente_5">[5] <a href="https://www.incibe.es/ciudadania/tematicas/configuraciones-dispositivos">INCIBE — Configuración segura de dispositivos y cuentas</a>.</li>
+<li id="fuente_6">[6] <a href="https://www.picuino.com/es/ley-ciencias-computacion-bach.html">Picuino — transcripción navegable del currículo</a>.</li>
+</ul>
+</section>
+</article></div></main>
+<nav class="topic-footer" aria-label="Navegación entre temas"><a href="tema07.html">← Tema 7</a><a href="tema09.html">Tema 9 →</a></nav>
+<footer class="site-footer">Ciencias de la Computación I · 1.º de Bachillerato · Comunidad de Madrid</footer>
+</body></html>

@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Tema 10 del Bloque C de Ciencias de la Computación I: qué aplicaciones acompañan al sistema operativo, en qué condiciones se usan y cómo se instalan y valoran.">
+<title>Tema 10. Software de utilidad, licencias e instalación · CC1</title><link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/estilos.css"><script src="assets/navegacion.js" defer></script></head>
+<body><a class="skip" href="#contenido">Saltar al contenido</a>
+<div class="progress" aria-hidden="true"><span></span></div>
+<header class="site-header"><div class="header-inner">
+  <a class="brand" href="index.html"><span class="brand-mark">CC1</span><span>Ciencias de la Computación I<small>1.º de Bachillerato · 2026–2027</small></span></a>
+  <nav class="top-nav" aria-label="Navegación principal"><a href="index.html">Índice</a></nav>
+</div></header>
+<main id="contenido">
+<section class="hero"><div class="hero-inner"><div><p class="kicker">Tema 10 · Bloque C · Software de sistema y de utilidad</p><h1>Software de utilidad, licencias e instalación</h1><p class="hero-lead">Qué aplicaciones acompañan al sistema operativo, en qué condiciones se usan y cómo se instalan y valoran.</p></div><aside class="hero-note"><strong>Pregunta guía</strong><p>Al pulsar «Acepto» antes de instalar un programa, ¿qué estás aceptando exactamente?</p></aside></div></section>
+<div class="layout"><nav class="toc" aria-label="Índice del tema"><strong>En este tema</strong><ol>
+<li><a href="#utilidad">Software de utilidad y tipos de aplicaciones</a></li>
+<li><a href="#distribucion">Escritorio, portable, web y móvil</a></li>
+<li><a href="#libre">Software libre y software propietario</a></li>
+<li><a href="#licencias">Las licencias más habituales</a></li>
+<li><a href="#gratis">Gratis no es libre</a></li>
+<li><a href="#requisitos">Requerimientos mínimos y recomendados</a></li>
+<li><a href="#instalar">Instalar, configurar, actualizar y desinstalar</a></li>
+<li><a href="#elegir">Elegir una aplicación con criterios verificables</a></li>
+<li><a href="#procedencia">Procedencia del software y riesgos de la descarga</a></li>
+<li><a href="#glosario">Glosario</a></li>
+<li><a href="#resumen">Resumen</a></li>
+<li><a href="#fuentes">Fuentes</a></li>
+</ol></nav><article class="paper">
+<p class="lesson-intro">Qué aplicaciones acompañan al sistema operativo, en qué condiciones se usan y cómo se instalan y valoran.</p>
+<div class="question"><strong>Antes de empezar:</strong> al pulsar «Acepto» antes de instalar un programa, ¿qué estás aceptando exactamente?</div>
+<div class="objectives"><strong>Al terminar serás capaz de…</strong><ul>
+<li>clasificar el software por su función y por su forma de ejecución</li>
+<li>explicar las cuatro libertades del software libre y en qué se diferencia del propietario</li>
+<li>distinguir licencias con copyleft de licencias permisivas, y libre de gratuito</li>
+<li>interpretar los requisitos mínimos y recomendados de una aplicación</li>
+<li>instalar, actualizar y desinstalar software de forma ordenada y segura</li>
+<li>valorar una aplicación con criterios verificables y reconocer una descarga peligrosa</li>
+</ul></div>
+
+<h2 id="utilidad">1. Software de utilidad y tipos de aplicaciones</h2>
+<p>En el <a href="tema08.html">Tema 8</a> distinguiste software de sistema y de aplicación. Entre ambos hay una familia con nombre propio: el <strong>software de utilidad</strong>, formado por herramientas que no resuelven una tarea del usuario, sino que <strong>sirven para mantener, proteger u observar el propio equipo</strong>.</p>
+<div class="tabla_responsiva"><table class="cc1-table">
+<tr><th>Categoría</th><th>Para qué sirve</th><th>Ejemplos</th></tr>
+<tr><td><strong>Mantenimiento</strong></td><td>Liberar espacio, revisar el disco, gestionar particiones.</td><td>Limpiadores, comprobadores de disco, particionadores.</td></tr>
+<tr><td><strong>Seguridad</strong></td><td>Detectar amenazas y proteger la información.</td><td>Antivirus, cortafuegos, gestores de contraseñas, cifrado.</td></tr>
+<tr><td><strong>Copias y recuperación</strong></td><td>Guardar y restaurar datos ante un fallo.</td><td>Programas de copia de seguridad, clonado de discos.</td></tr>
+<tr><td><strong>Compresión y archivo</strong></td><td>Reducir tamaño y agrupar archivos.</td><td>Compresores ZIP y equivalentes.</td></tr>
+<tr><td><strong>Diagnóstico</strong></td><td>Observar el estado y el rendimiento del sistema.</td><td>Monitores de recursos, informes de hardware, pruebas de memoria.</td></tr>
+<tr><td><strong>Conversión</strong></td><td>Pasar información de un formato a otro.</td><td>Conversores de imagen, audio, vídeo o documentos.</td></tr>
+</table></div>
+<p>El <strong>software de aplicación</strong>, en cambio, se clasifica por el trabajo que permite hacer: ofimática, diseño gráfico, edición de audio y vídeo, navegación, comunicación, gestión empresarial, educación, entretenimiento o desarrollo de programas.</p>
+<div class="cc1-note">💡 Muchas utilidades vienen ya incluidas en el sistema operativo: el cortafuegos, el antivirus, la herramienta de copias o el compresor. Antes de instalar una utilidad de terceros conviene comprobar si el sistema ya hace eso; añadir programas que duplican funciones es una fuente clásica de problemas y de lentitud.</div>
+
+<h2 id="distribucion">2. Escritorio, portable, web y móvil</h2>
+<p>El mismo tipo de aplicación puede llegarte de cuatro maneras distintas, y la diferencia no es cosmética: afecta a la privacidad, la disponibilidad y lo que puedes hacer con tus datos.</p>
+<div class="tabla_responsiva"><table class="cc1-table">
+<tr><th>Forma</th><th>Cómo funciona</th><th>Ventajas</th><th>Inconvenientes</th></tr>
+<tr><td><strong>De escritorio</strong></td><td>Se instala en el equipo y se ejecuta con sus recursos.</td><td>Funciona sin conexión; máximo rendimiento; los datos son tuyos y locales.</td><td>Hay que instalarla y mantenerla en cada equipo.</td></tr>
+<tr><td><strong>Portable</strong></td><td>Se ejecuta sin instalación, desde una carpeta o un pendrive.</td><td>No modifica el sistema; útil en equipos ajenos o sin permisos.</td><td>No se integra con el sistema y suele actualizarse a mano.</td></tr>
+<tr><td><strong>Web</strong></td><td>Se ejecuta en el navegador; el trabajo se reparte entre este y un servidor.</td><td>Nada que instalar; accesible desde cualquier equipo; siempre actualizada.</td><td>Depende de la conexión y del proveedor; tus datos están en su servidor.</td></tr>
+<tr><td><strong>Móvil</strong></td><td>Se instala desde una tienda de aplicaciones.</td><td>Aprovecha sensores y notificaciones; instalación sencilla y revisada.</td><td>Pide permisos que conviene revisar; depende de la tienda.</td></tr>
+</table></div>
+<div class="cc1-think">🤔 <strong>Para pensar:</strong> cuando escribes un documento en una aplicación web, ¿dónde está el archivo mientras lo escribes? ¿Y si mañana el servicio cierra, sube de precio o cambia sus condiciones, podrías llevarte tu trabajo a otro sitio? La respuesta a esa última pregunta se llama <strong>interoperabilidad</strong>, y conviene comprobarla <em>antes</em> de acumular años de documentos.</div>
+
+<h2 id="libre">3. Software libre y software propietario</h2>
+<p>Todo programa está protegido por derechos de autor desde el momento en que se escribe. La <strong>licencia</strong> es el documento por el cual quien tiene esos derechos autoriza a otros a usarlo, y con qué condiciones. Esa es la respuesta literal a la pregunta guía: al pulsar «Acepto» estás firmando un contrato.</p>
+<h3>3.1. Las cuatro libertades</h3>
+<p>Se llama <strong>software libre</strong> al que garantiza a quien lo recibe cuatro libertades, formuladas por la Free Software Foundation:</p>
+<div class="tabla_responsiva"><table class="cc1-table">
+<tr><th>Libertad</th><th>En qué consiste</th></tr>
+<tr><td><strong>0</strong></td><td>Ejecutar el programa para cualquier propósito.</td></tr>
+<tr><td><strong>1</strong></td><td>Estudiar cómo funciona y modificarlo. Requiere acceso al <strong>código fuente</strong>.</td></tr>
+<tr><td><strong>2</strong></td><td>Redistribuir copias para ayudar a otros.</td></tr>
+<tr><td><strong>3</strong></td><td>Distribuir copias de tus versiones modificadas.</td></tr>
+</table></div>
+<p>El <strong>software propietario</strong> es el que no concede esas libertades: se distribuye ya compilado, sin código fuente, y la licencia limita lo que puedes hacer con él —cuántas instalaciones, si puedes cederlo, si puedes analizarlo—.</p>
+<div class="cc1-curio">🐃 <strong>¿Sabías que…?</strong> El movimiento arranca en 1983, cuando <strong>Richard Stallman</strong> anuncia el proyecto GNU para construir un sistema operativo completamente libre. Hacia 1991 estaban casi todas las piezas menos el núcleo, y ese año <strong>Linus Torvalds</strong> publicó el suyo. La combinación de ambos es lo que hoy llamamos <strong>GNU/Linux</strong>, y es el sistema que mueve la mayoría de los servidores de Internet, todos los supercomputadores del TOP500 y, en su núcleo, todos los teléfonos Android.</div>
+<div class="aviso"><strong>Libre, abierto y gratis son tres cosas distintas</strong>«Software libre» se refiere a las cuatro libertades. «Código abierto» designa prácticamente el mismo conjunto de programas, pero con un énfasis distinto: la comunidad que acuñó el término en 1998 subrayaba las ventajas prácticas de compartir el código, no la dimensión ética. Y «gratis» no es ninguna de las dos cosas: es solo el precio. En inglés se resume diciendo que <em>free</em> aquí significa libre como en «libertad de expresión», no como en «barra libre».</div>
+
+<h2 id="licencias">4. Las licencias más habituales</h2>
+<p>Dentro del software libre hay dos grandes familias, y la diferencia entre ellas importa mucho a quien reutiliza código:</p>
+<div class="cc1-grid">
+<div class="cc1-card"><h3>Con copyleft</h3><p>Obligan a que las versiones modificadas se distribuyan con la <strong>misma licencia</strong>. Aseguran que lo libre siga siendo libre. La más conocida es la <strong>GPL</strong>.</p></div>
+<div class="cc1-card"><h3>Permisivas</h3><p>Permiten reutilizar el código casi sin condiciones, incluso dentro de un programa propietario. Solo exigen reconocer la autoría. Son <strong>MIT</strong>, <strong>BSD</strong> y <strong>Apache</strong>.</p></div>
+</div>
+<div class="tabla_responsiva"><table class="cc1-table">
+<tr><th>Licencia</th><th>Tipo</th><th>Qué exige</th></tr>
+<tr><td><strong>GPL</strong></td><td>Libre, con copyleft</td><td>Publicar el código fuente de las versiones derivadas bajo la misma licencia.</td></tr>
+<tr><td><strong>LGPL</strong></td><td>Libre, copyleft suave</td><td>Permite usar la biblioteca desde programas propietarios; sus modificaciones sí siguen siendo libres.</td></tr>
+<tr><td><strong>MIT / BSD</strong></td><td>Libre, permisiva</td><td>Conservar el aviso de copyright. Poco más.</td></tr>
+<tr><td><strong>Apache 2.0</strong></td><td>Libre, permisiva</td><td>Como MIT, y además incluye una cesión expresa de patentes.</td></tr>
+<tr><td><strong>EUPL</strong></td><td>Libre, con copyleft</td><td>Licencia oficial de la Unión Europea, publicada en todas sus lenguas y compatible con el derecho europeo.</td></tr>
+<tr><td><strong>EULA propietaria</strong></td><td>Propietaria</td><td>Lo que decida el fabricante: número de equipos, uso comercial, prohibición de analizar el programa.</td></tr>
+</table></div>
+<div class="cc1-note">💡 Para <strong>contenidos</strong> —textos, imágenes, música, materiales de clase— no se usan licencias de software, sino las <strong>Creative Commons</strong>, que combinan condiciones como reconocer la autoría, prohibir el uso comercial o exigir compartir igual. La propia organización recomienda no usarlas para código. Volverás sobre ellas al hablar de derechos de autor en el Tema 15.</div>
+
+<h2 id="gratis">5. Gratis no es libre</h2>
+<p>Un programa puede ser gratuito y seguir siendo propietario. Conviene reconocer los modelos:</p>
+<div class="tabla_responsiva"><table class="cc1-table">
+<tr><th>Modelo</th><th>Qué significa</th><th>Qué mirar</th></tr>
+<tr><td><strong>Freeware</strong></td><td>Gratuito, pero sin código fuente ni libertad de modificación.</td><td>Qué recopila y quién lo mantiene.</td></tr>
+<tr><td><strong>Shareware / versión de prueba</strong></td><td>Gratuito durante un tiempo o con funciones limitadas.</td><td>Qué pasa con tus archivos cuando expire.</td></tr>
+<tr><td><strong>Freemium</strong></td><td>Versión básica gratuita y funciones de pago.</td><td>Si lo que necesitas está en la parte gratuita.</td></tr>
+<tr><td><strong>Suscripción</strong></td><td>Pago periódico; si dejas de pagar, dejas de usarlo.</td><td>Coste acumulado y si conservas acceso a tus documentos.</td></tr>
+<tr><td><strong>Licencia perpetua</strong></td><td>Se paga una vez y se usa esa versión indefinidamente.</td><td>Hasta cuándo recibirá actualizaciones de seguridad.</td></tr>
+<tr><td><strong>Financiado con datos</strong></td><td>Gratuito a cambio de publicidad o de tu información.</td><td>Qué datos recoge y con quién los comparte.</td></tr>
+</table></div>
+<div class="cc1-concept"><strong class="cc1-concept-tag">La pregunta correcta</strong>Ante un programa gratuito, la pregunta no es «¿cuánto cuesta?» sino «<strong>¿cómo se sostiene?</strong>». Todo software cuesta dinero de desarrollar y mantener. Si no lo pagas tú con dinero, alguien lo paga: una comunidad de voluntarios, una fundación, una empresa que vende soporte, un anunciante… o tú mismo con tus datos. Ninguna respuesta es automáticamente mala; lo malo es no saber cuál es.</div>
+
+<h2 id="requisitos">6. Requerimientos mínimos y recomendados</h2>
+<p>Toda aplicación declara qué necesita para funcionar, y casi siempre en dos niveles:</p>
+<ul>
+<li><strong>Requisitos mínimos:</strong> lo imprescindible para que arranque. Funcionará, pero puede ir justo.</li>
+<li><strong>Requisitos recomendados:</strong> lo necesario para usarla con soltura en condiciones normales.</li>
+</ul>
+<div class="tabla_responsiva"><table class="cc1-table">
+<tr><th>Requisito</th><th>Qué comprobar</th><th>Error frecuente</th></tr>
+<tr><td><strong>Sistema operativo</strong></td><td>Nombre y versión mínima.</td><td>Instalar en una versión ya sin soporte.</td></tr>
+<tr><td><strong>Arquitectura</strong></td><td>Si es para 64 bits, y si es x86 o ARM.</td><td>Descargar la versión de otra arquitectura.</td></tr>
+<tr><td><strong>Procesador y memoria</strong></td><td>Número de núcleos y RAM.</td><td>Confundir el mínimo con lo recomendable.</td></tr>
+<tr><td><strong>Espacio en disco</strong></td><td>El que ocupa, más margen de trabajo.</td><td>Olvidar el espacio temporal que necesita al instalarse.</td></tr>
+<tr><td><strong>Gráficos</strong></td><td>Tarjeta y versión de las bibliotecas gráficas.</td><td>Suponer que una gráfica integrada bastará para edición o 3D.</td></tr>
+<tr><td><strong>Conexión</strong></td><td>Si exige estar en línea para funcionar o para validarse.</td><td>Descubrirlo cuando no hay red.</td></tr>
+</table></div>
+<div class="cc1-note">💡 Los requisitos se declaran para <em>esa</em> aplicación funcionando sola. En la práctica compartes el equipo con el sistema operativo, el navegador con veinte pestañas y el antivirus. Si tu equipo está justo en el mínimo, la experiencia real será peor que la anunciada.</div>
+
+<h2 id="instalar">7. Instalar, configurar, actualizar y desinstalar</h2>
+<h3>7.1. Instalar</h3>
+<p>Instalar no es solo copiar archivos: además se registra la aplicación en el sistema, se crean accesos, se asocian extensiones de archivo y, a veces, se instalan servicios que arrancarán con el equipo. Por eso suele hacer falta permiso de administrador, y por eso conviene fijarse en lo que se acepta.</p>
+<div class="tabla_responsiva"><table class="cc1-table">
+<tr><th>Vía de instalación</th><th>Cómo funciona</th><th>Ventaja principal</th></tr>
+<tr><td><strong>Tienda de aplicaciones</strong></td><td>Catálogo revisado por el fabricante del sistema.</td><td>Instalación y actualización centralizadas y con cierta verificación.</td></tr>
+<tr><td><strong>Gestor de paquetes</strong></td><td>Herramienta que instala desde repositorios oficiales resolviendo dependencias.</td><td>Todo el sistema se actualiza con una sola orden.</td></tr>
+<tr><td><strong>Instalador descargado</strong></td><td>Un archivo que se ejecuta y realiza la instalación.</td><td>Flexibilidad; es la vía más común y también la más arriesgada.</td></tr>
+<tr><td><strong>Código fuente</strong></td><td>Se compila en el propio equipo.</td><td>Control total; propio de software libre y usuarios avanzados.</td></tr>
+</table></div>
+<div class="aviso"><strong>La instalación «personalizada» existe por algo</strong>Muchos instaladores gratuitos incluyen software adicional que nadie ha pedido: barras de navegador, antivirus de prueba, cambios en el buscador predeterminado. Casi siempre vienen marcados por defecto y solo se pueden rechazar eligiendo la instalación personalizada y desmarcándolos uno a uno. Pulsar «Siguiente» cinco veces seguidas es como firmar sin leer.</div>
+<h3>7.2. Configurar, actualizar y desinstalar</h3>
+<ul>
+<li><strong>Configurar:</strong> tras instalar conviene revisar qué permisos ha pedido la aplicación, si arranca automáticamente con el sistema y qué datos envía. Los valores por defecto los elige el fabricante pensando en sus intereses, no necesariamente en los tuyos.</li>
+<li><strong>Actualizar:</strong> las actualizaciones corrigen fallos de seguridad además de añadir funciones. Un programa que ya no recibe actualizaciones es un riesgo creciente aunque siga funcionando.</li>
+<li><strong>Desinstalar:</strong> siempre con la herramienta del sistema o del gestor de paquetes, nunca borrando la carpeta a mano: eso deja el registro, los servicios y la configuración sueltos. Y conviene revisar de vez en cuando qué hay instalado: lo que no se usa, se desinstala.</li>
+</ul>
+
+<h2 id="elegir">8. Elegir una aplicación con criterios verificables</h2>
+<p>Casi siempre hay varias herramientas que hacen lo mismo. Elegir bien consiste en aplicar criterios que se puedan <strong>comprobar</strong>, no impresiones.</p>
+<div class="tabla_responsiva"><table class="cc1-table">
+<tr><th>Criterio</th><th>Pregunta verificable</th></tr>
+<tr><td><strong>Función</strong></td><td>¿Hace exactamente lo que necesito y con qué límites?</td></tr>
+<tr><td><strong>Interoperabilidad</strong></td><td>¿Importa y exporta formatos estándar sin perder información?</td></tr>
+<tr><td><strong>Privacidad</strong></td><td>¿Qué datos salen del equipo, adónde van y quién los conserva?</td></tr>
+<tr><td><strong>Accesibilidad</strong></td><td>¿Se puede usar solo con teclado y con un lector de pantalla?</td></tr>
+<tr><td><strong>Licencia y coste</strong></td><td>¿Qué usos permite, en cuántos equipos y a qué precio total?</td></tr>
+<tr><td><strong>Mantenimiento</strong></td><td>¿Cuándo fue su última actualización y quién está detrás?</td></tr>
+<tr><td><strong>Requisitos</strong></td><td>¿Funciona con soltura en los equipos que voy a usar?</td></tr>
+<tr><td><strong>Salida</strong></td><td>Si mañana quisiera dejar de usarla, ¿podría llevarme mis datos?</td></tr>
+</table></div>
+<div class="cc1-concept"><strong class="cc1-concept-tag">El criterio que casi nadie aplica</strong>El último de la tabla es el más importante a largo plazo y el que menos se comprueba. Una herramienta que guarda el trabajo en un <strong>formato abierto y documentado</strong> te deja marchar cuando quieras. Una que usa un formato cerrado te encierra: el coste real de cambiar no es el precio de la alternativa, sino el de convertir años de archivos.</div>
+
+<h2 id="procedencia">9. Procedencia del software y riesgos de la descarga</h2>
+<p>Instalar un programa es darle permiso para ejecutar código en tu equipo. La pregunta decisiva no es qué hace, sino <strong>de dónde viene</strong>.</p>
+<div class="tabla_responsiva"><table class="cc1-table">
+<tr><th>Origen</th><th>Nivel de confianza</th></tr>
+<tr><td>Tienda oficial del sistema o repositorio de la distribución</td><td>Alto: hay revisión y firma.</td></tr>
+<tr><td>Web oficial del fabricante, con conexión segura</td><td>Alto.</td></tr>
+<tr><td>Portal de descargas generalista</td><td>Bajo: muchos reempaquetan el instalador y le añaden extras.</td></tr>
+<tr><td>Enlace recibido por mensaje, correo o anuncio</td><td>Muy bajo, aunque parezca de un conocido.</td></tr>
+<tr><td>Copia «activada» o con generador de claves</td><td>Nulo, además de ilegal.</td></tr>
+</table></div>
+<div class="aviso"><strong>Tres trampas clásicas</strong>Los <strong>anuncios en los buscadores</strong> que aparecen por encima del resultado real y llevan a una web falsa con el mismo aspecto. Los programas que prometen <strong>«actualizar todos tus drivers»</strong>, que piden permisos de administrador con una excusa perfectamente creíble. Y el <strong>software pirata</strong>: quien se molesta en romper la protección de un programa de pago y regalarlo no lo hace por altruismo; lo hace porque el paquete lleva algo más dentro.</div>
+<h3>9.1. Comprobar que lo descargado es lo que dice ser</h3>
+<ul>
+<li><strong>Firma digital:</strong> muchos instaladores están firmados por su fabricante y el sistema lo verifica. Una advertencia de «editor desconocido» merece detenerse a pensar.</li>
+<li><strong>Suma de comprobación:</strong> algunos proyectos publican un <em>hash</em> del archivo. Si el que calculas al descargarlo coincide, el archivo no se ha alterado por el camino.</li>
+<li><strong>La dirección exacta:</strong> conviene mirar el dominio letra a letra. Muchas webs falsas cambian un carácter o añaden una palabra.</li>
+</ul>
+<div class="cc1-think">🤔 <strong>Para pensar:</strong> vuelve a la pregunta guía. Al pulsar «Acepto» aceptas una licencia que casi nadie lee, que puede permitir recopilar datos de uso, limitar en cuántos equipos instalas el programa y eximir al fabricante de responsabilidad si algo sale mal. ¿Qué tres cosas mirarías, como mínimo, antes de aceptar? Y una segunda: si el programa es libre, ¿por qué también tiene licencia?</div>
+
+<h2 id="glosario">Glosario del tema</h2>
+<dl class="cc1-glosario">
+<dt>Software de utilidad</dt><dd>Herramientas dedicadas a mantener, proteger u observar el propio sistema.</dd>
+<dt>Aplicación portable</dt><dd>Programa que se ejecuta sin instalación y sin modificar el sistema.</dd>
+<dt>Aplicación web</dt><dd>Programa que se ejecuta en el navegador repartiendo el trabajo con un servidor.</dd>
+<dt>Licencia</dt><dd>Documento que autoriza el uso de un programa y fija sus condiciones.</dd>
+<dt>Software libre</dt><dd>El que garantiza las cuatro libertades: usar, estudiar, redistribuir y modificar.</dd>
+<dt>Código fuente</dt><dd>Texto del programa tal como lo escribió el programador, legible y modificable.</dd>
+<dt>Software propietario</dt><dd>El que no concede esas libertades y se distribuye sin código fuente.</dd>
+<dt>Copyleft</dt><dd>Cláusula que obliga a distribuir las versiones derivadas con la misma licencia.</dd>
+<dt>Licencia permisiva</dt><dd>Licencia libre que permite reutilizar el código casi sin condiciones, incluso en software propietario.</dd>
+<dt>EULA</dt><dd>Contrato de licencia de usuario final propio del software propietario.</dd>
+<dt>Freeware</dt><dd>Software gratuito pero propietario, sin código fuente.</dd>
+<dt>Requisitos mínimos</dt><dd>Configuración imprescindible para que una aplicación llegue a funcionar.</dd>
+<dt>Gestor de paquetes</dt><dd>Herramienta que instala y actualiza software desde repositorios oficiales resolviendo dependencias.</dd>
+<dt>Suma de comprobación</dt><dd>Valor calculado sobre un archivo que permite verificar que no ha sido alterado.</dd>
+<dt>Formato abierto</dt><dd>Formato documentado públicamente que cualquier programa puede leer y escribir.</dd>
+</dl>
+
+<section class="summary"><h2 id="resumen">Resumen esencial</h2><ol>
+<li>El software de utilidad mantiene, protege y observa el sistema; el de aplicación resuelve tareas del usuario.</li>
+<li>Escritorio, portable, web y móvil no son lo mismo: cambian la privacidad, la disponibilidad y el control de tus datos.</li>
+<li>El software libre garantiza cuatro libertades y exige acceso al código fuente; el propietario no las concede.</li>
+<li>Las licencias libres se dividen en copyleft, que obliga a mantener la libertad, y permisivas, que casi no exigen nada.</li>
+<li>Gratis no es libre: ante un programa gratuito, la pregunta correcta es cómo se sostiene.</li>
+<li>Los requisitos mínimos no son los recomendados, y ninguna aplicación se ejecuta sola en el equipo.</li>
+<li>Instalar registra servicios y asociaciones: conviene la instalación personalizada y desinstalar con la herramienta del sistema.</li>
+<li>Se elige una aplicación con criterios verificables, y el más olvidado es si podrás llevarte tus datos al marcharte.</li>
+<li>La procedencia importa más que el programa: tienda oficial o web del fabricante, y desconfianza ante todo lo demás.</li>
+</ol></section>
+
+<section aria-labelledby="fuentes">
+<h2 id="fuentes">Fuentes y recursos fiables</h2>
+<ul>
+<li id="fuente_1">[1] <a href="https://www.bocm.es/boletin/CM_Orden_BOCM/2023/05/31/BOCM-20230531-18.PDF">Orden 1736/2023, de 19 de mayo, Anexo IV</a> — currículo oficial de Ciencias de la Computación en Bachillerato (PDF).</li>
+<li id="fuente_2">[2] <a href="https://www.gnu.org/philosophy/free-sw.es.html">GNU — Qué es el software libre y las cuatro libertades</a>.</li>
+<li id="fuente_3">[3] <a href="https://opensource.org/licenses">Open Source Initiative — Licencias aprobadas</a>.</li>
+<li id="fuente_4">[4] <a href="https://interoperable-europe.ec.europa.eu/collection/eupl">Comisión Europea — Licencia Pública de la Unión Europea (EUPL)</a>.</li>
+<li id="fuente_5">[5] <a href="https://creativecommons.org/faq/#can-i-apply-a-creative-commons-license-to-software">Creative Commons — Por qué no conviene usar CC para software</a>.</li>
+<li id="fuente_6">[6] <a href="https://www.incibe.es/ciudadania/tematicas/software">INCIBE — Descarga e instalación segura de software</a>.</li>
+<li id="fuente_7">[7] <a href="https://www.picuino.com/es/ley-ciencias-computacion-bach.html">Picuino — transcripción navegable del currículo</a>.</li>
+</ul>
+</section>
+</article></div></main>
+<nav class="topic-footer" aria-label="Navegación entre temas"><a href="tema09.html">← Tema 9</a><a href="index.html">Índice →</a></nav>
+<footer class="site-footer">Ciencias de la Computación I · 1.º de Bachillerato · Comunidad de Madrid</footer>
+</body></html>
