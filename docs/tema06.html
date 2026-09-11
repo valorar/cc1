@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Tema 6 del Bloque B de Ciencias de la Computación I: cómo se conectan los componentes, de dónde obtienen energía y qué ocurre desde que se pulsa el botón de encendido.">
+<title>Tema 6. La placa base, la alimentación y el arranque del equipo · CC1</title><link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/estilos.css"><script src="assets/navegacion.js" defer></script></head>
+<body><a class="skip" href="#contenido">Saltar al contenido</a>
+<div class="progress" aria-hidden="true"><span></span></div>
+<header class="site-header"><div class="header-inner">
+  <a class="brand" href="index.html"><span class="brand-mark">CC1</span><span>Ciencias de la Computación I<small>1.º de Bachillerato · 2026–2027</small></span></a>
+  <nav class="top-nav" aria-label="Navegación principal"><a href="index.html">Índice</a></nav>
+</div></header>
+<main id="contenido">
+<section class="hero"><div class="hero-inner"><div><p class="kicker">Tema 6 · Bloque B · Los sistemas informáticos</p><h1>La placa base, la alimentación y el arranque del equipo</h1><p class="hero-lead">Cómo se conectan los componentes, de dónde obtienen energía y qué ocurre desde que se pulsa el botón de encendido.</p></div><aside class="hero-note"><strong>Pregunta guía</strong><p>Al pulsar el botón, ¿cómo pasa el equipo de ser un conjunto de piezas apagadas a estar ejecutando un sistema operativo?</p></aside></div></section>
+<div class="layout"><nav class="toc" aria-label="Índice del tema"><strong>En este tema</strong><ol>
+<li><a href="#placa">La placa base: qué conecta y por qué</a></li>
+<li><a href="#zocalo">Zócalo, ranuras y factores de forma</a></li>
+<li><a href="#chipset">El chipset: del puente norte y sur al chip único</a></li>
+<li><a href="#reloj">El reloj del sistema y la memoria CMOS</a></li>
+<li><a href="#firmware">El firmware: BIOS y UEFI</a></li>
+<li><a href="#buses">Buses de expansión, conectores y puertos</a></li>
+<li><a href="#alimentacion">La alimentación y la protección ante fallos</a></li>
+<li><a href="#arranque">La secuencia de arranque, paso a paso</a></li>
+<li><a href="#diagnostico">Diagnosticar un arranque que falla</a></li>
+<li><a href="#glosario">Glosario</a></li>
+<li><a href="#resumen">Resumen</a></li>
+<li><a href="#fuentes">Fuentes</a></li>
+</ol></nav><article class="paper">
+<p class="lesson-intro">Cómo se conectan los componentes, de dónde obtienen energía y qué ocurre desde que se pulsa el botón de encendido.</p>
+<div class="question"><strong>Antes de empezar:</strong> al pulsar el botón, ¿cómo pasa el equipo de ser un conjunto de piezas apagadas a estar ejecutando un sistema operativo?</div>
+<div class="objectives"><strong>Al terminar serás capaz de…</strong><ul>
+<li>explicar qué función cumple la placa base más allá de «sujetar las piezas»</li>
+<li>comprobar la compatibilidad entre procesador, memoria y placa antes de montar nada</li>
+<li>describir qué es el chipset y por qué el modelo de puente norte y sur ya no describe un equipo actual</li>
+<li>diferenciar BIOS y UEFI y explicar qué aporta el arranque seguro</li>
+<li>dimensionar y elegir una fuente de alimentación y justificar cuándo hace falta un SAI</li>
+<li>ordenar las fases del arranque y localizar en cuál de ellas falla un equipo</li>
+</ul></div>
+
+<h2 id="placa">1. La placa base: qué conecta y por qué</h2>
+<p>La <strong>placa base</strong> (o placa madre) es la tarjeta de circuito impreso sobre la que se monta todo lo demás. Es fácil verla como una simple bandeja donde se enchufan las piezas, y esa idea es engañosa: la placa base hace dos trabajos imprescindibles.</p>
+<div class="cc1-grid">
+<div class="cc1-card"><h3>Distribuir energía</h3><p>Recibe unas pocas tensiones de la fuente y, mediante reguladores, entrega a cada componente exactamente la que necesita, estabilizada y filtrada.</p></div>
+<div class="cc1-card"><h3>Comunicar componentes</h3><p>Lleva grabadas, en varias capas de cobre, las pistas que forman los buses del <a href="tema05.html">Tema 5</a>. Es el sistema circulatorio del equipo.</p></div>
+</div>
+<div class="cc1-concept"><strong class="cc1-concept-tag">Concepto clave</strong>La placa base no conecta <em>piezas</em>: conecta <strong>funciones</strong>. Determina qué procesadores admite, cuánta y qué tipo de memoria acepta, cuántos dispositivos rápidos puede alojar y a qué velocidad se comunican entre sí. Es la pieza que fija los límites de todo lo demás.</div>
+
+<h2 id="zocalo">2. Zócalo, ranuras y factores de forma</h2>
+<h3>2.1. El zócalo del procesador</h3>
+<p>El <strong>zócalo</strong> (<em>socket</em>) es el conector donde se aloja la CPU. Cada familia de procesadores usa un zócalo con un número y una disposición de contactos determinados, y no hay adaptadores posibles: <strong>o encaja, o no encaja</strong>. Además, no basta con que encaje físicamente: el chipset y el firmware de la placa tienen que reconocer ese modelo concreto, y a veces hace falta actualizar el firmware antes de instalar un procesador más nuevo.</p>
+<h3>2.2. Las ranuras de memoria</h3>
+<p>Los módulos de RAM se insertan en ranuras <strong>DIMM</strong>. Cada generación de memoria —DDR4, DDR5— tiene la muesca de posición en un sitio distinto justamente para <strong>impedir físicamente</strong> que se monte una memoria incompatible. Una placa admite una sola generación.</p>
+<p>Las ranuras suelen ir emparejadas por colores. Si se instalan dos módulos en las ranuras adecuadas, la memoria trabaja en <strong>doble canal</strong> y duplica el ancho de banda disponible. Montar los dos módulos en el par equivocado funciona igualmente, pero desperdicia rendimiento sin avisar de nada.</p>
+<h3>2.3. Factores de forma</h3>
+<p>El <strong>factor de forma</strong> normaliza el tamaño de la placa, la posición de los agujeros de sujeción y la de los conectores traseros, de modo que cualquier placa quepa en cualquier caja compatible:</p>
+<div class="tabla_responsiva"><table class="cc1-table">
+<tr><th>Factor de forma</th><th>Tamaño aproximado</th><th>Ranuras de expansión</th><th>Uso típico</th></tr>
+<tr><td><strong>ATX</strong></td><td>305 × 244 mm</td><td>Hasta 7</td><td>Sobremesa completo, torres estándar</td></tr>
+<tr><td><strong>microATX</strong></td><td>244 × 244 mm</td><td>Hasta 4</td><td>Equipos de oficina y aula</td></tr>
+<tr><td><strong>mini-ITX</strong></td><td>170 × 170 mm</td><td>1</td><td>Equipos compactos y de salón</td></tr>
+</table></div>
+<div class="cc1-concept"><strong class="cc1-concept-tag">La comprobación de compatibilidad</strong>Antes de unir dos componentes hay que verificar cinco cosas: <strong>interfaz física</strong> (¿encaja?), <strong>protocolo</strong> (¿hablan el mismo idioma?), <strong>versión</strong> (¿a qué velocidad?), <strong>alimentación</strong> (¿hay potencia y conector?) y <strong>soporte</strong> (¿lo reconocen el firmware y el sistema operativo?). Que encaje es solo la primera de las cinco.</div>
+
+<h2 id="chipset">3. El chipset: del puente norte y sur al chip único</h2>
+<p>El <strong>chipset</strong> es el conjunto de circuitos de la placa que gestiona la comunicación entre el procesador y el resto. Durante muchos años se dividió en dos chips, y así aparece todavía en el currículo oficial y en la mayoría de los libros:</p>
+<div class="tabla_responsiva"><table class="cc1-table">
+<tr><th>Chip</th><th>De qué se encargaba</th><th>Por qué se llamaba así</th></tr>
+<tr><td><strong>Puente norte</strong></td><td>Lo más rápido: comunicación entre CPU, memoria RAM y tarjeta gráfica.</td><td>Se dibujaba en la parte alta del esquema, junto al procesador.</td></tr>
+<tr><td><strong>Puente sur</strong></td><td>Lo más lento: almacenamiento, puertos USB, audio, red, ranuras de expansión.</td><td>Se dibujaba abajo, junto a los conectores.</td></tr>
+</table></div>
+<div class="aviso"><strong>Este modelo ya no describe un equipo actual</strong>Desde finales de los años 2000, las funciones del puente norte —el controlador de memoria y las líneas rápidas hacia la tarjeta gráfica— se integraron <strong>dentro del propio procesador</strong>, para acortar el camino y reducir la latencia. De los dos chips solo queda uno, heredero del puente sur, que hoy se llama simplemente «el chipset». Conviene conocer el modelo histórico, porque explica la organización y sigue apareciendo en los exámenes y en la bibliografía, pero no debe estudiarse como si describiera la máquina que tienes delante.</div>
+<div class="cc1-note">💡 Esa integración es la misma tendencia que viste en el <a href="tema02.html">Tema 2</a>: primero se separan las funciones en piezas distintas, después se juntan en un solo chip cuando la fabricación lo permite. Los procesadores actuales integran ya el controlador de memoria, las líneas PCI Express y, muy a menudo, la tarjeta gráfica.</div>
+
+<h2 id="reloj">4. El reloj del sistema y la memoria CMOS</h2>
+<h3>4.1. El reloj</h3>
+<p>Un <strong>oscilador de cuarzo</strong> en la placa genera una señal de frecuencia muy estable a partir de la cual se derivan todas las demás: la del procesador, la de la memoria, la de los buses. Es el metrónomo del equipo, el que permite que componentes distintos sepan cuándo empieza y acaba cada ciclo.</p>
+<h3>4.2. La CMOS y su pila</h3>
+<p>La configuración del firmware —el orden de arranque, la velocidad de la memoria, si el arranque seguro está activo— tiene que sobrevivir al apagado, y también la hora del sistema. Se guarda en una pequeña memoria llamada <strong>CMOS</strong>, alimentada por una <strong>pila de botón</strong> (habitualmente una CR2032) que dura años.</p>
+<div class="cc1-curio">🔋 <strong>¿Sabías que…?</strong> Si un ordenador antiguo pierde la hora cada vez que se apaga y se queja al arrancar de que la configuración no es válida, casi siempre es que se ha agotado esa pila de un euro. Y quitarla durante unos minutos es el método clásico para <strong>restablecer el firmware de fábrica</strong> cuando una configuración errónea impide arrancar. La mayoría de las placas tienen además un puente o un botón que hace lo mismo sin desmontar nada.</div>
+
+<h2 id="firmware">5. El firmware: BIOS y UEFI</h2>
+<p>Cuando pulsas el botón no hay sistema operativo: está en el disco y nadie lo ha cargado todavía. Hace falta un programa que ya esté ahí, grabado en un chip de la placa, capaz de despertar el hardware y buscar el sistema. Ese programa es el <strong>firmware</strong>.</p>
+<div class="tabla_responsiva"><table class="cc1-table">
+<tr><th></th><th>BIOS (clásica)</th><th>UEFI (actual)</th></tr>
+<tr><td><strong>Época</strong></td><td>Desde 1981</td><td>Generalizada desde 2012</td></tr>
+<tr><td><strong>Modo de trabajo</strong></td><td>16 bits, memoria muy limitada</td><td>32 o 64 bits, sin esas limitaciones</td></tr>
+<tr><td><strong>Tabla de particiones</strong></td><td>MBR: máximo 2 TB de arranque y 4 particiones primarias</td><td>GPT: discos mucho mayores y muchas más particiones</td></tr>
+<tr><td><strong>Interfaz</strong></td><td>Texto, solo teclado</td><td>Gráfica, con ratón y a menudo en español</td></tr>
+<tr><td><strong>Arranque seguro</strong></td><td>No existe</td><td>Sí: comprueba firmas digitales antes de ejecutar</td></tr>
+<tr><td><strong>Velocidad</strong></td><td>Comprobaciones largas</td><td>Arranque notablemente más rápido</td></tr>
+</table></div>
+<p>Casi todos los equipos actuales usan UEFI, aunque muchas personas —y muchos manuales— la sigan llamando «la BIOS» por costumbre. Casi todas las UEFI incluyen además un modo de compatibilidad heredado para poder arrancar sistemas antiguos preparados para BIOS.</p>
+<div class="cc1-concept"><strong class="cc1-concept-tag">El arranque seguro</strong>El <strong>arranque seguro</strong> hace que cada etapa del encendido compruebe la <em>firma digital</em> de la siguiente antes de cederle el control: el firmware verifica el gestor de arranque, y este verifica el núcleo del sistema. Se llama <em>cadena de confianza</em> y dificulta que un programa malicioso se instale antes que el sistema operativo, donde ningún antivirus podría verlo. No hace infalible al equipo: solo cierra una puerta concreta.</div>
+
+<h2 id="buses">6. Buses de expansión, conectores y puertos</h2>
+<h3>6.1. PCI Express</h3>
+<p><strong>PCI Express</strong> es el bus de expansión que usan las tarjetas gráficas, las tarjetas de red y los SSD rápidos. Tiene dos características que conviene entender:</p>
+<ul>
+<li>Se organiza en <strong>líneas</strong> independientes. Una ranura puede ser x1, x4, x8 o x16 según cuántas líneas tenga: cuantas más, más ancho de banda. La ranura larga x16 es la de la tarjeta gráfica.</li>
+<li>Cada <strong>generación</strong> duplica aproximadamente la velocidad por línea. Las placas actuales combinan ranuras de distintas generaciones según a qué las dedique el fabricante.</li>
+</ul>
+<h3>6.2. La ranura M.2</h3>
+<p>Los SSD modernos no usan cable: se atornillan directamente a la placa en una ranura <strong>M.2</strong>. Ojo, porque en la misma ranura pueden entrar dos cosas distintas: un SSD que hable el protocolo antiguo <strong>SATA</strong> y otro que hable <strong>NVMe</strong> sobre PCI Express, que es muchísimo más rápido. Encajan igual, pero no rinden igual, y algunas ranuras solo admiten uno de los dos.</p>
+<h3>6.3. Los puertos más frecuentes</h3>
+<div class="tabla_responsiva"><table class="cc1-table">
+<tr><th>Puerto</th><th>Para qué sirve</th><th>Qué conviene mirar</th></tr>
+<tr><td><strong>USB-A</strong></td><td>Periféricos de todo tipo</td><td>El color y la etiqueta indican la velocidad; no todos son iguales.</td></tr>
+<tr><td><strong>USB-C</strong></td><td>Datos, vídeo y carga por el mismo conector</td><td>Es solo una <em>forma</em>: lo que ese puerto sabe hacer varía muchísimo.</td></tr>
+<tr><td><strong>HDMI / DisplayPort</strong></td><td>Vídeo y audio digital hacia un monitor o televisor</td><td>La versión limita la resolución y la frecuencia de refresco.</td></tr>
+<tr><td><strong>Ethernet (RJ-45)</strong></td><td>Red cableada</td><td>La velocidad del puerto y la categoría del cable.</td></tr>
+<tr><td><strong>Jack de 3,5 mm</strong></td><td>Auriculares y micrófono</td><td>Si es solo salida, solo entrada o combinado.</td></tr>
+</table></div>
+<div class="aviso"><strong>La forma del conector no cuenta toda la historia</strong>Una <em>interfaz</em> son tres cosas: conector físico, señales eléctricas y protocolo. Dos puertos USB-C idénticos a la vista pueden diferir en velocidad, en si transportan vídeo y en cuánta potencia entregan para cargar. Antes de dar por hecho que algo funcionará, hay que mirar la etiqueta del puerto o el manual de la placa, no la forma del agujero.</div>
+
+<h2 id="alimentacion">7. La alimentación y la protección ante fallos</h2>
+<h3>7.1. La fuente de alimentación</h3>
+<p>La red eléctrica entrega corriente alterna a 230 V, y los circuitos digitales necesitan corriente continua a 12, 5 y 3,3 V. De esa conversión se encarga la <strong>fuente de alimentación</strong>, que además debe entregar corriente estable aunque el consumo cambie bruscamente.</p>
+<div class="tabla_responsiva"><table class="cc1-table">
+<tr><th>Aspecto</th><th>Qué significa</th><th>Cómo se elige</th></tr>
+<tr><td><strong>Potencia</strong></td><td>Vatios que puede entregar de forma continua.</td><td>Sumar el consumo de los componentes y dejar margen; la tarjeta gráfica suele ser la que más pide.</td></tr>
+<tr><td><strong>Eficiencia</strong></td><td>Qué parte de la energía tomada de la red llega a los componentes; el resto se pierde en calor.</td><td>Las certificaciones <em>80 PLUS</em> garantizan mínimos de eficiencia.</td></tr>
+<tr><td><strong>Conectores</strong></td><td>Cada componente necesita el suyo: 24 pines para la placa, uno específico para la CPU y otros para la gráfica.</td><td>Comprobar que la fuente trae los que exigen la placa y la tarjeta gráfica.</td></tr>
+<tr><td><strong>Protecciones</strong></td><td>Cortes automáticos ante sobretensión, sobrecarga o cortocircuito.</td><td>Es lo que separa una fuente barata de una segura.</td></tr>
+</table></div>
+<div class="aviso"><strong>Seguridad en el aula</strong>Una fuente de alimentación <strong>no se abre nunca</strong>, ni siquiera desenchufada: sus condensadores pueden conservar carga peligrosa mucho tiempo. Cualquier intervención dentro de un equipo se hace con el aparato apagado y desconectado de la red, con autorización del profesor, sobre una mesa despejada y descargando antes la electricidad estática del cuerpo.</div>
+<h3>7.2. Refrigeración</h3>
+<p>Toda la energía que consume un equipo acaba convertida en calor. Disipadores, ventiladores y un flujo de aire ordenado lo expulsan. Si la temperatura sube demasiado, el procesador <strong>reduce su frecuencia automáticamente</strong> para no dañarse, y si aun así sigue subiendo, el equipo se apaga. Por eso el rendimiento sostenido de un equipo depende tanto de su refrigeración como de su ficha técnica.</p>
+<h3>7.3. Sistemas de protección ante fallos</h3>
+<div class="cc1-grid">
+<div class="cc1-card"><h3>SAI</h3><p>Un sistema de alimentación ininterrumpida contiene baterías que mantienen el equipo encendido durante un corte, el tiempo suficiente para guardar y apagar con orden. Los hay que además estabilizan la tensión.</p></div>
+<div class="cc1-card"><h3>Fuentes redundantes</h3><p>En servidores, dos fuentes en paralelo: si una falla, la otra sostiene el equipo sin que nadie lo note.</p></div>
+<div class="cc1-card"><h3>Protección contra sobretensión</h3><p>Regletas y protectores que absorben los picos de tensión, como los que provoca una tormenta eléctrica.</p></div>
+<div class="cc1-card"><h3>Copias de seguridad</h3><p>Ninguna protección eléctrica sustituye a una copia. Es la única medida que salva los datos cuando el fallo ya ha ocurrido.</p></div>
+</div>
+
+<h2 id="arranque">8. La secuencia de arranque, paso a paso</h2>
+<p>El arranque es una <strong>cadena de transferencias de control</strong>: cada etapa despierta lo justo para poder ceder el mando a la siguiente.</p>
+<div class="cc1-timeline">
+<div class="cc1-tl-item"><div class="cc1-tl-year">1 — Pulsación y estabilización</div><p>Al pulsar el botón, la placa ordena arrancar a la fuente. Esta tarda unas décimas de segundo en estabilizar todas las tensiones y entonces envía una señal de conformidad. Hasta que no llega esa señal, el procesador se mantiene en reposo.</p></div>
+<div class="cc1-tl-item"><div class="cc1-tl-year">2 — Primera instrucción</div><p>El procesador sale del reposo y ejecuta su primera instrucción desde una dirección fija predeterminada, donde está el firmware. Todavía no hay memoria RAM configurada ni disco disponible.</p></div>
+<div class="cc1-tl-item"><div class="cc1-tl-year">3 — POST</div><p>El firmware realiza la <strong>autocomprobación de encendido</strong>: detecta e inicializa memoria, procesador, gráficos y dispositivos esenciales, y verifica que respondan. Si algo crítico falla aquí, lo comunica con pitidos, luces o un código en pantalla.</p></div>
+<div class="cc1-tl-item"><div class="cc1-tl-year">4 — Configuración y elección</div><p>El firmware lee su configuración de la CMOS y recorre el <strong>orden de arranque</strong> —disco interno, USB, red— buscando un dispositivo con un sistema arrancable.</p></div>
+<div class="cc1-tl-item"><div class="cc1-tl-year">5 — Gestor de arranque</div><p>Cede el control al <strong>gestor de arranque</strong> del dispositivo elegido: GRUB en Linux, el Administrador de arranque en Windows. Si hay varios sistemas instalados, es él quien muestra el menú para escoger.</p></div>
+<div class="cc1-tl-item"><div class="cc1-tl-year">6 — Carga del núcleo</div><p>El gestor localiza el <strong>núcleo</strong> del sistema operativo, lo copia del disco a la RAM y le transfiere el control. A partir de aquí manda el sistema operativo, no el firmware.</p></div>
+<div class="cc1-tl-item"><div class="cc1-tl-year">7 — Arranque del sistema</div><p>El núcleo carga los controladores, monta los sistemas de archivos, inicia los servicios en segundo plano y, por último, presenta la pantalla de inicio de sesión.</p></div>
+</div>
+<div class="cc1-note">💡 Con el arranque seguro activado, cada eslabón de esa cadena verifica la firma digital del siguiente antes de cederle el control. Por eso, instalar un sistema operativo poco habitual puede exigir desactivarlo o registrar su clave: no está «roto», está haciendo exactamente su trabajo.</div>
+
+<h2 id="diagnostico">9. Diagnosticar un arranque que falla</h2>
+<p>«No arranca» no es un diagnóstico: es tres problemas distintos según <strong>en qué fase se detiene</strong>. Identificar la fase reduce enormemente las posibilidades.</p>
+<div class="tabla_responsiva"><table class="cc1-table">
+<tr><th>Síntoma</th><th>Fase en la que falla</th><th>Dónde mirar primero</th></tr>
+<tr><td>No se enciende nada: ni luces, ni ventiladores</td><td>Antes de la fase 1</td><td>Cable, interruptor de la fuente, regleta, conector del botón de encendido.</td></tr>
+<tr><td>Ventiladores en marcha, pero pantalla negra y sin pitidos</td><td>Fase 3 (POST)</td><td>Memoria mal asentada, cable de vídeo en la salida equivocada, monitor en otra entrada.</td></tr>
+<tr><td>Pitidos o luces de error repetidos</td><td>Fase 3 (POST)</td><td>El manual de la placa: cada patrón identifica un componente concreto.</td></tr>
+<tr><td>Aparece el firmware pero dice que no hay dispositivo de arranque</td><td>Fase 4</td><td>Orden de arranque, disco no detectado, cable suelto.</td></tr>
+<tr><td>Empieza a cargar el sistema y se reinicia o se queda parado</td><td>Fases 6-7</td><td>Sistema operativo, controladores o disco dañado; no es un problema de hardware básico.</td></tr>
+</table></div>
+<div class="cc1-concept"><strong class="cc1-concept-tag">Método</strong>Diagnosticar es <strong>reducir posibilidades con evidencias</strong>, no sustituir la pieza más cara. Registra el síntoma exacto, qué cambió desde la última vez que funcionaba, qué has probado y qué resultado obtuviste. Y cambia <strong>una sola cosa cada vez</strong>: si modificas tres, aunque el equipo arranque no sabrás cuál era la causa, y volverá a pasarte.</div>
+<div class="cc1-think">🤔 <strong>Para pensar:</strong> un equipo enciende, hace el POST correctamente y se queda en el firmware diciendo que no encuentra sistema. Alguien propone cambiar la placa base. ¿Qué tres comprobaciones harías antes, y qué evidencia te daría cada una?</div>
+
+<h2 id="glosario">Glosario del tema</h2>
+<dl class="cc1-glosario">
+<dt>Placa base</dt><dd>Tarjeta que distribuye la alimentación y contiene los buses que comunican todos los componentes.</dd>
+<dt>Zócalo</dt><dd>Conector de la placa donde se instala el procesador; determina qué CPU son compatibles.</dd>
+<dt>DIMM</dt><dd>Ranura donde se insertan los módulos de memoria RAM.</dd>
+<dt>Doble canal</dt><dd>Configuración con módulos de memoria emparejados que duplica el ancho de banda disponible.</dd>
+<dt>Factor de forma</dt><dd>Norma que fija el tamaño de la placa y la posición de sus conectores y anclajes.</dd>
+<dt>Chipset</dt><dd>Circuitos de la placa que gestionan la comunicación entre el procesador y el resto del sistema.</dd>
+<dt>CMOS</dt><dd>Memoria alimentada por pila donde se guardan la configuración del firmware y la hora.</dd>
+<dt>BIOS</dt><dd>Firmware clásico de arranque, de 16 bits y asociado a particiones MBR.</dd>
+<dt>UEFI</dt><dd>Firmware moderno que sustituye a la BIOS: admite GPT, arranque seguro e interfaz gráfica.</dd>
+<dt>Arranque seguro</dt><dd>Mecanismo que verifica la firma digital de cada etapa del arranque antes de ejecutarla.</dd>
+<dt>PCI Express</dt><dd>Bus de expansión organizado en líneas por el que se conectan tarjetas y SSD rápidos.</dd>
+<dt>M.2</dt><dd>Ranura de la placa para SSD, que admite unidades SATA o NVMe según el modelo.</dd>
+<dt>POST</dt><dd>Autocomprobación de encendido que verifica los componentes esenciales antes de arrancar.</dd>
+<dt>Gestor de arranque</dt><dd>Programa que localiza el núcleo del sistema operativo, lo carga en RAM y le cede el control.</dd>
+<dt>SAI</dt><dd>Sistema de alimentación ininterrumpida: baterías que mantienen el equipo durante un corte eléctrico.</dd>
+</dl>
+
+<section class="summary"><h2 id="resumen">Resumen esencial</h2><ol>
+<li>La placa base distribuye energía y comunica funciones: fija los límites de todo lo que se le puede conectar.</li>
+<li>La compatibilidad exige comprobar cinco cosas —interfaz, protocolo, versión, alimentación y soporte—; que encaje es solo la primera.</li>
+<li>El modelo de puente norte y puente sur es histórico: hoy el controlador de memoria vive dentro del procesador y queda un solo chipset.</li>
+<li>La CMOS y su pila conservan la configuración y la hora cuando el equipo está apagado.</li>
+<li>UEFI sustituyó a la BIOS: admite discos GPT mayores, arranca más rápido y añade el arranque seguro como cadena de confianza.</li>
+<li>Una interfaz son conector, señales y protocolo: dos puertos USB-C idénticos pueden hacer cosas muy distintas.</li>
+<li>La fuente convierte y estabiliza la energía; el SAI cubre los cortes, y ninguna protección eléctrica sustituye a una copia de seguridad.</li>
+<li>El arranque es una cadena de siete transferencias de control, y saber en cuál se detiene un equipo es la mitad del diagnóstico.</li>
+</ol></section>
+
+<section aria-labelledby="fuentes">
+<h2 id="fuentes">Fuentes y recursos fiables</h2>
+<ul>
+<li id="fuente_1">[1] <a href="https://www.bocm.es/boletin/CM_Orden_BOCM/2023/05/31/BOCM-20230531-18.PDF">Orden 1736/2023, de 19 de mayo, Anexo IV</a> — currículo oficial de Ciencias de la Computación en Bachillerato (PDF).</li>
+<li id="fuente_2">[2] <a href="https://uefi.org/specifications">UEFI Forum — Especificaciones UEFI</a>.</li>
+<li id="fuente_3">[3] <a href="https://learn.microsoft.com/es-es/windows-hardware/manufacture/desktop/boot-to-uefi-mode-or-legacy-bios-mode">Microsoft Learn — Arranque en modo UEFI o BIOS heredado</a>.</li>
+<li id="fuente_4">[4] <a href="https://pcisig.com/specifications">PCI-SIG — Especificaciones de PCI Express</a>.</li>
+<li id="fuente_5">[5] <a href="https://www.incibe.es/protege-tu-empresa/blog/copias-seguridad-sistema-la-regla-321">INCIBE — Copias de seguridad y la regla 3-2-1</a>.</li>
+<li id="fuente_6">[6] <a href="https://www.picuino.com/es/ley-ciencias-computacion-bach.html">Picuino — transcripción navegable del currículo</a>.</li>
+</ul>
+</section>
+</article></div></main>
+<nav class="topic-footer" aria-label="Navegación entre temas"><a href="tema05.html">← Tema 5</a><a href="tema07.html">Tema 7 →</a></nav>
+<footer class="site-footer">Ciencias de la Computación I · 1.º de Bachillerato · Comunidad de Madrid</footer>
+</body></html>

@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Tema 7 del Bloque B de Ciencias de la Computación I: cómo se conserva la información y cómo entra y sale del sistema informático.">
+<title>Tema 7. Almacenamiento y periféricos de entrada, salida y comunicación · CC1</title><link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/estilos.css"><script src="assets/navegacion.js" defer></script></head>
+<body><a class="skip" href="#contenido">Saltar al contenido</a>
+<div class="progress" aria-hidden="true"><span></span></div>
+<header class="site-header"><div class="header-inner">
+  <a class="brand" href="index.html"><span class="brand-mark">CC1</span><span>Ciencias de la Computación I<small>1.º de Bachillerato · 2026–2027</small></span></a>
+  <nav class="top-nav" aria-label="Navegación principal"><a href="index.html">Índice</a></nav>
+</div></header>
+<main id="contenido">
+<section class="hero"><div class="hero-inner"><div><p class="kicker">Tema 7 · Bloque B · Los sistemas informáticos</p><h1>Almacenamiento y periféricos de entrada, salida y comunicación</h1><p class="hero-lead">Cómo se conserva la información y cómo entra y sale del sistema informático.</p></div><aside class="hero-note"><strong>Pregunta guía</strong><p>¿Por qué no existe un único dispositivo de almacenamiento que sea a la vez enorme, instantáneo, permanente y barato?</p></aside></div></section>
+<div class="layout"><nav class="toc" aria-label="Índice del tema"><strong>En este tema</strong><ol>
+<li><a href="#propiedades">Cinco propiedades en conflicto</a></li>
+<li><a href="#hdd">El disco duro magnético</a></li>
+<li><a href="#ssd">SSD y memoria flash</a></li>
+<li><a href="#otros">Óptico, cinta, red y nube</a></li>
+<li><a href="#comparativa">Comparativa y criterios de elección</a></li>
+<li><a href="#entrada">Dispositivos de entrada</a></li>
+<li><a href="#salida">Salida, mixtos y comunicación</a></li>
+<li><a href="#conexion">Cómo se conecta un periférico</a></li>
+<li><a href="#dimensionar">Dimensionar un puesto y su ciclo de vida</a></li>
+<li><a href="#glosario">Glosario</a></li>
+<li><a href="#resumen">Resumen</a></li>
+<li><a href="#fuentes">Fuentes</a></li>
+</ol></nav><article class="paper">
+<p class="lesson-intro">Cómo se conserva la información y cómo entra y sale del sistema informático.</p>
+<div class="question"><strong>Antes de empezar:</strong> ¿por qué no existe un único dispositivo de almacenamiento que sea a la vez enorme, instantáneo, permanente y barato?</div>
+<div class="objectives"><strong>Al terminar serás capaz de…</strong><ul>
+<li>explicar qué propiedades se enfrentan al diseñar un sistema de almacenamiento</li>
+<li>comparar disco duro, SSD, óptico, cinta y nube con criterios técnicos</li>
+<li>clasificar un periférico como de entrada, de salida, mixto o de comunicación</li>
+<li>distinguir conector, protocolo y controlador al conectar un dispositivo</li>
+<li>dimensionar el equipamiento de un puesto de trabajo según su uso</li>
+<li>aplicar la regla 3-2-1 de copias de seguridad y razonar sobre el ciclo de vida del hardware</li>
+</ul></div>
+
+<h2 id="propiedades">1. Cinco propiedades en conflicto</h2>
+<p>En el <a href="tema05.html">Tema 5</a> viste la jerarquía de memoria y su motivo: no existe una tecnología que lo tenga todo. Al bajar al almacenamiento permanente, el conflicto se concreta en cinco propiedades que <strong>no se pueden maximizar a la vez</strong>.</p>
+<div class="tabla_responsiva"><table class="cc1-table">
+<tr><th>Propiedad</th><th>Pregunta</th><th>Se mide en</th></tr>
+<tr><td><strong>Capacidad</strong></td><td>¿Cuántos datos caben?</td><td>GB, TB</td></tr>
+<tr><td><strong>Ancho de banda</strong></td><td>¿Cuántos datos pasan por segundo?</td><td>MB/s, GB/s</td></tr>
+<tr><td><strong>Latencia</strong></td><td>¿Cuánto tarda en empezar a responder?</td><td>ms, µs</td></tr>
+<tr><td><strong>Persistencia</strong></td><td>¿Conserva los datos sin corriente y durante cuánto?</td><td>Años</td></tr>
+<tr><td><strong>Coste por GB</strong></td><td>¿Cuánto cuesta guardar cada gigabyte?</td><td>€/GB</td></tr>
+</table></div>
+<div class="cc1-concept"><strong class="cc1-concept-tag">Concepto clave</strong>Cada tecnología de almacenamiento es una <strong>respuesta distinta al mismo conflicto</strong>. Por eso conviven todas: un centro de datos usa a la vez SSD para lo que se consulta a diario, discos duros para lo que se guarda por si acaso y cinta para lo que hay que conservar diez años y casi nunca se lee. Ninguna es «mejor»: cada una gana en unas propiedades y pierde en otras.</div>
+<p>A esas cinco hay que añadir dos consideraciones prácticas: la <strong>fiabilidad</strong> —qué probabilidad hay de que falle y de que se pierdan los datos— y el <strong>tipo de acceso</strong>, según si se puede saltar directamente a cualquier punto o hay que recorrer el soporte en orden.</p>
+
+<h2 id="hdd">2. El disco duro magnético</h2>
+<p>Un <strong>disco duro</strong> guarda la información magnetizando la superficie de unos platos metálicos que giran a gran velocidad —normalmente 5.400 o 7.200 revoluciones por minuto—. Unos cabezales montados en un brazo móvil se desplazan sobre ellos para leer y escribir, flotando a una distancia minúscula sin llegar a tocarlos.</p>
+<p>Esa mecánica explica todas sus características:</p>
+<div class="cc1-grid">
+<div class="cc1-card"><h3>Latencia alta</h3><p>Antes de leer hay que <em>mover el brazo</em> y <em>esperar a que el plato gire</em> hasta la posición correcta. Son milisegundos: una eternidad para el procesador.</p></div>
+<div class="cc1-card"><h3>Frágil en movimiento</h3><p>Un golpe mientras gira puede hacer que el cabezal toque la superficie y destruya los datos de esa zona.</p></div>
+<div class="cc1-card"><h3>Muy barato por TB</h3><p>Sigue siendo, con diferencia, la forma más económica de guardar muchos datos.</p></div>
+<div class="cc1-card"><h3>Duradero sin corriente</h3><p>El magnetismo se conserva durante años, aunque no indefinidamente.</p></div>
+</div>
+<div class="cc1-note">💡 El disco duro no ha desaparecido: se ha desplazado. Ya casi no se usa como disco del sistema, pero sigue siendo la opción sensata para almacenar grandes volúmenes de archivos, para copias de seguridad y para los servidores donde importa el precio por terabyte más que la velocidad.</div>
+
+<h2 id="ssd">3. SSD y memoria flash</h2>
+<p>Un <strong>SSD</strong> no tiene ninguna pieza móvil: guarda los datos como carga eléctrica atrapada en celdas de <strong>memoria flash</strong>. Sin brazo que mover ni plato que esperar, la latencia baja de milisegundos a microsegundos: es entre cien y mil veces más rápido en responder.</p>
+<h3>3.1. SATA y NVMe</h3>
+<p>Que un SSD sea rápido depende también de <strong>por dónde se conecta</strong>:</p>
+<div class="tabla_responsiva"><table class="cc1-table">
+<tr><th></th><th>SSD SATA</th><th>SSD NVMe</th></tr>
+<tr><td><strong>Se conecta por</strong></td><td>El bus SATA, diseñado originalmente para discos mecánicos</td><td>Directamente a PCI Express, normalmente en una ranura M.2</td></tr>
+<tr><td><strong>Velocidad máxima</strong></td><td>Unos 550 MB/s, límite del bus</td><td>Varios GB/s, según la generación de PCI Express</td></tr>
+<tr><td><strong>Formato</strong></td><td>Caja de 2,5 pulgadas con cable, o M.2</td><td>Tarjeta M.2 atornillada a la placa</td></tr>
+</table></div>
+<div class="aviso"><strong>El mismo hueco, dos cosas distintas</strong>Como viste en el <a href="tema06.html">Tema 6</a>, en una ranura M.2 pueden entrar un SSD SATA y uno NVMe, con aspecto casi idéntico. Si se monta un SATA esperando velocidades NVMe, el equipo funcionará perfectamente… a una décima parte de la velocidad prevista, y nada avisará del error.</div>
+<h3>3.2. El desgaste de la memoria flash</h3>
+<p>Las celdas flash <strong>se degradan al escribirse</strong>: admiten un número limitado de ciclos de borrado. Los fabricantes lo declaran como <em>terabytes escritos</em> soportados durante la garantía. En la práctica, un uso normal de escritorio no agota un SSD moderno antes de que quede obsoleto por otras razones, y el controlador reparte las escrituras por toda la superficie para que ninguna celda se gaste antes que las demás.</p>
+<div class="aviso"><strong>Un SSD desconectado no es un archivo permanente</strong>La carga eléctrica que guarda un SSD se va perdiendo lentamente si no se le da corriente. Para archivar algo durante años, un SSD guardado en un cajón es peor opción que un disco duro o, mejor aún, que varias copias en soportes distintos.</div>
+
+<h2 id="otros">4. Óptico, cinta, red y nube</h2>
+<div class="tabla_responsiva"><table class="cc1-table">
+<tr><th>Soporte</th><th>Capacidad típica</th><th>Para qué sigue sirviendo</th></tr>
+<tr><td><strong>CD</strong></td><td>700 MB</td><td>Prácticamente en desuso.</td></tr>
+<tr><td><strong>DVD</strong></td><td>4,7 GB</td><td>Distribución de software antiguo y archivo doméstico.</td></tr>
+<tr><td><strong>Blu-ray</strong></td><td>25-100 GB</td><td>Vídeo de alta calidad y archivo de larga duración.</td></tr>
+<tr><td><strong>Cinta magnética</strong></td><td>Decenas de TB por cartucho</td><td>Copias de seguridad de gran volumen y archivo legal a largo plazo.</td></tr>
+</table></div>
+<div class="cc1-curio">📼 <strong>¿Sabías que…?</strong> La cinta magnética parece una tecnología del siglo pasado y sigue viva en los centros de datos más grandes del mundo. El motivo es simple: es el soporte más barato por terabyte, consume cero energía guardado en una estantería y conserva los datos durante décadas. Su pega —que hay que recorrerla en orden para llegar a un dato— no importa cuando se trata de información que casi nunca se lee, pero que hay que poder recuperar.</div>
+<h3>4.1. Almacenamiento en red y en la nube</h3>
+<p>Los datos no tienen por qué estar dentro del equipo:</p>
+<ul>
+<li>Un <strong>NAS</strong> es un pequeño servidor de almacenamiento conectado a la red local: varios discos accesibles desde cualquier equipo de la casa, el aula o la oficina.</li>
+<li>El <strong>almacenamiento en la nube</strong> guarda los archivos en los centros de datos de un proveedor, accesibles desde cualquier sitio con conexión. Añade comodidad y sincronización, pero introduce dependencias: la red, el proveedor, su política de precios y la privacidad de lo que se sube.</li>
+</ul>
+<h3>4.2. RAID: varios discos como uno solo</h3>
+<p><strong>RAID</strong> combina varios discos para que el sistema los vea como una unidad. Según la configuración, puede aumentar la velocidad, ofrecer redundancia —si un disco muere, los datos siguen ahí— o ambas cosas.</p>
+<div class="aviso"><strong>RAID no es una copia de seguridad</strong>Un RAID protege frente al fallo <em>de un disco</em>. No protege frente a un borrado accidental, un cifrado por ransomware, un incendio o un robo: todo eso afecta a la vez a todos los discos del conjunto. Son cosas complementarias, no alternativas.</div>
+
+<h2 id="comparativa">5. Comparativa y criterios de elección</h2>
+<div class="tabla_responsiva"><table class="cc1-table">
+<tr><th></th><th>Disco duro</th><th>SSD NVMe</th><th>Óptico</th><th>Cinta</th><th>Nube</th></tr>
+<tr><td><strong>Latencia</strong></td><td>Milisegundos</td><td>Microsegundos</td><td>Alta</td><td>Muy alta</td><td>Depende de la red</td></tr>
+<tr><td><strong>Coste por TB</strong></td><td>Bajo</td><td>Alto</td><td>Medio</td><td>Muy bajo</td><td>Cuota periódica</td></tr>
+<tr><td><strong>Acceso</strong></td><td>Directo</td><td>Directo</td><td>Directo, lento</td><td>Secuencial</td><td>Directo por red</td></tr>
+<tr><td><strong>Resistencia a golpes</strong></td><td>Baja</td><td>Alta</td><td>Media</td><td>Media</td><td>No aplica</td></tr>
+<tr><td><strong>Mejor uso</strong></td><td>Volumen y copias</td><td>Sistema y trabajo diario</td><td>Distribución y archivo</td><td>Archivo masivo</td><td>Acceso desde cualquier sitio</td></tr>
+</table></div>
+<div class="cc1-concept"><strong class="cc1-concept-tag">La regla 3-2-1</strong>Una copia de seguridad razonable mantiene <strong>3</strong> copias de los datos importantes, en <strong>2</strong> tipos de soporte distintos, con al menos <strong>1</strong> de ellas fuera del lugar habitual. No es una recomendación teórica: cubre exactamente los tres modos en que se pierden datos —fallo del dispositivo, error propio y desastre físico en el edificio—.</div>
+
+<h2 id="entrada">6. Dispositivos de entrada</h2>
+<p>Un <strong>periférico</strong> es todo dispositivo que se conecta al sistema para introducir, extraer o intercambiar información. Los de <strong>entrada</strong> convierten algo del mundo exterior en datos que la máquina puede procesar.</p>
+<div class="tabla_responsiva"><table class="cc1-table">
+<tr><th>Tipo</th><th>Ejemplos</th><th>Qué convierten en datos</th></tr>
+<tr><td><strong>De texto y órdenes</strong></td><td>Teclado, ratón, panel táctil, mando de juego</td><td>Pulsaciones y movimientos de la mano</td></tr>
+<tr><td><strong>De imagen</strong></td><td>Escáner, cámara, lector de códigos</td><td>Luz reflejada o emitida</td></tr>
+<tr><td><strong>De sonido</strong></td><td>Micrófono</td><td>Variaciones de presión del aire</td></tr>
+<tr><td><strong>Biométricos</strong></td><td>Lector de huella, reconocimiento facial</td><td>Rasgos físicos de una persona</td></tr>
+<tr><td><strong>Sensores</strong></td><td>Acelerómetro, GPS, termómetro, sensor de luz</td><td>Magnitudes físicas del entorno</td></tr>
+</table></div>
+<div class="cc1-note">💡 Los sensores son los que más han cambiado en los últimos veinte años. Un móvil actual lleva más de una docena, y son ellos los que permiten que un dispositivo reaccione al mundo sin que nadie le teclee nada: girar la pantalla, contar pasos, ajustar el brillo o avisar de un choque.</div>
+
+<h2 id="salida">7. Salida, mixtos y comunicación</h2>
+<h3>7.1. Dispositivos de salida</h3>
+<p>Hacen el camino inverso: convierten datos en algo perceptible o en una acción física.</p>
+<ul>
+<li><strong>Visual:</strong> monitor, proyector, pantalla de un móvil. Sus parámetros son la resolución, la frecuencia de refresco y la fidelidad del color.</li>
+<li><strong>Sonoro:</strong> altavoces y auriculares.</li>
+<li><strong>Impreso:</strong> impresora de tinta o láser, plóter, impresora 3D.</li>
+<li><strong>Físico:</strong> los <strong>actuadores</strong> —motores, válvulas, relés— con los que un sistema informático manipula el mundo. Son la salida de un robot o de una lavadora.</li>
+</ul>
+<h3>7.2. Dispositivos mixtos</h3>
+<p>Muchos periféricos hacen las dos cosas y no se pueden clasificar en una sola casilla: una <strong>pantalla táctil</strong> muestra y recibe; unos <strong>auriculares con micrófono</strong> también; una <strong>impresora multifunción</strong> imprime y escanea; una <strong>unidad de almacenamiento</strong> se lee y se escribe.</p>
+<h3>7.3. Dispositivos de comunicación</h3>
+<p>Conectan el sistema con otros sistemas en lugar de con una persona: <strong>tarjeta de red</strong> cableada, adaptador <strong>Wi-Fi</strong>, <strong>Bluetooth</strong> para periféricos cercanos, y <strong>router</strong> o <strong>módem</strong> para salir al exterior. En un equipo actual casi todos vienen integrados en la placa base.</p>
+<div class="cc1-think">🤔 <strong>Para pensar:</strong> clasifica una impresora 3D, un lector de códigos QR y un altavoz inteligente con micrófono. ¿Alguno cabe limpiamente en una sola categoría? Si no, ¿es un problema de los aparatos o de la clasificación?</div>
+
+<h2 id="conexion">8. Cómo se conecta un periférico</h2>
+<p>Conectar un dispositivo exige que encajen <strong>tres cosas distintas</strong>, y confundirlas es el origen de la mayoría de los «no me funciona».</p>
+<div class="cc1-grid">
+<div class="cc1-card"><h3>1. El conector</h3><p>La forma física. Que entre en el hueco es condición necesaria, pero no dice nada de la velocidad ni de las funciones.</p></div>
+<div class="cc1-card"><h3>2. El protocolo</h3><p>El idioma y la velocidad con que se hablan los dos extremos. Un mismo conector puede soportar protocolos y versiones muy distintos.</p></div>
+<div class="cc1-card"><h3>3. El controlador</h3><p>El programa que enseña al sistema operativo a manejar ese dispositivo concreto. Sin él, el hardware está conectado pero es inservible.</p></div>
+</div>
+<h3>8.1. El caso USB-C</h3>
+<p>USB-C es el mejor ejemplo del problema. Es un <strong>conector</strong>, reversible y pequeño, no una prestación. Dos puertos USB-C idénticos a la vista pueden diferir en la velocidad de transferencia, en si sacan vídeo a un monitor, en cuánta potencia entregan para cargar y en si admiten conectar un disco externo rápido. La única forma de saberlo es mirar el icono junto al puerto o el manual del equipo.</p>
+<div class="cc1-note">💡 Lo mismo pasa con los cables: dos cables USB-C exteriormente idénticos pueden ser uno solo de carga lenta y otro capaz de transportar vídeo y datos a gran velocidad. Cuando algo «no funciona con este cable pero sí con el otro», casi nunca está roto: es que no son el mismo cable.</div>
+<h3>8.2. Controladores y conexión en caliente</h3>
+<p>El <strong>controlador</strong> (o <em>driver</em>) traduce las órdenes genéricas del sistema operativo a las que entiende ese modelo concreto. Los sistemas actuales incorporan controladores genéricos para las categorías más comunes —teclados, ratones, memorias USB—, y por eso funcionan nada más enchufarlos: es lo que se llama <em>plug and play</em>. Una impresora o una tarjeta gráfica, en cambio, suelen necesitar el controlador del fabricante para aprovechar todas sus funciones.</p>
+<div class="aviso"><strong>De dónde se descarga un controlador</strong>Siempre de la web del fabricante del dispositivo o del propio sistema operativo. Las páginas que ofrecen «actualizar todos tus drivers» son uno de los vectores clásicos de distribución de software malicioso, porque piden permisos de administrador con una excusa perfectamente creíble.</div>
+
+<h2 id="dimensionar">9. Dimensionar un puesto y su ciclo de vida</h2>
+<h3>9.1. Elegir según el uso</h3>
+<p>No hay un equipo «bueno»: hay equipos adecuados a un uso. Lo importante es identificar dónde estará el <strong>cuello de botella</strong> de ese uso concreto y gastar ahí el dinero.</p>
+<div class="tabla_responsiva"><table class="cc1-table">
+<tr><th>Uso</th><th>Dónde está el cuello de botella</th><th>Prioridad de gasto</th></tr>
+<tr><td>Ofimática y navegación</td><td>Latencia del disco y memoria justa</td><td>SSD y RAM suficiente; el procesador rara vez importa</td></tr>
+<tr><td>Programación</td><td>Compilar y arrancar herramientas</td><td>RAM abundante, SSD rápido, varios núcleos</td></tr>
+<tr><td>Edición de vídeo o 3D</td><td>Cálculo masivo y archivos enormes</td><td>Muchos núcleos, mucha RAM, GPU y almacenamiento rápido y grande</td></tr>
+<tr><td>Juegos</td><td>Generación de imágenes</td><td>Tarjeta gráfica, y después procesador</td></tr>
+<tr><td>Aula de informática</td><td>Fiabilidad y mantenimiento, no potencia</td><td>Equipos homogéneos, SSD, buena garantía y facilidad de reparación</td></tr>
+</table></div>
+<div class="cc1-concept"><strong class="cc1-concept-tag">La mejora más rentable</strong>En un equipo antiguo que va lento, sustituir un disco duro mecánico por un SSD y ampliar la memoria suele producir una mejora mucho mayor —y a una fracción del coste— que cambiar el procesador. La razón la viste en el <a href="tema05.html">Tema 5</a>: lo que más tiempo pierde un ordenador es esperar.</div>
+<h3>9.2. Mantenimiento, consumo y ciclo de vida</h3>
+<ul>
+<li><strong>Mantenimiento físico:</strong> el polvo tapona disipadores y hace subir la temperatura, y con ella baja el rendimiento. Limpiar filtros y ventiladores es la tarea de mantenimiento con mejor relación esfuerzo-resultado.</li>
+<li><strong>Baterías:</strong> las de los portátiles se degradan por ciclos de carga y por calor. Mantener la carga entre el 20 % y el 80 % alarga notablemente su vida.</li>
+<li><strong>Consumo:</strong> conviene mirar el consumo real de un equipo encendido muchas horas al día. Un aula de treinta puestos multiplica por treinta cualquier diferencia.</li>
+<li><strong>Ciclo de vida:</strong> en el <a href="tema03.html">Tema 3</a> viste las cifras: 62 millones de toneladas de residuos electrónicos en 2022 y solo un 22,3 % reciclado adecuadamente. Alargar la vida útil de un equipo, repararlo, comprarlo reacondicionado o entregarlo en un punto limpio no son gestos simbólicos: son la decisión técnica con más impacto ambiental de todo este bloque.</li>
+</ul>
+<div class="cc1-curio">♻️ <strong>¿Sabías que…?</strong> Un ordenador de diez años con un SSD y memoria ampliada suele resultar más ágil para ofimática que uno nuevo de gama baja con disco mecánico. La obsolescencia de un equipo es muchas veces una cuestión de un componente concreto, no del conjunto: identificar cuál es exactamente lo que has aprendido a hacer en este bloque.</div>
+
+<h2 id="glosario">Glosario del tema</h2>
+<dl class="cc1-glosario">
+<dt>Periférico</dt><dd>Dispositivo que se conecta al sistema para introducir, extraer o intercambiar información.</dd>
+<dt>Disco duro (HDD)</dt><dd>Almacenamiento magnético con platos giratorios y cabezales móviles.</dd>
+<dt>SSD</dt><dd>Unidad de estado sólido: almacenamiento en memoria flash, sin piezas móviles.</dd>
+<dt>Memoria flash</dt><dd>Memoria no volátil que guarda los datos como carga eléctrica en celdas.</dd>
+<dt>NVMe</dt><dd>Protocolo de almacenamiento sobre PCI Express, mucho más rápido que SATA.</dd>
+<dt>Acceso secuencial</dt><dd>Modo de acceso que obliga a recorrer el soporte en orden hasta llegar al dato.</dd>
+<dt>NAS</dt><dd>Servidor de almacenamiento conectado a la red local y accesible por varios equipos.</dd>
+<dt>RAID</dt><dd>Combinación de varios discos que el sistema ve como una unidad, con más velocidad o redundancia.</dd>
+<dt>Regla 3-2-1</dt><dd>Criterio de copias: tres copias, en dos soportes distintos, una de ellas fuera del lugar habitual.</dd>
+<dt>Actuador</dt><dd>Dispositivo de salida que produce una acción física, como un motor o una válvula.</dd>
+<dt>Controlador (driver)</dt><dd>Programa que permite al sistema operativo manejar un dispositivo concreto.</dd>
+<dt>Plug and play</dt><dd>Capacidad de un dispositivo de funcionar al conectarlo, sin instalar nada manualmente.</dd>
+<dt>Cuello de botella</dt><dd>Componente que limita el rendimiento del conjunto porque es el más lento para esa tarea.</dd>
+</dl>
+
+<section class="summary"><h2 id="resumen">Resumen esencial</h2><ol>
+<li>Capacidad, ancho de banda, latencia, persistencia y coste no se pueden maximizar a la vez: por eso conviven varias tecnologías.</li>
+<li>El disco duro es mecánico, lento en responder, frágil y muy barato por terabyte; sigue siendo útil para volumen y copias.</li>
+<li>El SSD no tiene piezas móviles y baja la latencia a microsegundos; NVMe sobre PCI Express es muy superior a SATA.</li>
+<li>Óptico y cinta no han muerto: la cinta sigue siendo el archivo masivo más barato y duradero.</li>
+<li>RAID protege frente al fallo de un disco, pero no es una copia de seguridad; la regla 3-2-1 sí cubre los tres modos de perder datos.</li>
+<li>Los periféricos se clasifican en entrada, salida, mixtos y comunicación, y muchos no caben en una sola casilla.</li>
+<li>Conectar exige conector, protocolo y controlador: USB-C es una forma, no una prestación.</li>
+<li>Dimensionar un puesto es identificar su cuello de botella; en un equipo lento, SSD y RAM rinden más que un procesador nuevo.</li>
+<li>Alargar la vida útil de un equipo es la decisión con mayor impacto ambiental de todo el bloque.</li>
+</ol></section>
+
+<section aria-labelledby="fuentes">
+<h2 id="fuentes">Fuentes y recursos fiables</h2>
+<ul>
+<li id="fuente_1">[1] <a href="https://www.bocm.es/boletin/CM_Orden_BOCM/2023/05/31/BOCM-20230531-18.PDF">Orden 1736/2023, de 19 de mayo, Anexo IV</a> — currículo oficial de Ciencias de la Computación en Bachillerato (PDF).</li>
+<li id="fuente_2">[2] <a href="https://www.incibe.es/protege-tu-empresa/blog/copias-seguridad-sistema-la-regla-321">INCIBE — Copias de seguridad y la regla 3-2-1</a>.</li>
+<li id="fuente_3">[3] <a href="https://nvmexpress.org/specifications/">NVM Express — Especificaciones NVMe</a>.</li>
+<li id="fuente_4">[4] <a href="https://www.usb.org/documents">USB Implementers Forum — Documentación y logotipos de certificación</a>.</li>
+<li id="fuente_5">[5] <a href="https://news.un.org/es/story/2024/03/1528476">Naciones Unidas — <em>Global E-waste Monitor 2024</em></a>, residuos electrónicos y reciclaje.</li>
+<li id="fuente_6">[6] <a href="https://www.picuino.com/es/ley-ciencias-computacion-bach.html">Picuino — transcripción navegable del currículo</a>.</li>
+</ul>
+</section>
+</article></div></main>
+<nav class="topic-footer" aria-label="Navegación entre temas"><a href="tema06.html">← Tema 6</a><a href="index.html">Índice →</a></nav>
+<footer class="site-footer">Ciencias de la Computación I · 1.º de Bachillerato · Comunidad de Madrid</footer>
+</body></html>

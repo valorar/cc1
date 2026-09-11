@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Tema 4 del Bloque B de Ciencias de la Computación I: qué piezas forman un sistema informático, qué papel cumple cada una y cómo se mide y se representa la información.">
+<title>Tema 4. Elementos y clasificación de un sistema informático · CC1</title><link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/estilos.css"><script src="assets/navegacion.js" defer></script></head>
+<body><a class="skip" href="#contenido">Saltar al contenido</a>
+<div class="progress" aria-hidden="true"><span></span></div>
+<header class="site-header"><div class="header-inner">
+  <a class="brand" href="index.html"><span class="brand-mark">CC1</span><span>Ciencias de la Computación I<small>1.º de Bachillerato · 2026–2027</small></span></a>
+  <nav class="top-nav" aria-label="Navegación principal"><a href="index.html">Índice</a></nav>
+</div></header>
+<main id="contenido">
+<section class="hero"><div class="hero-inner"><div><p class="kicker">Tema 4 · Bloque B · Los sistemas informáticos</p><h1>Elementos y clasificación de un sistema informático</h1><p class="hero-lead">Qué piezas forman un sistema informático, qué papel cumple cada una y cómo se mide y se representa la información que manejan.</p></div><aside class="hero-note"><strong>Pregunta guía</strong><p>¿Qué convierte un montón de componentes electrónicos en un sistema informático, y por qué las personas forman parte de él?</p></aside></div></section>
+<div class="layout"><nav class="toc" aria-label="Índice del tema"><strong>En este tema</strong><ol>
+<li><a href="#sistema">Qué es un sistema informático</a></li>
+<li><a href="#subsistemas">Subsistema físico y subsistema lógico</a></li>
+<li><a href="#personas">Las personas: perfiles del sistema</a></li>
+<li><a href="#binario">La información en binario: bit y byte</a></li>
+<li><a href="#multiplos">Los múltiplos y el kilo que no vale mil</a></li>
+<li><a href="#unidades">Capacidad, velocidad, latencia y frecuencia</a></li>
+<li><a href="#clasificacion">Personales, departamentales y grandes ordenadores</a></li>
+<li><a href="#formatos">Otros formatos actuales</a></li>
+<li><a href="#criterios">Criterios de clasificación</a></li>
+<li><a href="#glosario">Glosario</a></li>
+<li><a href="#resumen">Resumen</a></li>
+<li><a href="#fuentes">Fuentes</a></li>
+</ol></nav><article class="paper">
+<p class="lesson-intro">Qué piezas forman un sistema informático, qué papel cumple cada una y cómo se mide y se representa la información que manejan.</p>
+<div class="question"><strong>Antes de empezar:</strong> ¿qué convierte un montón de componentes electrónicos en un sistema informático, y por qué las personas forman parte de él?</div>
+<div class="objectives"><strong>Al terminar serás capaz de…</strong><ul>
+<li>identificar los tres subsistemas de un sistema informático y explicar cómo se relacionan</li>
+<li>distinguir los perfiles humanos que intervienen en un sistema</li>
+<li>explicar por qué un bit no significa nada sin un código y leer un número binario sencillo</li>
+<li>usar correctamente los múltiplos y saber por qué un disco de 1 TB muestra menos capacidad</li>
+<li>no confundir capacidad, ancho de banda, latencia y frecuencia</li>
+<li>clasificar un equipo según sus prestaciones, sus usuarios y su uso previsto</li>
+</ul></div>
+
+<h2 id="sistema">1. Qué es un sistema informático</h2>
+<p>Un montón de piezas sobre una mesa no es un ordenador. Un ordenador sin programas tampoco sirve de nada. Y un equipo perfectamente instalado que nadie sabe usar no resuelve ningún problema. Por eso, en informática no se habla de «máquina» sino de <strong>sistema informático</strong>: un conjunto de elementos que <em>solo funcionan juntos</em>.</p>
+<div class="cc1-concept"><strong class="cc1-concept-tag">Definición</strong>Un <strong>sistema informático</strong> es el conjunto formado por el <em>subsistema físico</em> (hardware), el <em>subsistema lógico</em> (software) y las <em>personas</em> que lo utilizan y lo mantienen, organizados para tratar información de forma automática y cumplir una finalidad.</div>
+<p>Fíjate en que la definición incluye dos cosas que suelen olvidarse: <strong>las personas</strong> y <strong>la finalidad</strong>. El aula de informática del instituto y el sistema informático de un hospital pueden tener hardware parecido; son sistemas distintos porque persiguen fines distintos, los usan personas con perfiles distintos y ejecutan software distinto.</p>
+<div class="cc1-grid">
+<div class="cc1-card"><h3>Hardware</h3><p>Todo lo que se puede tocar: procesador, memoria, almacenamiento, periféricos, cables. Es la parte que ejecuta.</p></div>
+<div class="cc1-card"><h3>Software</h3><p>Los programas y los datos. No tiene existencia física: es información que dirige al hardware.</p></div>
+<div class="cc1-card"><h3>Personas</h3><p>Quienes diseñan, programan, administran y usan el sistema. Sin ellas, el sistema no tiene propósito.</p></div>
+</div>
+<div class="cc1-note">💡 Algunos autores añaden dos elementos más: los <strong>datos</strong> —que a veces se cuentan dentro del software— y los <strong>procedimientos</strong>, es decir, las normas escritas sobre cómo se usa el sistema. La clasificación oficial de esta asignatura usa tres subsistemas, pero conviene saber que la frontera entre ellos es una convención útil, no una ley natural.</div>
+
+<h2 id="subsistemas">2. Subsistema físico y subsistema lógico</h2>
+<p>La distinción entre hardware y software parece obvia, pero tiene matices que conviene fijar desde ahora.</p>
+<div class="tabla_responsiva"><table class="cc1-table">
+<tr><th></th><th>Subsistema físico (hardware)</th><th>Subsistema lógico (software)</th></tr>
+<tr><td><strong>Naturaleza</strong></td><td>Material: circuitos, metales, plásticos.</td><td>Inmaterial: información codificada.</td></tr>
+<tr><td><strong>Se estropea…</strong></td><td>Por desgaste, golpes, calor o electricidad.</td><td>No se desgasta: falla por errores de diseño o por corrupción de los datos.</td></tr>
+<tr><td><strong>Copiar cuesta…</strong></td><td>Fabricar otra unidad completa.</td><td>Prácticamente nada.</td></tr>
+<tr><td><strong>Se repara…</strong></td><td>Sustituyendo o arreglando la pieza.</td><td>Corrigiendo el código y publicando una nueva versión.</td></tr>
+<tr><td><strong>Ejemplos</strong></td><td>Procesador, memoria RAM, teclado, impresora.</td><td>Sistema operativo, navegador, un archivo de texto.</td></tr>
+</table></div>
+<h3>2.1. El caso raro: el firmware</h3>
+<p>Entre ambos hay una zona intermedia. El <strong>firmware</strong> es software, porque es un programa, pero está grabado en un chip de la propia placa y es imprescindible para que el hardware arranque siquiera. La UEFI de tu ordenador, el programa interno de una impresora o el de un router son firmware. Se puede actualizar, pero no se instala ni se desinstala como una aplicación normal. Lo estudiarás en el <a href="tema06.html">Tema 6</a>.</p>
+
+<h2 id="personas">3. Las personas: perfiles del sistema</h2>
+<p>El currículo de esta asignatura menciona expresamente a las personas como tercer subsistema, y lo hace enumerando perfiles profesionales. Estos son los principales, aunque en organizaciones pequeñas una misma persona asuma varios:</p>
+<div class="tabla_responsiva"><table class="cc1-table">
+<tr><th>Perfil</th><th>De qué se ocupa</th><th>Pregunta que responde</th></tr>
+<tr><td><strong>Analista</strong></td><td>Estudia el problema, habla con quien lo tiene y define qué debe hacer el sistema y cómo se organizará.</td><td>¿Qué hay que construir y por qué?</td></tr>
+<tr><td><strong>Programador</strong></td><td>Escribe, prueba y corrige el código que implementa esa solución.</td><td>¿Cómo se construye?</td></tr>
+<tr><td><strong>Administrador de sistemas</strong></td><td>Instala, configura, actualiza y vigila los equipos, las redes y las copias de seguridad.</td><td>¿Cómo se mantiene funcionando?</td></tr>
+<tr><td><strong>Operario</strong></td><td>Ejecuta las tareas rutinarias de explotación del sistema según procedimientos establecidos.</td><td>¿Cómo se opera cada día?</td></tr>
+<tr><td><strong>Usuario final</strong></td><td>Utiliza el sistema para su trabajo, sin necesidad de conocer cómo está construido.</td><td>¿Para qué sirve?</td></tr>
+</table></div>
+<div class="cc1-think">🤔 <strong>Para pensar:</strong> muchos fallos graves de sistemas informáticos reales no se deben a un error del hardware ni a un fallo del código, sino a que el analista entendió mal el problema o a que el procedimiento de uso era confuso. Si las personas forman parte del sistema, ¿tiene sentido llamar «error humano» a un fallo y dar el asunto por cerrado?</div>
+
+<h2 id="binario">4. La información en binario: bit y byte</h2>
+<p>Antes de estudiar cómo funciona la máquina hay que entender <strong>en qué formato guarda lo que maneja</strong>. Un circuito digital distingue con fiabilidad dos estados eléctricos estables: hay tensión o no la hay. Representamos esos dos estados como <strong>0</strong> y <strong>1</strong>, y a cada uno lo llamamos <strong>bit</strong> (<em>binary digit</em>).</p>
+<div class="cc1-concept"><strong class="cc1-concept-tag">Concepto clave</strong>Un bit no significa nada por sí solo. <strong>El significado depende del código acordado.</strong> La secuencia <code>01000001</code> vale 65 si la interpretamos como un número, la letra <em>A</em> si la interpretamos con el código ASCII, y un tono de gris muy oscuro si la interpretamos como el brillo de un píxel.</div>
+<h3>4.1. Cuántas cosas se pueden representar</h3>
+<p>Con <strong>n</strong> bits se pueden distinguir <strong>2<sup>n</sup></strong> combinaciones distintas. La progresión crece muy deprisa:</p>
+<div class="tabla_responsiva"><table class="cc1-table">
+<tr><th>Bits</th><th>Combinaciones</th><th>Ejemplo de uso</th></tr>
+<tr><td>1</td><td>2</td><td>Sí / no, encendido / apagado</td></tr>
+<tr><td>4</td><td>16</td><td>Un dígito hexadecimal</td></tr>
+<tr><td><strong>8 (un byte)</strong></td><td><strong>256</strong></td><td>Un carácter ASCII, o la intensidad de un color</td></tr>
+<tr><td>16</td><td>65.536</td><td>Una muestra de sonido de calidad CD</td></tr>
+<tr><td>24</td><td>16.777.216</td><td>Un color RGB completo</td></tr>
+<tr><td>32</td><td>4.294.967.296</td><td>Una dirección IPv4</td></tr>
+</table></div>
+<p>Ocho bits forman un <strong>byte</strong>, que es la unidad práctica con la que se mide casi todo. Es la cantidad de información que históricamente bastaba para almacenar un carácter de texto.</p>
+<h3>4.2. Leer un número binario</h3>
+<p>El sistema binario funciona igual que el decimal, pero con potencias de 2 en lugar de potencias de 10. Cada posición vale el doble que la anterior, empezando por la derecha:</p>
+<div class="tabla_responsiva"><table class="cc1-table">
+<tr><th>Posición</th><th>128</th><th>64</th><th>32</th><th>16</th><th>8</th><th>4</th><th>2</th><th>1</th></tr>
+<tr><td><strong>Bits</strong></td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td></tr>
+</table></div>
+<p>Para saber cuánto vale, se suman los valores de las posiciones que tienen un 1: 64 + 1 = <strong>65</strong>. Para el camino inverso, se va restando la mayor potencia de 2 que quepa: 200 − 128 = 72; 72 − 64 = 8; 8 − 8 = 0, así que 200 se escribe <code>11001000</code>.</p>
+<div class="cc1-note">💡 Con 8 bits se representan los números del 0 al 255, que son 256 valores. Por eso los componentes de un color RGB van de 0 a 255, y por eso cada número de una dirección IPv4 también. No es una casualidad ni una convención estética: es el rango exacto de un byte.</div>
+<div class="aviso"><strong>Los códigos de caracteres van en su tema</strong>Cómo se decide que <code>01000001</code> represente la letra <em>A</em> —los códigos ASCII y Unicode— lo estudiarás en el Tema 19, cuando trabajes con cadenas de texto en Python y necesites usarlo. Aquí basta con retener que hace falta un código y que sin él los bits no significan nada.</div>
+
+<h2 id="multiplos">5. Los múltiplos y el kilo que no vale mil</h2>
+<p>Como los bytes se cuentan por miles de millones, se usan múltiplos. Y aquí aparece una de las confusiones más extendidas de toda la informática.</p>
+<p>El Sistema Internacional define los prefijos en potencias de 10: un <strong>kilo</strong> son mil. Pero los ordenadores trabajan en potencias de 2, y 2<sup>10</sup> = 1.024 se parece bastante a mil, así que durante décadas se llamó «kilobyte» a 1.024 bytes. La ambigüedad se arrastra hasta hoy.</p>
+<div class="tabla_responsiva"><table class="cc1-table">
+<tr><th>Prefijo decimal (SI)</th><th>Valor</th><th>Prefijo binario (IEC)</th><th>Valor</th><th>Diferencia</th></tr>
+<tr><td>kilobyte (kB)</td><td>10<sup>3</sup> = 1.000</td><td>kibibyte (KiB)</td><td>2<sup>10</sup> = 1.024</td><td>2,4 %</td></tr>
+<tr><td>megabyte (MB)</td><td>10<sup>6</sup></td><td>mebibyte (MiB)</td><td>2<sup>20</sup></td><td>4,9 %</td></tr>
+<tr><td>gigabyte (GB)</td><td>10<sup>9</sup></td><td>gibibyte (GiB)</td><td>2<sup>30</sup></td><td>7,4 %</td></tr>
+<tr><td>terabyte (TB)</td><td>10<sup>12</sup></td><td>tebibyte (TiB)</td><td>2<sup>40</sup></td><td>10,0 %</td></tr>
+</table></div>
+<div class="cc1-concept"><strong class="cc1-concept-tag">Por qué tu disco de 1 TB tiene 931 GB</strong>El fabricante vende 1 TB en unidades decimales: 1.000.000.000.000 bytes exactos. Windows divide esa cifra entre 1.024 tres veces y muestra <strong>931</strong>… pero lo etiqueta como «GB» en lugar de «GiB». Nadie miente: son la misma cantidad de bytes expresada en dos escalas distintas con la misma etiqueta. La diferencia crece con el tamaño: en un disco de 4 TB son casi 400 GB de «desajuste» aparente.</div>
+<h3>5.1. Bits y bytes: la otra confusión</h3>
+<p>Hay una segunda trampa, y esta sí cuesta dinero. Por convención:</p>
+<ul>
+<li>el <strong>almacenamiento</strong> se mide en <strong>bytes</strong>, con B mayúscula: MB, GB, TB;</li>
+<li>la <strong>velocidad de transmisión</strong> se mide en <strong>bits</strong> por segundo, con b minúscula: Mb/s, Gb/s.</li>
+</ul>
+<p>Como un byte son ocho bits, una conexión de <strong>600 Mb/s</strong> descarga como máximo <strong>75 MB/s</strong>: hay que dividir entre 8. Un archivo de 1,5 GB tardará unos veinte segundos, no dos y medio.</p>
+<div class="cc1-curio">📶 <strong>¿Sabías que…?</strong> Las operadoras anuncian siempre la velocidad en megabits por segundo, porque el número resulta ocho veces mayor y suena mucho mejor. Es perfectamente legal y perfectamente correcto: solo hay que saber leerlo. Mira la letra: <strong>Mb</strong> no es <strong>MB</strong>.</div>
+
+<h2 id="unidades">6. Capacidad, velocidad, latencia y frecuencia</h2>
+<p>Cuatro magnitudes distintas que se confunden constantemente. Cada una responde a una pregunta diferente y ninguna sustituye a las demás.</p>
+<div class="tabla_responsiva"><table class="cc1-table">
+<tr><th>Magnitud</th><th>Pregunta que responde</th><th>Unidad habitual</th><th>Ejemplo</th></tr>
+<tr><td><strong>Capacidad</strong></td><td>¿Cuántos datos caben?</td><td>GB, TB</td><td>Un SSD de 1 TB</td></tr>
+<tr><td><strong>Ancho de banda</strong></td><td>¿Cuántos datos pasan por segundo?</td><td>MB/s, Gb/s</td><td>Una conexión de 1 Gb/s</td></tr>
+<tr><td><strong>Latencia</strong></td><td>¿Cuánto se tarda en empezar a responder?</td><td>ms, µs, ns</td><td>Un disco duro tarda unos 8 ms en posicionarse</td></tr>
+<tr><td><strong>Frecuencia</strong></td><td>¿Cuántos ciclos ocurren por segundo?</td><td>MHz, GHz</td><td>Un procesador a 4 GHz</td></tr>
+</table></div>
+<p>Un dispositivo puede tener mucha capacidad y ser lento, o mucho ancho de banda y una latencia molesta. La comparación clásica: un camión cargado de discos duros que cruza España tiene un <strong>ancho de banda</strong> enorme —mueve petabytes— y una <strong>latencia</strong> pésima: ocho horas hasta el primer byte.</p>
+<div class="aviso"><strong>Más gigahercios no es más rápido</strong>La frecuencia solo dice cuántos ciclos por segundo ejecuta el reloj, no cuánto trabajo se hace en cada ciclo. Un procesador moderno a 3 GHz rinde muchísimo más que uno de hace quince años a 3 GHz, porque hace más operaciones por ciclo y tiene más núcleos. Comparar frecuencias entre procesadores de familias distintas no sirve para nada. Lo verás en detalle en el <a href="tema05.html">Tema 5</a>.</div>
+
+<h2 id="clasificacion">7. Personales, departamentales y grandes ordenadores</h2>
+<p>La clasificación clásica ordena los equipos por potencia, número de usuarios simultáneos y ámbito de uso.</p>
+<h3>7.1. Ordenadores personales</h3>
+<p>Pensados para <strong>un usuario cada vez</strong>. Sobremesa, portátiles, todo-en-uno y estaciones de trabajo. Es el segmento con diferencia más numeroso y el que tienes delante en el aula. Una <em>estación de trabajo</em> es un ordenador personal de gama alta destinado a tareas exigentes —diseño 3D, edición de vídeo, cálculo científico—, con más memoria, almacenamiento rápido y una tarjeta gráfica potente.</p>
+<h3>7.2. Sistemas departamentales</h3>
+<p>Equipos intermedios que dan servicio <strong>simultáneo a un grupo de usuarios</strong>: el servidor de archivos de un instituto, el que gestiona las cuentas y las impresoras, el que aloja la aplicación de una empresa mediana. Suelen llamarse <strong>servidores</strong> y estar diseñados para funcionar sin interrupción: componentes redundantes, discos que se cambian en caliente y fuentes de alimentación duplicadas.</p>
+<h3>7.3. Grandes ordenadores</h3>
+<p>Dentro de esta categoría conviene distinguir dos cosas que se confunden a menudo porque las dos son «enormes»:</p>
+<div class="cc1-grid">
+<div class="cc1-card"><h3>Mainframe</h3><p>Optimizado para procesar <strong>muchísimas transacciones</strong> a la vez con una fiabilidad extrema. Bancos, aerolíneas y administraciones los siguen usando: cada vez que sacas dinero de un cajero, probablemente hay uno detrás.</p></div>
+<div class="cc1-card"><h3>Supercomputador</h3><p>Optimizado para <strong>cálculo masivo</strong>: predicción del clima, simulación de moléculas, entrenamiento de modelos de IA. Es un conjunto de miles de nodos trabajando en paralelo sobre un mismo problema.</p></div>
+</div>
+<div class="cc1-curio">🇪🇸 <strong>¿Sabías que…?</strong> El supercomputador más potente de España es el <strong>MareNostrum 5</strong>, del Barcelona Supercomputing Center, y está instalado en la capilla desacralizada de Torre Girona: una nave de cristal dentro de una iglesia del siglo XIX. Se usa para investigación en clima, biomedicina, materiales e inteligencia artificial, y cualquier grupo de investigación europeo puede solicitar tiempo de cálculo en él.</div>
+
+<h2 id="formatos">8. Otros formatos actuales</h2>
+<p>La clasificación anterior es la del currículo y sigue siendo útil, pero se quedó fijada cuando un ordenador era una caja sobre una mesa. Hoy hay que añadir al menos cuatro categorías más:</p>
+<div class="tabla_responsiva"><table class="cc1-table">
+<tr><th>Formato</th><th>Qué lo caracteriza</th><th>Compromiso que asume</th></tr>
+<tr><td><strong>Portátiles</strong></td><td>Ordenador personal completo con batería y pantalla integradas.</td><td>Menos rendimiento sostenido y menos ampliable a cambio de movilidad.</td></tr>
+<tr><td><strong>Dispositivos móviles</strong></td><td>Móviles y tabletas: procesador de bajo consumo, sensores integrados, conectividad permanente.</td><td>Autonomía y tamaño por encima de la potencia bruta; poca o ninguna capacidad de ampliación.</td></tr>
+<tr><td><strong>Sistemas embebidos</strong></td><td>Ordenador dedicado a una única función dentro de otro aparato: lavadora, coche, marcapasos, semáforo.</td><td>Recursos mínimos y coste bajísimo a cambio de no ser de propósito general.</td></tr>
+<tr><td><strong>Servidores en la nube</strong></td><td>Capacidad de cálculo alquilada en centros de datos remotos, ampliable bajo demanda.</td><td>Se paga por uso y se evita comprar equipos, pero se depende de la red y de un proveedor.</td></tr>
+</table></div>
+<div class="cc1-note">💡 Un coche actual puede llevar más de cien pequeños ordenadores empotrados coordinando frenos, motor, climatización y asistentes de conducción. Numéricamente, la inmensa mayoría de los procesadores que se fabrican en el mundo no van a ordenadores personales: van a sistemas embebidos.</div>
+
+<h2 id="criterios">9. Criterios de clasificación</h2>
+<p>Ninguna clasificación es la «verdadera». Cada una responde a un criterio, y lo útil es saber cuál se está aplicando:</p>
+<div class="tabla_responsiva"><table class="cc1-table">
+<tr><th>Criterio</th><th>Pregunta</th><th>Categorías que produce</th></tr>
+<tr><td><strong>Prestaciones</strong></td><td>¿Cuánta capacidad de cálculo tiene?</td><td>Desde el microcontrolador hasta el supercomputador.</td></tr>
+<tr><td><strong>Usuarios simultáneos</strong></td><td>¿A cuántas personas atiende a la vez?</td><td>Monousuario, departamental, corporativo.</td></tr>
+<tr><td><strong>Uso previsto</strong></td><td>¿Para qué se ha diseñado?</td><td>Propósito general o dedicado a una única función.</td></tr>
+<tr><td><strong>Movilidad</strong></td><td>¿Está fijo o se transporta?</td><td>Sobremesa, portátil, dispositivo móvil, wearable.</td></tr>
+<tr><td><strong>Coste y ciclo de vida</strong></td><td>¿Cuánto cuesta comprarlo y mantenerlo?</td><td>Doméstico, profesional, industrial.</td></tr>
+</table></div>
+<div class="cc1-concept"><strong class="cc1-concept-tag">Criterio clave</strong>La pregunta útil no es «¿qué tipo de ordenador es este?», sino «<strong>¿para qué problema se diseñó y qué sacrificó a cambio?</strong>». Todo equipo es un compromiso entre potencia, consumo, tamaño, fiabilidad y precio; entender qué se sacrificó explica casi todas sus características.</div>
+
+<h2 id="glosario">Glosario del tema</h2>
+<dl class="cc1-glosario">
+<dt>Sistema informático</dt><dd>Conjunto de hardware, software y personas organizado para tratar información con una finalidad.</dd>
+<dt>Hardware</dt><dd>Subsistema físico: todos los componentes materiales del sistema.</dd>
+<dt>Software</dt><dd>Subsistema lógico: los programas y los datos que dirigen al hardware.</dd>
+<dt>Firmware</dt><dd>Programa grabado en un chip del propio equipo, imprescindible para que el hardware funcione.</dd>
+<dt>Bit</dt><dd>Unidad mínima de información; distingue entre dos estados, 0 y 1.</dd>
+<dt>Byte</dt><dd>Agrupación de ocho bits; permite 256 combinaciones distintas.</dd>
+<dt>Kibibyte (KiB)</dt><dd>1.024 bytes; prefijo binario, frente al kilobyte decimal de 1.000 bytes.</dd>
+<dt>Ancho de banda</dt><dd>Cantidad de datos transferidos por unidad de tiempo.</dd>
+<dt>Latencia</dt><dd>Tiempo que transcurre hasta que comienza o se completa una respuesta.</dd>
+<dt>Frecuencia</dt><dd>Número de ciclos por segundo; se mide en hercios y sus múltiplos.</dd>
+<dt>Estación de trabajo</dt><dd>Ordenador personal de altas prestaciones destinado a tareas técnicas exigentes.</dd>
+<dt>Mainframe</dt><dd>Gran ordenador optimizado para procesar enormes volúmenes de transacciones con máxima fiabilidad.</dd>
+<dt>Supercomputador</dt><dd>Conjunto de miles de nodos que trabajan en paralelo sobre problemas de cálculo masivo.</dd>
+<dt>Sistema embebido</dt><dd>Ordenador dedicado a una función concreta dentro de otro aparato.</dd>
+</dl>
+
+<section class="summary"><h2 id="resumen">Resumen esencial</h2><ol>
+<li>Un sistema informático son tres subsistemas —hardware, software y personas— trabajando con una finalidad; ninguno funciona solo.</li>
+<li>El firmware ocupa la frontera: es software, pero vive grabado en el hardware.</li>
+<li>Un bit no significa nada sin un código: la misma secuencia puede ser un número, una letra o un color.</li>
+<li>Con n bits hay 2ⁿ combinaciones; un byte son 8 bits y 256 valores posibles, de 0 a 255.</li>
+<li>Los prefijos decimales (kB, MB, GB) y los binarios (KiB, MiB, GiB) no valen lo mismo, y esa es la razón de que un disco de 1 TB muestre 931 GB.</li>
+<li>El almacenamiento se mide en bytes y la transmisión en bits: hay que dividir entre 8.</li>
+<li>Capacidad, ancho de banda, latencia y frecuencia responden a preguntas distintas y más gigahercios no significa más velocidad.</li>
+<li>Todo equipo, del microcontrolador al supercomputador, es un compromiso entre potencia, consumo, tamaño, fiabilidad y precio.</li>
+</ol></section>
+
+<section aria-labelledby="fuentes">
+<h2 id="fuentes">Fuentes y recursos fiables</h2>
+<ul>
+<li id="fuente_1">[1] <a href="https://www.bocm.es/boletin/CM_Orden_BOCM/2023/05/31/BOCM-20230531-18.PDF">Orden 1736/2023, de 19 de mayo, Anexo IV</a> — currículo oficial de Ciencias de la Computación en Bachillerato (PDF).</li>
+<li id="fuente_2">[2] <a href="https://www.bipm.org/en/measurement-units/si-prefixes">BIPM — Prefijos del Sistema Internacional</a>.</li>
+<li id="fuente_3">[3] <a href="https://physics.nist.gov/cuu/Units/binary.html">NIST — Prefijos binarios (KiB, MiB, GiB) según IEC 80000-13</a>.</li>
+<li id="fuente_4">[4] <a href="https://www.bsc.es/marenostrum/marenostrum-5">Barcelona Supercomputing Center — MareNostrum 5</a>.</li>
+<li id="fuente_5">[5] <a href="https://www.top500.org/">TOP500</a> — lista semestral de los supercomputadores más potentes del mundo.</li>
+<li id="fuente_6">[6] <a href="https://www.picuino.com/es/ley-ciencias-computacion-bach.html">Picuino — transcripción navegable del currículo</a>.</li>
+</ul>
+</section>
+</article></div></main>
+<nav class="topic-footer" aria-label="Navegación entre temas"><a href="tema03.html">← Tema 3</a><a href="tema05.html">Tema 5 →</a></nav>
+<footer class="site-footer">Ciencias de la Computación I · 1.º de Bachillerato · Comunidad de Madrid</footer>
+</body></html>

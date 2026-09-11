@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Tema 5 del Bloque B de Ciencias de la Computación I: cómo se organiza internamente un ordenador y por qué esa organización explica su rendimiento.">
+<title>Tema 5. Arquitectura de von Neumann: procesador, memoria y buses · CC1</title><link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/estilos.css"><script src="assets/navegacion.js" defer></script></head>
+<body><a class="skip" href="#contenido">Saltar al contenido</a>
+<div class="progress" aria-hidden="true"><span></span></div>
+<header class="site-header"><div class="header-inner">
+  <a class="brand" href="index.html"><span class="brand-mark">CC1</span><span>Ciencias de la Computación I<small>1.º de Bachillerato · 2026–2027</small></span></a>
+  <nav class="top-nav" aria-label="Navegación principal"><a href="index.html">Índice</a></nav>
+</div></header>
+<main id="contenido">
+<section class="hero"><div class="hero-inner"><div><p class="kicker">Tema 5 · Bloque B · Los sistemas informáticos</p><h1>Arquitectura de von Neumann: procesador, memoria y buses</h1><p class="hero-lead">Cómo se organiza internamente un ordenador y por qué esa organización explica su rendimiento.</p></div><aside class="hero-note"><strong>Pregunta guía</strong><p>¿Qué camino recorre exactamente una letra desde que pulsas la tecla hasta que aparece en la pantalla?</p></aside></div></section>
+<div class="layout"><nav class="toc" aria-label="Índice del tema"><strong>En este tema</strong><ol>
+<li><a href="#modelo">El modelo de von Neumann</a></li>
+<li><a href="#ciclo">El ciclo de instrucción</a></li>
+<li><a href="#cpu">Dentro de la CPU: control, ALU y registros</a></li>
+<li><a href="#reloj">Frecuencia, núcleos y ejecución simultánea</a></li>
+<li><a href="#memoria">La memoria principal: RAM y ROM</a></li>
+<li><a href="#jerarquia">La jerarquía de memoria y la caché</a></li>
+<li><a href="#buses">Los buses: datos, direcciones y control</a></li>
+<li><a href="#evolucion">El cuello de botella y la evolución reciente</a></li>
+<li><a href="#glosario">Glosario</a></li>
+<li><a href="#resumen">Resumen</a></li>
+<li><a href="#fuentes">Fuentes</a></li>
+</ol></nav><article class="paper">
+<p class="lesson-intro">Cómo se organiza internamente un ordenador y por qué esa organización explica su rendimiento.</p>
+<div class="question"><strong>Antes de empezar:</strong> ¿qué camino recorre exactamente una letra desde que pulsas la tecla hasta que aparece en la pantalla?</div>
+<div class="objectives"><strong>Al terminar serás capaz de…</strong><ul>
+<li>describir los cuatro elementos de la arquitectura de von Neumann y cómo se relacionan</li>
+<li>seguir paso a paso el ciclo de instrucción de un procesador</li>
+<li>distinguir unidad de control, unidad aritmético-lógica y registros</li>
+<li>explicar por qué más gigahercios no significa más velocidad</li>
+<li>justificar para qué sirve la memoria caché y por qué existe una jerarquía</li>
+<li>relacionar el ancho de los buses con la memoria máxima direccionable</li>
+</ul></div>
+
+<h2 id="modelo">1. El modelo de von Neumann</h2>
+<p>En el <a href="tema01.html">Tema 1</a> viste la idea del <strong>programa almacenado</strong>: guardar las instrucciones en la misma memoria que los datos. El modelo que la organiza se llama <strong>arquitectura de von Neumann</strong> y consta de cuatro elementos.</p>
+<div class="cc1-grid">
+<div class="cc1-card"><h3>Procesador (CPU)</h3><p>Ejecuta las instrucciones. Contiene la unidad de control, que dirige, y la unidad aritmético-lógica, que opera.</p></div>
+<div class="cc1-card"><h3>Memoria principal</h3><p>Guarda, en las mismas celdas numeradas, tanto las instrucciones del programa como los datos sobre los que trabaja.</p></div>
+<div class="cc1-card"><h3>Interfaces de entrada y salida</h3><p>Conectan el sistema con el exterior: teclado, pantalla, disco, red.</p></div>
+<div class="cc1-card"><h3>Buses</h3><p>Los caminos por los que circula la información entre los tres elementos anteriores.</p></div>
+</div>
+<p>La memoria se organiza como una larguísima lista de celdas, cada una con una <strong>dirección</strong> —su número de orden— y un <strong>contenido</strong>. La CPU nunca «busca» un dato: pide el contenido de una dirección concreta, igual que se pide un apartado de correos por su número sin saber qué hay dentro.</p>
+<div class="cc1-concept"><strong class="cc1-concept-tag">La idea decisiva</strong>Instrucciones y datos comparten memoria y son indistinguibles a la vista: ambos son secuencias de bits. Lo único que convierte unos bits en «instrucción» es que la CPU los lea <em>en ese momento</em> esperando una instrucción. De ahí que cambiar de programa sea simplemente cargar otro contenido en memoria.</div>
+<div class="cc1-think">🤔 <strong>Para pensar:</strong> si un programa es un dato más en memoria, un programa puede leer, escribir e incluso modificar a otro programa. Eso es lo que permite que exista un compilador… y también lo que hace posible un virus. Una misma propiedad sostiene lo mejor y lo peor de la informática.</div>
+
+<h2 id="ciclo">2. El ciclo de instrucción</h2>
+<p>La CPU no hace nada complicado: repite, miles de millones de veces por segundo, un ciclo de tres pasos.</p>
+<div class="tabla_responsiva"><table class="cc1-table">
+<tr><th>Fase</th><th>Qué ocurre</th></tr>
+<tr><td><strong>1. Búsqueda</strong> (<em>fetch</em>)</td><td>La unidad de control lee, en la dirección que indica el <strong>contador de programa</strong>, la siguiente instrucción, y la copia en el <strong>registro de instrucción</strong>. Después incrementa el contador para apuntar a la siguiente.</td></tr>
+<tr><td><strong>2. Decodificación</strong> (<em>decode</em>)</td><td>La unidad de control interpreta esos bits: averigua qué operación se pide y sobre qué operandos.</td></tr>
+<tr><td><strong>3. Ejecución</strong> (<em>execute</em>)</td><td>Se realiza la operación: la ALU calcula, o se lee o escribe en memoria, o se salta a otra dirección. El resultado se guarda donde corresponda.</td></tr>
+</table></div>
+<h3>2.1. Una traza sencilla</h3>
+<p>Supón un programa que suma 7 y 5. En el modelo, la secuencia sería aproximadamente:</p>
+<ol>
+<li>Cargar el valor 7 desde memoria a un registro.</li>
+<li>Cargar el valor 5 desde memoria a otro registro.</li>
+<li>Ordenar a la ALU que sume el contenido de ambos registros.</li>
+<li>Guardar el resultado, 12, en una dirección de memoria.</li>
+</ol>
+<p>Cuatro instrucciones para una suma que tú haces de cabeza. La potencia del ordenador no está en la complejidad de cada paso, sino en <strong>la cantidad de pasos que ejecuta por segundo</strong> y en que nunca se equivoca ni se cansa.</p>
+<div class="cc1-note">💡 Un procesador moderno no ejecuta las instrucciones estrictamente una detrás de otra: las solapa en una <em>cadena de montaje</em> —mientras ejecuta una, ya está decodificando la siguiente y buscando la de más allá—, e incluso las reordena o adelanta trabajo apostando por el resultado de una condición. El modelo de tres fases sigue siendo válido para razonar sobre <em>qué</em> hace la máquina y en qué orden lógico.</div>
+
+<h2 id="cpu">3. Dentro de la CPU: control, ALU y registros</h2>
+<div class="tabla_responsiva"><table class="cc1-table">
+<tr><th>Componente</th><th>Función</th><th>Analogía</th></tr>
+<tr><td><strong>Unidad de control (UC)</strong></td><td>Busca instrucciones, las decodifica y coordina al resto: decide quién hace qué y cuándo.</td><td>El director de la orquesta.</td></tr>
+<tr><td><strong>Unidad aritmético-lógica (ALU)</strong></td><td>Ejecuta las operaciones aritméticas (sumar, restar) y las lógicas AND, OR y NOT del <a href="tema01.html">Tema 1</a>, además de las comparaciones.</td><td>La calculadora.</td></tr>
+<tr><td><strong>Registros</strong></td><td>Pequeñas memorias internas, rapidísimas, que guardan los datos con los que se está operando ahora mismo.</td><td>Las manos: solo caben unas pocas cosas, pero se alcanzan al instante.</td></tr>
+</table></div>
+<p>Hay registros de propósito general, donde se colocan los operandos, y registros especializados. Dos imprescindibles:</p>
+<ul>
+<li>el <strong>contador de programa</strong>, que guarda la dirección de la siguiente instrucción y es lo que hace que el programa avance;</li>
+<li>el <strong>registro de estado</strong>, cuyos bits indican el resultado de la última operación —si dio cero, si hubo desbordamiento, si un número era mayor que otro—. Es lo que permite que exista un <code>if</code>: la unidad de control mira ese registro y decide si salta o no.</li>
+</ul>
+<div class="cc1-curio">🖥️ <strong>¿Sabías que…?</strong> Cuando en el Tema 18 escribas <code>if edad &gt;= 18:</code>, lo que la máquina hará por debajo es una resta, mirar un bit del registro de estado y, según valga 0 o 1, saltar o no a otra dirección. Toda la programación estructurada que aprenderás se traduce, al final, en comparaciones y saltos.</div>
+
+<h2 id="reloj">4. Frecuencia, núcleos y ejecución simultánea</h2>
+<h3>4.1. El reloj</h3>
+<p>Un cristal de cuarzo genera una señal que oscila a ritmo constante: el <strong>reloj del sistema</strong>. Cada pulso es un <strong>ciclo</strong>, y todos los componentes se sincronizan con él. La <strong>frecuencia</strong> mide cuántos ciclos hay por segundo: 4 GHz son cuatro mil millones de ciclos cada segundo.</p>
+<div class="aviso"><strong>Por qué comparar gigahercios no sirve</strong>La frecuencia dice cuántos ciclos hay, no cuánto trabajo se hace en cada uno. Dos procesadores a la misma frecuencia pueden rendir muy distinto según cuántas instrucciones completen por ciclo, cuánta caché tengan y cuántos núcleos posean. Comparar los GHz de dos procesadores de familias o generaciones distintas es como comparar dos coches por sus revoluciones por minuto.</div>
+<h3>4.2. Por qué dejaron de subir los gigahercios</h3>
+<p>Hasta mediados de los años 2000, cada generación de procesadores subía la frecuencia. Después se estancó en torno a los 3-5 GHz y ahí sigue. El motivo es físico: <strong>el consumo y el calor crecen mucho más deprisa que la frecuencia</strong>, y llegó un punto en que un procesador más rápido no se podía refrigerar de forma razonable.</p>
+<p>La industria cambió de estrategia: en lugar de un núcleo más rápido, <strong>varios núcleos</strong> a la vez.</p>
+<h3>4.3. Núcleos y ejecución simultánea</h3>
+<p>Un <strong>núcleo</strong> es una CPU completa —con su unidad de control, su ALU y sus registros— dentro del mismo chip. Un procesador de ocho núcleos puede ejecutar ocho secuencias de instrucciones a la vez. Algunos añaden además <em>multihilo simultáneo</em>, que permite a cada núcleo alternar entre dos secuencias para aprovechar los huecos en los que estaría esperando.</p>
+<div class="cc1-concept"><strong class="cc1-concept-tag">La trampa de los núcleos</strong>Más núcleos solo aceleran una tarea si esa tarea <strong>se puede dividir</strong> en partes independientes. Comprimir un vídeo o compilar un proyecto grande se reparte bien; muchas otras tareas son intrínsecamente secuenciales, porque cada paso necesita el resultado del anterior. Ocho personas no escriben una novela ocho veces más rápido.</div>
+
+<h2 id="memoria">5. La memoria principal: RAM y ROM</h2>
+<div class="tabla_responsiva"><table class="cc1-table">
+<tr><th></th><th>RAM</th><th>ROM</th></tr>
+<tr><td><strong>Nombre</strong></td><td>Memoria de acceso aleatorio</td><td>Memoria de solo lectura</td></tr>
+<tr><td><strong>Se puede escribir</strong></td><td>Sí, continuamente</td><td>No en uso normal; solo al actualizar el firmware</td></tr>
+<tr><td><strong>Volátil</strong></td><td>Sí: al apagar, se borra por completo</td><td>No: conserva el contenido sin alimentación</td></tr>
+<tr><td><strong>Qué guarda</strong></td><td>El sistema operativo y los programas y datos en ejecución</td><td>El firmware que arranca el equipo</td></tr>
+<tr><td><strong>Tamaño típico</strong></td><td>8, 16 o 32 GB en un equipo actual</td><td>Unos pocos megabytes</td></tr>
+</table></div>
+<p>«Acceso aleatorio» no significa «al azar»: significa que se puede acceder a <strong>cualquier dirección en el mismo tiempo</strong>, sin recorrer las anteriores. Es lo contrario de una cinta, donde para llegar al final hay que pasar por todo lo demás.</p>
+<div class="cc1-note">💡 Que la RAM sea volátil explica por qué se pierde un documento no guardado si se va la luz. Mientras lo editas, vive en la RAM; solo al guardar pasa al almacenamiento permanente, que estudiarás en el <a href="tema07.html">Tema 7</a>.</div>
+<h3>5.1. Cuando la RAM no basta</h3>
+<p>Si los programas abiertos necesitan más memoria de la que hay, el sistema operativo recurre a la <strong>memoria virtual</strong>: usa una parte del disco como si fuera RAM, moviendo hacia allí lo que lleva tiempo sin usarse. Funciona, pero el disco es miles de veces más lento que la RAM, y por eso un equipo con memoria insuficiente se vuelve desesperantemente lento aunque su procesador sea excelente.</p>
+<div class="aviso"><strong>Un SSD rápido no sustituye a la RAM</strong>Se lee a veces que «con un SSD ya no hace falta memoria». Es falso: la diferencia de velocidad entre RAM y SSD sigue siendo de varios órdenes de magnitud. Un SSD hace que quedarse sin RAM duela menos, no que deje de doler.</div>
+
+<h2 id="jerarquia">6. La jerarquía de memoria y la caché</h2>
+<p>No existe una memoria que sea a la vez enorme, instantánea, permanente y barata. Como no se puede tener todo, los ordenadores usan <strong>varios niveles</strong>: poca memoria muy rápida cerca del procesador y mucha memoria lenta lejos.</p>
+<div class="tabla_responsiva"><table class="cc1-table">
+<tr><th>Nivel</th><th>Tamaño típico</th><th>Tiempo de acceso</th><th>Volátil</th></tr>
+<tr><td><strong>Registros</strong></td><td>Unos pocos cientos de bytes</td><td>Menos de un nanosegundo</td><td>Sí</td></tr>
+<tr><td><strong>Caché L1</strong></td><td>Decenas de KB por núcleo</td><td>≈ 1 nanosegundo</td><td>Sí</td></tr>
+<tr><td><strong>Caché L2</strong></td><td>Cientos de KB o algunos MB</td><td>Unos pocos nanosegundos</td><td>Sí</td></tr>
+<tr><td><strong>Caché L3</strong></td><td>Decenas de MB, compartida</td><td>Decenas de nanosegundos</td><td>Sí</td></tr>
+<tr><td><strong>RAM</strong></td><td>Decenas de GB</td><td>≈ 80 nanosegundos</td><td>Sí</td></tr>
+<tr><td><strong>SSD</strong></td><td>Cientos de GB o TB</td><td>Decenas de microsegundos</td><td>No</td></tr>
+<tr><td><strong>Disco duro</strong></td><td>Varios TB</td><td>Milisegundos</td><td>No</td></tr>
+</table></div>
+<div class="cc1-concept"><strong class="cc1-concept-tag">Para hacerse una idea de la escala</strong>Los nanosegundos no dicen nada a la intuición. Imagina que un acceso a la caché L1 durase <strong>un segundo</strong>. A esa escala, leer de la RAM tardaría <strong>algo más de un minuto</strong>; leer de un SSD, <strong>medio día</strong>; y leer de un disco duro mecánico, <strong>unos tres meses</strong>. Toda la ingeniería de la caché existe para no tener que hacer ese viaje.</div>
+<h3>6.1. Por qué funciona la caché</h3>
+<p>La <strong>caché</strong> es una memoria pequeña y muy rápida que guarda copias de los datos usados recientemente. Funciona gracias al <strong>principio de localidad</strong>, que se cumple en casi todos los programas reales:</p>
+<ul>
+<li><strong>Localidad temporal:</strong> si acabas de usar un dato, es muy probable que lo vuelvas a usar enseguida —una variable dentro de un bucle, por ejemplo—.</li>
+<li><strong>Localidad espacial:</strong> si has usado un dato, es muy probable que uses el de al lado —recorrer una lista elemento a elemento—.</li>
+</ul>
+<p>Cuando la CPU pide un dato y está en la caché se produce un <em>acierto</em>; si no está, un <em>fallo</em>, y hay que ir a la RAM y traerse además los datos vecinos. En un programa bien escrito, la tasa de aciertos supera con holgura el 90 %.</p>
+
+<h2 id="buses">7. Los buses: datos, direcciones y control</h2>
+<p>Un <strong>bus</strong> es un conjunto de líneas conductoras compartidas por las que circula la información. En el modelo de von Neumann se distinguen tres:</p>
+<div class="tabla_responsiva"><table class="cc1-table">
+<tr><th>Bus</th><th>Qué transporta</th><th>Sentido</th><th>Qué determina su anchura</th></tr>
+<tr><td><strong>De datos</strong></td><td>La información propiamente dicha.</td><td>Bidireccional</td><td>Cuántos bits se transfieren de una vez.</td></tr>
+<tr><td><strong>De direcciones</strong></td><td>El número de la celda de memoria a la que se quiere acceder.</td><td>De la CPU hacia fuera</td><td>Cuánta memoria se puede direccionar como máximo.</td></tr>
+<tr><td><strong>De control</strong></td><td>Señales de coordinación: lectura, escritura, sincronización, interrupciones.</td><td>Bidireccional</td><td>Qué operaciones se pueden ordenar.</td></tr>
+</table></div>
+<div class="cc1-concept"><strong class="cc1-concept-tag">Por qué un sistema de 32 bits no pasa de 4 GB</strong>Con un bus de direcciones de 32 bits se pueden formar 2<sup>32</sup> direcciones distintas, es decir, 4.294.967.296. Si cada dirección apunta a un byte, el máximo direccionable es exactamente <strong>4 GiB</strong>. No es una limitación comercial ni un capricho del sistema operativo: es aritmética. Con 64 bits el límite teórico pasa a ser tan enorme que dejará de importar durante mucho tiempo.</div>
+<div class="cc1-curio">🚌 <strong>¿Sabías que…?</strong> Se llaman «buses» por analogía con el transporte público: una única vía compartida por la que van y vienen muchos pasajeros distintos, en lugar de un cable dedicado entre cada par de componentes. Ese ahorro de cables tiene un precio: mientras uno usa el bus, los demás esperan.</div>
+
+<h2 id="evolucion">8. El cuello de botella y la evolución reciente</h2>
+<h3>8.1. El cuello de botella de von Neumann</h3>
+<p>El modelo tiene un defecto conocido desde el principio: como instrucciones y datos comparten el mismo camino hacia la memoria, <strong>la CPU pasa mucho tiempo esperando</strong>. Y el problema ha empeorado con los años, porque los procesadores se han acelerado mucho más deprisa que las memorias.</p>
+<p>Casi todo lo que caracteriza a un procesador moderno son remedios contra ese cuello de botella:</p>
+<ul>
+<li><strong>Cachés en varios niveles</strong>, para evitar el viaje a la RAM.</li>
+<li><strong>Cachés separadas</strong> para instrucciones y para datos en el primer nivel, tomando prestada la idea de la <em>arquitectura Harvard</em>, que las mantiene en memorias distintas.</li>
+<li><strong>Ejecución solapada y anticipada</strong>, para no quedarse parado durante la espera.</li>
+<li><strong>Controlador de memoria integrado</strong> en el propio procesador, en lugar de en un chip aparte de la placa, para acortar el camino.</li>
+</ul>
+<h3>8.2. Qué ha cambiado desde 1945</h3>
+<div class="tabla_responsiva"><table class="cc1-table">
+<tr><th>En el modelo original</th><th>En un equipo actual</th></tr>
+<tr><td>Un único procesador con un núcleo.</td><td>Varios núcleos en un chip, más una GPU con miles de unidades de cálculo sencillas.</td></tr>
+<tr><td>Una memoria única y uniforme.</td><td>Una jerarquía de registros, tres niveles de caché, RAM y almacenamiento.</td></tr>
+<tr><td>Un bus general para todo.</td><td>Enlaces especializados: memoria directa a la CPU, PCI Express para tarjetas y dispositivos rápidos.</td></tr>
+<tr><td>Instrucciones estrictamente en orden.</td><td>Ejecución solapada, reordenada y anticipada.</td></tr>
+</table></div>
+<div class="cc1-note">💡 Pese a todos estos cambios, el modelo sigue siendo la forma correcta de explicar qué hace un ordenador: <strong>describe la lógica, no la implementación</strong>. Exactamente igual que la máquina de Turing del <a href="tema01.html">Tema 1</a>, que sigue siendo válida aunque ningún ordenador tenga una cinta infinita.</div>
+<div class="cc1-think">🤔 <strong>Para pensar:</strong> vuelve a la pregunta guía. Al pulsar una tecla, el teclado envía un código por un puerto; una señal de interrupción avisa a la CPU; el sistema operativo identifica qué aplicación está activa; el programa modifica el documento, que vive en la RAM; y la tarjeta gráfica compone la imagen que la pantalla mostrará. ¿Cuántas veces ha cruzado la información por un bus en ese recorrido?</div>
+
+<h2 id="glosario">Glosario del tema</h2>
+<dl class="cc1-glosario">
+<dt>Arquitectura de von Neumann</dt><dd>Modelo de ordenador con CPU, memoria compartida por datos e instrucciones, entrada/salida y buses.</dd>
+<dt>Unidad de control</dt><dd>Parte de la CPU que busca, decodifica y coordina la ejecución de las instrucciones.</dd>
+<dt>ALU</dt><dd>Unidad aritmético-lógica: realiza las operaciones aritméticas, lógicas y de comparación.</dd>
+<dt>Registro</dt><dd>Memoria muy pequeña y muy rápida dentro de la CPU.</dd>
+<dt>Contador de programa</dt><dd>Registro que guarda la dirección de la siguiente instrucción que se ejecutará.</dd>
+<dt>Ciclo de instrucción</dt><dd>Secuencia de búsqueda, decodificación y ejecución que la CPU repite continuamente.</dd>
+<dt>Frecuencia de reloj</dt><dd>Número de ciclos por segundo a los que se sincroniza el sistema.</dd>
+<dt>Núcleo</dt><dd>Unidad de proceso completa e independiente dentro de un mismo procesador.</dd>
+<dt>RAM</dt><dd>Memoria principal, volátil y de lectura y escritura, donde residen los programas en ejecución.</dd>
+<dt>ROM</dt><dd>Memoria no volátil de solo lectura donde reside el firmware.</dd>
+<dt>Memoria virtual</dt><dd>Uso de una parte del almacenamiento como prolongación de la RAM cuando esta se agota.</dd>
+<dt>Caché</dt><dd>Memoria pequeña y rápida que guarda copias de los datos usados recientemente.</dd>
+<dt>Principio de localidad</dt><dd>Tendencia de los programas a reutilizar datos recientes y a acceder a posiciones cercanas.</dd>
+<dt>Bus</dt><dd>Conjunto de líneas compartidas que comunican los componentes del sistema.</dd>
+</dl>
+
+<section class="summary"><h2 id="resumen">Resumen esencial</h2><ol>
+<li>La arquitectura de von Neumann organiza el ordenador en procesador, memoria, entrada/salida y buses.</li>
+<li>Datos e instrucciones comparten memoria y son indistinguibles: solo el momento en que la CPU los lee decide qué son.</li>
+<li>La CPU repite un ciclo de búsqueda, decodificación y ejecución, guiada por el contador de programa.</li>
+<li>La unidad de control dirige, la ALU calcula y los registros guardan lo que se está usando ahora mismo.</li>
+<li>La frecuencia dejó de crecer por el calor; la industria respondió con varios núcleos, que solo ayudan si la tarea se puede dividir.</li>
+<li>La RAM es volátil y rápida; la ROM es permanente y guarda el firmware; la memoria virtual es un parche lento.</li>
+<li>La jerarquía de memoria y la caché existen porque no hay memoria que sea grande, rápida, permanente y barata a la vez.</li>
+<li>El ancho del bus de direcciones fija la memoria máxima direccionable: 32 bits equivalen a 4 GiB.</li>
+</ol></section>
+
+<section aria-labelledby="fuentes">
+<h2 id="fuentes">Fuentes y recursos fiables</h2>
+<ul>
+<li id="fuente_1">[1] <a href="https://www.bocm.es/boletin/CM_Orden_BOCM/2023/05/31/BOCM-20230531-18.PDF">Orden 1736/2023, de 19 de mayo, Anexo IV</a> — currículo oficial de Ciencias de la Computación en Bachillerato (PDF).</li>
+<li id="fuente_2">[2] <a href="https://www.computerhistory.org/revolution/birth-of-the-computer/4/78">Computer History Museum — <em>First Draft of a Report on the EDVAC</em></a>.</li>
+<li id="fuente_3">[3] <a href="https://www.computerhistory.org/siliconengine/">Computer History Museum — The Silicon Engine</a>, evolución del procesador y la memoria.</li>
+<li id="fuente_4">[4] <a href="https://www.top500.org/">TOP500</a> — arquitecturas de los sistemas de cálculo más potentes.</li>
+<li id="fuente_5">[5] <a href="https://www.picuino.com/es/ley-ciencias-computacion-bach.html">Picuino — transcripción navegable del currículo</a>.</li>
+</ul>
+</section>
+</article></div></main>
+<nav class="topic-footer" aria-label="Navegación entre temas"><a href="tema04.html">← Tema 4</a><a href="tema06.html">Tema 6 →</a></nav>
+<footer class="site-footer">Ciencias de la Computación I · 1.º de Bachillerato · Comunidad de Madrid</footer>
+</body></html>
