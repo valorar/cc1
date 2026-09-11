@@ -3,7 +3,7 @@
 Materiales de la asignatura Ciencias de la Computación I de 1.º de Bachillerato (optativa, Comunidad de Madrid).
 
 - La web pública para GitHub Pages está en `docs/`.
-- Abre `docs/index.html` para navegar por los temas publicados.
+- Abre `docs/index.html` para navegar por los temas. **Los 21 temas teóricos están redactados** (bloques A, B, C, D y E).
 - Consulta `programa_asignatura_ciencias_computacion_1.md` para ver el programa teórico completo de la asignatura (bloques A, B, C, D y E; temas 1 a 21).
 - Consulta `analisis_y_decision.md` para ver la justificación de la estructura.
 - `generar_indice.py` vuelve a escribir `docs/index.html` a partir de la lista de temas: cada tarjeta enlaza al tema si existe `docs/temaNN.html` y, si no, se muestra como «En preparación».
