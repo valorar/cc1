@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Tema 12 del Bloque D de Ciencias de la Computación I: cómo organizar, calcular y consultar datos, y cuándo conviene cada herramienta.">
+<title>Tema 12. Hojas de cálculo y bases de datos · CC1</title><link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/estilos.css"><script src="assets/navegacion.js" defer></script></head>
+<body><a class="skip" href="#contenido">Saltar al contenido</a>
+<div class="progress" aria-hidden="true"><span></span></div>
+<header class="site-header"><div class="header-inner">
+  <a class="brand" href="index.html"><span class="brand-mark">CC1</span><span>Ciencias de la Computación I<small>1.º de Bachillerato · 2026–2027</small></span></a>
+  <nav class="top-nav" aria-label="Navegación principal"><a href="index.html">Índice</a></nav>
+</div></header>
+<main id="contenido">
+<section class="hero"><div class="hero-inner"><div><p class="kicker">Tema 12 · Bloque D · Elaboración y difusión de la información</p><h1>Hojas de cálculo y bases de datos</h1><p class="hero-lead">Cómo organizar, calcular y consultar datos, y cuándo conviene cada herramienta.</p></div><aside class="hero-note"><strong>Pregunta guía</strong><p>¿Cuándo deja de ser suficiente una hoja de cálculo y hace falta una base de datos?</p></aside></div></section>
+<div class="layout"><nav class="toc" aria-label="Índice del tema"><strong>En este tema</strong><ol>
+<li><a href="#hoja">La hoja de cálculo: celdas, tipos y formatos</a></li>
+<li><a href="#formulas">Fórmulas y referencias</a></li>
+<li><a href="#funciones">Funciones: de las básicas a las avanzadas</a></li>
+<li><a href="#analisis">Ordenar, filtrar y tablas dinámicas</a></li>
+<li><a href="#graficos">Gráficos que responden a una pregunta</a></li>
+<li><a href="#bd">Bases de datos: tabla, registro, campo y clave</a></li>
+<li><a href="#relaciones">Relaciones, consultas, formularios e informes</a></li>
+<li><a href="#cual">Hoja de cálculo o base de datos</a></li>
+<li><a href="#csv">CSV, importación y calidad de los datos</a></li>
+<li><a href="#glosario">Glosario</a></li>
+<li><a href="#resumen">Resumen</a></li>
+<li><a href="#fuentes">Fuentes</a></li>
+</ol></nav><article class="paper">
+<p class="lesson-intro">Cómo organizar, calcular y consultar datos, y cuándo conviene cada herramienta.</p>
+<div class="question"><strong>Antes de empezar:</strong> ¿cuándo deja de ser suficiente una hoja de cálculo y hace falta una base de datos?</div>
+<div class="objectives"><strong>Al terminar serás capaz de…</strong><ul>
+<li>distinguir el valor de una celda de su formato y elegir el tipo de dato adecuado</li>
+<li>usar referencias relativas, absolutas y mixtas al copiar fórmulas</li>
+<li>aplicar funciones condicionales, de búsqueda, de texto y de fecha</li>
+<li>resumir datos con filtros y tablas dinámicas y representarlos con el gráfico correcto</li>
+<li>diseñar una base de datos sencilla con claves y relaciones</li>
+<li>justificar cuándo conviene una hoja de cálculo y cuándo una base de datos</li>
+<li>importar y exportar CSV detectando los problemas habituales de calidad</li>
+</ul></div>
+
+<h2 id="hoja">1. La hoja de cálculo: celdas, tipos y formatos</h2>
+<p>Una hoja de cálculo es una cuadrícula de <strong>celdas</strong> identificadas por columna y fila: <code>A1</code>, <code>B7</code>. Un conjunto contiguo de celdas es un <strong>rango</strong>, y se escribe con dos puntos: <code>A1:A10</code>.</p>
+<h3>1.1. El valor no es el formato</h3>
+<div class="cc1-concept"><strong class="cc1-concept-tag">Concepto clave</strong>Cada celda guarda un <strong>valor</strong> y, aparte, una <strong>máscara de formato</strong> con la que se muestra. Si escribes 3,14159 y aplicas formato de dos decimales, verás 3,14 pero el valor sigue siendo 3,14159, y con él se calculará. El formato cambia lo que ves; solo funciones como <code>REDONDEAR</code> cambian el valor. Confundirlos es el origen de descuadres de céntimos que parecen inexplicables.</div>
+<h3>1.2. Los tipos de dato</h3>
+<div class="tabla_responsiva"><table class="cc1-table">
+<tr><th>Tipo</th><th>Cómo se reconoce</th><th>Problema habitual</th></tr>
+<tr><td><strong>Número</strong></td><td>Se alinea a la derecha.</td><td>Un número guardado como texto no suma; suele venir de una importación.</td></tr>
+<tr><td><strong>Texto</strong></td><td>Se alinea a la izquierda.</td><td>Espacios invisibles al principio o al final impiden que dos valores coincidan.</td></tr>
+<tr><td><strong>Fecha y hora</strong></td><td>Internamente es un número: el día contado desde una fecha de origen.</td><td>Ambigüedad entre <code>03/04</code> como 3 de abril o 4 de marzo.</td></tr>
+<tr><td><strong>Lógico</strong></td><td>VERDADERO o FALSO.</td><td>Se confunde con el texto «VERDADERO» escrito a mano.</td></tr>
+</table></div>
+<div class="cc1-curio">🧬 <strong>¿Sabías que…?</strong> En 2020, el comité internacional que nombra los genes humanos <strong>renombró 27 genes</strong> porque las hojas de cálculo convertían sus símbolos en fechas: <code>SEPT1</code> se transformaba en «1 de septiembre» y <code>MARCH1</code> en «1 de marzo». Un estudio había detectado que el problema afectaba a cerca de una quinta parte de los artículos de genética publicados. Resultó más práctico cambiar el nombre de los genes que cambiar el comportamiento de Excel. Es la mejor demostración de que un detalle de formato puede corromper datos científicos a escala mundial.</div>
+<div class="cc1-note">💡 Una hoja de cálculo actual admite 1.048.576 filas y 16.384 columnas. No son cifras caprichosas: son 2<sup>20</sup> y 2<sup>14</sup>, otra aparición de la aritmética binaria del <a href="tema04.html">Tema 4</a>.</div>
+
+<h2 id="formulas">2. Fórmulas y referencias</h2>
+<p>Toda fórmula empieza por <code>=</code>. A partir de ahí se combinan valores, referencias a celdas, operadores y funciones. La clave de una hoja bien hecha es que <strong>no contenga números escritos dentro de las fórmulas</strong>: si el IVA es del 21 %, ese 21 % va en una celda y las fórmulas la referencian. Así, cuando cambie, se cambia en un sitio.</p>
+<h3>2.1. Los tres tipos de referencia</h3>
+<p>Al copiar una fórmula a otra celda, las referencias se ajustan… o no, según cómo estén escritas:</p>
+<div class="tabla_responsiva"><table class="cc1-table">
+<tr><th>Referencia</th><th>Se escribe</th><th>Al copiar</th><th>Cuándo se usa</th></tr>
+<tr><td><strong>Relativa</strong></td><td><code>A1</code></td><td>Se ajustan fila y columna.</td><td>Lo normal: repetir el mismo cálculo por cada fila.</td></tr>
+<tr><td><strong>Absoluta</strong></td><td><code>$A$1</code></td><td>No cambia nunca.</td><td>Apuntar siempre a la misma celda: un tipo de IVA, una constante.</td></tr>
+<tr><td><strong>Mixta</strong></td><td><code>$A1</code> o <code>A$1</code></td><td>Se fija solo lo que lleva <code>$</code>.</td><td>Tablas de doble entrada, como una tabla de multiplicar.</td></tr>
+</table></div>
+<div class="cc1-concept"><strong class="cc1-concept-tag">La prueba de una hoja bien construida</strong>Una fórmula bien escrita se puede <strong>copiar a todas las filas sin retocarla</strong>. Si tienes que corregir la fórmula celda a celda, casi siempre falta un <code>$</code> en algún sitio.</div>
+
+<h2 id="funciones">3. Funciones: de las básicas a las avanzadas</h2>
+<div class="tabla_responsiva"><table class="cc1-table">
+<tr><th>Familia</th><th>Funciones</th><th>Para qué</th></tr>
+<tr><td><strong>Resumen</strong></td><td><code>SUMA</code>, <code>PROMEDIO</code>, <code>MAX</code>, <code>MIN</code>, <code>CONTAR</code>, <code>CONTARA</code></td><td>Reducir muchos valores a uno.</td></tr>
+<tr><td><strong>Redondeo</strong></td><td><code>REDONDEAR</code>, <code>ENTERO</code>, <code>TRUNCAR</code></td><td>Cambiar el valor, no solo su apariencia.</td></tr>
+<tr><td><strong>Condicionales</strong></td><td><code>SI</code>, <code>Y</code>, <code>O</code>, <code>SI.ERROR</code></td><td>Decidir según se cumpla o no una condición.</td></tr>
+<tr><td><strong>Condicionales con recuento</strong></td><td><code>CONTAR.SI</code>, <code>SUMAR.SI</code>, <code>PROMEDIO.SI</code></td><td>Resumir solo las filas que cumplen un criterio.</td></tr>
+<tr><td><strong>Búsqueda</strong></td><td><code>BUSCARV</code>, <code>BUSCARX</code>, <code>INDICE</code> con <code>COINCIDIR</code></td><td>Traer un dato de otra tabla a partir de una clave.</td></tr>
+<tr><td><strong>Texto</strong></td><td><code>IZQUIERDA</code>, <code>DERECHA</code>, <code>EXTRAE</code>, <code>ESPACIOS</code>, <code>CONCATENAR</code> o <code>&amp;</code></td><td>Limpiar y recomponer datos importados.</td></tr>
+<tr><td><strong>Fecha</strong></td><td><code>HOY</code>, <code>AÑO</code>, <code>MES</code>, <code>DIA</code>, <code>DIAS</code></td><td>Calcular antigüedades, plazos y vencimientos.</td></tr>
+</table></div>
+<h3>3.1. Las funciones condicionales</h3>
+<p>La función <code>SI</code> es la traducción directa del álgebra de Boole del <a href="tema01.html">Tema 1</a>: evalúa una condición y devuelve un valor u otro. Combinada con <code>Y</code> y <code>O</code> permite reglas compuestas: «apto si la nota es mayor o igual que 5 <em>y</em> ha entregado todas las prácticas». Es exactamente la misma lógica que escribirás en Python en el Tema 18, con otra sintaxis.</p>
+<h3>3.2. Las funciones de búsqueda</h3>
+<p>Son las que convierten una hoja en algo útil de verdad. Permiten tener una tabla de datos y otra de referencia, y traer automáticamente a la primera la información de la segunda a partir de un código común. Es el mismo principio que sostiene las bases de datos relacionales que verás en el apartado 6: <strong>no repetir un dato, sino apuntar a él</strong>.</p>
+<h3>3.3. Validación de datos y formato condicional</h3>
+<ul>
+<li>La <strong>validación de datos</strong> restringe lo que se puede escribir en una celda: un rango numérico, una fecha, una lista cerrada. Evita errores en el origen, que es donde salen más baratos.</li>
+<li>El <strong>formato condicional</strong> resalta automáticamente las celdas que cumplen una condición: los valores negativos, los duplicados, las fechas vencidas. Sirve para <em>ver</em> los problemas sin buscarlos.</li>
+</ul>
+
+<h2 id="analisis">4. Ordenar, filtrar y tablas dinámicas</h2>
+<div class="tabla_responsiva"><table class="cc1-table">
+<tr><th>Herramienta</th><th>Qué hace</th><th>Cuidado con…</th></tr>
+<tr><td><strong>Ordenar</strong></td><td>Reorganiza las filas según una o varias columnas.</td><td>Seleccionar solo una columna: se desordenan los datos respecto al resto de la fila.</td></tr>
+<tr><td><strong>Filtrar</strong></td><td>Oculta las filas que no cumplen un criterio, sin borrarlas.</td><td>Olvidar que hay un filtro puesto y sacar conclusiones de una parte de los datos.</td></tr>
+<tr><td><strong>Tabla dinámica</strong></td><td>Resume miles de filas agrupando por categorías y calculando totales.</td><td>No actualizarla tras cambiar los datos de origen.</td></tr>
+</table></div>
+<div class="cc1-note">💡 La <strong>tabla dinámica</strong> es la herramienta avanzada más rentable de toda la ofimática y la que menos gente conoce. Responde en segundos a preguntas del tipo «cuánto se ha gastado por departamento y por trimestre» sobre una tabla de diez mil filas, sin escribir una sola fórmula. Si solo aprendes una función avanzada este curso, que sea esta.</div>
+
+<h2 id="graficos">5. Gráficos que responden a una pregunta</h2>
+<div class="cc1-concept"><strong class="cc1-concept-tag">Criterio</strong>Un gráfico no decora: <strong>responde a una pregunta</strong>. Antes de elegir el tipo, formula la pregunta en voz alta. Si no sabes cuál es, el gráfico sobra.</div>
+<div class="tabla_responsiva"><table class="cc1-table">
+<tr><th>Pregunta</th><th>Gráfico adecuado</th></tr>
+<tr><td>¿Cómo evoluciona algo en el tiempo?</td><td>Líneas</td></tr>
+<tr><td>¿Cómo se comparan varias categorías?</td><td>Barras o columnas</td></tr>
+<tr><td>¿Qué parte del total representa cada categoría?</td><td>Sectores, y solo con pocas categorías</td></tr>
+<tr><td>¿Hay relación entre dos variables?</td><td>Dispersión</td></tr>
+<tr><td>¿Cómo se reparten los valores?</td><td>Histograma</td></tr>
+</table></div>
+<div class="aviso"><strong>Tres formas de mentir sin mentir</strong>Cortar el eje vertical para que una diferencia del 2 % parezca enorme. Usar sectores con quince categorías, donde ya no se distingue nada. Y añadir efectos 3D, que deforman las proporciones y hacen que las porciones delanteras parezcan mayores. Un gráfico honesto lleva ejes rotulados, escala completa o advertida, y la fuente de los datos.</div>
+
+<h2 id="bd">6. Bases de datos: tabla, registro, campo y clave</h2>
+<p>Una <strong>base de datos</strong> almacena información estructurada de forma que se pueda consultar, actualizar y compartir sin contradicciones. El modelo más extendido es el <strong>relacional</strong>, que organiza los datos en tablas relacionadas entre sí.</p>
+<div class="tabla_responsiva"><table class="cc1-table">
+<tr><th>Concepto</th><th>Qué es</th><th>Ejemplo</th></tr>
+<tr><td><strong>Tabla</strong></td><td>Conjunto de datos sobre un mismo tipo de entidad.</td><td>La tabla <em>Alumnos</em>.</td></tr>
+<tr><td><strong>Registro</strong></td><td>Cada fila: un ejemplar concreto de esa entidad.</td><td>Un alumno determinado.</td></tr>
+<tr><td><strong>Campo</strong></td><td>Cada columna: una característica, con su tipo de dato.</td><td>Nombre, fecha de nacimiento, curso.</td></tr>
+<tr><td><strong>Clave primaria</strong></td><td>Campo que identifica cada registro de forma única e irrepetible.</td><td>El número de matrícula.</td></tr>
+<tr><td><strong>Clave ajena</strong></td><td>Campo que apunta a la clave primaria de otra tabla.</td><td>El código de curso dentro de la tabla <em>Alumnos</em>.</td></tr>
+</table></div>
+<div class="cc1-concept"><strong class="cc1-concept-tag">Por qué hace falta una clave primaria</strong>Porque dos personas pueden llamarse igual, y hasta compartir fecha de nacimiento. Si no hay un identificador único, el sistema no puede distinguir dos registros, y cualquier modificación corre el riesgo de aplicarse al equivocado. La clave primaria no es burocracia: es lo que hace posible referirse a un registro sin ambigüedad.</div>
+
+<h2 id="relaciones">7. Relaciones, consultas, formularios e informes</h2>
+<h3>7.1. Por qué relacionar</h3>
+<p>Imagina una única tabla con los datos de los alumnos y, en cada fila, el nombre del tutor, su despacho y su teléfono. Aparecen tres problemas:</p>
+<ul>
+<li><strong>Redundancia:</strong> los datos del tutor se repiten en treinta filas.</li>
+<li><strong>Anomalías de actualización:</strong> si cambia su teléfono, hay que cambiarlo treinta veces; si se olvida una, la base se contradice a sí misma.</li>
+<li><strong>Anomalías de borrado:</strong> al borrar el último alumno de un tutor, desaparecen también sus datos.</li>
+</ul>
+<p>La solución es separar en dos tablas —<em>Alumnos</em> y <em>Tutores</em>— y enlazarlas con una clave ajena. El dato del tutor existe <strong>una sola vez</strong> y las demás tablas apuntan a él. Es la misma idea de las funciones de búsqueda del apartado 3, llevada hasta el final.</p>
+<h3>7.2. Los cuatro elementos de trabajo</h3>
+<div class="cc1-grid">
+<div class="cc1-card"><h3>Tablas</h3><p>Donde viven los datos, con sus tipos, sus claves y sus relaciones.</p></div>
+<div class="cc1-card"><h3>Consultas</h3><p>Preguntas a la base: qué campos, de qué tablas, con qué condición y en qué orden. El lenguaje habitual es <strong>SQL</strong>.</p></div>
+<div class="cc1-card"><h3>Formularios</h3><p>Pantallas para introducir y editar datos con comodidad y validación, en lugar de escribir en la tabla en bruto.</p></div>
+<div class="cc1-card"><h3>Informes</h3><p>Salidas presentables —para imprimir o exportar— con los datos agrupados, totalizados y con formato.</p></div>
+</div>
+<div class="cc1-note">💡 Una consulta SQL se escribe diciendo <em>qué</em> se quiere, no <em>cómo</em> obtenerlo: es el ejemplo de programación <strong>declarativa</strong> que viste en el <a href="tema09.html">Tema 9</a>. Tú pides «los alumnos de segundo ordenados por apellido» y el gestor decide por su cuenta la estrategia más eficiente para encontrarlos.</div>
+
+<h2 id="cual">8. Hoja de cálculo o base de datos</h2>
+<p>Ya puedes responder a la pregunta guía. Las dos herramientas guardan datos en filas y columnas, y ahí acaba el parecido.</p>
+<div class="tabla_responsiva"><table class="cc1-table">
+<tr><th></th><th>Hoja de cálculo</th><th>Base de datos</th></tr>
+<tr><td><strong>Está pensada para</strong></td><td>Calcular, explorar y presentar.</td><td>Almacenar de forma fiable y consultar.</td></tr>
+<tr><td><strong>Estructura</strong></td><td>Libre: cada celda puede contener cualquier cosa.</td><td>Rígida: cada campo tiene un tipo y unas restricciones.</td></tr>
+<tr><td><strong>Integridad</strong></td><td>Nada impide escribir un texto en una columna de importes.</td><td>El sistema rechaza los datos que incumplen las reglas.</td></tr>
+<tr><td><strong>Varios usuarios a la vez</strong></td><td>Problemática; se pisan los cambios.</td><td>Prevista desde el diseño.</td></tr>
+<tr><td><strong>Volumen</strong></td><td>Miles de filas; con cientos de miles se vuelve lenta.</td><td>Millones de registros sin dificultad.</td></tr>
+<tr><td><strong>Relaciones</strong></td><td>Se imitan con funciones de búsqueda.</td><td>Son el fundamento del modelo.</td></tr>
+</table></div>
+<div class="cc1-concept"><strong class="cc1-concept-tag">El criterio práctico</strong>Usa una <strong>hoja de cálculo</strong> mientras el problema sea calcular y explorar, los datos quepan cómodamente y trabajes tú solo. Pasa a una <strong>base de datos</strong> cuando los datos se repitan en varias filas, cuando varias personas deban editarlos a la vez o cuando importe más la <em>fiabilidad</em> que la <em>flexibilidad</em>. Muchas hojas de cálculo enormes y llenas de errores son, en realidad, bases de datos mal disfrazadas.</div>
+
+<h2 id="csv">9. CSV, importación y calidad de los datos</h2>
+<h3>9.1. Qué es un CSV</h3>
+<p>Un <strong>CSV</strong> es un archivo de texto plano donde cada línea es una fila y los valores van separados por un carácter. Es feo, no guarda formatos ni fórmulas… y por eso es el formato universal de intercambio: lo lee cualquier programa, hoy y dentro de veinte años. Es un formato abierto en el sentido más literal.</p>
+<div class="aviso"><strong>Las cuatro trampas de un CSV en español</strong>El <strong>separador</strong>: como la coma es nuestro separador decimal, las hojas en español suelen usar punto y coma. El <strong>separador decimal</strong>: coma aquí, punto en los datos de origen anglosajón. La <strong>codificación</strong>: si no es UTF-8, las tildes y las eñes salen convertidas en símbolos raros. Y las <strong>fechas</strong>: <code>03/04/2026</code> es 3 de abril aquí y 4 de marzo en Estados Unidos. Casi todos los desastres de importación salen de una de estas cuatro.</div>
+<h3>9.2. Calidad de los datos</h3>
+<p>Antes de calcular nada con datos ajenos hay que revisarlos. La lista de comprobación habitual:</p>
+<div class="tabla_responsiva"><table class="cc1-table">
+<tr><th>Problema</th><th>Cómo detectarlo</th></tr>
+<tr><td>Registros duplicados</td><td>Formato condicional de duplicados, o quitar duplicados sobre la clave.</td></tr>
+<tr><td>Celdas vacías</td><td>Contar filas frente a contar valores; decidir si el hueco es un cero o un dato desconocido.</td></tr>
+<tr><td>Números guardados como texto</td><td>Se alinean a la izquierda y no entran en las sumas.</td></tr>
+<tr><td>Espacios sobrantes</td><td><code>ESPACIOS</code>; dos valores idénticos a la vista pueden no coincidir.</td></tr>
+<tr><td>Escritura inconsistente</td><td>«Madrid», «madrid» y «MADRID» cuentan como tres categorías distintas.</td></tr>
+<tr><td>Valores imposibles</td><td>Edades negativas, fechas futuras, porcentajes mayores que 100.</td></tr>
+</table></div>
+<div class="cc1-concept"><strong class="cc1-concept-tag">Trazabilidad</strong>Conserva siempre los <strong>datos originales sin tocar</strong> en una hoja aparte y haz las limpiezas en otra, con fórmulas. Así puedes explicar y rehacer cada transformación. Modificar los datos de origen a mano hace imposible saber después qué se cambió y por qué, y convierte cualquier error en irreparable.</div>
+<div class="cc1-think">🤔 <strong>Para pensar:</strong> si trabajas con datos de personas, se aplica el RGPD que viste en el <a href="tema03.html">Tema 3</a>. El principio de <em>minimización</em> dice que solo se deben recoger los datos necesarios para la finalidad. ¿Necesita realmente el listado de un torneo escolar incluir la fecha de nacimiento completa, o basta con el curso? Cada dato que no recoges es un dato que no puedes perder.</div>
+
+<h2 id="glosario">Glosario del tema</h2>
+<dl class="cc1-glosario">
+<dt>Celda</dt><dd>Unidad básica de una hoja de cálculo, identificada por columna y fila.</dd>
+<dt>Rango</dt><dd>Conjunto contiguo de celdas, como <code>A1:B10</code>.</dd>
+<dt>Referencia absoluta</dt><dd>Referencia con <code>$</code> que no se ajusta al copiar la fórmula.</dd>
+<dt>Validación de datos</dt><dd>Restricción sobre lo que puede escribirse en una celda.</dd>
+<dt>Formato condicional</dt><dd>Resaltado automático de las celdas que cumplen una condición.</dd>
+<dt>Tabla dinámica</dt><dd>Herramienta que resume grandes conjuntos de datos agrupando y totalizando.</dd>
+<dt>Base de datos relacional</dt><dd>Base de datos organizada en tablas relacionadas mediante claves.</dd>
+<dt>Registro</dt><dd>Fila de una tabla: un ejemplar concreto de la entidad.</dd>
+<dt>Campo</dt><dd>Columna de una tabla: una característica con su tipo de dato.</dd>
+<dt>Clave primaria</dt><dd>Campo que identifica cada registro de forma única.</dd>
+<dt>Clave ajena</dt><dd>Campo que apunta a la clave primaria de otra tabla.</dd>
+<dt>Redundancia</dt><dd>Repetición innecesaria de un mismo dato, origen de contradicciones.</dd>
+<dt>Consulta</dt><dd>Pregunta formulada a la base de datos, habitualmente en SQL.</dd>
+<dt>CSV</dt><dd>Archivo de texto plano con valores separados, usado para intercambiar datos.</dd>
+</dl>
+
+<section class="summary"><h2 id="resumen">Resumen esencial</h2><ol>
+<li>El valor de una celda y su formato son cosas distintas: el formato cambia lo que ves, no lo que se calcula.</li>
+<li>Una fórmula bien escrita se copia a todas las filas sin retocarla; si no, falta un <code>$</code>.</li>
+<li>Las funciones condicionales son el álgebra de Boole aplicada, y las de búsqueda anticipan el modelo relacional.</li>
+<li>La tabla dinámica resume miles de filas sin escribir fórmulas: es la función avanzada más rentable.</li>
+<li>Un gráfico responde a una pregunta; si no sabes cuál es, sobra.</li>
+<li>En una base de datos relacional, la clave primaria identifica sin ambigüedad y la clave ajena enlaza tablas.</li>
+<li>Relacionar evita la redundancia y las contradicciones: cada dato existe una sola vez.</li>
+<li>La hoja de cálculo es para calcular y explorar; la base de datos, para almacenar con fiabilidad y consultar.</li>
+<li>El CSV es universal pero traicionero: separador, decimales, codificación y fechas.</li>
+<li>Conserva los datos originales intactos y haz las limpiezas aparte, para poder explicar cada transformación.</li>
+</ol></section>
+
+<section aria-labelledby="fuentes">
+<h2 id="fuentes">Fuentes y recursos fiables</h2>
+<ul>
+<li id="fuente_1">[1] <a href="https://www.bocm.es/boletin/CM_Orden_BOCM/2023/05/31/BOCM-20230531-18.PDF">Orden 1736/2023, de 19 de mayo, Anexo IV</a> — currículo oficial de Ciencias de la Computación en Bachillerato (PDF).</li>
+<li id="fuente_2">[2] <a href="https://help.libreoffice.org/latest/es/text/scalc/main0000.html">LibreOffice Calc — Ayuda en español</a>.</li>
+<li id="fuente_3">[3] <a href="https://support.microsoft.com/es-es/excel">Soporte de Microsoft Excel en español</a>.</li>
+<li id="fuente_4">[4] <a href="https://www.nature.com/articles/s41588-020-0669-3">Bruford et al., <em>Nature Genetics</em> (2020)</a> — nueva guía de nomenclatura de genes tras los errores de autoformato.</li>
+<li id="fuente_5">[5] <a href="https://datos.gob.es/">datos.gob.es</a> — portal de datos abiertos de las administraciones españolas.</li>
+<li id="fuente_6">[6] <a href="https://www.aepd.es/guias-y-herramientas">AEPD — Guías sobre tratamiento de datos personales</a>.</li>
+<li id="fuente_7">[7] <a href="https://www.picuino.com/es/ley-ciencias-computacion-bach.html">Picuino — transcripción navegable del currículo</a>.</li>
+</ul>
+</section>
+</article></div></main>
+<nav class="topic-footer" aria-label="Navegación entre temas"><a href="tema11.html">← Tema 11</a><a href="tema13.html">Tema 13 →</a></nav>
+<footer class="site-footer">Ciencias de la Computación I · 1.º de Bachillerato · Comunidad de Madrid</footer>
+</body></html>

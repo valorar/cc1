@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Tema 11 del Bloque D de Ciencias de la Computación I: cómo producir documentos y presentaciones bien estructurados, reutilizables y accesibles.">
+<title>Tema 11. Documentación electrónica: procesadores de texto y presentaciones · CC1</title><link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/estilos.css"><script src="assets/navegacion.js" defer></script></head>
+<body><a class="skip" href="#contenido">Saltar al contenido</a>
+<div class="progress" aria-hidden="true"><span></span></div>
+<header class="site-header"><div class="header-inner">
+  <a class="brand" href="index.html"><span class="brand-mark">CC1</span><span>Ciencias de la Computación I<small>1.º de Bachillerato · 2026–2027</small></span></a>
+  <nav class="top-nav" aria-label="Navegación principal"><a href="index.html">Índice</a></nav>
+</div></header>
+<main id="contenido">
+<section class="hero"><div class="hero-inner"><div><p class="kicker">Tema 11 · Bloque D · Elaboración y difusión de la información</p><h1>Documentación electrónica: procesadores de texto y presentaciones</h1><p class="hero-lead">Cómo producir documentos y presentaciones bien estructurados, reutilizables y accesibles.</p></div><aside class="hero-note"><strong>Pregunta guía</strong><p>¿Por qué un documento de treinta páginas hecho a base de negritas y saltos de línea se vuelve inmanejable, y uno hecho con estilos no?</p></aside></div></section>
+<div class="layout"><nav class="toc" aria-label="Índice del tema"><strong>En este tema</strong><ol>
+<li><a href="#ofimatica">Ofimática y documentación electrónica</a></li>
+<li><a href="#estilos">Estructura antes que apariencia: estilos y plantillas</a></li>
+<li><a href="#secciones">Secciones, numeración e índices automáticos</a></li>
+<li><a href="#citas">Citas, referencias y bibliografía</a></li>
+<li><a href="#avanzadas">Funciones avanzadas: correspondencia, campos y formularios</a></li>
+<li><a href="#presentaciones">Presentaciones: el guion antes que las diapositivas</a></li>
+<li><a href="#revision">Revisión, comentarios y control de cambios</a></li>
+<li><a href="#exportar">Exportar, PDF y accesibilidad</a></li>
+<li><a href="#academico">Normas de presentación de trabajos académicos</a></li>
+<li><a href="#glosario">Glosario</a></li>
+<li><a href="#resumen">Resumen</a></li>
+<li><a href="#fuentes">Fuentes</a></li>
+</ol></nav><article class="paper">
+<p class="lesson-intro">Cómo producir documentos y presentaciones bien estructurados, reutilizables y accesibles.</p>
+<div class="question"><strong>Antes de empezar:</strong> ¿por qué un documento de treinta páginas hecho a base de negritas y saltos de línea se vuelve inmanejable, y uno hecho con estilos no?</div>
+<div class="objectives"><strong>Al terminar serás capaz de…</strong><ul>
+<li>distinguir estructura y apariencia, y aplicar estilos en lugar de formato manual</li>
+<li>generar índices, referencias cruzadas y bibliografía de forma automática</li>
+<li>usar funciones avanzadas como la combinación de correspondencia y los campos</li>
+<li>preparar una presentación partiendo del guion y no de las diapositivas</li>
+<li>trabajar sobre un mismo documento con control de cambios y comentarios</li>
+<li>exportar a PDF cuidando la accesibilidad y cumplir unas normas de presentación</li>
+</ul></div>
+
+<h2 id="ofimatica">1. Ofimática y documentación electrónica</h2>
+<p>La <strong>ofimática</strong> es el conjunto de aplicaciones que permiten producir, tratar y comunicar información en el trabajo académico y profesional: procesador de textos, hoja de cálculo, base de datos, presentaciones y gestión de proyectos. Este tema y el siguiente cubren las cuatro primeras.</p>
+<p>Ya sabes usarlas a nivel básico. Lo que cambia en Bachillerato es el nivel de exigencia: aquí no basta con que el documento <em>se vea bien</em>, tiene que estar <strong>bien construido</strong>. Y esas dos cosas no son lo mismo.</p>
+<h3>1.1. Suites y formatos</h3>
+<div class="tabla_responsiva"><table class="cc1-table">
+<tr><th>Suite</th><th>Formato propio</th><th>Modelo</th></tr>
+<tr><td><strong>LibreOffice</strong></td><td>ODF: <code>.odt</code>, <code>.ods</code>, <code>.odp</code></td><td>Software libre; se instala en el equipo.</td></tr>
+<tr><td><strong>Microsoft 365</strong></td><td>OOXML: <code>.docx</code>, <code>.xlsx</code>, <code>.pptx</code></td><td>Propietario, por suscripción; escritorio y web.</td></tr>
+<tr><td><strong>Google Workspace</strong></td><td>Formato propio en la nube</td><td>Aplicación web; exporta a los formatos anteriores.</td></tr>
+</table></div>
+<p>Tanto ODF como OOXML son <strong>formatos abiertos y normalizados</strong>, así que cualquiera de las tres suites puede abrir los archivos de las otras. Ahora bien, «abrir» no siempre es «abrir igual»: al convertir de un formato a otro pueden desplazarse elementos, perderse comentarios o cambiar la paginación. Si un documento va a intercambiarse mucho, conviene acordar un formato desde el principio.</p>
+<div class="cc1-note">💡 Recuerda el criterio de salida del <a href="tema10.html">Tema 10</a>: lo importante no es qué programa usas hoy, sino si podrás abrir tus documentos dentro de diez años y con otra herramienta. Los formatos abiertos y documentados son la garantía de eso.</div>
+
+<h2 id="estilos">2. Estructura antes que apariencia: estilos y plantillas</h2>
+<p>Aquí está la idea central de todo el tema, y responde a la pregunta guía.</p>
+<div class="cc1-concept"><strong class="cc1-concept-tag">Concepto clave</strong>Cuando marcas un título poniéndolo en negrita y a 16 puntos, le estás dando <strong>apariencia</strong>. Cuando le aplicas el estilo «Título 1», le estás dando <strong>estructura</strong>: el documento pasa a <em>saber</em> que eso es un título de primer nivel. La apariencia solo la ve una persona que mire; la estructura la entienden el programa, el lector de pantalla y cualquier conversión posterior.</div>
+<p>De ahí salen cuatro ventajas que no se pueden conseguir con formato manual:</p>
+<div class="cc1-grid">
+<div class="cc1-card"><h3>Coherencia</h3><p>Todos los títulos del mismo nivel se ven igual, porque comparten definición. No hay uno a 15 puntos por descuido.</p></div>
+<div class="cc1-card"><h3>Cambio global</h3><p>Modificas el estilo una vez y cambian los cuarenta títulos del documento a la vez.</p></div>
+<div class="cc1-card"><h3>Automatización</h3><p>El índice, el panel de navegación y las referencias cruzadas se construyen solos a partir de los estilos.</p></div>
+<div class="cc1-card"><h3>Accesibilidad</h3><p>Un lector de pantalla anuncia los encabezados y permite saltar entre secciones. Con negritas sueltas, lee un párrafo más.</p></div>
+</div>
+<h3>2.1. La jerarquía de títulos</h3>
+<p>Los niveles de título forman un esquema, y hay que respetarlo: después de un «Título 1» viene un «Título 2», no un «Título 3». Saltarse niveles rompe el índice automático y desorienta a quien navega con el teclado. Los niveles indican <strong>jerarquía lógica</strong>, no tamaño de letra: si un título te parece demasiado grande, cambia el estilo, no el nivel.</p>
+<h3>2.2. Plantillas</h3>
+<p>Una <strong>plantilla</strong> es un documento de partida con los estilos, la portada, los márgenes y los encabezados ya definidos. Sirve para que todos los documentos de un mismo tipo —los informes de un departamento, los trabajos de una asignatura— salgan homogéneos sin que nadie tenga que recordar las reglas.</p>
+<div class="cc1-think">🤔 <strong>Para pensar:</strong> imagina que has terminado un trabajo de 40 páginas con formato manual y el profesor pide cambiar la letra de todos los apartados de segundo nivel. ¿Cuántas operaciones te costaría? ¿Y si hubieras usado estilos? Ahora calcula cuánto tiempo se tarda en aprender a usar estilos.</div>
+
+<h2 id="secciones">3. Secciones, numeración e índices automáticos</h2>
+<h3>3.1. Secciones y saltos</h3>
+<p>Un <strong>salto de página</strong> obliga a empezar en una página nueva; un <strong>salto de sección</strong> hace algo más profundo: divide el documento en partes que pueden tener encabezado, pie, orientación o numeración distintos. Es lo que permite que la portada no lleve número, que el índice se numere en romanos y que una página con una tabla ancha esté en horizontal.</p>
+<div class="aviso"><strong>El error clásico</strong>Empujar el texto a la página siguiente pulsando <em>Intro</em> muchas veces. Funciona hasta que añades un párrafo antes: entonces todo se descoloca y hay que rehacerlo. Un salto de página es una sola instrucción que se mantiene siempre.</div>
+<h3>3.2. Numeración automática</h3>
+<p>Los números de página, de capítulo, de figura o de tabla no se escriben a mano: se insertan como <strong>campos</strong> que el programa recalcula. Así, al añadir una figura en medio, todas las siguientes se renumeran solas.</p>
+<h3>3.3. Índices y referencias cruzadas</h3>
+<p>Si el documento usa estilos, el <strong>índice de contenidos</strong> se genera con una orden y se actualiza con otra. Lo mismo ocurre con la tabla de ilustraciones y con las <strong>referencias cruzadas</strong>: en lugar de escribir «véase el apartado 3.2 en la página 14», se inserta una referencia que se corrige sola si el apartado cambia de sitio.</p>
+
+<h2 id="citas">4. Citas, referencias y bibliografía</h2>
+<p>Citar no es un requisito burocrático. Cumple tres funciones distintas:</p>
+<ul>
+<li><strong>Permite verificar:</strong> quien lea tu trabajo puede ir a la fuente y comprobar que dice lo que afirmas.</li>
+<li><strong>Reconoce la autoría:</strong> las ideas de otras personas se atribuyen a quien las tuvo.</li>
+<li><strong>Te protege:</strong> presentar como propio el trabajo ajeno es plagio, con consecuencias académicas.</li>
+</ul>
+<p>Los procesadores de texto incorporan un <strong>gestor de fuentes</strong>: se introduce cada obra una vez y después se inserta la cita donde haga falta. La bibliografía se genera automáticamente y en el estilo elegido —APA, IEEE, Vancouver—, de modo que cambiar de estilo no obliga a reescribir nada.</p>
+<div class="cc1-concept"><strong class="cc1-concept-tag">Qué debe llevar una referencia</strong>Lo mínimo para que otra persona encuentre exactamente lo que tú leíste: <strong>autoría, título, dónde se publicó, fecha</strong> y, si es en línea, la dirección y la fecha de consulta. Esta última importa porque una página puede cambiar o desaparecer.</div>
+<div class="aviso"><strong>Y si has usado una herramienta de IA</strong>Lo mismo que con cualquier otra fuente: hay que decirlo. Un texto generado no es una fuente verificable, así que su contenido debe contrastarse en una fuente real, y esa es la que se cita. Recuerda del <a href="tema03.html">Tema 3</a> que estos sistemas inventan referencias con formato impecable: comprueba siempre que la obra citada existe.</div>
+
+<h2 id="avanzadas">5. Funciones avanzadas: correspondencia, campos y formularios</h2>
+<p>El currículo pide prestar atención especial a las funciones que el alumnado no suele conocer. Estas son las tres principales.</p>
+<h3>5.1. Combinación de correspondencia</h3>
+<p>Permite generar muchos documentos personalizados a partir de <strong>una plantilla</strong> y <strong>una tabla de datos</strong>. Se escribe la carta una vez con marcas donde van el nombre, el curso o la nota, se enlaza con la hoja de datos y el programa produce un documento por cada fila. Sirve para diplomas, cartas, etiquetas o convocatorias: cien documentos con el mismo esfuerzo que uno.</p>
+<h3>5.2. Campos</h3>
+<p>Un <strong>campo</strong> es un contenido que el programa calcula en lugar de que lo escribas tú: la fecha de hoy, el número de página, el total de páginas, el título del capítulo actual, una referencia cruzada. Su ventaja es que se mantienen correctos sin intervención.</p>
+<h3>5.3. Formularios</h3>
+<p>Un documento puede incluir <strong>campos rellenables</strong> —texto, casillas, listas desplegables— y proteger el resto para que no se modifique. Es la forma correcta de repartir una plantilla que otros deben completar sin desmontar el diseño.</p>
+
+<h2 id="presentaciones">6. Presentaciones: el guion antes que las diapositivas</h2>
+<div class="cc1-concept"><strong class="cc1-concept-tag">El error de partida</strong>Casi todo el mundo abre el programa de presentaciones y empieza a hacer diapositivas. Una presentación se prepara al revés: primero se decide <strong>qué se quiere que el público entienda y recuerde</strong>, después se ordena en un guion, y solo al final se construyen las diapositivas que apoyan ese guion. La diapositiva es el apoyo, no el contenido.</div>
+<h3>6.1. Reglas que funcionan</h3>
+<div class="tabla_responsiva"><table class="cc1-table">
+<tr><th>Regla</th><th>Por qué</th></tr>
+<tr><td><strong>Una idea por diapositiva</strong></td><td>El público no puede leer y escucharte a la vez. Si compite, pierde la explicación.</td></tr>
+<tr><td><strong>Poco texto, grande</strong></td><td>La diapositiva se lee desde el fondo del aula. Si el texto no se lee a cinco metros, sobra.</td></tr>
+<tr><td><strong>No leer la diapositiva</strong></td><td>Si vas a leer lo que está escrito, el público ya lo ha leído antes que tú y deja de escucharte.</td></tr>
+<tr><td><strong>Contraste suficiente</strong></td><td>El proyector del aula tiene mucho menos contraste que tu pantalla. El gris claro sobre blanco desaparece.</td></tr>
+<tr><td><strong>Notas del orador</strong></td><td>Lo que quieres decir va en las notas, no en la diapositiva. Solo las ves tú.</td></tr>
+</table></div>
+<h3>6.2. Patrones de diapositiva</h3>
+<p>El <strong>patrón</strong> es a las presentaciones lo que los estilos a los documentos: define de una vez la tipografía, los colores, la posición del título y el pie. Cambiarlo modifica toda la presentación. Da coherencia y ahorra el trabajo de recolocar cada elemento.</p>
+<div class="aviso"><strong>Una presentación no es un documento</strong>Si necesitas que el contenido se entienda sin ti —porque se va a leer después—, no hagas una presentación densa: haz un documento y, aparte, una presentación ligera para exponerlo. Intentar que un mismo archivo sirva para las dos cosas produce diapositivas ilegibles y documentos incompletos.</div>
+
+<h2 id="revision">7. Revisión, comentarios y control de cambios</h2>
+<div class="tabla_responsiva"><table class="cc1-table">
+<tr><th>Herramienta</th><th>Para qué sirve</th></tr>
+<tr><td><strong>Comentarios</strong></td><td>Sugerir o preguntar sin tocar el texto. Cada comentario queda asociado a un fragmento y a quien lo escribió.</td></tr>
+<tr><td><strong>Control de cambios</strong></td><td>Registrar cada modificación con su autoría, para que otra persona pueda aceptarla o rechazarla una a una.</td></tr>
+<tr><td><strong>Comparar documentos</strong></td><td>Ver las diferencias entre dos versiones cuando alguien editó sin activar el control de cambios.</td></tr>
+<tr><td><strong>Historial de versiones</strong></td><td>Recuperar el documento tal como estaba hace tres días. Lo ofrecen las suites en la nube.</td></tr>
+</table></div>
+<div class="aviso"><strong>Limpia el documento antes de entregarlo</strong>Un documento con cambios sin aceptar y comentarios internos revela el proceso y a veces cosas que no querías enseñar. Antes de entregar: acepta o rechaza todos los cambios, elimina los comentarios y revisa las <strong>propiedades del archivo</strong>, que suelen conservar el nombre del autor y de todos los que lo han editado.</div>
+
+<h2 id="exportar">8. Exportar, PDF y accesibilidad</h2>
+<h3>8.1. Cuándo usar PDF</h3>
+<p>El <strong>PDF</strong> fija la apariencia: se ve igual en cualquier equipo y no se modifica por accidente. Es el formato adecuado para <strong>entregar y distribuir</strong>. No lo es para trabajar: editarlo es incómodo y siempre conviene conservar el documento original editable.</p>
+<p>Existe además <strong>PDF/A</strong>, una variante pensada para archivo a largo plazo: incrusta las tipografías y prohíbe elementos que puedan dejar de funcionar con los años.</p>
+<h3>8.2. Documentos accesibles</h3>
+<p>Un documento accesible es el que puede usar también quien navega con teclado, con un lector de pantalla o con baja visión. No requiere herramientas especiales, solo hacer bien lo que ya deberías hacer:</p>
+<div class="tabla_responsiva"><table class="cc1-table">
+<tr><th>Requisito</th><th>Qué hay que hacer</th></tr>
+<tr><td><strong>Encabezados reales</strong></td><td>Usar estilos de título, no negritas. Es lo que permite navegar por el documento.</td></tr>
+<tr><td><strong>Texto alternativo</strong></td><td>Describir cada imagen que aporte información. Las decorativas se marcan como tales.</td></tr>
+<tr><td><strong>Contraste</strong></td><td>Suficiente entre texto y fondo; no dar por bueno lo que se lee en tu pantalla.</td></tr>
+<tr><td><strong>No solo color</strong></td><td>Si el color distingue algo, añadir también texto o símbolo: hay personas que no lo perciben.</td></tr>
+<tr><td><strong>Tablas con encabezado</strong></td><td>Marcar la fila de cabecera para que el lector de pantalla la anuncie en cada celda.</td></tr>
+<tr><td><strong>Enlaces descriptivos</strong></td><td>«Consulta el currículo oficial», no «pincha aquí»: quien salta de enlace en enlace solo oye el texto del enlace.</td></tr>
+<tr><td><strong>Idioma del documento</strong></td><td>Declararlo, para que el lector de pantalla lo pronuncie correctamente.</td></tr>
+</table></div>
+<div class="cc1-note">💡 Fíjate en que la mayoría de estos requisitos <strong>no son trabajo extra</strong>: son consecuencia de haber usado estilos y de escribir con cuidado. La accesibilidad casi nunca es una capa que se añade al final; es lo que queda cuando el documento está bien hecho. Lo volverás a ver, ya como norma legal, en el <a href="tema14.html">Tema 14</a>.</div>
+
+<h2 id="academico">9. Normas de presentación de trabajos académicos</h2>
+<p>Un trabajo bien presentado no adorna: facilita la lectura y demuestra cuidado. Estas son las convenciones habituales, que conviene contrastar siempre con lo que pida cada profesor.</p>
+<div class="tabla_responsiva"><table class="cc1-table">
+<tr><th>Elemento</th><th>Criterio habitual</th></tr>
+<tr><td><strong>Portada</strong></td><td>Título, autoría, materia, curso y fecha. Sin numeración.</td></tr>
+<tr><td><strong>Índice</strong></td><td>Automático, generado a partir de los estilos.</td></tr>
+<tr><td><strong>Tipografía</strong></td><td>Una sola familia legible, tamaño 11 o 12 en el cuerpo, interlineado 1,15 o 1,5.</td></tr>
+<tr><td><strong>Márgenes y páginas</strong></td><td>Márgenes uniformes y numeración desde la primera página de contenido.</td></tr>
+<tr><td><strong>Figuras y tablas</strong></td><td>Numeradas, con título y con la fuente indicada si no son propias.</td></tr>
+<tr><td><strong>Bibliografía</strong></td><td>Al final, con un estilo único y coherente.</td></tr>
+<tr><td><strong>Entrega</strong></td><td>En PDF salvo indicación contraria, con un nombre de archivo informativo.</td></tr>
+</table></div>
+<div class="cc1-curio">📄 <strong>¿Sabías que…?</strong> El nombre del archivo también comunica. <code>Apellido_Nombre_Tema11_2026-09.pdf</code> le dice a quien corrige de quién es y de qué va sin abrirlo, y se ordena solo en la lista. <code>trabajo final definitivo (2).pdf</code>, multiplicado por treinta alumnos, convierte una carpeta en un problema.</div>
+
+<h2 id="glosario">Glosario del tema</h2>
+<dl class="cc1-glosario">
+<dt>Ofimática</dt><dd>Conjunto de aplicaciones para producir, tratar y comunicar información en el trabajo.</dd>
+<dt>Estilo</dt><dd>Definición con nombre de formato y nivel que se aplica a un elemento del documento.</dd>
+<dt>Plantilla</dt><dd>Documento de partida con estilos y estructura ya definidos.</dd>
+<dt>Salto de sección</dt><dd>División que permite encabezados, orientación o numeración distintos en cada parte.</dd>
+<dt>Campo</dt><dd>Contenido que el programa calcula y actualiza automáticamente.</dd>
+<dt>Referencia cruzada</dt><dd>Enlace interno a otro punto del documento que se corrige solo si este se mueve.</dd>
+<dt>Combinación de correspondencia</dt><dd>Generación de muchos documentos personalizados desde una plantilla y una tabla de datos.</dd>
+<dt>Patrón de diapositiva</dt><dd>Definición común de tipografía, colores y posiciones para toda una presentación.</dd>
+<dt>Control de cambios</dt><dd>Registro de cada modificación con su autoría, para aceptarla o rechazarla.</dd>
+<dt>PDF/A</dt><dd>Variante del PDF pensada para conservación a largo plazo.</dd>
+<dt>Texto alternativo</dt><dd>Descripción de una imagen destinada a quien no puede verla.</dd>
+<dt>Plagio</dt><dd>Presentar como propio el trabajo o las ideas de otra persona.</dd>
+</dl>
+
+<section class="summary"><h2 id="resumen">Resumen esencial</h2><ol>
+<li>Estructura y apariencia no son lo mismo: los estilos dan estructura y son la base de todo lo demás.</li>
+<li>Con estilos, el índice, la navegación, las referencias y la accesibilidad salen prácticamente gratis.</li>
+<li>Las secciones permiten encabezados y numeraciones distintos; los saltos no se hacen con la tecla Intro.</li>
+<li>Citar permite verificar, reconoce la autoría y evita el plagio; el gestor de fuentes automatiza la bibliografía.</li>
+<li>La combinación de correspondencia produce cien documentos personalizados con el esfuerzo de uno.</li>
+<li>Una presentación empieza por el guion; la diapositiva apoya, no contiene.</li>
+<li>Antes de entregar hay que limpiar cambios, comentarios y propiedades del archivo.</li>
+<li>El PDF es para distribuir, no para trabajar; conserva siempre el original editable.</li>
+<li>La accesibilidad no es una capa final: es lo que queda cuando el documento está bien construido.</li>
+</ol></section>
+
+<section aria-labelledby="fuentes">
+<h2 id="fuentes">Fuentes y recursos fiables</h2>
+<ul>
+<li id="fuente_1">[1] <a href="https://www.bocm.es/boletin/CM_Orden_BOCM/2023/05/31/BOCM-20230531-18.PDF">Orden 1736/2023, de 19 de mayo, Anexo IV</a> — currículo oficial de Ciencias de la Computación en Bachillerato (PDF).</li>
+<li id="fuente_2">[2] <a href="https://documentation.libreoffice.org/es/documentacion-en-espanol/">LibreOffice — Documentación en español</a>.</li>
+<li id="fuente_3">[3] <a href="https://support.microsoft.com/es-es/office">Soporte de Microsoft 365 en español</a>.</li>
+<li id="fuente_4">[4] <a href="https://www.w3.org/WAI/tips/writing/">W3C WAI — Consejos de accesibilidad al redactar contenidos</a>.</li>
+<li id="fuente_5">[5] <a href="https://normas-apa.org/">Guía de estilo APA en español</a>.</li>
+<li id="fuente_6">[6] <a href="https://www.picuino.com/es/ley-ciencias-computacion-bach.html">Picuino — transcripción navegable del currículo</a>.</li>
+</ul>
+</section>
+</article></div></main>
+<nav class="topic-footer" aria-label="Navegación entre temas"><a href="tema10.html">← Tema 10</a><a href="tema12.html">Tema 12 →</a></nav>
+<footer class="site-footer">Ciencias de la Computación I · 1.º de Bachillerato · Comunidad de Madrid</footer>
+</body></html>

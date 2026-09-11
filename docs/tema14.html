@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Tema 14 del Bloque D de Ciencias de la Computación I: cómo se construye y se publica un sitio web y qué condiciones debe cumplir para ser útil y accesible.">
+<title>Tema 14. Diseño, edición y publicación de páginas web · CC1</title><link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/estilos.css"><script src="assets/navegacion.js" defer></script></head>
+<body><a class="skip" href="#contenido">Saltar al contenido</a>
+<div class="progress" aria-hidden="true"><span></span></div>
+<header class="site-header"><div class="header-inner">
+  <a class="brand" href="index.html"><span class="brand-mark">CC1</span><span>Ciencias de la Computación I<small>1.º de Bachillerato · 2026–2027</small></span></a>
+  <nav class="top-nav" aria-label="Navegación principal"><a href="index.html">Índice</a></nav>
+</div></header>
+<main id="contenido">
+<section class="hero"><div class="hero-inner"><div><p class="kicker">Tema 14 · Bloque D · Elaboración y difusión de la información</p><h1>Diseño, edición y publicación de páginas web</h1><p class="hero-lead">Cómo se construye y se publica un sitio web y qué condiciones debe cumplir para ser útil y accesible.</p></div><aside class="hero-note"><strong>Pregunta guía</strong><p>Cuando escribes una dirección y pulsas Intro, ¿qué ocurre exactamente hasta que la página aparece en tu pantalla?</p></aside></div></section>
+<div class="layout"><nav class="toc" aria-label="Índice del tema"><strong>En este tema</strong><ol>
+<li><a href="#web">Cómo funciona la Web: cliente, servidor, URL y HTTP</a></li>
+<li><a href="#tres">Los tres lenguajes de la Web</a></li>
+<li><a href="#html">HTML: la estructura y el significado</a></li>
+<li><a href="#css">CSS: la presentación</a></li>
+<li><a href="#adaptable">Diseño adaptable</a></li>
+<li><a href="#herramientas">Editores de código y gestores de contenidos</a></li>
+<li><a href="#estructura">Organizar la información y la navegación</a></li>
+<li><a href="#publicar">Publicar: alojamiento, dominio y mantenimiento</a></li>
+<li><a href="#accesibilidad">Accesibilidad y validación</a></li>
+<li><a href="#glosario">Glosario</a></li>
+<li><a href="#resumen">Resumen</a></li>
+<li><a href="#fuentes">Fuentes</a></li>
+</ol></nav><article class="paper">
+<p class="lesson-intro">Cómo se construye y se publica un sitio web y qué condiciones debe cumplir para ser útil y accesible.</p>
+<div class="question"><strong>Antes de empezar:</strong> cuando escribes una dirección y pulsas Intro, ¿qué ocurre exactamente hasta que la página aparece en tu pantalla?</div>
+<div class="objectives"><strong>Al terminar serás capaz de…</strong><ul>
+<li>describir el intercambio entre cliente y servidor e interpretar las partes de una URL</li>
+<li>separar estructura, presentación y comportamiento en HTML, CSS y JavaScript</li>
+<li>escribir HTML semántico y aplicar estilos desde una hoja externa</li>
+<li>explicar en qué consiste un diseño adaptable</li>
+<li>organizar un sitio con rutas relativas y una navegación comprensible</li>
+<li>publicar un sitio y aplicar los requisitos de accesibilidad exigidos por la normativa</li>
+</ul></div>
+
+<h2 id="web">1. Cómo funciona la Web: cliente, servidor, URL y HTTP</h2>
+<p>Toda la Web funciona sobre un intercambio muy simple: el <strong>cliente</strong> —tu navegador— pide algo y el <strong>servidor</strong> responde. Nada más. Lo que ocurre al pulsar Intro es esto:</p>
+<div class="cc1-timeline">
+<div class="cc1-tl-item"><div class="cc1-tl-year">1 — Resolución del nombre</div><p>El navegador pregunta al <strong>DNS</strong> qué dirección IP corresponde a ese nombre de dominio. Los nombres son para las personas; la red trabaja con números.</p></div>
+<div class="cc1-tl-item"><div class="cc1-tl-year">2 — Conexión y petición</div><p>El navegador conecta con ese servidor y le envía una <strong>petición HTTP</strong>: «dame este recurso».</p></div>
+<div class="cc1-tl-item"><div class="cc1-tl-year">3 — Respuesta</div><p>El servidor devuelve un <strong>código de estado</strong> y, si todo va bien, el contenido: normalmente un archivo HTML.</p></div>
+<div class="cc1-tl-item"><div class="cc1-tl-year">4 — Peticiones adicionales</div><p>Al leer el HTML, el navegador descubre que necesita hojas de estilo, imágenes y guiones, y hace una petición por cada uno.</p></div>
+<div class="cc1-tl-item"><div class="cc1-tl-year">5 — Representación</div><p>Con todas las piezas, el navegador construye y dibuja la página. Todo el proceso suele durar menos de un segundo.</p></div>
+</div>
+<h3>1.1. Las partes de una URL</h3>
+<p>Una <strong>URL</strong> es la dirección completa de un recurso. Por ejemplo, <code>https://valorar.github.io/cc1/tema14.html</code>:</p>
+<div class="tabla_responsiva"><table class="cc1-table">
+<tr><th>Parte</th><th>Ejemplo</th><th>Qué indica</th></tr>
+<tr><td><strong>Esquema</strong></td><td><code>https://</code></td><td>El protocolo. La <em>s</em> significa que la conexión va cifrada.</td></tr>
+<tr><td><strong>Dominio</strong></td><td><code>valorar.github.io</code></td><td>Qué servidor atiende la petición.</td></tr>
+<tr><td><strong>Ruta</strong></td><td><code>/cc1/tema14.html</code></td><td>Qué recurso concreto se pide dentro de ese servidor.</td></tr>
+<tr><td><strong>Parámetros</strong></td><td><code>?q=redes</code></td><td>Datos adicionales para el servidor, tras la interrogación.</td></tr>
+<tr><td><strong>Fragmento</strong></td><td><code>#accesibilidad</code></td><td>Un punto dentro de la página. No se envía al servidor: lo usa el navegador.</td></tr>
+</table></div>
+<h3>1.2. Códigos de estado</h3>
+<div class="tabla_responsiva"><table class="cc1-table">
+<tr><th>Código</th><th>Significa</th></tr>
+<tr><td><strong>200</strong></td><td>Correcto: aquí tienes el recurso.</td></tr>
+<tr><td><strong>301 / 302</strong></td><td>Redirección: el recurso está en otra dirección.</td></tr>
+<tr><td><strong>403</strong></td><td>Prohibido: existe, pero no tienes permiso.</td></tr>
+<tr><td><strong>404</strong></td><td>No encontrado: en el servidor no hay nada en esa ruta.</td></tr>
+<tr><td><strong>500</strong></td><td>Error del servidor: el fallo está en el otro extremo, no en tu equipo.</td></tr>
+</table></div>
+<div class="cc1-curio">🐈 <strong>¿Sabías que…?</strong> El famoso <strong>404</strong> no es un mensaje del navegador: es un código que envía el servidor, y cada sitio puede personalizar la página que lo acompaña. Prueba a escribir una dirección inventada dentro de este mismo sitio y verás la nuestra. Distinguir un 404 de un 500 ahorra mucho tiempo: el primero significa que te has equivocado de dirección, el segundo que el problema no es tuyo.</div>
+<div class="cc1-note">💡 <strong>HTTPS no es opcional.</strong> Cifra el intercambio para que nadie en el camino pueda leerlo ni alterarlo, y verifica que el servidor es quien dice ser. Los navegadores marcan como no seguras las páginas que aún usan HTTP, y hoy los certificados son gratuitos: no hay excusa para publicar sin él.</div>
+
+<h2 id="tres">2. Los tres lenguajes de la Web</h2>
+<div class="cc1-grid">
+<div class="cc1-card"><h3>HTML — estructura</h3><p>Marca <strong>qué es cada cosa</strong>: esto es un título, esto un párrafo, esto una lista, esto un enlace. Es el esqueleto y el significado.</p></div>
+<div class="cc1-card"><h3>CSS — presentación</h3><p>Decide <strong>cómo se ve</strong>: colores, tipografías, tamaños, espaciado y disposición en la pantalla.</p></div>
+<div class="cc1-card"><h3>JavaScript — comportamiento</h3><p>Añade <strong>qué ocurre</strong> al interactuar: validar un formulario, desplegar un menú, actualizar datos sin recargar.</p></div>
+</div>
+<div class="cc1-concept"><strong class="cc1-concept-tag">Por qué se separan</strong>Es la misma idea que los estilos del <a href="tema11.html">Tema 11</a>, llevada a la Web. Con la estructura separada de la presentación, se cambia el aspecto de un sitio entero editando un solo archivo, el contenido sigue teniendo sentido aunque falle el diseño, y un lector de pantalla o un buscador pueden entender la página aunque no la dibujen. Mezclarlas produce sitios imposibles de mantener.</div>
+<div class="cc1-note">💡 Este curso trabaja HTML y CSS. JavaScript se menciona por su función, pero programar la interactividad de una página no es contenido de 1.º: en el Bloque E programarás en Python.</div>
+
+<h2 id="html">3. HTML: la estructura y el significado</h2>
+<p>Un documento HTML se compone de <strong>etiquetas</strong> que envuelven el contenido y le dan sentido. La mayoría van por pares: una de apertura y otra de cierre.</p>
+<div class="tabla_responsiva"><table class="cc1-table">
+<tr><th>Etiqueta</th><th>Qué marca</th></tr>
+<tr><td><code>&lt;h1&gt;</code> … <code>&lt;h6&gt;</code></td><td>Encabezados de seis niveles jerárquicos.</td></tr>
+<tr><td><code>&lt;p&gt;</code></td><td>Un párrafo.</td></tr>
+<tr><td><code>&lt;ul&gt;</code>, <code>&lt;ol&gt;</code>, <code>&lt;li&gt;</code></td><td>Listas sin ordenar, ordenadas y sus elementos.</td></tr>
+<tr><td><code>&lt;a href="…"&gt;</code></td><td>Un enlace a otro recurso.</td></tr>
+<tr><td><code>&lt;img src="…" alt="…"&gt;</code></td><td>Una imagen, con su descripción alternativa.</td></tr>
+<tr><td><code>&lt;table&gt;</code>, <code>&lt;tr&gt;</code>, <code>&lt;th&gt;</code>, <code>&lt;td&gt;</code></td><td>Tablas de datos, con celdas de encabezado y de contenido.</td></tr>
+</table></div>
+<h3>3.1. HTML semántico</h3>
+<p>Además existen etiquetas que describen <strong>el papel de cada zona</strong> de la página: <code>&lt;header&gt;</code>, <code>&lt;nav&gt;</code>, <code>&lt;main&gt;</code>, <code>&lt;section&gt;</code>, <code>&lt;article&gt;</code>, <code>&lt;aside&gt;</code> y <code>&lt;footer&gt;</code>. Usarlas se llama escribir <strong>HTML semántico</strong>, y no es un capricho de estilo: es lo que permite a un lector de pantalla ofrecer «saltar a la navegación» o «ir al contenido principal», y a un buscador entender qué parte de la página importa.</p>
+<div class="aviso"><strong>El error más extendido</strong>Usar <code>&lt;div&gt;</code> para todo y simular los títulos con tamaño y negrita. Visualmente puede quedar idéntico, pero la página pierde toda su estructura: no se puede navegar por encabezados, los buscadores no distinguen jerarquía y el contenido deja de tener significado sin el CSS. Exactamente el mismo error que dar formato manual en lugar de aplicar estilos.</div>
+<h3>3.2. Encabezados y jerarquía</h3>
+<p>Un solo <code>&lt;h1&gt;</code> por página, que es su título. Debajo, <code>&lt;h2&gt;</code> para las secciones y <code>&lt;h3&gt;</code> para los apartados, sin saltarse niveles. El conjunto de encabezados debe leerse como un índice del contenido.</p>
+
+<h2 id="css">4. CSS: la presentación</h2>
+<p>Una regla CSS se compone de un <strong>selector</strong>, que indica a qué elementos se aplica, y un conjunto de <strong>propiedades</strong> con sus valores:</p>
+<div class="tabla_responsiva"><table class="cc1-table">
+<tr><th>Selector</th><th>Selecciona</th></tr>
+<tr><td><code>p</code></td><td>Todos los párrafos.</td></tr>
+<tr><td><code>.aviso</code></td><td>Todos los elementos con la clase <code>aviso</code>.</td></tr>
+<tr><td><code>#contenido</code></td><td>El elemento con ese identificador único.</td></tr>
+<tr><td><code>nav a</code></td><td>Los enlaces que estén dentro de un elemento de navegación.</td></tr>
+</table></div>
+<p>El CSS puede escribirse dentro de la propia etiqueta, dentro de la página o en un <strong>archivo externo</strong> enlazado. Solo la tercera opción es razonable en un sitio real: una hoja compartida por todas las páginas se edita una vez y el navegador la guarda en caché, de modo que el resto del sitio carga más rápido.</p>
+<div class="cc1-note">💡 Este mismo sitio funciona así: las catorce páginas comparten un único archivo <code>estilos.css</code>. Cambiar un color de la asignatura es editar una línea en un archivo, no en catorce.</div>
+
+<h2 id="adaptable">5. Diseño adaptable</h2>
+<p>Una misma página se ve hoy en un móvil de 5 pulgadas, en un portátil y en un televisor. El <strong>diseño adaptable</strong> consiste en que el contenido se reorganice según el espacio disponible, en lugar de tener una versión distinta para cada dispositivo.</p>
+<div class="tabla_responsiva"><table class="cc1-table">
+<tr><th>Técnica</th><th>En qué consiste</th></tr>
+<tr><td><strong>Unidades relativas</strong></td><td>Definir tamaños en proporción al espacio o al texto, no en píxeles fijos.</td></tr>
+<tr><td><strong>Imágenes flexibles</strong></td><td>Limitar su anchura al contenedor para que nunca desborden.</td></tr>
+<tr><td><strong>Consultas de medios</strong></td><td>Aplicar reglas distintas según la anchura de la pantalla: por ejemplo, pasar de dos columnas a una.</td></tr>
+<tr><td><strong>Diseño móvil primero</strong></td><td>Diseñar para la pantalla pequeña y añadir después lo que aproveche las grandes. Obliga a priorizar el contenido.</td></tr>
+</table></div>
+<div class="cc1-concept"><strong class="cc1-concept-tag">La prueba más sencilla</strong>Abre tu página en el ordenador y <strong>estrecha la ventana</strong> hasta el ancho de un móvil. Si aparece una barra de desplazamiento horizontal, el diseño no es adaptable: algún elemento tiene una anchura fija que no cabe. Es una comprobación de cinco segundos que detecta la mayoría de los problemas.</div>
+
+<h2 id="herramientas">6. Editores de código y gestores de contenidos</h2>
+<div class="tabla_responsiva"><table class="cc1-table">
+<tr><th>Enfoque</th><th>Cómo se trabaja</th><th>Cuándo conviene</th></tr>
+<tr><td><strong>Editor de código</strong></td><td>Se escriben los archivos HTML y CSS a mano.</td><td>Sitios pequeños, aprendizaje y control total del resultado.</td></tr>
+<tr><td><strong>Generador de sitios estáticos</strong></td><td>Se escribe el contenido en texto y una herramienta genera las páginas.</td><td>Sitios con muchas páginas de estructura repetida.</td></tr>
+<tr><td><strong>Gestor de contenidos (CMS)</strong></td><td>Se administra desde el navegador; el contenido vive en una base de datos.</td><td>Sitios que actualizan varias personas sin saber programar.</td></tr>
+<tr><td><strong>Constructor visual</strong></td><td>Se arrastran bloques prediseñados.</td><td>Resultados rápidos, a cambio de dependencia de la plataforma.</td></tr>
+</table></div>
+<div class="cc1-curio">🌐 <strong>¿Sabías que…?</strong> Esta web es un sitio <strong>estático</strong>: solo archivos HTML, una hoja de estilos y una imagen, alojados gratuitamente en GitHub Pages. No hay base de datos ni servidor de aplicaciones que mantener, no puede «caerse» por una sobrecarga y es imposible atacarla por la vía habitual, porque no hay ningún programa ejecutándose en el servidor. Para un sitio de contenido que cambia poco, lo estático suele ser la mejor decisión técnica, no la más pobre.</div>
+
+<h2 id="estructura">7. Organizar la información y la navegación</h2>
+<h3>7.1. Estructura de archivos</h3>
+<p>Un sitio es una carpeta con archivos y subcarpetas. Tres convenciones importantes:</p>
+<ul>
+<li>La página principal se llama <strong><code>index.html</code></strong>: es la que el servidor entrega cuando se pide la carpeta sin nombre de archivo.</li>
+<li>Los recursos —hojas de estilo, imágenes, guiones— van en subcarpetas ordenadas, no sueltos junto a las páginas.</li>
+<li>Los nombres de archivo, <strong>en minúsculas, sin espacios y sin acentos</strong>. Muchos servidores distinguen mayúsculas de minúsculas, y un enlace que funciona en tu equipo puede dar 404 al publicarlo.</li>
+</ul>
+<h3>7.2. Rutas relativas</h3>
+<p>Los enlaces internos deben usar <strong>rutas relativas</strong>, con la misma lógica que viste en el <a href="tema08.html">Tema 8</a>: <code>tema15.html</code> para una página hermana, <code>assets/estilos.css</code> para bajar a una subcarpeta, <code>../index.html</code> para subir un nivel. Así el sitio funciona igual en tu equipo que publicado, y se puede mover entero sin romper nada.</p>
+<h3>7.3. Navegación comprensible</h3>
+<div class="tabla_responsiva"><table class="cc1-table">
+<tr><th>Principio</th><th>Qué significa</th></tr>
+<tr><td><strong>Orientación</strong></td><td>Desde cualquier página, saber dónde estoy, qué hay alrededor y cómo volver.</td></tr>
+<tr><td><strong>Coherencia</strong></td><td>El menú está siempre en el mismo sitio y con los mismos nombres.</td></tr>
+<tr><td><strong>Enlaces descriptivos</strong></td><td>El texto del enlace dice adónde lleva, sin depender del párrafo que lo rodea.</td></tr>
+<tr><td><strong>Jerarquía plana</strong></td><td>Pocos niveles: enterrar contenido a cinco clics equivale a esconderlo.</td></tr>
+<tr><td><strong>Página de error útil</strong></td><td>Un 404 que ofrezca una salida hacia el índice, no un callejón sin salida.</td></tr>
+</table></div>
+
+<h2 id="publicar">8. Publicar: alojamiento, dominio y mantenimiento</h2>
+<div class="cc1-grid">
+<div class="cc1-card"><h3>Alojamiento</h3><p>El servidor donde viven los archivos y que los sirve a quien los pida. Puede ser un servicio de pago, un alojamiento gratuito de páginas estáticas o un servidor propio.</p></div>
+<div class="cc1-card"><h3>Dominio</h3><p>El nombre por el que se llega. Se alquila por años a un registrador. Los <code>.es</code> los gestiona Red.es.</p></div>
+<div class="cc1-card"><h3>Certificado</h3><p>Lo que habilita HTTPS. Hoy la mayoría de los alojamientos lo incluyen y lo renuevan solos.</p></div>
+<div class="cc1-card"><h3>Mantenimiento</h3><p>Actualizar el contenido, revisar enlaces rotos, mantener el software al día y conservar copias.</p></div>
+</div>
+<div class="aviso"><strong>Publicar es hacer público</strong>Todo lo que subes queda accesible para cualquiera y puede quedar copiado en archivos y buscadores aunque después lo borres. Antes de publicar: comprueba que no incluyes datos personales de terceros, que tienes derecho a usar todas las imágenes y que no expones información de contacto que no quieres difundir. Un sitio publicado por error se retira, pero no se «desdifunde».</div>
+
+<h2 id="accesibilidad">9. Accesibilidad y validación</h2>
+<h3>9.1. Los cuatro principios</h3>
+<p>Las pautas internacionales de accesibilidad web, las <strong>WCAG</strong> del W3C, se organizan en cuatro principios. Un contenido debe ser:</p>
+<div class="tabla_responsiva"><table class="cc1-table">
+<tr><th>Principio</th><th>Significa</th><th>Ejemplo concreto</th></tr>
+<tr><td><strong>Perceptible</strong></td><td>Se puede percibir por algún sentido.</td><td>Texto alternativo en imágenes; subtítulos en vídeo; contraste suficiente.</td></tr>
+<tr><td><strong>Operable</strong></td><td>Se puede manejar de distintas formas.</td><td>Todo accesible con teclado; foco visible; sin límites de tiempo rígidos.</td></tr>
+<tr><td><strong>Comprensible</strong></td><td>El contenido y el funcionamiento se entienden.</td><td>Idioma declarado; navegación coherente; errores explicados con claridad.</td></tr>
+<tr><td><strong>Robusto</strong></td><td>Funciona con distintas tecnologías, hoy y mañana.</td><td>HTML válido y semántico que las tecnologías de apoyo puedan interpretar.</td></tr>
+</table></div>
+<p>Las pautas se agrupan en tres niveles de exigencia: <strong>A</strong>, <strong>AA</strong> y <strong>AAA</strong>. El nivel de referencia habitual, y el que exige la ley, es el <strong>AA</strong>.</p>
+<h3>9.2. Qué obliga la normativa en España</h3>
+<div class="tabla_responsiva"><table class="cc1-table">
+<tr><th>Norma</th><th>A quién obliga</th></tr>
+<tr><td><strong>Real Decreto 1112/2018</strong></td><td>Sitios web y aplicaciones móviles del <strong>sector público</strong>. Exige la norma europea EN 301 549, equivalente a WCAG 2.1 nivel AA, y publicar una declaración de accesibilidad.</td></tr>
+<tr><td><strong>Ley 11/2023</strong></td><td>Desde el <strong>28 de junio de 2025</strong> extiende requisitos de accesibilidad a determinados productos y servicios del <strong>sector privado</strong>, como el comercio electrónico. Transpone la Ley Europea de Accesibilidad y deja fuera a las microempresas.</td></tr>
+</table></div>
+<div class="cc1-concept"><strong class="cc1-concept-tag">Un cambio importante</strong>La accesibilidad web ha dejado de ser una recomendación de buenas prácticas o una obligación solo para las administraciones. Desde 2025 es también una <strong>obligación legal para muchas empresas privadas</strong> en España. Y, más allá de la ley: hablamos de un porcentaje muy alto de la población que en algún momento de su vida encuentra barreras —por discapacidad permanente, por una lesión temporal o simplemente por la edad—.</div>
+<h3>9.3. Comprobar antes de publicar</h3>
+<ul>
+<li><strong>Validador de HTML del W3C:</strong> detecta etiquetas mal cerradas y errores de estructura.</li>
+<li><strong>Herramientas de accesibilidad</strong> como WAVE o las integradas en el navegador: señalan imágenes sin texto alternativo, contrastes insuficientes y encabezados mal jerarquizados.</li>
+<li><strong>Prueba de teclado:</strong> recorre toda la página con el tabulador. Si no puedes llegar a algo o no ves dónde está el foco, no es operable.</li>
+<li><strong>Prueba de anchura:</strong> estrecha la ventana hasta el tamaño de un móvil.</li>
+<li><strong>Prueba sin estilos:</strong> desactiva el CSS. Si el contenido sigue leyéndose en orden lógico, la estructura es correcta.</li>
+</ul>
+<div class="cc1-think">🤔 <strong>Para pensar:</strong> repasa los requisitos de accesibilidad de documentos del <a href="tema11.html">Tema 11</a> y los de este tema. Son prácticamente los mismos: encabezados reales, texto alternativo, contraste, no depender del color, enlaces descriptivos. ¿Por qué crees que las buenas prácticas coinciden en soportes tan distintos?</div>
+
+<h2 id="glosario">Glosario del tema</h2>
+<dl class="cc1-glosario">
+<dt>Cliente y servidor</dt><dd>Programa que pide un recurso y programa que lo entrega.</dd>
+<dt>DNS</dt><dd>Sistema que traduce nombres de dominio en direcciones IP.</dd>
+<dt>HTTP / HTTPS</dt><dd>Protocolo de transferencia de la Web; la variante segura viaja cifrada.</dd>
+<dt>URL</dt><dd>Dirección completa de un recurso: esquema, dominio, ruta y, en su caso, parámetros y fragmento.</dd>
+<dt>Código de estado</dt><dd>Número con el que el servidor indica el resultado de una petición, como 200 o 404.</dd>
+<dt>HTML</dt><dd>Lenguaje de marcado que define la estructura y el significado del contenido.</dd>
+<dt>HTML semántico</dt><dd>Uso de etiquetas que describen el papel de cada parte de la página.</dd>
+<dt>CSS</dt><dd>Lenguaje que define la presentación visual del contenido.</dd>
+<dt>Selector</dt><dd>Parte de una regla CSS que indica a qué elementos se aplica.</dd>
+<dt>Diseño adaptable</dt><dd>Diseño que reorganiza el contenido según el espacio disponible en pantalla.</dd>
+<dt>Ruta relativa</dt><dd>Dirección de un recurso expresada desde la ubicación del archivo actual.</dd>
+<dt>Sitio estático</dt><dd>Sitio formado por archivos que el servidor entrega tal cual, sin generar nada.</dd>
+<dt>Gestor de contenidos</dt><dd>Aplicación que permite administrar un sitio desde el navegador sin programar.</dd>
+<dt>WCAG</dt><dd>Pautas internacionales de accesibilidad del contenido web, con niveles A, AA y AAA.</dd>
+</dl>
+
+<section class="summary"><h2 id="resumen">Resumen esencial</h2><ol>
+<li>La Web es un intercambio de peticiones y respuestas entre cliente y servidor, previa resolución del nombre por DNS.</li>
+<li>Una URL tiene partes con función propia, y el código de estado dice si el problema es tuyo o del servidor.</li>
+<li>HTML da estructura, CSS presentación y JavaScript comportamiento: separarlos es lo que hace mantenible un sitio.</li>
+<li>El HTML semántico permite navegar por la página y que su contenido tenga sentido sin el diseño.</li>
+<li>Un diseño adaptable reorganiza el contenido; la prueba es estrechar la ventana y no encontrar barra horizontal.</li>
+<li>Un sitio estático es a menudo la mejor decisión técnica para contenido que cambia poco.</li>
+<li>Rutas relativas, nombres en minúsculas y una página <code>index.html</code>: así el sitio funciona igual en local que publicado.</li>
+<li>Publicar es hacer público, y lo publicado puede quedar copiado aunque después se borre.</li>
+<li>La accesibilidad se organiza en cuatro principios y, desde 2025, obliga en España también a muchas empresas privadas.</li>
+</ol></section>
+
+<section aria-labelledby="fuentes">
+<h2 id="fuentes">Fuentes y recursos fiables</h2>
+<ul>
+<li id="fuente_1">[1] <a href="https://www.bocm.es/boletin/CM_Orden_BOCM/2023/05/31/BOCM-20230531-18.PDF">Orden 1736/2023, de 19 de mayo, Anexo IV</a> — currículo oficial de Ciencias de la Computación en Bachillerato (PDF).</li>
+<li id="fuente_2">[2] <a href="https://developer.mozilla.org/es/docs/Learn">MDN Web Docs — Aprender desarrollo web, en español</a>.</li>
+<li id="fuente_3">[3] <a href="https://validator.w3.org/">Validador de HTML del W3C</a>.</li>
+<li id="fuente_4">[4] <a href="https://www.w3.org/WAI/standards-guidelines/wcag/es">W3C WAI — Pautas WCAG</a>.</li>
+<li id="fuente_5">[5] <a href="https://www.boe.es/buscar/act.php?id=BOE-A-2018-12699">Real Decreto 1112/2018, de accesibilidad de los sitios web del sector público</a>.</li>
+<li id="fuente_6">[6] <a href="https://www.boe.es/buscar/act.php?id=BOE-A-2023-11022">Ley 11/2023, de accesibilidad de determinados productos y servicios</a>.</li>
+<li id="fuente_7">[7] <a href="https://www.picuino.com/es/ley-ciencias-computacion-bach.html">Picuino — transcripción navegable del currículo</a>.</li>
+</ul>
+</section>
+</article></div></main>
+<nav class="topic-footer" aria-label="Navegación entre temas"><a href="tema13.html">← Tema 13</a><a href="tema15.html">Tema 15 →</a></nav>
+<footer class="site-footer">Ciencias de la Computación I · 1.º de Bachillerato · Comunidad de Madrid</footer>
+</body></html>
