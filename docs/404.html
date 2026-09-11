@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#eef2f4">
+  <title>Error 404 · Página no encontrada · CC1</title>
+  <link rel="icon" href="/cc1/assets/img/favicon.svg" type="image/svg+xml">
+  <style>
+    :root {
+      color-scheme: light;
+      --papel: #eef2f4;
+      --tinta: #17262d;
+      --foco: #0b6680;
+      --enlace: #0b6680;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body { min-height: 100%; }
+
+    body {
+      display: grid;
+      place-items: center;
+      margin: 0;
+      padding: clamp(1rem, 4vw, 3rem);
+      background: var(--papel);
+      color: var(--tinta);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.6;
+    }
+
+    main { width: min(100%, 1180px); }
+
+    .imagen_404 {
+      display: block;
+      border-radius: 1rem;
+      outline: 0 solid transparent;
+      box-shadow: 0 16px 45px rgb(23 38 45 / 14%);
+      transition: transform 160ms ease, box-shadow 160ms ease, outline 160ms ease;
+    }
+
+    .imagen_404:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 20px 55px rgb(23 38 45 / 20%);
+    }
+
+    .imagen_404:focus-visible {
+      outline: 5px solid var(--foco);
+      outline-offset: 6px;
+    }
+
+    .imagen_404 img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: inherit;
+    }
+
+    .volver {
+      margin: 1.15rem 0 0;
+      text-align: center;
+      font-size: .95rem;
+    }
+
+    .volver a {
+      color: var(--enlace);
+      font-weight: 650;
+      text-underline-offset: 3px;
+    }
+
+    .volver a:focus-visible {
+      outline: 3px solid var(--foco);
+      outline-offset: 3px;
+      border-radius: 4px;
+    }
+
+    .solo_lectores {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .imagen_404 { transition: none; }
+      .imagen_404:hover { transform: none; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1 class="solo_lectores">Error 404: página no encontrada</h1>
+    <p class="solo_lectores">Parece que el gato ha estado jugando con los cables. Pulsa la imagen para volver a la página anterior o usa el enlace inferior para ir al índice de la asignatura.</p>
+    <a class="imagen_404" href="/cc1/" aria-label="Volver a la página anterior" onclick="if (history.length > 1) { history.back(); return false; }">
+      <img src="/cc1/assets/img/error_404_gato.jpg" width="1280" height="714" alt="Error 404: página no encontrada. Un gato atigrado naranja, tumbado boca arriba sobre una mesa, mordisquea el cable de un teclado. Pulsa la imagen para volver a la página anterior.">
+    </a>
+    <p class="volver"><a href="/cc1/">Ir al índice de Ciencias de la Computación I</a></p>
+  </main>
+</body>
+</html>
