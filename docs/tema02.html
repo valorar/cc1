@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Tema 2 del Bloque A de Ciencias de la Computación I: cómo la mecánica, la electricidad y la electrónica fueron sustituyendo al cálculo manual hasta llegar al chip.">
+<title>Tema 2. De las primeras máquinas de calcular al circuito integrado · CC1</title><link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/estilos.css"><script src="assets/navegacion.js" defer></script></head>
+<body><a class="skip" href="#contenido">Saltar al contenido</a>
+<div class="progress" aria-hidden="true"><span></span></div>
+<header class="site-header"><div class="header-inner">
+  <a class="brand" href="index.html"><span class="brand-mark">CC1</span><span>Ciencias de la Computación I<small>1.º de Bachillerato · 2026–2027</small></span></a>
+  <nav class="top-nav" aria-label="Navegación principal"><a href="index.html">Índice</a></nav>
+</div></header>
+<main id="contenido">
+<section class="hero"><div class="hero-inner"><div><p class="kicker">Tema 2 · Bloque A · Evolución histórica</p><h1>De las primeras máquinas de calcular al circuito integrado</h1><p class="hero-lead">Cómo la mecánica, la electricidad y la electrónica fueron sustituyendo al cálculo manual hasta llegar al chip.</p></div><aside class="hero-note"><strong>Pregunta guía</strong><p>¿Qué problema concreto intentaba resolver cada máquina, y qué nuevo problema abrió al resolverlo?</p></aside></div></section>
+<div class="layout"><nav class="toc" aria-label="Índice del tema"><strong>En este tema</strong><ol>
+<li><a href="#objetos">Calcular con objetos: el ábaco</a></li>
+<li><a href="#logaritmos">Calcular con logaritmos: Napier y la regla deslizante</a></li>
+<li><a href="#engranajes">Calcular con engranajes: la pascalina</a></li>
+<li><a href="#tarjetas">Instrucciones en tarjetas: Jacquard, Babbage y Hollerith</a></li>
+<li><a href="#valvulas">La electrónica entra en escena: la válvula y el ENIAC</a></li>
+<li><a href="#transistor">El transistor: pequeño, frío y fiable</a></li>
+<li><a href="#chip">El circuito integrado, el chip y las generaciones</a></li>
+<li><a href="#fuera">Fuera del ordenador: sensores, robótica e IA</a></li>
+<li><a href="#linea">La línea del tiempo completa</a></li>
+<li><a href="#glosario">Glosario</a></li>
+<li><a href="#resumen">Resumen</a></li>
+<li><a href="#fuentes">Fuentes</a></li>
+</ol></nav><article class="paper">
+<p class="lesson-intro">Cómo la mecánica, la electricidad y la electrónica fueron sustituyendo al cálculo manual hasta llegar al chip.</p>
+<div class="question"><strong>Antes de empezar:</strong> ¿qué problema concreto intentaba resolver cada máquina, y qué nuevo problema abrió al resolverlo?</div>
+<div class="objectives"><strong>Al terminar serás capaz de…</strong><ul>
+<li>situar en orden los hitos que llevan del ábaco al circuito integrado</li>
+<li>explicar qué necesidad real motivó cada avance, no solo en qué año ocurrió</li>
+<li>distinguir una máquina de calcular de una máquina programable</li>
+<li>describir por qué el transistor y el circuito integrado cambiaron la escala de todo</li>
+<li>relacionar cada generación de ordenadores con su tecnología de conmutación</li>
+</ul></div>
+
+<p>Este tema no es una lista de fechas que memorizar. Es una <strong>cadena de problemas</strong>: cada máquina resolvió una dificultad concreta y, al resolverla, dejó al descubierto la siguiente. Si entiendes la cadena, las fechas se colocan solas.</p>
+
+<h2 id="objetos">1. Calcular con objetos: el ábaco</h2>
+<p>El problema más antiguo es el más simple: <strong>la memoria humana no aguanta</strong>. Sumar una columna larga de cifras mentalmente es lento y poco fiable, porque hay que recordar resultados parciales mientras se sigue operando.</p>
+<p>La primera solución fue sacar esos resultados parciales fuera de la cabeza y ponerlos en objetos físicos: piedras en surcos, fichas sobre una tabla y, finalmente, cuentas ensartadas en varillas. El <strong>ábaco</strong> aparece en distintas culturas de forma independiente —la tabla de Salamina griega, el ábaco romano, el <em>suanpan</em> chino, el <em>soroban</em> japonés— y sigue en uso en algunos lugares.</p>
+<div class="cc1-concept"><strong class="cc1-concept-tag">Concepto clave</strong>El ábaco no calcula: <em>representa</em>. Es la persona quien ejecuta el procedimiento; la máquina solo almacena el estado. Esa distinción entre representar información y ejecutar un procedimiento recorrerá todo el tema.</div>
+<div class="cc1-think">🤔 <strong>Para pensar:</strong> con lo que aprendiste en el <a href="tema01.html">Tema 1</a>, ¿es un ábaco un ordenador? Ayuda a representar números y a operar con ellos, pero no ejecuta por sí mismo ningún procedimiento ni almacena un programa. Es un antecedente valioso porque demuestra algo que sigue siendo cierto: representar bien un problema es la mitad de resolverlo.</div>
+
+<h2 id="logaritmos">2. Calcular con logaritmos: Napier y la regla deslizante</h2>
+<p>El siguiente problema llegó con la navegación y la astronomía del siglo XVII: <strong>multiplicar y dividir números grandes es mucho más costoso que sumarlos</strong>. Calcular la posición de un barco exigía multiplicaciones de muchas cifras, y cada una podía llevar minutos y contener errores.</p>
+<p>En 1614, el escocés <strong>John Napier</strong> publicó los <strong>logaritmos</strong>, que resuelven el problema con un truco matemático elegante: el logaritmo de un producto es la suma de los logaritmos. Multiplicar se convierte en sumar, siempre que dispongas de una tabla que traduzca de un mundo al otro. Napier diseñó además unas varillas grabadas, los llamados <em>huesos de Napier</em> (1617), para mecanizar las multiplicaciones.</p>
+<p>Poco después, en <strong>1621</strong>, el matemático inglés <strong>William Oughtred</strong> dio el paso decisivo: colocó dos escalas logarítmicas de modo que una pudiera <strong>deslizarse</strong> sobre la otra. Alineando una escala con otra, la suma de longitudes se leía directamente y se obtenía el producto. Acababa de nacer la <strong>regla de cálculo</strong>.</p>
+<div class="cc1-curio">🚀 <strong>¿Sabías que…?</strong> La regla de cálculo fue la herramienta de trabajo de ingenieros y científicos durante <strong>350 años</strong>. Con reglas de cálculo se diseñaron los puentes del siglo XIX, los primeros aviones y buena parte del programa Apolo que llevó personas a la Luna en 1969. Solo la desplazó la calculadora electrónica de bolsillo, a mediados de los años setenta.</div>
+<div class="cc1-note">💡 Fíjate en el patrón: no se construyó una máquina más potente, sino que se <strong>transformó el problema</strong> en otro más fácil. Cambiar la representación para simplificar el procedimiento es una de las estrategias más útiles de toda la informática, y la volverás a encontrar constantemente.</div>
+
+<h2 id="engranajes">3. Calcular con engranajes: la pascalina</h2>
+<p>Napier y Oughtred aliviaron el cálculo, pero seguía siendo la persona quien ejecutaba cada paso. La pregunta siguiente era inevitable: <strong>¿puede una máquina hacer la operación por sí sola?</strong></p>
+<p>En <strong>1642</strong>, con solo 19 años, <strong>Blaise Pascal</strong> construyó la máquina que hoy conocemos como <strong>pascalina</strong>. Su padre era recaudador de impuestos en Ruan y pasaba jornadas enteras sumando cuentas; Pascal quiso ahorrarle ese trabajo. La máquina usaba ruedas dentadas numeradas: al girar una rueda completa, un mecanismo hacía avanzar una posición a la rueda de la izquierda. Es decir, resolvía mecánicamente el <strong>acarreo</strong>, que es la parte realmente difícil de automatizar en una suma.</p>
+<p>La pascalina sumaba y restaba, pero no multiplicaba. Ese paso lo dio <strong>Gottfried Leibniz</strong> en 1673 con su <em>rueda escalonada</em>, capaz de multiplicar y dividir mediante sumas y restas repetidas. Leibniz, además, describió en 1703 el <strong>sistema binario</strong>, que tres siglos después sería el lenguaje de todos los ordenadores.</p>
+<div class="tabla_responsiva"><table class="cc1-table">
+<tr><th>Máquina</th><th>Año</th><th>Qué automatiza</th><th>Limitación</th></tr>
+<tr><td>Ábaco</td><td>Antigüedad</td><td>Almacenar el estado del cálculo</td><td>La persona ejecuta todos los pasos</td></tr>
+<tr><td>Regla de cálculo</td><td>1621</td><td>Convertir productos en sumas de longitudes</td><td>Precisión limitada; la persona lee e interpreta</td></tr>
+<tr><td>Pascalina</td><td>1642</td><td>La suma y la resta, con acarreo automático</td><td>Solo dos operaciones; sin programa</td></tr>
+<tr><td>Rueda escalonada</td><td>1673</td><td>También la multiplicación y la división</td><td>Frágil; sin programa</td></tr>
+</table></div>
+<div class="aviso"><strong>El límite común de todas ellas</strong>Ninguna de estas máquinas es programable. Hacen siempre lo mismo: la operación que su mecanismo tiene grabada físicamente. Para que apareciera el ordenador faltaba una idea completamente distinta, y llegó desde un sitio inesperado: la industria textil.</div>
+
+<h2 id="tarjetas">4. Instrucciones en tarjetas: Jacquard, Babbage y Hollerith</h2>
+<h3>4.1. El telar que leía tarjetas</h3>
+<p>En <strong>1804</strong>, el francés <strong>Joseph Marie Jacquard</strong> presentó un telar capaz de tejer dibujos complejos guiándose por una serie de <strong>tarjetas perforadas</strong>. Donde había un agujero, una aguja pasaba; donde no lo había, quedaba bloqueada. Cambiando las tarjetas se cambiaba el dibujo, <strong>sin modificar la máquina</strong>.</p>
+<p>Jacquard no pretendía inventar nada relacionado con el cálculo. Pero acababa de separar por primera vez, de forma industrial, dos cosas que hasta entonces iban unidas: <strong>la máquina y las instrucciones que ejecuta</strong>. Esa separación es la definición misma de programa.</p>
+<h3>4.2. Babbage: la máquina diferencial y la máquina analítica</h3>
+<p>En <strong>1822</strong>, el matemático inglés <strong>Charles Babbage</strong> presentó el proyecto de su <strong>máquina diferencial</strong>. El problema que quería resolver era muy real: las tablas de logaritmos y de navegación se calculaban a mano y estaban llenas de erratas, y de esas tablas dependían vidas humanas en el mar. Su máquina calcularía tablas por el método de las diferencias y las <em>imprimiría</em> directamente, eliminando también los errores de copia.</p>
+<p>El gobierno británico la financió durante años. Nunca se terminó: exigía miles de piezas mecanizadas con una precisión que la industria de la época apenas alcanzaba, y Babbage cambiaba de diseño constantemente.</p>
+<p>Antes incluso de acabarla, hacia <strong>1837</strong>, Babbage concibió algo mucho más ambicioso: la <strong>máquina analítica</strong>. Tomando la idea de las tarjetas de Jacquard, diseñó una máquina de propósito general con una unidad de cálculo (el <em>molino</em>), una memoria (el <em>almacén</em>), entrada por tarjetas y salida impresa. Sobre el papel, tenía la estructura de un ordenador moderno. Tampoco llegó a construirse.</p>
+<div class="cc1-curio">⚙️ <strong>¿Sabías que…?</strong> En 1991, para el bicentenario del nacimiento de Babbage, el Science Museum de Londres construyó su <strong>máquina diferencial n.º 2</strong> siguiendo los planos originales y usando solo tolerancias disponibles en el siglo XIX. Pesa unas cinco toneladas, tiene más de 8.000 piezas… y funciona perfectamente. El diseño era correcto; lo que falló en su día fue la financiación y la fabricación.</div>
+<div class="cc1-note">💡 Fue trabajando sobre la máquina analítica cuando <strong>Ada Lovelace</strong> escribió las notas que estudiaste en el <a href="tema01.html">Tema 1</a>. Babbage diseñó la máquina; Lovelace comprendió que lo importante no era la máquina, sino lo que se le podía ordenar hacer.</div>
+<h3>4.3. Hollerith: cuando las tarjetas se hicieron rentables</h3>
+<p>La idea de las tarjetas perforadas tuvo su primer éxito comercial rotundo con <strong>Herman Hollerith</strong>. El censo de Estados Unidos de 1880 había tardado casi ocho años en procesarse a mano, y con el crecimiento de la población se temía que el de 1890 no estuviera listo antes del siguiente. Hollerith diseñó una máquina tabuladora que leía los datos de cada persona codificados en una tarjeta perforada. El recuento pasó de años a meses.</p>
+<p>La empresa que fundó para explotar el invento se fusionó con otras en 1911 y, en 1924, cambió su nombre por el de <strong>International Business Machines</strong>: IBM. Las tarjetas perforadas siguieron siendo el modo normal de introducir programas y datos en los ordenadores hasta bien entrados los años setenta.</p>
+
+<h2 id="valvulas">5. La electrónica entra en escena: la válvula y el ENIAC</h2>
+<p>Los engranajes tienen un techo insalvable: <strong>la materia tiene inercia</strong>. Una pieza metálica no puede moverse más deprisa, se desgasta y se atasca. Para dar el siguiente salto había que sustituir el movimiento por algo que no tuviera masa: <strong>electrones</strong>.</p>
+<p>La <strong>válvula de vacío</strong> lo permitió. Inventada como diodo por John Ambrose Fleming en 1904 y convertida en triodo por Lee De Forest en 1906, es un tubo de cristal sin aire en cuyo interior una rejilla controla el paso de corriente. Puede actuar como amplificador o como <strong>interruptor</strong>: dejar pasar la corriente o cortarla, según reciba o no una señal. Y un interruptor es exactamente lo que hace falta para ejecutar el álgebra de Boole que viste en el <a href="tema01.html">Tema 1</a>. Sin partes móviles, conmuta miles de veces por segundo.</p>
+<h3>5.1. El ENIAC</h3>
+<p>El primer gran ordenador electrónico de propósito general fue el <strong>ENIAC</strong> (<em>Electronic Numerical Integrator and Computer</em>), construido entre <strong>1943 y 1946</strong> en la Universidad de Pensilvania por John Mauchly y J. Presper Eckert. Se financió para calcular tablas de tiro de artillería durante la Segunda Guerra Mundial: cada tabla exigía miles de trayectorias y, calculadas a mano, llegaban tarde al frente.</p>
+<div class="tabla_responsiva"><table class="cc1-table">
+<tr><th>ENIAC (1946)</th><th>Un teléfono móvil actual</th></tr>
+<tr><td>Unas 17.500 válvulas de vacío</td><td>Miles de millones de transistores en un chip</td></tr>
+<tr><td>Unas 30 toneladas y 167 m² de superficie</td><td>Menos de 200 gramos</td></tr>
+<tr><td>Unos 150 kilovatios de consumo</td><td>Unos pocos vatios</td></tr>
+<tr><td>Unas 5.000 sumas por segundo</td><td>Miles de millones de operaciones por segundo</td></tr>
+<tr><td>Se programaba recableando y moviendo conmutadores: días de trabajo</td><td>Se cambia de programa tocando un icono</td></tr>
+</table></div>
+<div class="cc1-curio">👩‍💻 <strong>¿Sabías que…?</strong> Las primeras seis personas que programaron el ENIAC fueron mujeres: Kay McNulty, Betty Jennings, Betty Snyder, Marlyn Wescoff, Fran Bilas y Ruth Lichterman. Tuvieron que averiguar cómo programar la máquina estudiando sus esquemas eléctricos, porque no existían manuales ni lenguajes de programación. Durante décadas se las presentó en las fotografías oficiales como simples «modelos» que posaban junto al equipo.</div>
+<div class="aviso"><strong>El ENIAC no fue el primero en todo</strong>El <strong>Colossus</strong>, construido en Bletchley Park en 1943-1944 para descifrar comunicaciones alemanas, fue electrónico y anterior, pero estaba diseñado para una única tarea y su existencia se mantuvo en secreto hasta los años setenta. Y el ENIAC tampoco tenía programa almacenado: esa idea, la de von Neumann que viste en el <a href="tema01.html">Tema 1</a>, llegó justo después, con el EDVAC.</div>
+
+<h2 id="transistor">6. El transistor: pequeño, frío y fiable</h2>
+<p>Las válvulas resolvieron la velocidad, pero trajeron tres problemas nuevos: <strong>ocupan mucho, consumen muchísimo y se funden</strong>. En el ENIAC se quemaba una válvula cada pocas horas, y localizar cuál de las 17.500 había fallado podía llevar medio día.</p>
+<p>El <strong>23 de diciembre de 1947</strong>, en los Laboratorios Bell, <strong>John Bardeen</strong>, <strong>Walter Brattain</strong> y <strong>William Shockley</strong> presentaron el <strong>transistor</strong>: un dispositivo que hace exactamente lo mismo que una válvula —amplificar y conmutar— pero aprovechando las propiedades de un material <strong>semiconductor</strong>, primero germanio y después silicio. Recibieron el Premio Nobel de Física en 1956.</p>
+<div class="cc1-grid">
+<div class="cc1-card"><h3>Más pequeño</h3><p>Milímetros en lugar de centímetros. Cabían miles donde antes cabían decenas de válvulas.</p></div>
+<div class="cc1-card"><h3>Más frío</h3><p>No necesita calentar un filamento incandescente. El consumo cae en varios órdenes de magnitud.</p></div>
+<div class="cc1-card"><h3>Más fiable</h3><p>Sin filamento que se funda ni vacío que se pierda, la vida útil se mide en años, no en horas.</p></div>
+<div class="cc1-card"><h3>Más barato</h3><p>Se fabrica con procesos químicos en serie, no montando piezas de cristal una a una.</p></div>
+</div>
+<div class="cc1-concept"><strong class="cc1-concept-tag">Concepto clave</strong>Válvula y transistor hacen conceptualmente lo mismo: son interruptores controlados eléctricamente. Todo lo que ha cambiado desde 1947 es <em>cuántos</em> caben, <em>cuánto</em> consumen y <em>cuánto</em> cuestan. La lógica que ejecutan sigue siendo la de Boole.</div>
+
+<h2 id="chip">7. El circuito integrado, el chip y las generaciones</h2>
+<p>El transistor creó, a su vez, el problema siguiente, que en la industria se llamó <em>la tiranía de los números</em>: un circuito con diez mil transistores necesita decenas de miles de soldaduras hechas a mano, y basta que una falle para que todo deje de funcionar. Los componentes ya eran diminutos; el cuello de botella eran <strong>las conexiones entre ellos</strong>.</p>
+<p>La solución llegó casi a la vez en dos empresas distintas: fabricar los componentes <strong>y sus conexiones</strong> sobre una única pieza de material semiconductor. <strong>Jack Kilby</strong>, en Texas Instruments, demostró el primer circuito integrado el <strong>12 de septiembre de 1958</strong> sobre germanio. Meses después, en enero de <strong>1959</strong>, <strong>Robert Noyce</strong>, en Fairchild Semiconductor, desarrolló una versión sobre silicio con el <em>proceso planar</em>, que permitía imprimir las conexiones mediante litografía y era mucho más fácil de fabricar en serie. La historia los reconoce como coinventores; Kilby recibió el Nobel de Física en el año 2000.</p>
+<div class="cc1-concept"><strong class="cc1-concept-tag">Qué es un chip</strong>Un <strong>circuito integrado</strong> o <strong>chip</strong> es un circuito electrónico completo —transistores, resistencias y las conexiones entre ellos— fabricado sobre una única pastilla de material semiconductor. Su ventaja no es solo el tamaño: al no haber soldaduras, es mucho más fiable, y al fabricarse por litografía, hacer un millón cuesta casi lo mismo que hacer uno.</div>
+<div class="cc1-note">💡 En 1965, <strong>Gordon Moore</strong> observó que el número de transistores por chip venía duplicándose aproximadamente cada dos años. La llamada <strong>ley de Moore</strong> no es una ley física, sino una observación económica e industrial que se cumplió durante medio siglo y que hoy se ha ralentizado, porque los transistores se acercan al tamaño de unas pocas decenas de átomos.</div>
+<h3>7.1. Las generaciones de ordenadores</h3>
+<p>Es costumbre agrupar la historia del ordenador en generaciones según la tecnología con la que conmutan:</p>
+<div class="tabla_responsiva"><table class="cc1-table">
+<tr><th>Generación</th><th>Época aproximada</th><th>Tecnología</th><th>Consecuencia</th></tr>
+<tr><td><strong>1.ª</strong></td><td>1940–1955</td><td>Válvulas de vacío</td><td>Máquinas enormes, caras y frágiles; una por centro de investigación.</td></tr>
+<tr><td><strong>2.ª</strong></td><td>1955–1964</td><td>Transistores</td><td>Equipos más pequeños y fiables; aparecen los primeros lenguajes de alto nivel.</td></tr>
+<tr><td><strong>3.ª</strong></td><td>1964–1971</td><td>Circuitos integrados</td><td>Ordenadores para empresas y universidades; sistemas operativos y terminales.</td></tr>
+<tr><td><strong>4.ª</strong></td><td>1971–hoy</td><td>Microprocesador e integración a gran escala</td><td>La CPU cabe en un chip: nace el ordenador personal y, después, el móvil.</td></tr>
+</table></div>
+<p>El microprocesador que abre la cuarta generación fue el <strong>Intel 4004</strong>, de 1971: reunía unos 2.300 transistores en una sola pastilla y contenía una unidad central de proceso completa. Es el antepasado directo del procesador que estudiarás en el Tema 5.</p>
+<div class="aviso"><strong>Cuidado con la «quinta generación»</strong>Muchos libros añaden una quinta generación asociada a la inteligencia artificial, el paralelismo masivo o la computación cuántica. Es una convención cómoda, pero no hay acuerdo sobre qué la define ni sobre cuándo empieza, entre otras cosas porque no responde a un cambio en la tecnología de conmutación como las cuatro anteriores. Conviene usarla sabiendo que es una etiqueta discutida.</div>
+
+<h2 id="fuera">8. Fuera del ordenador: sensores, robótica e inteligencia artificial</h2>
+<p>Cuando un ordenador completo cabe en un chip barato, deja de tener sentido preguntarse dónde <em>está</em> el ordenador: la computación se mete dentro de otros objetos. Tres líneas de este proceso cierran el recorrido del Bloque A.</p>
+<h3>8.1. Sensores: darle sentidos a la máquina</h3>
+<p>Un <strong>sensor</strong> convierte una magnitud física —temperatura, luz, aceleración, presión, sonido— en una señal eléctrica que un circuito puede medir y digitalizar. La miniaturización permitió fabricarlos con las mismas técnicas que los chips, y por eso un móvil lleva hoy acelerómetro, giroscopio, magnetómetro, sensor de luz, de proximidad, de huella y varias cámaras. Sin sensores, un ordenador solo puede procesar lo que una persona le teclee; con ellos, puede <strong>observar el mundo</strong>.</p>
+<h3>8.2. Robótica: actuar sobre el mundo</h3>
+<p>Si los sensores son la entrada, los <strong>actuadores</strong> —motores, válvulas, brazos— son la salida. Un <strong>robot</strong> es un sistema que percibe, decide y actúa físicamente. El primer robot industrial, <strong>Unimate</strong>, entró a trabajar en una cadena de montaje de General Motors en 1961, manipulando piezas de fundición demasiado peligrosas para las personas.</p>
+<h3>8.3. Inteligencia artificial: el nombre y el primer intento</h3>
+<p>El término <strong>inteligencia artificial</strong> se acuñó en 1956, en una reunión de verano celebrada en el Dartmouth College y organizada, entre otros, por John McCarthy. La propuesta partía de una conjetura ambiciosa: que cualquier aspecto del aprendizaje o la inteligencia puede describirse con suficiente precisión como para que una máquina lo simule.</p>
+<p>Aquellos primeros sistemas funcionaban a base de reglas escritas a mano por expertos y chocaron pronto con sus límites, lo que provocó etapas de desencanto y recortes que se conocen como <em>inviernos de la IA</em>. La inteligencia artificial que conoces hoy funciona de una manera muy distinta —aprendiendo patrones a partir de enormes cantidades de datos— y es un fenómeno actual, no un hito histórico: la tratarás en el <a href="tema03.html">Tema 3</a>.</p>
+
+<h2 id="linea">9. La línea del tiempo completa</h2>
+<div class="cc1-timeline">
+<div class="cc1-tl-item"><div class="cc1-tl-year">Antigüedad — El ábaco</div><p>Sacar los resultados parciales fuera de la memoria humana. La máquina representa el estado; la persona ejecuta el procedimiento.</p></div>
+<div class="cc1-tl-item"><div class="cc1-tl-year">1614-1621 — Logaritmos y regla de cálculo</div><p>Napier convierte productos en sumas; Oughtred lo materializa en dos escalas deslizantes. Transformar el problema en otro más fácil.</p></div>
+<div class="cc1-tl-item"><div class="cc1-tl-year">1642 — La pascalina</div><p>Pascal automatiza la suma y el acarreo con ruedas dentadas. Por primera vez, la máquina ejecuta la operación.</p></div>
+<div class="cc1-tl-item"><div class="cc1-tl-year">1673 — La rueda escalonada de Leibniz</div><p>Multiplicación y división mecánicas. Leibniz describirá además el sistema binario en 1703.</p></div>
+<div class="cc1-tl-item"><div class="cc1-tl-year">1804 — El telar de Jacquard</div><p>Las tarjetas perforadas separan la máquina de las instrucciones. Nace la idea de programa.</p></div>
+<div class="cc1-tl-item"><div class="cc1-tl-year">1822 — La máquina diferencial de Babbage</div><p>Calcular e imprimir tablas sin errores humanos. Nunca terminada; reconstruida y funcionando en 1991.</p></div>
+<div class="cc1-tl-item"><div class="cc1-tl-year">1837 — La máquina analítica</div><p>Molino, almacén, entrada por tarjetas y salida impresa: la estructura de un ordenador, un siglo antes de tiempo. Lovelace escribe sus notas en 1843.</p></div>
+<div class="cc1-tl-item"><div class="cc1-tl-year">1890 — La tabuladora de Hollerith</div><p>El censo de Estados Unidos pasa de años a meses. Su empresa acabará llamándose IBM.</p></div>
+<div class="cc1-tl-item"><div class="cc1-tl-year">1904-1906 — La válvula de vacío</div><p>Fleming y De Forest: conmutar sin piezas móviles, miles de veces por segundo.</p></div>
+<div class="cc1-tl-item"><div class="cc1-tl-year">1943-1946 — El ENIAC</div><p>Primer gran ordenador electrónico de propósito general. 30 toneladas, 17.500 válvulas y programación por recableado.</p></div>
+<div class="cc1-tl-item"><div class="cc1-tl-year">1945 — El programa almacenado</div><p>El informe sobre el EDVAC propone guardar las instrucciones en la misma memoria que los datos.</p></div>
+<div class="cc1-tl-item"><div class="cc1-tl-year">1947 — El transistor</div><p>Bardeen, Brattain y Shockley, en los Laboratorios Bell. Más pequeño, más frío, más fiable y más barato.</p></div>
+<div class="cc1-tl-item"><div class="cc1-tl-year">1958-1959 — El circuito integrado</div><p>Kilby en Texas Instruments y Noyce en Fairchild: componentes y conexiones sobre una única pastilla de semiconductor.</p></div>
+<div class="cc1-tl-item"><div class="cc1-tl-year">1965 — La ley de Moore</div><p>Los transistores por chip se duplican cada dos años. Una observación económica que marcó medio siglo de industria.</p></div>
+<div class="cc1-tl-item"><div class="cc1-tl-year">1971 — El microprocesador</div><p>El Intel 4004 mete una CPU completa en un chip. Empieza el camino hacia el ordenador personal y el móvil.</p></div>
+<div class="cc1-tl-item"><div class="cc1-tl-year">1956 y después — Sensores, robótica e IA</div><p>La computación sale de la caja: percibe con sensores, actúa con robots y empieza a llamarse inteligencia artificial.</p></div>
+</div>
+
+<h2 id="glosario">Glosario del tema</h2>
+<dl class="cc1-glosario">
+<dt>Ábaco</dt><dd>Instrumento de cuentas que representa el estado de un cálculo, sin ejecutarlo por sí mismo.</dd>
+<dt>Logaritmo</dt><dd>Función que convierte productos en sumas; base de la regla de cálculo.</dd>
+<dt>Pascalina</dt><dd>Calculadora mecánica de Pascal (1642) que suma y resta resolviendo el acarreo con ruedas dentadas.</dd>
+<dt>Tarjeta perforada</dt><dd>Soporte de datos o instrucciones codificados como presencia o ausencia de agujeros.</dd>
+<dt>Máquina analítica</dt><dd>Diseño de Babbage (1837) de una máquina programable de propósito general; nunca construida.</dd>
+<dt>Válvula de vacío</dt><dd>Tubo que conmuta o amplifica corriente sin partes móviles; base de la primera generación.</dd>
+<dt>ENIAC</dt><dd>Primer gran ordenador electrónico de propósito general (1946), programado por recableado.</dd>
+<dt>Semiconductor</dt><dd>Material, como el silicio, que conduce la electricidad solo en determinadas condiciones controlables.</dd>
+<dt>Transistor</dt><dd>Interruptor y amplificador de estado sólido (1947) que sustituyó a la válvula.</dd>
+<dt>Circuito integrado</dt><dd>Circuito completo, con sus conexiones, fabricado sobre una única pastilla de semiconductor.</dd>
+<dt>Ley de Moore</dt><dd>Observación de 1965 según la cual los transistores por chip se duplican cada unos dos años.</dd>
+<dt>Microprocesador</dt><dd>Circuito integrado que contiene una unidad central de proceso completa.</dd>
+<dt>Sensor</dt><dd>Dispositivo que convierte una magnitud física en una señal eléctrica medible.</dd>
+</dl>
+
+<section class="summary"><h2 id="resumen">Resumen esencial</h2><ol>
+<li>Cada avance resolvió un problema concreto y dejó al descubierto el siguiente: esa cadena es lo que hay que entender, no la lista de fechas.</li>
+<li>Ábaco, regla de cálculo, pascalina y rueda escalonada automatizan operaciones, pero ninguna es programable.</li>
+<li>Las tarjetas perforadas de Jacquard separan la máquina de sus instrucciones; Babbage lleva esa idea al cálculo y Hollerith la hace rentable.</li>
+<li>La válvula sustituye el movimiento mecánico por electrones y hace posible el ENIAC, todavía sin programa almacenado.</li>
+<li>El transistor resuelve el tamaño, el consumo y la fiabilidad; el circuito integrado resuelve el problema de las conexiones.</li>
+<li>Las cuatro generaciones se distinguen por su tecnología de conmutación; la «quinta» es una etiqueta discutida.</li>
+<li>Con el chip barato, la computación sale del ordenador y entra en sensores, robots y sistemas de inteligencia artificial.</li>
+</ol></section>
+
+<section aria-labelledby="fuentes">
+<h2 id="fuentes">Fuentes y recursos fiables</h2>
+<ul>
+<li id="fuente_1">[1] <a href="https://www.bocm.es/boletin/CM_Orden_BOCM/2023/05/31/BOCM-20230531-18.PDF">Orden 1736/2023, de 19 de mayo, Anexo IV</a> — currículo oficial de Ciencias de la Computación en Bachillerato (PDF).</li>
+<li id="fuente_2">[2] <a href="https://www.computerhistory.org/timeline/">Computer History Museum — Timeline of Computer History</a>.</li>
+<li id="fuente_3">[3] <a href="https://www.computerhistory.org/siliconengine/">Computer History Museum — The Silicon Engine</a>, cronología del transistor y el circuito integrado.</li>
+<li id="fuente_4">[4] <a href="https://www.nobelprize.org/prizes/physics/2000/kilby/facts/">Premio Nobel de Física 2000 — Jack S. Kilby</a>.</li>
+<li id="fuente_5">[5] <a href="https://www.sciencemuseum.org.uk/objects-and-stories/charles-babbage-father-computing">Science Museum — Charles Babbage y la máquina diferencial n.º 2</a>.</li>
+<li id="fuente_6">[6] <a href="https://www.picuino.com/es/ley-ciencias-computacion-bach.html">Picuino — transcripción navegable del currículo</a>.</li>
+</ul>
+</section>
+</article></div></main>
+<nav class="topic-footer" aria-label="Navegación entre temas"><a href="tema01.html">← Tema 1</a><a href="tema03.html">Tema 3 →</a></nav>
+<footer class="site-footer">Ciencias de la Computación I · 1.º de Bachillerato · Comunidad de Madrid</footer>
+</body></html>

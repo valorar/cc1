@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Tema 1 del Bloque A de Ciencias de la Computación I: qué estudian las ciencias de la computación, quiénes sentaron sus bases y hasta dónde llega lo que una máquina puede calcular.">
+<title>Tema 1. Fundamentos teóricos: algoritmos, lógica y computabilidad · CC1</title><link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/estilos.css"><script src="assets/navegacion.js" defer></script></head>
+<body><a class="skip" href="#contenido">Saltar al contenido</a>
+<div class="progress" aria-hidden="true"><span></span></div>
+<header class="site-header"><div class="header-inner">
+  <a class="brand" href="index.html"><span class="brand-mark">CC1</span><span>Ciencias de la Computación I<small>1.º de Bachillerato · 2026–2027</small></span></a>
+  <nav class="top-nav" aria-label="Navegación principal"><a href="index.html">Índice</a></nav>
+</div></header>
+<main id="contenido">
+<section class="hero"><div class="hero-inner"><div><p class="kicker">Tema 1 · Bloque A · Evolución histórica</p><h1>Fundamentos teóricos: algoritmos, lógica y computabilidad</h1><p class="hero-lead">Qué estudian las ciencias de la computación, quiénes sentaron sus bases y hasta dónde llega lo que una máquina puede calcular.</p></div><aside class="hero-note"><strong>Pregunta guía</strong><p>Si un problema puede explicarse con total precisión, ¿siempre podrá resolverlo un ordenador?</p></aside></div></section>
+<div class="layout"><nav class="toc" aria-label="Índice del tema"><strong>En este tema</strong><ol>
+<li><a href="#objeto">¿Qué estudian las ciencias de la computación?</a></li>
+<li><a href="#fundadores">Cuatro ideas fundacionales</a></li>
+<li><a href="#algoritmo">Qué es exactamente un algoritmo</a></li>
+<li><a href="#boole">El álgebra de Boole: lógica que un circuito puede ejecutar</a></li>
+<li><a href="#turing">La máquina de Turing: qué significa «calcular»</a></li>
+<li><a href="#computabilidad">Computación y computabilidad</a></li>
+<li><a href="#indecidibles">Problemas de decisión y problemas indecidibles</a></li>
+<li><a href="#limites">Dos límites distintos: lo imposible y lo costoso</a></li>
+<li><a href="#glosario">Glosario</a></li>
+<li><a href="#resumen">Resumen</a></li>
+<li><a href="#fuentes">Fuentes</a></li>
+</ol></nav><article class="paper">
+<p class="lesson-intro">Qué estudian las ciencias de la computación, quiénes sentaron sus bases y hasta dónde llega lo que una máquina puede calcular.</p>
+<div class="question"><strong>Antes de empezar:</strong> si un problema puede explicarse con total precisión, ¿siempre podrá resolverlo un ordenador?</div>
+<div class="objectives"><strong>Al terminar serás capaz de…</strong><ul>
+<li>explicar qué estudian las ciencias de la computación y en qué se diferencian de «saber usar el ordenador»</li>
+<li>distinguir con precisión algoritmo, programa y máquina</li>
+<li>aplicar las operaciones básicas del álgebra de Boole y construir su tabla de verdad</li>
+<li>describir qué es una máquina de Turing y para qué sirve un modelo teórico</li>
+<li>explicar qué significa que un problema sea computable o decidible</li>
+<li>diferenciar un límite lógico de un límite de recursos</li>
+</ul></div>
+
+<h2 id="objeto">1. ¿Qué estudian las ciencias de la computación?</h2>
+<p>Casi todo el mundo sabe usar un ordenador. Muchas menos personas saben <strong>qué puede y qué no puede hacer</strong> un ordenador, y por qué. Esa es exactamente la diferencia entre manejar una herramienta y estudiar la disciplina que hay detrás.</p>
+<p>Las <strong>ciencias de la computación</strong> no estudian los ordenadores igual que la astronomía no estudia los telescopios. Estudian el <strong>cómputo</strong>: qué problemas pueden resolverse mediante un procedimiento automático, cómo se representa la información para que una máquina pueda operar con ella, qué procedimientos son correctos y cuáles son eficientes. El ordenador es el instrumento; el objeto de estudio es el procedimiento.</p>
+<div class="cc1-grid">
+<div class="cc1-card"><h3>Representar</h3><p>Convertir un problema del mundo real —un texto, una foto, un horario, una partida de ajedrez— en datos con los que se pueda operar.</p></div>
+<div class="cc1-card"><h3>Procesar</h3><p>Definir un procedimiento preciso que transforme esos datos de entrada en el resultado buscado.</p></div>
+<div class="cc1-card"><h3>Automatizar</h3><p>Conseguir que una máquina ejecute ese procedimiento sin intervención humana y sin necesidad de interpretarlo.</p></div>
+<div class="cc1-card"><h3>Delimitar</h3><p>Saber qué problemas quedan fuera: los que ningún procedimiento resuelve y los que ninguna máquina resolvería a tiempo.</p></div>
+</div>
+<div class="cc1-concept"><strong class="cc1-concept-tag">Concepto clave</strong>Computar es representar información y aplicar sobre ella un procedimiento que una máquina pueda ejecutar sin necesidad de comprenderlo.</div>
+<p>Esta última precisión es importante. Una calculadora hace operaciones; un ordenador de propósito general es distinto porque <strong>cambia de tarea cuando cambia su programa</strong>. Tu móvil es cámara, mapa, reproductor de música y traductor con el mismo hardware, porque cada uno de esos problemas se ha convertido en datos y operaciones. Esa idea —una máquina, muchos programas— es la que este tema va a explicar de dónde viene.</p>
+<div class="cc1-curio">🧮 <strong>¿Sabías que…?</strong> La palabra <em>algoritmo</em> viene del nombre del matemático persa <strong>al-Juarismi</strong> (siglo IX), cuyos libros introdujeron en Europa la numeración decimal y los métodos sistemáticos de cálculo. La palabra <em>álgebra</em> procede del título de una de sus obras, <em>al-yabr</em>. Y <em>ordenador</em>, en español, viene del francés <em>ordinateur</em>: una palabra que IBM Francia encargó en 1955 a un profesor de latín porque no quería traducir literalmente el inglés <em>computer</em>, «calculadora».</div>
+
+<h2 id="fundadores">2. Cuatro ideas fundacionales</h2>
+<p>No hace falta memorizar biografías. Lo que importa es <strong>qué problema intelectual resolvió cada aportación</strong>, porque las cuatro siguen presentes en cualquier ordenador actual.</p>
+<div class="tabla_responsiva"><table class="cc1-table">
+<tr><th>Aportación</th><th>Idea decisiva</th><th>Dónde sigue viva hoy</th></tr>
+<tr><td><strong>Ada Lovelace</strong><br><small>1815–1852</small></td><td>Una máquina programable puede manipular <em>símbolos</em>, no solo cantidades: si algo se puede representar con números, se puede procesar.</td><td>En que el mismo ordenador edita fotos, reproduce música y traduce textos.</td></tr>
+<tr><td><strong>George Boole</strong><br><small>1815–1864</small></td><td>El razonamiento lógico puede escribirse como un álgebra: verdadero y falso se combinan con reglas exactas.</td><td>En cada circuito digital y en cada condición <code>if</code> de un programa.</td></tr>
+<tr><td><strong>Alan Turing</strong><br><small>1912–1954</small></td><td>Se puede definir matemáticamente qué significa «calcular», y demostrar que hay cosas que no se pueden calcular.</td><td>En la propia noción de programa y en los límites de lo que se puede automatizar.</td></tr>
+<tr><td><strong>John von Neumann</strong><br><small>1903–1957</small></td><td>Las instrucciones pueden guardarse en la memoria igual que los datos: el <em>programa almacenado</em>.</td><td>En la arquitectura de prácticamente todos los ordenadores que usas.</td></tr>
+</table></div>
+<h3>2.1. Ada Lovelace y la máquina que manipula símbolos</h3>
+<p>En 1843, Ada Lovelace tradujo al inglés un artículo del ingeniero italiano Luigi Menabrea sobre la máquina analítica de Charles Babbage y le añadió unas notas propias <strong>más extensas que el texto original</strong>. En la última de ellas, la conocida como <em>Nota G</em>, describió paso a paso cómo la máquina calcularía una secuencia de números de Bernoulli: una descripción que suele considerarse el primer algoritmo escrito para ser ejecutado por una máquina.</p>
+<p>Su aportación más profunda, sin embargo, no fue ese procedimiento, sino una observación conceptual: si la máquina puede operar con números y los números pueden representar <em>otras cosas</em> —notas musicales, letras, relaciones—, entonces la máquina podría componer música o manipular lenguaje. Estaba describiendo, un siglo antes de que existiera, la idea de ordenador de propósito general.</p>
+<div class="cc1-note">💡 En la misma Nota G, Lovelace advirtió que la máquina «no tiene ninguna pretensión de <em>originar</em> nada» y que solo puede hacer «aquello que sepamos ordenarle que haga». Esa frase se sigue citando hoy en los debates sobre inteligencia artificial, a favor y en contra: volveremos sobre ella en el <a href="tema03.html">Tema 3</a>.</div>
+<h3>2.2. John von Neumann y el programa almacenado</h3>
+<p>El ENIAC, el primer gran ordenador electrónico, se «programaba» recableándolo y moviendo conmutadores: cambiar de tarea podía llevar días. En 1945, en un informe conocido como <em>First Draft of a Report on the EDVAC</em>, von Neumann describió una organización distinta: guardar <strong>las instrucciones en la misma memoria que los datos</strong>. Cambiar de programa pasaba a ser cargar otro contenido en memoria, no reconstruir la máquina.</p>
+<div class="aviso"><strong>Una atribución matizada</strong>El informe circuló firmado solo por von Neumann, pero la idea se había discutido en equipo con los ingenieros del ENIAC, J. Presper Eckert y John Mauchly, y estaba anticipada en la máquina universal de Turing de 1936. Se sigue llamando «arquitectura de von Neumann» por costumbre, no porque fuera obra de una sola persona. En el Tema 5 la estudiarás en detalle.</div>
+
+<h2 id="algoritmo">3. Qué es exactamente un algoritmo</h2>
+<p>Un <strong>algoritmo</strong> es un procedimiento finito y preciso que, a partir de unos datos de entrada, produce un resultado resolviendo una clase completa de problemas, no un caso aislado. «Sumar 3 + 5» no es un algoritmo; «sumar dos números de cualquier cantidad de cifras» sí lo es.</p>
+<p>Para que un procedimiento merezca llamarse algoritmo tiene que cumplir varias propiedades:</p>
+<div class="tabla_responsiva"><table class="cc1-table">
+<tr><th>Propiedad</th><th>Qué exige</th><th>Ejemplo de incumplimiento</th></tr>
+<tr><td><strong>Preciso</strong></td><td>Cada paso está definido sin ambigüedad.</td><td>«Añade sal al gusto.»</td></tr>
+<tr><td><strong>Finito</strong></td><td>Termina después de un número limitado de pasos.</td><td>«Sigue dividiendo hasta que te canses.»</td></tr>
+<tr><td><strong>Definido</strong></td><td>Con los mismos datos de entrada produce siempre el mismo resultado.</td><td>«Elige un número cualquiera y súmalo.»</td></tr>
+<tr><td><strong>Con entrada y salida</strong></td><td>Parte de unos datos y produce un resultado observable.</td><td>Un procedimiento que calcula algo y no lo devuelve.</td></tr>
+<tr><td><strong>Efectivo</strong></td><td>Cada paso es lo bastante elemental para poder ejecutarse de verdad.</td><td>«Comprueba todos los números naturales.»</td></tr>
+</table></div>
+<div class="cc1-concept"><strong class="cc1-concept-tag">Prueba práctica</strong>Un procedimiento está suficientemente definido cuando otra persona puede ejecutarlo con los mismos datos, sin adivinar ningún paso, y obtener exactamente el mismo resultado.</div>
+<h3>3.1. Algoritmo, programa y máquina no son lo mismo</h3>
+<p>Estas tres palabras se usan a veces como sinónimos y no lo son:</p>
+<div class="cc1-grid">
+<div class="cc1-card"><h3>Algoritmo</h3><p>La <strong>idea</strong> del procedimiento. Existe con independencia de cualquier lenguaje: se puede explicar de viva voz, en español o en un esquema.</p></div>
+<div class="cc1-card"><h3>Programa</h3><p>La <strong>expresión ejecutable</strong> de ese algoritmo con las reglas de un lenguaje concreto. Un mismo algoritmo da lugar a programas distintos en Python, en Java o en C.</p></div>
+<div class="cc1-card"><h3>Máquina</h3><p>El <strong>sistema físico</strong> que ejecuta el programa. No interpreta intenciones: aplica exactamente la regla que encuentra, o falla.</p></div>
+</div>
+<h3>3.2. Un ejemplo completo: encontrar el mayor</h3>
+<p>Este algoritmo recibe una lista de números y devuelve el mayor:</p>
+<ol>
+<li>Tomar el primer número como <em>mayor provisional</em>.</li>
+<li>Pasar al siguiente número de la lista.</li>
+<li>Si ese número es mayor que el mayor provisional, sustituirlo.</li>
+<li>Repetir los pasos 2 y 3 mientras queden números.</li>
+<li>Devolver el mayor provisional.</li>
+</ol>
+<p>Fíjate en que ya aparecen todos los ingredientes que vas a programar en el Bloque E: unos <strong>datos de entrada</strong>, un <strong>estado</strong> que cambia (el mayor provisional), una <strong>condición</strong> (paso 3), una <strong>repetición</strong> (paso 4) y un <strong>resultado</strong>. En el Tema 18 lo escribirás en Python en cinco líneas.</p>
+<div class="cc1-think">🤔 <strong>Para pensar:</strong> ¿qué hace este algoritmo si la lista está vacía? No lo dice. Un algoritmo bien definido tiene que decidir también qué ocurre en los <em>casos límite</em>, y ese descuido es el origen de una parte enorme de los fallos de los programas reales.</div>
+
+<h2 id="boole">4. El álgebra de Boole: lógica que un circuito puede ejecutar</h2>
+<p>En 1854, en un libro titulado <em>An Investigation of the Laws of Thought</em>, George Boole propuso algo insólito para su época: <strong>tratar el razonamiento lógico como si fuera álgebra</strong>. En lugar de operar con números, se opera con dos únicos valores —verdadero y falso— y unas pocas operaciones exactas.</p>
+<p>Las tres operaciones básicas son:</p>
+<div class="tabla_responsiva"><table class="cc1-table">
+<tr><th>Operación</th><th>En lenguaje corriente</th><th>Es verdadera cuando…</th><th>En Python</th></tr>
+<tr><td><strong>NOT</strong> (negación)</td><td>«no…»</td><td>…su única entrada es falsa.</td><td><code>not</code></td></tr>
+<tr><td><strong>AND</strong> (conjunción)</td><td>«… y …»</td><td>…<em>ambas</em> entradas son verdaderas.</td><td><code>and</code></td></tr>
+<tr><td><strong>OR</strong> (disyunción)</td><td>«… o …»</td><td>…<em>al menos una</em> entrada es verdadera.</td><td><code>or</code></td></tr>
+</table></div>
+<p>Su comportamiento se resume en una <strong>tabla de verdad</strong>, que enumera todas las combinaciones posibles de entradas. Con dos entradas hay cuatro combinaciones:</p>
+<div class="tabla_responsiva"><table class="cc1-table">
+<tr><th>A</th><th>B</th><th>NOT A</th><th>A AND B</th><th>A OR B</th></tr>
+<tr><td>Falso</td><td>Falso</td><td>Verdadero</td><td>Falso</td><td>Falso</td></tr>
+<tr><td>Falso</td><td>Verdadero</td><td>Verdadero</td><td>Falso</td><td>Verdadero</td></tr>
+<tr><td>Verdadero</td><td>Falso</td><td>Falso</td><td>Falso</td><td>Verdadero</td></tr>
+<tr><td>Verdadero</td><td>Verdadero</td><td>Falso</td><td>Verdadero</td><td>Verdadero</td></tr>
+</table></div>
+<div class="cc1-note">💡 Una regla de acceso del tipo «entra si el usuario es válido <strong>y</strong> la contraseña es válida» es exactamente un AND: de las cuatro filas de la tabla, solo la última permite el paso. Que un sistema real se comporte así no es una metáfora: es literalmente esa operación, ejecutada por un circuito.</div>
+<h3>4.1. De la lógica al circuito: la conexión que faltaba</h3>
+<p>Durante casi un siglo, el álgebra de Boole fue matemática pura sin aplicación práctica. La conexión la estableció <strong>Claude Shannon</strong> en 1937, en su tesis de máster en el MIT: se dio cuenta de que un interruptor eléctrico tiene también dos estados —abierto y cerrado— y de que, combinando interruptores en serie y en paralelo, se podían construir físicamente las operaciones AND y OR.</p>
+<p>Esa tesis es la razón por la que hoy los ordenadores son <strong>digitales y binarios</strong>: dos valores lógicos, dos estados eléctricos, dos dígitos. Volverás sobre ello en el Tema 4, al estudiar la representación binaria de la información, y lo usarás constantemente en el Tema 18, al escribir condiciones.</p>
+<div class="cc1-curio">⚡ <strong>¿Sabías que…?</strong> La tesis de máster de Shannon se ha descrito como «posiblemente la tesis de máster más importante del siglo». Tenía 21 años cuando la escribió. Once años después, en 1948, publicaría además el artículo que fundó la teoría de la información y que introdujo la palabra <strong>bit</strong>.</div>
+
+<h2 id="turing">5. La máquina de Turing: qué significa «calcular»</h2>
+<p>En 1936 había un problema abierto planteado por el matemático David Hilbert: el <em>Entscheidungsproblem</em> o «problema de la decisión». Preguntaba si existe un procedimiento mecánico capaz de determinar, para cualquier afirmación matemática, si es demostrable o no.</p>
+<p>Para responderlo había que resolver antes una dificultad: <strong>nadie había definido con precisión qué es un «procedimiento mecánico»</strong>. Alan Turing, con 23 años, propuso una definición mediante una máquina imaginaria deliberadamente simple, tan simple que hoy llamamos <strong>máquina de Turing</strong>.</p>
+<h3>5.1. Cómo es</h3>
+<p>Una máquina de Turing consta de muy pocos elementos:</p>
+<ul>
+<li>una <strong>cinta</strong> infinita dividida en casillas, cada una con un símbolo;</li>
+<li>un <strong>cabezal</strong> que lee y escribe en una casilla y puede desplazarse una posición a izquierda o derecha;</li>
+<li>un <strong>estado</strong> interno, tomado de un conjunto finito;</li>
+<li>una <strong>tabla de reglas</strong> del tipo: «si estás en el estado <em>E</em> y lees el símbolo <em>s</em>, escribe <em>s'</em>, muévete en la dirección <em>d</em> y pasa al estado <em>E'</em>».</li>
+</ul>
+<p>Eso es todo. No tiene pantalla, ni teclado, ni memoria RAM. Y, sin embargo, cualquier cosa que tu ordenador sea capaz de calcular, una máquina de Turing también podría calcularla: más despacio, con una cinta absurdamente larga, pero podría.</p>
+<div class="aviso"><strong>No es una máquina para construir</strong>La máquina de Turing nunca se pensó como un aparato real. Es un <em>modelo</em>: un objeto matemático lo bastante sencillo como para razonar sobre él con rigor, y lo bastante potente como para representar cualquier cómputo. Sirve para demostrar teoremas, no para hacer cuentas.</div>
+<h3>5.2. La máquina universal</h3>
+<p>Turing dio un segundo paso decisivo. Demostró que existe una <strong>máquina universal</strong>: una máquina de Turing capaz de leer, en su propia cinta, la <em>descripción</em> de cualquier otra máquina de Turing y simular su comportamiento.</p>
+<p>Dicho de otro modo: una sola máquina que, según los datos que reciba, se comporta como cualquier otra. Eso es exactamente lo que hace tu ordenador cuando abre un programa distinto, y por eso la máquina universal de Turing se considera el antecedente teórico del ordenador de propósito general y del programa almacenado.</p>
+<div class="cc1-concept"><strong class="cc1-concept-tag">Tesis de Church-Turing</strong>Todo aquello que consideramos intuitivamente «calculable mediante un procedimiento mecánico» puede calcularlo una máquina de Turing. No es un teorema demostrable, porque relaciona una idea intuitiva con una definición formal: es una <em>tesis</em> que nadie ha conseguido refutar en casi noventa años. Alonzo Church llegó al mismo resultado en 1936 por un camino matemático distinto.</div>
+
+<h2 id="computabilidad">6. Computación y computabilidad</h2>
+<p>Con la máquina de Turing sobre la mesa, ya se puede plantear la pregunta con precisión. Un problema es <strong>computable</strong> cuando existe un algoritmo capaz de resolver todas sus instancias válidas. La <strong>computabilidad</strong> es la parte de las ciencias de la computación que estudia dónde está esa frontera.</p>
+<p>Conviene distinguir dos tipos de problemas:</p>
+<div class="cc1-grid">
+<div class="cc1-card"><h3>Problemas de cálculo</h3><p>Piden producir un resultado: «calcula el máximo común divisor de estos dos números», «ordena esta lista».</p></div>
+<div class="cc1-card"><h3>Problemas de decisión</h3><p>Piden responder <strong>sí</strong> o <strong>no</strong>: «¿es este número primo?», «¿contiene este texto la palabra <em>árbol</em>?».</p></div>
+</div>
+<p>Un problema de decisión es <strong>decidible</strong> cuando existe un algoritmo que, para cualquier entrada válida, <em>siempre termina</em> y responde correctamente. Las dos condiciones importan por igual: un procedimiento que acierta cuando responde, pero que a veces se queda dando vueltas para siempre, no decide el problema.</p>
+
+<h2 id="indecidibles">7. Problemas de decisión y problemas indecidibles</h2>
+<p>Aquí llega el resultado que sorprende a casi todo el mundo la primera vez: <strong>existen problemas perfectamente bien formulados que ningún algoritmo puede decidir</strong>. No es que aún no lo hayamos encontrado; es que se ha demostrado que no puede existir.</p>
+<h3>7.1. El problema de la parada</h3>
+<p>El ejemplo clásico es el <strong>problema de la parada</strong> (<em>halting problem</em>), demostrado indecidible por Turing en el mismo artículo de 1936. Su enunciado es sencillo:</p>
+<div class="cc1-concept"><strong class="cc1-concept-tag">El problema de la parada</strong>Dado un programa cualquiera y unos datos de entrada cualesquiera, decidir si ese programa terminará alguna vez o seguirá ejecutándose indefinidamente.</div>
+<p>Parece razonable pedirlo. Sería utilísimo: bastaría pasar cualquier programa por ese analizador antes de ejecutarlo para saber si se va a colgar. Turing demostró que <strong>ese analizador no puede existir</strong>.</p>
+<h3>7.2. Por qué no puede existir</h3>
+<p>La demostración completa es materia universitaria, pero la idea se puede seguir. Supongamos que alguien construye ese analizador perfecto; lo llamaremos <code>PARA</code>. Recibe un programa y sus datos, y responde siempre «sí, termina» o «no, no termina».</p>
+<p>Si <code>PARA</code> existiera, podríamos usarlo para construir otro programa, llamémoslo <code>TRAMPA</code>, que hiciera lo siguiente consigo mismo:</p>
+<ul>
+<li>preguntar a <code>PARA</code> si <code>TRAMPA</code> termina;</li>
+<li>si la respuesta es «sí, termina», entrar deliberadamente en un bucle infinito;</li>
+<li>si la respuesta es «no, no termina», terminar inmediatamente.</li>
+</ul>
+<p>Sea cual sea la respuesta de <code>PARA</code>, <code>TRAMPA</code> hace justo lo contrario. La contradicción no está en <code>TRAMPA</code>, que es un programa perfectamente construible: está en haber supuesto que <code>PARA</code> existía. Por tanto, no existe.</p>
+<div class="cc1-think">🤔 <strong>Para pensar:</strong> este argumento tiene la misma forma que la frase «esta afirmación es falsa». Si es verdadera, es falsa; si es falsa, es verdadera. Turing convirtió esa vieja paradoja en una herramienta matemática y la usó, de paso, para responder que no al problema de la decisión de Hilbert.</div>
+<div class="cc1-note">💡 Esto no significa que no puedas analizar programas concretos. Es evidente que <code>print("hola")</code> termina y que <code>while True: pass</code> no. Lo que no existe es un <strong>método universal</strong> que acierte con <em>todos</em> los programas posibles. Los analizadores de código reales aprovechan ese margen: aciertan en muchos casos, y en los demás avisan de que no pueden determinarlo.</div>
+
+<h2 id="limites">8. Dos límites distintos: lo imposible y lo costoso</h2>
+<p>Es fácil confundir dos cosas que no tienen nada que ver, y merece la pena separarlas con claridad:</p>
+<div class="tabla_responsiva"><table class="cc1-table">
+<tr><th></th><th>Límite lógico</th><th>Límite de coste</th></tr>
+<tr><td><strong>Qué ocurre</strong></td><td>No existe ningún algoritmo que resuelva el problema.</td><td>Existe un algoritmo, pero tardaría demasiado o necesitaría demasiada memoria.</td></tr>
+<tr><td><strong>Ejemplo</strong></td><td>El problema de la parada.</td><td>Probar todas las contraseñas posibles de 20 caracteres.</td></tr>
+<tr><td><strong>¿Lo arregla un ordenador más rápido?</strong></td><td><strong>No.</strong> Ni el más potente imaginable.</td><td>A veces sí, o un algoritmo mejor.</td></tr>
+</table></div>
+<p>La <strong>noción de coste</strong> aparece por primera vez aquí y te acompañará todo el curso. Un algoritmo no solo tiene que ser correcto: tiene que terminar en un tiempo útil. Y el coste no crece siempre igual.</p>
+<p>Imagina buscar un nombre en una lista de <em>n</em> nombres. Si la recorres uno a uno, en el peor caso haces <em>n</em> comprobaciones: duplicar la lista duplica el trabajo. Si la lista está ordenada y buscas por la mitad cada vez —como se busca en un diccionario de papel—, cada comprobación descarta la mitad de los candidatos: con un millón de nombres bastan unas veinte comprobaciones. Mismo problema, mismo ordenador, resultados radicalmente distintos.</p>
+<div class="cc1-concept"><strong class="cc1-concept-tag">Criterio clave</strong>Elegir un algoritmo mejor suele producir mejoras mucho mayores que comprar una máquina más rápida. El hardware avanza por factores; un cambio de algoritmo puede cambiar el orden de magnitud del problema.</div>
+<div class="aviso"><strong>Y la inteligencia artificial, ¿cambia algo de esto?</strong>No cambia los límites lógicos. Un sistema de IA puede generar una respuesta útil, estimar una probabilidad o acertar en muchísimos casos concretos, pero eso no convierte en decidible un problema que no lo es. Además, una respuesta plausible no equivale a una demostración de que sea correcta: es una distinción que conviene tener clara desde el primer tema del curso.</div>
+
+<h2 id="glosario">Glosario del tema</h2>
+<dl class="cc1-glosario">
+<dt>Algoritmo</dt><dd>Procedimiento finito, preciso y efectivo que resuelve toda una clase de problemas a partir de unos datos de entrada.</dd>
+<dt>Programa</dt><dd>Expresión de un algoritmo en un lenguaje concreto, en forma ejecutable por una máquina.</dd>
+<dt>Álgebra de Boole</dt><dd>Sistema algebraico con dos valores (verdadero y falso) y las operaciones NOT, AND y OR.</dd>
+<dt>Tabla de verdad</dt><dd>Tabla que enumera el resultado de una operación lógica para todas las combinaciones posibles de sus entradas.</dd>
+<dt>Máquina de Turing</dt><dd>Modelo teórico de cómputo formado por una cinta, un cabezal, un conjunto finito de estados y una tabla de reglas.</dd>
+<dt>Máquina universal</dt><dd>Máquina de Turing capaz de simular a cualquier otra a partir de su descripción; antecedente del ordenador de propósito general.</dd>
+<dt>Computable</dt><dd>Dicho de un problema para el que existe un algoritmo que lo resuelve.</dd>
+<dt>Decidible</dt><dd>Dicho de un problema de respuesta sí/no para el que existe un algoritmo que siempre termina y responde correctamente.</dd>
+<dt>Problema de la parada</dt><dd>Problema, demostrado indecidible, de determinar si un programa cualquiera terminará con unos datos cualesquiera.</dd>
+<dt>Programa almacenado</dt><dd>Principio según el cual las instrucciones se guardan en memoria junto a los datos.</dd>
+</dl>
+
+<section class="summary"><h2 id="resumen">Resumen esencial</h2><ol>
+<li>Las ciencias de la computación estudian el cómputo, no los ordenadores: qué se puede automatizar y a qué coste.</li>
+<li>Un algoritmo es la idea del procedimiento; el programa es su expresión en un lenguaje; la máquina lo ejecuta sin interpretarlo.</li>
+<li>El álgebra de Boole reduce el razonamiento a dos valores y tres operaciones, y Shannon demostró en 1937 que un circuito puede ejecutarlas.</li>
+<li>La máquina de Turing define con precisión qué significa calcular, y la máquina universal anticipa el ordenador de propósito general.</li>
+<li>Existen problemas bien formulados que ningún algoritmo puede decidir; el problema de la parada es el ejemplo clásico.</li>
+<li>Un límite lógico no se supera con más potencia; un límite de coste, a veces sí, y casi siempre con un algoritmo mejor.</li>
+</ol></section>
+
+<section aria-labelledby="fuentes">
+<h2 id="fuentes">Fuentes y recursos fiables</h2>
+<ul>
+<li id="fuente_1">[1] <a href="https://www.bocm.es/boletin/CM_Orden_BOCM/2023/05/31/BOCM-20230531-18.PDF">Orden 1736/2023, de 19 de mayo, Anexo IV</a> — currículo oficial de Ciencias de la Computación en Bachillerato (PDF).</li>
+<li id="fuente_2">[2] <a href="https://www.computerhistory.org/timeline/">Computer History Museum — Timeline of Computer History</a>.</li>
+<li id="fuente_3">[3] <a href="https://plato.stanford.edu/entries/turing-machine/">Stanford Encyclopedia of Philosophy — Turing Machines</a>.</li>
+<li id="fuente_4">[4] <a href="https://plato.stanford.edu/entries/church-turing/">Stanford Encyclopedia of Philosophy — The Church-Turing Thesis</a>.</li>
+<li id="fuente_5">[5] <a href="https://www.bl.uk/collection-items/ada-lovelaces-notes-on-the-analytical-engine">British Library — Notas de Ada Lovelace sobre la máquina analítica</a>.</li>
+<li id="fuente_6">[6] <a href="https://www.picuino.com/es/ley-ciencias-computacion-bach.html">Picuino — transcripción navegable del currículo</a>.</li>
+</ul>
+</section>
+</article></div></main>
+<nav class="topic-footer" aria-label="Navegación entre temas"><a href="index.html">← Índice</a><a href="tema02.html">Tema 2 →</a></nav>
+<footer class="site-footer">Ciencias de la Computación I · 1.º de Bachillerato · Comunidad de Madrid</footer>
+</body></html>
