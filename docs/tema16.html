@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Tema 16 del Bloque E de Ciencias de la Computación I: cómo se pasa de un problema enunciado en palabras a un programa que funciona, con código ejecutable desde la primera sesión.">
+<title>Tema 16. Del problema al programa: algoritmos y primeros pasos con Python · CC1</title><link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/estilos.css"><script src="assets/navegacion.js" defer></script></head>
+<body><a class="skip" href="#contenido">Saltar al contenido</a>
+<div class="progress" aria-hidden="true"><span></span></div>
+<header class="site-header"><div class="header-inner">
+  <a class="brand" href="index.html"><span class="brand-mark">CC1</span><span>Ciencias de la Computación I<small>1.º de Bachillerato · 2026–2027</small></span></a>
+  <nav class="top-nav" aria-label="Navegación principal"><a href="index.html">Índice</a></nav>
+</div></header>
+<main id="contenido">
+<section class="hero"><div class="hero-inner"><div><p class="kicker">Tema 16 · Bloque E · Programación</p><h1>Del problema al programa: algoritmos y primeros pasos con Python</h1><p class="hero-lead">Cómo se pasa de un problema enunciado en palabras a un programa que funciona, con código ejecutable desde la primera sesión.</p></div><aside class="hero-note"><strong>Pregunta guía</strong><p>¿Por qué cuesta tanto explicarle a una máquina algo que a una persona le explicarías en una frase?</p></aside></div></section>
+<div class="layout"><nav class="toc" aria-label="Índice del tema"><strong>En este tema</strong><ol>
+<li><a href="#elementos">Programa, código fuente y ejecución</a></li>
+<li><a href="#ingenieria">Ingeniería del software: por qué existe</a></li>
+<li><a href="#pensamiento">Pensamiento computacional</a></li>
+<li><a href="#tipos">Tipos de algoritmos</a></li>
+<li><a href="#descomponer">Descomponer un problema</a></li>
+<li><a href="#describir">Cómo describimos un algoritmo en este curso</a></li>
+<li><a href="#notebook">Python en Jupyter Notebook</a></li>
+<li><a href="#primer">Tu primer programa</a></li>
+<li><a href="#metodo">El método de trabajo del curso</a></li>
+<li><a href="#glosario">Glosario</a></li>
+<li><a href="#resumen">Resumen</a></li>
+<li><a href="#fuentes">Fuentes</a></li>
+</ol></nav><article class="paper">
+<p class="lesson-intro">Cómo se pasa de un problema enunciado en palabras a un programa que funciona, con código ejecutable desde la primera sesión.</p>
+<div class="question"><strong>Antes de empezar:</strong> ¿por qué cuesta tanto explicarle a una máquina algo que a una persona le explicarías en una frase?</div>
+<div class="objectives"><strong>Al terminar serás capaz de…</strong><ul>
+<li>distinguir algoritmo, código fuente, programa y ejecución</li>
+<li>aplicar las cuatro operaciones del pensamiento computacional a un problema</li>
+<li>diferenciar algoritmos estáticos, probabilísticos y adaptativos</li>
+<li>leer un diagrama de flujo sencillo y describir un algoritmo en lenguaje natural</li>
+<li>trabajar con celdas en un Jupyter Notebook y entender el estado de la sesión</li>
+<li>escribir, ejecutar y corregir tu primer programa en Python</li>
+</ul></div>
+
+<p>Empieza el bloque de programación, y empieza <strong>programando</strong>. No hay una unidad previa de teoría abstracta: desde esta primera sesión vas a escribir código que se ejecuta y produce un resultado. Lo que sí necesitas antes son unas pocas ideas que te ahorrarán mucho tiempo después.</p>
+
+<h2 id="elementos">1. Programa, código fuente y ejecución</h2>
+<p>En el <a href="tema01.html">Tema 1</a> distinguiste algoritmo, programa y máquina. Al ponerte a programar aparecen dos matices más:</p>
+<div class="tabla_responsiva"><table class="cc1-table">
+<tr><th>Elemento</th><th>Qué es</th><th>Dónde está</th></tr>
+<tr><td><strong>Algoritmo</strong></td><td>La idea del procedimiento, independiente de cualquier lenguaje.</td><td>En tu cabeza, o en un papel.</td></tr>
+<tr><td><strong>Código fuente</strong></td><td>Ese algoritmo escrito con las reglas de un lenguaje concreto.</td><td>Un archivo de texto o una celda del Notebook.</td></tr>
+<tr><td><strong>Programa</strong></td><td>El conjunto de código fuente que resuelve un problema completo.</td><td>Uno o varios archivos.</td></tr>
+<tr><td><strong>Ejecución</strong></td><td>Lo que ocurre cuando la máquina recorre esas instrucciones.</td><td>En la memoria, mientras dura.</td></tr>
+</table></div>
+<div class="cc1-concept"><strong class="cc1-concept-tag">Concepto clave</strong>El código fuente <strong>no hace nada</strong> mientras está guardado: es texto. Solo cobra vida al ejecutarse, y cada ejecución es distinta porque parte de datos distintos. Muchos errores que parecen misteriosos se entienden al separar estas dos cosas: <em>lo que has escrito</em> y <em>lo que se está ejecutando</em>.</div>
+
+<h2 id="ingenieria">2. Ingeniería del software: por qué existe</h2>
+<p>Escribir un programa de veinte líneas es fácil. Escribir uno de veinte mil, entre varias personas, que funcione durante años y se pueda modificar sin romperlo, es un problema completamente distinto. De ahí nació la <strong>ingeniería del software</strong>: aplicar métodos sistemáticos al desarrollo de programas.</p>
+<p>Su ciclo básico, que reconocerás durante todo el bloque:</p>
+<div class="cc1-grid">
+<div class="cc1-card"><h3>Análisis</h3><p>Entender el problema: qué datos entran, qué debe salir y qué casos raros existen.</p></div>
+<div class="cc1-card"><h3>Diseño</h3><p>Decidir cómo se organizará la solución: en qué partes y con qué estructuras de datos.</p></div>
+<div class="cc1-card"><h3>Codificación</h3><p>Escribir el código en un lenguaje concreto.</p></div>
+<div class="cc1-card"><h3>Prueba y mantenimiento</h3><p>Comprobar que hace lo que debe y seguir corrigiéndolo y mejorándolo después.</p></div>
+</div>
+<div class="cc1-note">💡 En el <a href="tema03.html">Tema 3</a> viste la evolución de los lenguajes: cada nivel de abstracción amplió el número de personas capaces de programar. La ingeniería del software resuelve el problema complementario: no <em>quién</em> puede escribir código, sino <strong>cómo lograr que un programa siga siendo comprensible cuando crece</strong>.</div>
+
+<h2 id="pensamiento">3. Pensamiento computacional</h2>
+<p>El <strong>pensamiento computacional</strong> es la forma de razonar que permite plantear un problema de manera que pueda resolverlo un procedimiento automático. No es exclusivo de la informática, pero es imprescindible en ella. Consta de cuatro operaciones:</p>
+<div class="tabla_responsiva"><table class="cc1-table">
+<tr><th>Operación</th><th>En qué consiste</th><th>Ejemplo</th></tr>
+<tr><td><strong>Descomposición</strong></td><td>Partir un problema grande en subproblemas manejables.</td><td>«Gestionar las notas» se parte en: leer datos, calcular medias, decidir aprobados, mostrar resultados.</td></tr>
+<tr><td><strong>Reconocimiento de patrones</strong></td><td>Detectar lo que se repite entre casos.</td><td>Calcular la media es el mismo procedimiento para cualquier asignatura.</td></tr>
+<tr><td><strong>Abstracción</strong></td><td>Quedarse con lo esencial e ignorar lo irrelevante.</td><td>Para calcular la media, del alumno solo importan sus notas: no el color de su mochila.</td></tr>
+<tr><td><strong>Diseño del algoritmo</strong></td><td>Definir la secuencia de pasos precisa que resuelve el problema.</td><td>«Sumar todas las notas, dividir entre cuántas hay, redondear a dos decimales».</td></tr>
+</table></div>
+<div class="cc1-concept"><strong class="cc1-concept-tag">Aquí está la respuesta a la pregunta guía</strong>A una persona le dices «calcula la media» y lo hace, porque rellena sola todo lo que no dijiste: qué hacer si no hay notas, si alguna está vacía, cuántos decimales, si redondear hacia arriba. Una máquina <strong>no rellena nada</strong>. Programar es, sobre todo, descubrir cuántas decisiones estabas tomando sin darte cuenta.</div>
+
+<h2 id="tipos">4. Tipos de algoritmos</h2>
+<div class="tabla_responsiva"><table class="cc1-table">
+<tr><th>Tipo</th><th>Cómo se comporta</th><th>Ejemplo</th></tr>
+<tr><td><strong>Estático</strong> o determinista</td><td>Con los mismos datos de entrada produce <strong>siempre</strong> el mismo resultado, siguiendo siempre los mismos pasos.</td><td>Calcular una media; ordenar una lista.</td></tr>
+<tr><td><strong>Probabilístico</strong></td><td>Incorpora el azar, de modo que dos ejecuciones con los mismos datos pueden diferir.</td><td>Barajar cartas; simular una tirada de dados; elegir una pregunta al azar.</td></tr>
+<tr><td><strong>Adaptativo</strong></td><td>Modifica su propio comportamiento según la información que va acumulando.</td><td>Un recomendador que aprende de lo que ves; un corrector que se ajusta a tu forma de escribir.</td></tr>
+</table></div>
+<div class="cc1-note">💡 Los algoritmos que escribirás este curso son <strong>estáticos</strong>, salvo cuando uses el módulo de azar en el <a href="tema20.html">Tema 20</a>. Los adaptativos son la base de la inteligencia artificial que viste en el <a href="tema03.html">Tema 3</a>: no se programa la respuesta, se programa el mecanismo que la ajusta a partir de datos.</div>
+
+<h2 id="descomponer">5. Descomponer un problema</h2>
+<p>La descomposición no es una recomendación pedagógica: es la única forma conocida de resolver problemas que no caben en la cabeza de golpe.</p>
+<p>Ante cualquier enunciado, empieza siempre por lo mismo:</p>
+<div class="tabla_responsiva"><table class="cc1-table">
+<tr><th>Pregunta</th><th>Qué hay que concretar</th></tr>
+<tr><td><strong>¿Qué entra?</strong></td><td>Qué datos recibe el programa, de qué tipo y con qué límites.</td></tr>
+<tr><td><strong>¿Qué sale?</strong></td><td>Qué resultado exacto debe producir y en qué formato.</td></tr>
+<tr><td><strong>¿Qué relación hay entre ambos?</strong></td><td>Qué transformación convierte lo primero en lo segundo.</td></tr>
+<tr><td><strong>¿Qué casos raros existen?</strong></td><td>Entrada vacía, valores negativos, cero, texto donde se esperaba un número.</td></tr>
+</table></div>
+<div class="cc1-concept"><strong class="cc1-concept-tag">El truco de los ejemplos</strong>Antes de escribir una sola línea, escribe <strong>dos o tres ejemplos concretos</strong>: con esta entrada, esta salida. Si no eres capaz de rellenar la tabla de ejemplos, todavía no has entendido el problema, y programar no te va a ayudar a entenderlo. Además, esos ejemplos se convierten después en tus casos de prueba.</div>
+
+<h2 id="describir">6. Cómo describimos un algoritmo en este curso</h2>
+<p>Un algoritmo puede expresarse de varias formas antes de convertirse en código. Conviene que sepas cuáles existen y cuál usaremos.</p>
+<h3>6.1. Diagramas de flujo</h3>
+<p>Un <strong>diagrama de flujo</strong> representa un algoritmo con figuras unidas por flechas. Aparecen en libros, en apuntes y en documentación técnica, así que <strong>hay que saber leerlos</strong>:</p>
+<div class="tabla_responsiva"><table class="cc1-table">
+<tr><th>Símbolo</th><th>Significa</th></tr>
+<tr><td>Óvalo</td><td>Inicio o fin del algoritmo.</td></tr>
+<tr><td>Rectángulo</td><td>Un proceso: un cálculo o una asignación.</td></tr>
+<tr><td>Romboide</td><td>Entrada o salida de datos.</td></tr>
+<tr><td>Rombo</td><td>Una decisión: la flecha sale por «sí» o por «no».</td></tr>
+<tr><td>Flecha</td><td>El orden en que se recorren los pasos.</td></tr>
+</table></div>
+<p>Con eso basta para interpretar cualquier diagrama sencillo que te encuentres. <strong>No los usaremos como método de diseño</strong>: dibujar un diagrama de un programa de treinta líneas cuesta más que escribir el programa, y hay que rehacerlo entero cada vez que cambia algo.</p>
+<h3>6.2. Lenguaje natural</h3>
+<p>Describir un algoritmo en español corriente, con frases numeradas, es rápido, no exige aprender nada y sirve para hablarlo en clase. Es lo que haremos cuando convenga poner en común una idea antes de teclearla.</p>
+<h3>6.3. Y directamente en Python</h3>
+<div class="aviso"><strong>Por qué no usamos pseudocódigo formal</strong>Existen notaciones y programas que imitan un lenguaje de programación con palabras en español —<em>Inicio</em>, <em>Escribir</em>, <em>Fin_Si</em>—. Tienen su propia sintaxis, sus propias reglas y sus propios errores, y <strong>después hay que abandonarlas</strong>. Ese esfuerzo lo invertimos en Python, que es igual de legible, se ejecuta de verdad y te dice al momento si lo has escrito bien. La planificación la haremos con ejemplos, entradas, salidas esperadas y código incremental.</div>
+
+<h2 id="notebook">7. Python en Jupyter Notebook</h2>
+<p>Trabajaremos en un <strong>Jupyter Notebook</strong>, un documento que mezcla texto explicativo y código ejecutable. En clase accederemos a él mediante <strong>Google Colab</strong>, que no requiere instalar nada y funciona desde cualquier equipo con navegador.</p>
+<h3>7.1. Celdas</h3>
+<div class="cc1-grid">
+<div class="cc1-card"><h3>Celdas de código</h3><p>Contienen Python. Se ejecutan con el botón de reproducción o con <strong>Mayús + Intro</strong>, y su resultado aparece justo debajo.</p></div>
+<div class="cc1-card"><h3>Celdas de texto</h3><p>Contienen explicaciones. Sirven para documentar lo que hace cada parte, igual que los apartados de un informe.</p></div>
+</div>
+<h3>7.2. El estado de la sesión</h3>
+<p>Esta es la idea que más problemas causa al empezar, así que conviene entenderla bien desde el principio.</p>
+<pre tabindex="0" aria-label="Código Python desplazable horizontalmente"><code># Celda 1
+precio = 12.50
+unidades = 4
+
+# Celda 2, ejecutada después de la anterior
+total = precio * unidades
+print("Total:", total)
+# Salida: Total: 50.0</code></pre>
+<div class="cc1-concept"><strong class="cc1-concept-tag">El estado no es el documento</strong>Las variables no viven en el texto de las celdas: viven en la <strong>memoria de la sesión</strong>. La celda 2 funciona porque la celda 1 se ejecutó antes y dejó <code>precio</code> en memoria. Si borras la celda 1, la variable <em>sigue existiendo</em>; y si reinicias la sesión, desaparece aunque el texto siga ahí. Lo que se ejecuta es lo que has ejecutado, no lo que se ve.</div>
+<div class="aviso"><strong>El error clásico del Notebook</strong>Ejecutar las celdas en desorden. El Notebook te deja hacerlo, y entonces el programa «funciona» en tu pantalla pero no funcionaría para nadie más, porque depende de un orden que no está escrito en ninguna parte. <strong>Antes de dar por bueno un Notebook, reinicia la sesión y ejecútalo entero de arriba abajo.</strong> Si falla, no estaba terminado.</div>
+<div class="cc1-note">💡 Los archivos que subas a Colab y las variables de la sesión son <strong>temporales</strong>: la máquina virtual que ejecuta tu código se libera tras un rato de inactividad. Lo único que se conserva es el Notebook guardado. No confundas «tengo el archivo cargado» con «tengo el archivo guardado».</div>
+
+<h2 id="primer">8. Tu primer programa</h2>
+<p>La orden <code>print()</code> muestra en pantalla lo que se le pase entre paréntesis:</p>
+<pre tabindex="0" aria-label="Código Python desplazable horizontalmente"><code>print("Hola, Ciencias de la Computación I")</code></pre>
+<p>Un programa algo más completo, que ya contiene casi todo lo que verás en el próximo tema:</p>
+<pre tabindex="0" aria-label="Código Python desplazable horizontalmente"><code># Calcula el precio final de una compra aplicando el IVA.
+IVA = 0.21
+
+precio = 12.50
+unidades = 4
+
+subtotal = precio * unidades
+total = subtotal * (1 + IVA)
+
+print("Subtotal:", subtotal)
+print("Total con IVA:", total)</code></pre>
+<pre tabindex="0" aria-label="Salida del programa"><code>Subtotal: 50.0
+Total con IVA: 60.5</code></pre>
+<h3>8.1. Los comentarios</h3>
+<p>Todo lo que sigue a <code>#</code> en una línea es un <strong>comentario</strong>: Python lo ignora por completo. Sirven para explicar <em>por qué</em> se hace algo, no <em>qué</em> se hace, que ya lo dice el propio código.</p>
+<pre tabindex="0" aria-label="Código Python desplazable horizontalmente"><code># Mal: repite lo que ya se ve.
+total = subtotal * 1.21  # multiplica subtotal por 1.21
+
+# Bien: explica una decisión que el código no cuenta.
+total = subtotal * 1.21  # IVA general vigente en España</code></pre>
+<h3>8.2. Los tres errores del primer día</h3>
+<div class="tabla_responsiva"><table class="cc1-table">
+<tr><th>Error</th><th>Qué lo provoca</th><th>Cómo se reconoce</th></tr>
+<tr><td><strong>Comillas sin cerrar</strong></td><td>Abrir una cadena y no cerrarla.</td><td><code>SyntaxError</code> antes de ejecutar nada.</td></tr>
+<tr><td><strong>Paréntesis sin cerrar</strong></td><td>Olvidar el paréntesis de <code>print</code>.</td><td><code>SyntaxError</code>, a veces señalando la línea siguiente.</td></tr>
+<tr><td><strong>Nombre mal escrito</strong></td><td>Escribir <code>Print</code> o usar una variable inexistente.</td><td><code>NameError</code> al ejecutar.</td></tr>
+</table></div>
+<div class="cc1-note">💡 Python distingue mayúsculas de minúsculas: <code>Precio</code> y <code>precio</code> son dos variables distintas, y <code>Print</code> no es <code>print</code>. Es una de las causas más frecuentes de <code>NameError</code> al empezar.</div>
+
+<h2 id="metodo">9. El método de trabajo del curso</h2>
+<p>Todos los programas de este bloque se construyen igual. Este ciclo no es una formalidad: es lo que evita quedarse bloqueado.</p>
+<div class="cc1-timeline">
+<div class="cc1-tl-item"><div class="cc1-tl-year">1 — Entender y escribir ejemplos</div><p>Qué entra, qué sale y dos o tres casos concretos con su resultado esperado. Por escrito, antes de tocar el teclado.</p></div>
+<div class="cc1-tl-item"><div class="cc1-tl-year">2 — Descomponer</div><p>Partir el problema en pasos pequeños que puedas resolver y comprobar uno a uno.</p></div>
+<div class="cc1-tl-item"><div class="cc1-tl-year">3 — Escribir un trozo pequeño</div><p>Nunca el programa entero de golpe. Unas pocas líneas que hagan una cosa.</p></div>
+<div class="cc1-tl-item"><div class="cc1-tl-year">4 — Ejecutar y comprobar</div><p>Ejecutar ese trozo y verificar que hace exactamente lo previsto. Un <code>print()</code> intermedio vale más que diez minutos mirando el código.</p></div>
+<div class="cc1-tl-item"><div class="cc1-tl-year">5 — Repetir</div><p>Volver al paso 3 con el siguiente trozo, sobre una base que ya sabes que funciona.</p></div>
+<div class="cc1-tl-item"><div class="cc1-tl-year">6 — Comprobar los casos límite</div><p>Probar con cero, con vacío, con negativos, con lo inesperado. Ahí es donde fallan los programas.</p></div>
+</div>
+<div class="cc1-concept"><strong class="cc1-concept-tag">Desarrollo incremental</strong>Escribir treinta líneas y ejecutarlas por primera vez al final es la forma más segura de acabar con un error que no sabes dónde está. Escribir cinco, comprobarlas, y solo entonces escribir las cinco siguientes, significa que <strong>cuando algo falle sabrás que está en lo último que escribiste</strong>. Es la diferencia entre buscar en treinta líneas y buscar en cinco.</div>
+<div class="cc1-think">🤔 <strong>Para pensar:</strong> vuelve al algoritmo de «encontrar el mayor» del <a href="tema01.html">Tema 1</a>. Antes de programarlo en el <a href="tema18.html">Tema 18</a>, escribe sus ejemplos: ¿qué devuelve con <code>[3, 9, 4]</code>? ¿Y con <code>[7]</code>? ¿Y con una lista vacía? Esa tercera pregunta no tiene respuesta obvia, y decidirla <em>es</em> parte de programar.</div>
+
+<h2 id="glosario">Glosario del tema</h2>
+<dl class="cc1-glosario">
+<dt>Código fuente</dt><dd>Texto de un programa escrito con las reglas de un lenguaje concreto.</dd>
+<dt>Ejecución</dt><dd>Recorrido efectivo de las instrucciones por parte de la máquina.</dd>
+<dt>Ingeniería del software</dt><dd>Disciplina que aplica métodos sistemáticos al desarrollo y mantenimiento de programas.</dd>
+<dt>Pensamiento computacional</dt><dd>Forma de razonar que plantea un problema para que pueda resolverlo un procedimiento automático.</dd>
+<dt>Descomposición</dt><dd>Partir un problema en subproblemas más pequeños y manejables.</dd>
+<dt>Abstracción</dt><dd>Quedarse con lo esencial de un problema e ignorar lo irrelevante.</dd>
+<dt>Algoritmo estático</dt><dd>El que produce siempre el mismo resultado con los mismos datos de entrada.</dd>
+<dt>Algoritmo probabilístico</dt><dd>El que incorpora azar y puede dar resultados distintos en cada ejecución.</dd>
+<dt>Algoritmo adaptativo</dt><dd>El que modifica su comportamiento según la información que acumula.</dd>
+<dt>Jupyter Notebook</dt><dd>Documento que combina celdas de texto y celdas de código ejecutable.</dd>
+<dt>Celda</dt><dd>Bloque de un Notebook que contiene texto o código y se ejecuta por separado.</dd>
+<dt>Estado de la sesión</dt><dd>Conjunto de variables que existen en memoria como resultado de lo ya ejecutado.</dd>
+<dt>Comentario</dt><dd>Texto precedido de <code>#</code> que el intérprete ignora y sirve para explicar el código.</dd>
+<dt>Desarrollo incremental</dt><dd>Construir un programa en trozos pequeños, comprobando cada uno antes de seguir.</dd>
+</dl>
+
+<section class="summary"><h2 id="resumen">Resumen esencial</h2><ol>
+<li>El código fuente es texto y no hace nada; solo cobra vida al ejecutarse, y cada ejecución parte de datos distintos.</li>
+<li>El pensamiento computacional descompone, reconoce patrones, abstrae y diseña el algoritmo.</li>
+<li>Programar es descubrir todas las decisiones que estabas tomando sin darte cuenta, porque la máquina no rellena huecos.</li>
+<li>Los algoritmos pueden ser estáticos, probabilísticos o adaptativos; los de este curso son estáticos.</li>
+<li>Antes de escribir código, escribe ejemplos concretos de entrada y salida esperada.</li>
+<li>Los diagramas de flujo se leen, no se dibujan; y no usamos pseudocódigo formal: usamos Python.</li>
+<li>En un Notebook, las variables viven en el estado de la sesión, no en el texto de las celdas.</li>
+<li>Antes de dar por bueno un Notebook, reinicia la sesión y ejecútalo entero de arriba abajo.</li>
+<li>El desarrollo incremental hace que, cuando algo falle, sepas que está en lo último que escribiste.</li>
+</ol></section>
+
+<section aria-labelledby="fuentes">
+<h2 id="fuentes">Fuentes y recursos fiables</h2>
+<ul>
+<li id="fuente_1">[1] <a href="https://www.bocm.es/boletin/CM_Orden_BOCM/2023/05/31/BOCM-20230531-18.PDF">Orden 1736/2023, de 19 de mayo, Anexo IV</a> — currículo oficial de Ciencias de la Computación en Bachillerato (PDF).</li>
+<li id="fuente_2">[2] <a href="https://docs.python.org/es/3/tutorial/">Tutorial oficial de Python, en español</a>.</li>
+<li id="fuente_3">[3] <a href="https://colab.research.google.com/">Google Colab</a> — entorno de Notebooks usado en clase.</li>
+<li id="fuente_4">[4] <a href="https://jupyter.org/">Proyecto Jupyter</a>.</li>
+<li id="fuente_5">[5] <a href="https://www.picuino.com/es/ley-ciencias-computacion-bach.html">Picuino — transcripción navegable del currículo</a>.</li>
+</ul>
+</section>
+</article></div></main>
+<nav class="topic-footer" aria-label="Navegación entre temas"><a href="tema15.html">← Tema 15</a><a href="tema17.html">Tema 17 →</a></nav>
+<footer class="site-footer">Ciencias de la Computación I · 1.º de Bachillerato · Comunidad de Madrid</footer>
+</body></html>

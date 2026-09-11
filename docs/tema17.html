@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Tema 17 del Bloque E de Ciencias de la Computación I: cómo se representan y se combinan los datos dentro de un programa y cómo dialoga el programa con quien lo usa.">
+<title>Tema 17. Datos, variables, operadores, entrada y salida · CC1</title><link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/estilos.css"><script src="assets/navegacion.js" defer></script></head>
+<body><a class="skip" href="#contenido">Saltar al contenido</a>
+<div class="progress" aria-hidden="true"><span></span></div>
+<header class="site-header"><div class="header-inner">
+  <a class="brand" href="index.html"><span class="brand-mark">CC1</span><span>Ciencias de la Computación I<small>1.º de Bachillerato · 2026–2027</small></span></a>
+  <nav class="top-nav" aria-label="Navegación principal"><a href="index.html">Índice</a></nav>
+</div></header>
+<main id="contenido">
+<section class="hero"><div class="hero-inner"><div><p class="kicker">Tema 17 · Bloque E · Programación</p><h1>Datos, variables, operadores, entrada y salida</h1><p class="hero-lead">Cómo se representan y se combinan los datos dentro de un programa y cómo dialoga el programa con quien lo usa.</p></div><aside class="hero-note"><strong>Pregunta guía</strong><p>¿Por qué <code>"3" + "4"</code> da <code>"34"</code> y no <code>7</code>?</p></aside></div></section>
+<div class="layout"><nav class="toc" aria-label="Índice del tema"><strong>En este tema</strong><ol>
+<li><a href="#variables">Variables: nombres que guardan valores</a></li>
+<li><a href="#tipos">Los tipos de datos</a></li>
+<li><a href="#conversion">Conversión de tipos</a></li>
+<li><a href="#aritmeticos">Operadores aritméticos</a></li>
+<li><a href="#logicos">Operadores relacionales y lógicos</a></li>
+<li><a href="#expresiones">Expresiones y precedencia</a></li>
+<li><a href="#entrada">Entrada de datos con <code>input()</code></a></li>
+<li><a href="#salida">Salida con <code>print()</code> y cadenas f</a></li>
+<li><a href="#legibilidad">Constantes, nombres y legibilidad</a></li>
+<li><a href="#glosario">Glosario</a></li>
+<li><a href="#resumen">Resumen</a></li>
+<li><a href="#fuentes">Fuentes</a></li>
+</ol></nav><article class="paper">
+<p class="lesson-intro">Cómo se representan y se combinan los datos dentro de un programa y cómo dialoga el programa con quien lo usa.</p>
+<div class="question"><strong>Antes de empezar:</strong> ¿por qué <code>"3" + "4"</code> da <code>"34"</code> y no <code>7</code>?</div>
+<div class="objectives"><strong>Al terminar serás capaz de…</strong><ul>
+<li>crear variables con nombres adecuados y saber qué ocurre al asignar</li>
+<li>identificar el tipo de un valor y convertir entre tipos</li>
+<li>usar los operadores aritméticos, relacionales y lógicos con su precedencia</li>
+<li>leer datos del usuario con <code>input()</code> y convertirlos correctamente</li>
+<li>presentar resultados con <code>print()</code> y cadenas f con formato</li>
+<li>escribir código legible con nombres significativos y constantes</li>
+</ul></div>
+
+<h2 id="variables">1. Variables: nombres que guardan valores</h2>
+<p>Una <strong>variable</strong> asocia un nombre con un valor guardado en memoria. Se crea en el momento en que se le asigna algo, con el signo <code>=</code>:</p>
+<pre tabindex="0" aria-label="Código Python desplazable horizontalmente"><code>ciudad = "Getafe"
+temperatura = 18.5
+alumnos = 27
+hay_alerta = False
+
+print(ciudad, temperatura, alumnos, hay_alerta)</code></pre>
+<pre tabindex="0" aria-label="Salida del programa"><code>Getafe 18.5 27 False</code></pre>
+<div class="aviso"><strong>El <code>=</code> no significa «igual»</strong>En matemáticas, <code>x = x + 1</code> es una ecuación sin solución. En programación es una instrucción perfectamente normal: <strong>calcula</strong> el valor de la derecha y <strong>guarda</strong> el resultado en el nombre de la izquierda. Se lee «x pasa a valer x más uno». Confundir la asignación con la igualdad matemática es uno de los tropiezos más comunes al empezar.</div>
+<pre tabindex="0" aria-label="Código Python desplazable horizontalmente"><code>contador = 5
+contador = contador + 1   # ahora vale 6
+contador = contador * 2   # ahora vale 12
+print(contador)</code></pre>
+<pre tabindex="0" aria-label="Salida del programa"><code>12</code></pre>
+<h3>1.1. Reglas para los nombres</h3>
+<div class="tabla_responsiva"><table class="cc1-table">
+<tr><th>Regla</th><th>Válido</th><th>No válido</th></tr>
+<tr><td>Empieza por letra o guion bajo</td><td><code>nota</code>, <code>_total</code></td><td><code>2nota</code></td></tr>
+<tr><td>Sin espacios ni signos</td><td><code>nota_final</code></td><td><code>nota final</code>, <code>nota-final</code></td></tr>
+<tr><td>Distingue mayúsculas</td><td><code>nota</code> y <code>Nota</code> son distintas</td><td>—</td></tr>
+<tr><td>No usar palabras reservadas</td><td><code>lista_notas</code></td><td><code>if</code>, <code>for</code>, <code>print</code></td></tr>
+</table></div>
+<div class="cc1-note">💡 Por convención, en Python los nombres de variable se escriben en minúsculas y con guiones bajos: <code>precio_unitario</code>, <code>numero_de_alumnos</code>. No es obligatorio, pero todo el mundo lo hace, y el código ajeno te resultará más fácil de leer si tú también lo haces.</div>
+
+<h2 id="tipos">2. Los tipos de datos</h2>
+<p>Cada valor tiene un <strong>tipo</strong>, y el tipo determina qué operaciones tienen sentido con él. Los cuatro básicos:</p>
+<div class="tabla_responsiva"><table class="cc1-table">
+<tr><th>Tipo</th><th>Nombre en Python</th><th>Qué representa</th><th>Ejemplos</th></tr>
+<tr><td><strong>Entero</strong></td><td><code>int</code></td><td>Números sin decimales, positivos o negativos.</td><td><code>27</code>, <code>-4</code>, <code>0</code></td></tr>
+<tr><td><strong>Real</strong></td><td><code>float</code></td><td>Números con decimales. El separador es el <strong>punto</strong>.</td><td><code>18.5</code>, <code>-0.75</code></td></tr>
+<tr><td><strong>Cadena</strong></td><td><code>str</code></td><td>Texto, siempre entre comillas.</td><td><code>"Getafe"</code>, <code>"27"</code></td></tr>
+<tr><td><strong>Booleano</strong></td><td><code>bool</code></td><td>Solo dos valores: verdadero o falso.</td><td><code>True</code>, <code>False</code></td></tr>
+</table></div>
+<p>La función <code>type()</code> dice de qué tipo es un valor:</p>
+<pre tabindex="0" aria-label="Código Python desplazable horizontalmente"><code>print(type(27))
+print(type(18.5))
+print(type("27"))
+print(type(True))</code></pre>
+<pre tabindex="0" aria-label="Salida del programa"><code>&lt;class 'int'&gt;
+&lt;class 'float'&gt;
+&lt;class 'str'&gt;
+&lt;class 'bool'&gt;</code></pre>
+<div class="cc1-concept"><strong class="cc1-concept-tag">Aquí está la respuesta a la pregunta guía</strong><code>"3"</code> y <code>3</code> parecen lo mismo y no lo son: uno es <strong>texto</strong> y otro es un <strong>número</strong>. El operador <code>+</code> hace cosas distintas según el tipo: con números <em>suma</em>, con cadenas <em>concatena</em>. Por eso <code>"3" + "4"</code> vale <code>"34"</code> y <code>3 + 4</code> vale <code>7</code>. Es la misma idea del <a href="tema04.html">Tema 4</a>: los mismos bits significan cosas distintas según el código con que se interpreten.</div>
+<pre tabindex="0" aria-label="Código Python desplazable horizontalmente"><code>print(3 + 4)        # 7    · suma de números
+print("3" + "4")    # 34   · concatenación de texto
+print("Hola " * 3)  # repite la cadena tres veces</code></pre>
+<pre tabindex="0" aria-label="Salida del programa"><code>7
+34
+Hola Hola Hola </code></pre>
+<div class="aviso"><strong>Los decimales no son exactos</strong>Prueba <code>print(0.1 + 0.2)</code>: Python responde <code>0.30000000000000004</code>. No es un fallo de Python, sino una consecuencia de representar decimales en binario con un número finito de bits, como viste en el <a href="tema04.html">Tema 4</a>. Práctica: <strong>nunca compares dos decimales con <code>==</code></strong>, y redondea al mostrar resultados.</div>
+
+<h2 id="conversion">3. Conversión de tipos</h2>
+<p>Para pasar de un tipo a otro se usan funciones con el nombre del tipo de destino:</p>
+<pre tabindex="0" aria-label="Código Python desplazable horizontalmente"><code>print(int("42") + 1)      # texto a entero
+print(float("3.5") * 2)   # texto a real
+print(str(2026) + "-09")  # número a texto
+print(int(9.87))          # trunca, no redondea
+print(round(9.87))        # redondea de verdad</code></pre>
+<pre tabindex="0" aria-label="Salida del programa"><code>43
+7.0
+2026-09
+9
+10</code></pre>
+<div class="cc1-note">💡 Ojo con <code>int()</code> sobre un decimal: <strong>trunca</strong>, es decir, se queda con la parte entera y descarta el resto. <code>int(9.87)</code> vale 9, no 10. Para redondear hay que usar <code>round()</code>.</div>
+<p>Si la conversión es imposible, el programa se detiene con un error:</p>
+<pre tabindex="0" aria-label="Código Python desplazable horizontalmente"><code>numero = int("veinte")   # ValueError: invalid literal for int() with base 10: 'veinte'</code></pre>
+<p>Ese <code>ValueError</code> es un <strong>error de ejecución</strong>: el código es sintácticamente correcto, pero al ejecutarse se le pide algo imposible. Es una de las tres clases de error del <a href="tema09.html">Tema 9</a>, y en el <a href="tema21.html">Tema 21</a> aprenderás a leer su mensaje completo.</p>
+
+<h2 id="aritmeticos">4. Operadores aritméticos</h2>
+<div class="tabla_responsiva"><table class="cc1-table">
+<tr><th>Operador</th><th>Operación</th><th>Ejemplo</th><th>Resultado</th></tr>
+<tr><td><code>+</code></td><td>Suma</td><td><code>7 + 2</code></td><td><code>9</code></td></tr>
+<tr><td><code>-</code></td><td>Resta</td><td><code>7 - 2</code></td><td><code>5</code></td></tr>
+<tr><td><code>*</code></td><td>Multiplicación</td><td><code>7 * 2</code></td><td><code>14</code></td></tr>
+<tr><td><code>/</code></td><td>División</td><td><code>7 / 2</code></td><td><code>3.5</code></td></tr>
+<tr><td><code>//</code></td><td>División entera (cociente)</td><td><code>7 // 2</code></td><td><code>3</code></td></tr>
+<tr><td><code>%</code></td><td>Módulo (resto)</td><td><code>7 % 2</code></td><td><code>1</code></td></tr>
+<tr><td><code>**</code></td><td>Potencia</td><td><code>7 ** 2</code></td><td><code>49</code></td></tr>
+</table></div>
+<div class="cc1-concept"><strong class="cc1-concept-tag">Dos operadores que parecen menores y no lo son</strong>La división entera <code>//</code> y el módulo <code>%</code> resuelven media docena de problemas típicos. El módulo dice si un número es divisible entre otro —si <code>n % 2</code> vale 0, <code>n</code> es par—, sirve para recorrer algo cíclicamente y para separar las cifras de un número. La división entera reparte en grupos completos.</div>
+<pre tabindex="0" aria-label="Código Python desplazable horizontalmente"><code>minutos = 95
+horas = minutos // 60
+resto = minutos % 60
+print(horas, "h", resto, "min")
+
+print(10 % 2 == 0)   # ¿es par 10?
+print(7 % 2 == 0)    # ¿es par 7?</code></pre>
+<pre tabindex="0" aria-label="Salida del programa"><code>1 h 35 min
+True
+False</code></pre>
+<div class="cc1-note">💡 En Python 3, <code>/</code> siempre devuelve un decimal, aunque la división sea exacta: <code>6 / 3</code> vale <code>2.0</code>, no <code>2</code>. Si necesitas un entero, usa <code>//</code>.</div>
+
+<h2 id="logicos">5. Operadores relacionales y lógicos</h2>
+<h3>5.1. Relacionales</h3>
+<p>Comparan dos valores y devuelven siempre un booleano:</p>
+<div class="tabla_responsiva"><table class="cc1-table">
+<tr><th>Operador</th><th>Significa</th><th>Ejemplo</th><th>Resultado</th></tr>
+<tr><td><code>==</code></td><td>Igual a</td><td><code>5 == 5</code></td><td><code>True</code></td></tr>
+<tr><td><code>!=</code></td><td>Distinto de</td><td><code>5 != 3</code></td><td><code>True</code></td></tr>
+<tr><td><code>&lt;</code> <code>&gt;</code></td><td>Menor / mayor que</td><td><code>3 &lt; 5</code></td><td><code>True</code></td></tr>
+<tr><td><code>&lt;=</code> <code>&gt;=</code></td><td>Menor o igual / mayor o igual</td><td><code>5 &gt;= 5</code></td><td><code>True</code></td></tr>
+</table></div>
+<div class="aviso"><strong>Un <code>=</code> asigna; dos <code>==</code> comparan</strong>Es el error tipográfico más frecuente de todo el curso. <code>nota = 5</code> guarda un 5 en la variable; <code>nota == 5</code> pregunta si vale 5. Si los confundes dentro de una condición, Python te avisará con un error de sintaxis, pero conviene tenerlo claro desde el principio.</div>
+<h3>5.2. Lógicos</h3>
+<p>Son las operaciones del álgebra de Boole del <a href="tema01.html">Tema 1</a>, ahora ejecutables:</p>
+<pre tabindex="0" aria-label="Código Python desplazable horizontalmente"><code>nota = 7
+asistencia = 90
+
+print(nota &gt;= 5 and asistencia &gt;= 80)   # ambas condiciones
+print(nota &gt;= 9 or asistencia &gt;= 80)    # al menos una
+print(not (nota &gt;= 5))                  # niega la condición</code></pre>
+<pre tabindex="0" aria-label="Salida del programa"><code>True
+True
+False</code></pre>
+<div class="cc1-note">💡 Python permite encadenar comparaciones igual que en matemáticas: <code>0 &lt;= nota &lt;= 10</code> equivale a <code>nota &gt;= 0 and nota &lt;= 10</code>, y se lee mucho mejor. Es una de las razones por las que su código resulta tan legible.</div>
+
+<h2 id="expresiones">6. Expresiones y precedencia</h2>
+<p>Una <strong>expresión</strong> combina valores, variables y operadores para producir un resultado. Python la evalúa siguiendo un orden de precedencia:</p>
+<div class="tabla_responsiva"><table class="cc1-table">
+<tr><th>Prioridad</th><th>Operadores</th></tr>
+<tr><td>1.ª (mayor)</td><td>Paréntesis <code>( )</code></td></tr>
+<tr><td>2.ª</td><td>Potencia <code>**</code></td></tr>
+<tr><td>3.ª</td><td><code>*</code>, <code>/</code>, <code>//</code>, <code>%</code></td></tr>
+<tr><td>4.ª</td><td><code>+</code>, <code>-</code></td></tr>
+<tr><td>5.ª</td><td>Comparaciones <code>==</code>, <code>!=</code>, <code>&lt;</code>, <code>&gt;</code>, <code>&lt;=</code>, <code>&gt;=</code></td></tr>
+<tr><td>6.ª</td><td><code>not</code>, después <code>and</code>, después <code>or</code></td></tr>
+</table></div>
+<pre tabindex="0" aria-label="Código Python desplazable horizontalmente"><code>print(2 + 3 * 4)      # 14, no 20: la multiplicación va antes
+print((2 + 3) * 4)    # 20: los paréntesis mandan
+print(10 - 2 - 3)     # 5: se evalúa de izquierda a derecha</code></pre>
+<pre tabindex="0" aria-label="Salida del programa"><code>14
+20
+5</code></pre>
+<div class="cc1-concept"><strong class="cc1-concept-tag">Criterio práctico</strong>No hace falta memorizar la tabla entera: <strong>usa paréntesis siempre que la expresión no sea evidente de un vistazo</strong>. Un paréntesis de más no cuesta nada y hace explícita tu intención; una precedencia mal recordada produce un error de lógica que nadie detecta.</div>
+
+<h2 id="entrada">7. Entrada de datos con <code>input()</code></h2>
+<p>La función <code>input()</code> detiene el programa, muestra un mensaje y espera a que el usuario escriba algo y pulse Intro:</p>
+<pre tabindex="0" aria-label="Código Python desplazable horizontalmente"><code>nombre = input("¿Cómo te llamas? ")
+print("Hola,", nombre)</code></pre>
+<div class="cc1-concept"><strong class="cc1-concept-tag">La regla que hay que grabar a fuego</strong><code>input()</code> devuelve <strong>siempre</strong> una cadena de texto, aunque el usuario escriba un número. Si vas a operar con ese dato, tienes que convertirlo antes. Es la causa número uno de errores en los primeros programas.</div>
+<pre tabindex="0" aria-label="Código Python desplazable horizontalmente"><code># Mal: concatena texto en lugar de sumar
+edad = input("Tu edad: ")
+print(edad + 1)          # TypeError: can only concatenate str (not "int") to str
+
+# Bien: convierte antes de operar
+edad = int(input("Tu edad: "))
+print("El año que viene tendrás", edad + 1)</code></pre>
+<pre tabindex="0" aria-label="Ejemplo de ejecución"><code>Tu edad: 16
+El año que viene tendrás 17</code></pre>
+<div class="cc1-note">💡 Si el usuario escribe algo que no es un número, <code>int()</code> lanzará un <code>ValueError</code> y el programa se detendrá. Comprobar la entrada antes de convertirla es parte del <a href="tema21.html">Tema 21</a>; de momento, basta con que sepas que ese riesgo existe y con que lo tengas en cuenta al probar tus programas.</div>
+
+<h2 id="salida">8. Salida con <code>print()</code> y cadenas f</h2>
+<p><code>print()</code> admite varios valores separados por comas, y los muestra separados por un espacio:</p>
+<pre tabindex="0" aria-label="Código Python desplazable horizontalmente"><code>producto = "Cuaderno"
+precio = 3.5
+unidades = 4
+print("Producto:", producto, "| Unidades:", unidades)</code></pre>
+<pre tabindex="0" aria-label="Salida del programa"><code>Producto: Cuaderno | Unidades: 4</code></pre>
+<h3>8.1. Cadenas f</h3>
+<p>La forma cómoda de construir texto con valores dentro es una <strong>cadena f</strong>: se antepone <code>f</code> a las comillas y se escriben las expresiones entre llaves.</p>
+<pre tabindex="0" aria-label="Código Python desplazable horizontalmente"><code>producto = "Cuaderno"
+precio = 3.5
+unidades = 4
+total = precio * unidades
+
+print(f"{unidades} x {producto}: {total} €")
+print(f"{unidades} x {producto}: {total:.2f} €")
+print(f"El doble sería {total * 2:.2f} €")</code></pre>
+<pre tabindex="0" aria-label="Salida del programa"><code>4 x Cuaderno: 14.0 €
+4 x Cuaderno: 14.00 €
+El doble sería 28.00 €</code></pre>
+<div class="tabla_responsiva"><table class="cc1-table">
+<tr><th>Formato</th><th>Qué hace</th><th>Ejemplo con <code>total = 14.0</code></th></tr>
+<tr><td><code>{total}</code></td><td>Muestra el valor tal cual.</td><td><code>14.0</code></td></tr>
+<tr><td><code>{total:.2f}</code></td><td>Dos decimales.</td><td><code>14.00</code></td></tr>
+<tr><td><code>{total:.0f}</code></td><td>Sin decimales, redondeando.</td><td><code>14</code></td></tr>
+<tr><td><code>{total:8.2f}</code></td><td>Dos decimales, alineado en 8 caracteres.</td><td><code>&nbsp;&nbsp;&nbsp;14.00</code></td></tr>
+</table></div>
+<div class="cc1-note">💡 Recuerda la distinción del <a href="tema12.html">Tema 12</a> entre valor y formato: <code>{total:.2f}</code> cambia <strong>cómo se muestra</strong> el número, no su valor. El cálculo siguiente seguirá usando todos los decimales. Si quieres cambiar el valor, usa <code>round()</code>.</div>
+
+<h2 id="legibilidad">9. Constantes, nombres y legibilidad</h2>
+<h3>9.1. Constantes</h3>
+<p>Un valor fijo que aparece en varios sitios debe estar en una variable con nombre, no repetido dentro de las fórmulas. Por convención se escriben en mayúsculas para indicar que no deben cambiar durante la ejecución:</p>
+<pre tabindex="0" aria-label="Código Python desplazable horizontalmente"><code># Mal: ¿qué es 0.21? ¿Y si mañana cambia?
+total = base * 1.21
+
+# Bien: el nombre lo explica y se cambia en un solo sitio
+IVA = 0.21
+total = base * (1 + IVA)</code></pre>
+<div class="cc1-concept"><strong class="cc1-concept-tag">Números mágicos</strong>Se llama <strong>número mágico</strong> a una cifra suelta en medio del código sin explicación. Es un problema doble: nadie sabe qué significa, y si aparece en cinco sitios hay que acordarse de cambiarla en los cinco. Es exactamente el mismo criterio que en el <a href="tema12.html">Tema 12</a>: el IVA va en una celda, no dentro de cada fórmula.</div>
+<h3>9.2. Nombres que explican</h3>
+<div class="tabla_responsiva"><table class="cc1-table">
+<tr><th>En vez de…</th><th>Escribe…</th><th>Por qué</th></tr>
+<tr><td><code>x</code>, <code>a</code>, <code>dato2</code></td><td><code>temperatura</code>, <code>nota_media</code></td><td>El nombre dice qué guarda, sin tener que buscarlo.</td></tr>
+<tr><td><code>lista</code></td><td><code>notas</code>, <code>alumnos</code></td><td>Describe el contenido, no el tipo.</td></tr>
+<tr><td><code>flag</code></td><td><code>hay_alerta</code>, <code>es_valido</code></td><td>Los booleanos se leen mejor como una afirmación.</td></tr>
+</table></div>
+<div class="cc1-note">💡 Se dice que el código se escribe una vez y se lee muchas: por otras personas, y por ti mismo dentro de dos semanas, cuando ya no recuerdes nada. Un buen nombre es la documentación más barata que existe, porque no hay que mantenerla aparte.</div>
+<h3>9.3. Un programa completo</h3>
+<p>Reuniendo todo lo del tema:</p>
+<pre tabindex="0" aria-label="Código Python desplazable horizontalmente"><code># Calcula el importe de una compra con IVA y descuento.
+IVA = 0.21
+DESCUENTO_MINIMO = 50      # € a partir de los cuales se aplica descuento
+PORCENTAJE_DESCUENTO = 0.10
+
+producto = input("Producto: ")
+unidades = int(input("Unidades: "))
+precio = float(input("Precio unitario en €: "))
+
+subtotal = precio * unidades
+tiene_descuento = subtotal &gt;= DESCUENTO_MINIMO
+descuento = subtotal * PORCENTAJE_DESCUENTO if tiene_descuento else 0
+total = (subtotal - descuento) * (1 + IVA)
+
+print(f"{unidades} x {producto}")
+print(f"Subtotal:   {subtotal:8.2f} €")
+print(f"Descuento:  {descuento:8.2f} €")
+print(f"Total:      {total:8.2f} €")</code></pre>
+<pre tabindex="0" aria-label="Ejemplo de ejecución"><code>Producto: Cuaderno
+Unidades: 20
+Precio unitario en €: 3.5
+20 x Cuaderno
+Subtotal:      70.00 €
+Descuento:      7.00 €
+Total:         76.23 €</code></pre>
+<div class="cc1-think">🤔 <strong>Para pensar:</strong> en ese programa hay una línea con una construcción que aún no hemos explicado, la que decide el descuento según una condición. En el <a href="tema18.html">Tema 18</a> la escribirás de forma mucho más clara con <code>if</code>. Mientras tanto, comprueba los ejemplos: ¿qué pasa si compras 10 unidades en lugar de 20? ¿Y si escribes <code>3,5</code> con coma en vez de con punto?</div>
+
+<h2 id="glosario">Glosario del tema</h2>
+<dl class="cc1-glosario">
+<dt>Variable</dt><dd>Nombre asociado a un valor guardado en memoria.</dd>
+<dt>Asignación</dt><dd>Operación que calcula el valor de la derecha y lo guarda en el nombre de la izquierda.</dd>
+<dt>Tipo de dato</dt><dd>Clase de valor que determina qué operaciones tienen sentido.</dd>
+<dt>int</dt><dd>Tipo de los números enteros.</dd>
+<dt>float</dt><dd>Tipo de los números con decimales, con punto como separador.</dd>
+<dt>str</dt><dd>Tipo de las cadenas de texto, siempre entre comillas.</dd>
+<dt>bool</dt><dd>Tipo lógico, con los valores <code>True</code> y <code>False</code>.</dd>
+<dt>Conversión de tipo</dt><dd>Transformación de un valor a otro tipo mediante <code>int()</code>, <code>float()</code> o <code>str()</code>.</dd>
+<dt>Módulo (<code>%</code>)</dt><dd>Operador que devuelve el resto de una división entera.</dd>
+<dt>Expresión</dt><dd>Combinación de valores, variables y operadores que produce un resultado.</dd>
+<dt>Precedencia</dt><dd>Orden en que se evalúan los operadores dentro de una expresión.</dd>
+<dt>Cadena f</dt><dd>Cadena precedida de <code>f</code> que permite insertar expresiones entre llaves.</dd>
+<dt>Número mágico</dt><dd>Valor fijo sin explicación escrito directamente en el código.</dd>
+<dt>ValueError</dt><dd>Error de ejecución que ocurre al pedir una conversión imposible.</dd>
+</dl>
+
+<section class="summary"><h2 id="resumen">Resumen esencial</h2><ol>
+<li>La asignación no es una igualdad: calcula la derecha y guarda el resultado en la izquierda.</li>
+<li>Cada valor tiene un tipo, y el tipo decide qué hace cada operador: <code>+</code> suma números y concatena cadenas.</li>
+<li><code>int()</code> trunca y <code>round()</code> redondea; los decimales binarios no son exactos, así que no se comparan con <code>==</code>.</li>
+<li><code>//</code> y <code>%</code> resuelven muchos problemas típicos, empezando por saber si un número es par.</li>
+<li>Los operadores lógicos son el álgebra de Boole del <a href="tema01.html">Tema 1</a>, ya ejecutable.</li>
+<li>Ante la duda con la precedencia, pon paréntesis: hacen explícita tu intención.</li>
+<li><code>input()</code> devuelve siempre texto: hay que convertirlo antes de operar.</li>
+<li>Las cadenas f construyen la salida con formato, y el formato no cambia el valor.</li>
+<li>Un valor fijo va en una constante con nombre, nunca suelto dentro de una fórmula.</li>
+</ol></section>
+
+<section aria-labelledby="fuentes">
+<h2 id="fuentes">Fuentes y recursos fiables</h2>
+<ul>
+<li id="fuente_1">[1] <a href="https://www.bocm.es/boletin/CM_Orden_BOCM/2023/05/31/BOCM-20230531-18.PDF">Orden 1736/2023, de 19 de mayo, Anexo IV</a> — currículo oficial de Ciencias de la Computación en Bachillerato (PDF).</li>
+<li id="fuente_2">[2] <a href="https://docs.python.org/es/3/tutorial/introduction.html">Tutorial de Python — Una introducción informal</a>.</li>
+<li id="fuente_3">[3] <a href="https://docs.python.org/es/3/library/stdtypes.html">Documentación de Python — Tipos incorporados</a>.</li>
+<li id="fuente_4">[4] <a href="https://docs.python.org/es/3/tutorial/floatingpoint.html">Documentación de Python — Aritmética de coma flotante</a>.</li>
+<li id="fuente_5">[5] <a href="https://www.picuino.com/es/ley-ciencias-computacion-bach.html">Picuino — transcripción navegable del currículo</a>.</li>
+</ul>
+</section>
+</article></div></main>
+<nav class="topic-footer" aria-label="Navegación entre temas"><a href="tema16.html">← Tema 16</a><a href="tema18.html">Tema 18 →</a></nav>
+<footer class="site-footer">Ciencias de la Computación I · 1.º de Bachillerato · Comunidad de Madrid</footer>
+</body></html>

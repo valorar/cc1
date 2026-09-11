@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Tema 20 del Bloque E de Ciencias de la Computación I: cómo dividir un programa en piezas con nombre propio, reutilizables y fáciles de comprobar.">
+<title>Tema 20. Funciones y organización de un programa · CC1</title><link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/estilos.css"><script src="assets/navegacion.js" defer></script></head>
+<body><a class="skip" href="#contenido">Saltar al contenido</a>
+<div class="progress" aria-hidden="true"><span></span></div>
+<header class="site-header"><div class="header-inner">
+  <a class="brand" href="index.html"><span class="brand-mark">CC1</span><span>Ciencias de la Computación I<small>1.º de Bachillerato · 2026–2027</small></span></a>
+  <nav class="top-nav" aria-label="Navegación principal"><a href="index.html">Índice</a></nav>
+</div></header>
+<main id="contenido">
+<section class="hero"><div class="hero-inner"><div><p class="kicker">Tema 20 · Bloque E · Programación</p><h1>Funciones y organización de un programa</h1><p class="hero-lead">Cómo dividir un programa en piezas con nombre propio, reutilizables y fáciles de comprobar.</p></div><aside class="hero-note"><strong>Pregunta guía</strong><p>¿En qué momento un programa deja de caber en la cabeza, y qué se hace entonces?</p></aside></div></section>
+<div class="layout"><nav class="toc" aria-label="Índice del tema"><strong>En este tema</strong><ol>
+<li><a href="#porque">Por qué existen las funciones</a></li>
+<li><a href="#definir">Definir y llamar</a></li>
+<li><a href="#parametros">Parámetros, argumentos y retorno</a></li>
+<li><a href="#ambito">Ámbito de las variables</a></li>
+<li><a href="#biblioteca">La biblioteca estándar: <code>math</code> y <code>random</code></a></li>
+<li><a href="#descomponer">Descomponer un programa en funciones</a></li>
+<li><a href="#separar">Separar cálculo, entrada y presentación</a></li>
+<li><a href="#documentar">Documentar y nombrar</a></li>
+<li><a href="#incremental">Un programa completo, paso a paso</a></li>
+<li><a href="#glosario">Glosario</a></li>
+<li><a href="#resumen">Resumen</a></li>
+<li><a href="#fuentes">Fuentes</a></li>
+</ol></nav><article class="paper">
+<p class="lesson-intro">Cómo dividir un programa en piezas con nombre propio, reutilizables y fáciles de comprobar.</p>
+<div class="question"><strong>Antes de empezar:</strong> ¿en qué momento un programa deja de caber en la cabeza, y qué se hace entonces?</div>
+<div class="objectives"><strong>Al terminar serás capaz de…</strong><ul>
+<li>definir funciones con parámetros y valor de retorno, y llamarlas</li>
+<li>distinguir variables locales y globales y explicar por qué importa</li>
+<li>usar módulos de la biblioteca estándar como <code>math</code> y <code>random</code></li>
+<li>descomponer un programa en funciones con una responsabilidad cada una</li>
+<li>separar el cálculo de la entrada y de la presentación</li>
+<li>documentar funciones con <em>docstrings</em> y elegir buenos nombres</li>
+</ul></div>
+
+<h2 id="porque">1. Por qué existen las funciones</h2>
+<p>El programa de estadísticas del <a href="tema18.html">Tema 18</a> tenía unas treinta líneas y ya costaba abarcarlo de un vistazo. Con cien líneas resulta imposible, y con mil no lo entiende ni quien lo escribió.</p>
+<div class="cc1-concept"><strong class="cc1-concept-tag">Aquí está la respuesta a la pregunta guía</strong>Un programa deja de caber en la cabeza cuando hay que recordar demasiadas cosas a la vez. La solución no es ser más listo: es <strong>dividirlo en piezas que se puedan entender por separado</strong>. Una función bien hecha se puede usar sabiendo solo <em>qué</em> hace, sin necesidad de recordar <em>cómo</em> lo hace. Eso es lo que libera espacio mental.</div>
+<p>Las funciones aportan cuatro cosas concretas:</p>
+<div class="cc1-grid">
+<div class="cc1-card"><h3>Reutilización</h3><p>Un cálculo escrito una vez se usa desde muchos sitios. Si hay que corregirlo, se corrige en un solo lugar.</p></div>
+<div class="cc1-card"><h3>Legibilidad</h3><p><code>calcular_media(notas)</code> se entiende al instante; las cinco líneas que hay dentro, no tanto.</p></div>
+<div class="cc1-card"><h3>Comprobación</h3><p>Una función se puede probar aislada con distintos datos, sin ejecutar el programa entero.</p></div>
+<div class="cc1-card"><h3>División del trabajo</h3><p>Varias personas pueden escribir funciones distintas si está claro qué recibe y qué devuelve cada una.</p></div>
+</div>
+<p>De hecho ya llevas todo el bloque usando funciones: <code>print()</code>, <code>input()</code>, <code>len()</code>, <code>sum()</code> y <code>sorted()</code> lo son. Ahora vas a escribir las tuyas.</p>
+
+<h2 id="definir">2. Definir y llamar</h2>
+<p>Una función se define con <code>def</code>, un nombre, unos paréntesis y dos puntos; su contenido va sangrado, como los bloques del <a href="tema18.html">Tema 18</a>.</p>
+<pre tabindex="0" aria-label="Código Python desplazable horizontalmente"><code>def saludar():
+    print("Hola, Ciencias de la Computación I")
+
+# Definirla no la ejecuta. Hay que llamarla:
+saludar()
+saludar()</code></pre>
+<pre tabindex="0" aria-label="Salida del programa"><code>Hola, Ciencias de la Computación I
+Hola, Ciencias de la Computación I</code></pre>
+<div class="aviso"><strong>Definir no es ejecutar</strong>El bloque <code>def</code> solo le dice a Python «recuerda este procedimiento con este nombre». No se ejecuta nada hasta que aparece la llamada, con los paréntesis. Un error frecuente al empezar es escribir una función perfecta y extrañarse de que el programa no haga nada: falta llamarla.</div>
+
+<h2 id="parametros">3. Parámetros, argumentos y retorno</h2>
+<h3>3.1. Recibir datos</h3>
+<pre tabindex="0" aria-label="Código Python desplazable horizontalmente"><code>def saludar(nombre):
+    print(f"Hola, {nombre}")
+
+saludar("Ana")
+saludar("Luis")</code></pre>
+<pre tabindex="0" aria-label="Salida del programa"><code>Hola, Ana
+Hola, Luis</code></pre>
+<div class="tabla_responsiva"><table class="cc1-table">
+<tr><th>Término</th><th>Qué es</th><th>En el ejemplo</th></tr>
+<tr><td><strong>Parámetro</strong></td><td>El nombre que aparece en la definición.</td><td><code>nombre</code></td></tr>
+<tr><td><strong>Argumento</strong></td><td>El valor concreto que se pasa al llamarla.</td><td><code>"Ana"</code></td></tr>
+</table></div>
+<h3>3.2. Devolver un resultado</h3>
+<p>La instrucción <code>return</code> termina la función y entrega un valor a quien la llamó:</p>
+<pre tabindex="0" aria-label="Código Python desplazable horizontalmente"><code>def calcular_media(numeros):
+    return sum(numeros) / len(numeros)
+
+media = calcular_media([7, 4, 9, 5])
+print(f"La media es {media:.2f}")
+print(f"El doble de la media es {calcular_media([7, 4, 9, 5]) * 2:.2f}")</code></pre>
+<pre tabindex="0" aria-label="Salida del programa"><code>La media es 6.25
+El doble de la media es 12.50</code></pre>
+<div class="cc1-concept"><strong class="cc1-concept-tag"><code>return</code> no es <code>print</code></strong>Es la confusión más importante de este tema. <code>print()</code> <strong>muestra</strong> algo en pantalla y no deja nada aprovechable; <code>return</code> <strong>entrega un valor</strong> al programa, que puede guardarlo, operarlo o volver a pasarlo a otra función. Una función que calcula debe <em>devolver</em>, no imprimir: si imprime, su resultado ya no sirve para nada más.</div>
+<pre tabindex="0" aria-label="Código Python desplazable horizontalmente"><code># Mal: el resultado se pierde, no se puede reutilizar
+def media_mal(numeros):
+    print(sum(numeros) / len(numeros))
+
+resultado = media_mal([7, 4, 9, 5])
+print(resultado)     # None: la función no devolvió nada</code></pre>
+<pre tabindex="0" aria-label="Salida del programa"><code>6.25
+None</code></pre>
+<h3>3.3. Varios parámetros y valores por defecto</h3>
+<pre tabindex="0" aria-label="Código Python desplazable horizontalmente"><code>def precio_final(base, iva=0.21, descuento=0):
+    con_descuento = base * (1 - descuento)
+    return con_descuento * (1 + iva)
+
+print(round(precio_final(100), 2))
+print(round(precio_final(100, descuento=0.10), 2))
+print(round(precio_final(100, iva=0.10), 2))</code></pre>
+<pre tabindex="0" aria-label="Salida del programa"><code>121.0
+108.9
+110.0</code></pre>
+<div class="cc1-note">💡 Los parámetros con valor por defecto hacen la función cómoda en el caso habitual y flexible en los demás. Y nombrar el argumento al llamarla —<code>descuento=0.10</code>— evita tener que recordar el orden y deja claro qué significa cada número.</div>
+
+<h2 id="ambito">4. Ámbito de las variables</h2>
+<p>Las variables creadas dentro de una función son <strong>locales</strong>: nacen al empezar la llamada y desaparecen al terminarla. Fuera no existen.</p>
+<pre tabindex="0" aria-label="Código Python desplazable horizontalmente"><code>def calcular_area(base, altura):
+    area = base * altura / 2     # 'area' es local
+    return area
+
+print(calcular_area(10, 4))
+# print(area)   # NameError: 'area' no existe aquí fuera</code></pre>
+<pre tabindex="0" aria-label="Salida del programa"><code>20.0</code></pre>
+<div class="cc1-concept"><strong class="cc1-concept-tag">El ámbito es una ventaja, no una molestia</strong>Que las variables sean locales es justamente lo que permite entender una función por separado: puedes usar <code>i</code> o <code>total</code> dentro sin miedo a pisar nada del resto del programa. Es la <strong>encapsulación</strong>, y es lo que hace que una pieza sea de verdad independiente.</div>
+<div class="aviso"><strong>Evita depender de variables globales</strong>Una función puede <em>leer</em> una variable definida fuera, y eso tienta a usarla en lugar de pasarla como parámetro. Es mala idea: la función deja de ser autónoma, no se puede probar sola y falla si se copia a otro programa. <strong>Todo lo que la función necesite, que entre por parámetros; todo lo que produzca, que salga por <code>return</code>.</strong> Las constantes en mayúsculas son la excepción razonable.</div>
+
+<h2 id="biblioteca">5. La biblioteca estándar: <code>math</code> y <code>random</code></h2>
+<p>Python incluye centenares de funciones ya escritas, organizadas en <strong>módulos</strong>. Para usarlas basta con importarlos.</p>
+<pre tabindex="0" aria-label="Código Python desplazable horizontalmente"><code>import math
+
+print(math.sqrt(144))
+print(round(math.pi, 4))
+print(math.ceil(4.1), math.floor(4.9))
+print(round(math.hypot(3, 4), 1))</code></pre>
+<pre tabindex="0" aria-label="Salida del programa"><code>12.0
+3.1416
+5 4
+5.0</code></pre>
+<pre tabindex="0" aria-label="Código Python desplazable horizontalmente"><code>import random
+
+random.seed(42)          # fija el azar para poder repetir la ejecución
+print(random.randint(1, 6))
+print(random.choice(["piedra", "papel", "tijera"]))
+
+cartas = [1, 2, 3, 4, 5]
+random.shuffle(cartas)
+print(cartas)</code></pre>
+<div class="cc1-note">💡 <code>random.seed()</code> parece un detalle menor y es muy útil: fija el punto de partida del azar, de modo que el programa produce siempre la misma secuencia. Sirve para <strong>poder repetir exactamente una ejecución</strong> mientras buscas un error, algo imposible si cada vez salen números distintos. Es un algoritmo probabilístico de los del <a href="tema16.html">Tema 16</a> convertido temporalmente en repetible.</div>
+<div class="cc1-concept"><strong class="cc1-concept-tag">Antes de programar algo, comprueba si ya existe</strong>La biblioteca estándar de Python trae módulos para fechas, texto, matemáticas, azar, archivos, redes y mucho más. Reescribir una función que ya existe cuesta tiempo y casi siempre sale peor: la versión de la biblioteca está probada por millones de personas y contempla casos límite que tú no habrías previsto.</div>
+
+<h2 id="descomponer">6. Descomponer un programa en funciones</h2>
+<p>La descomposición del <a href="tema16.html">Tema 16</a> se materializa aquí. La regla de oro:</p>
+<div class="cc1-concept"><strong class="cc1-concept-tag">Una función, una responsabilidad</strong>Cada función debe hacer <strong>una cosa</strong> y su nombre debe decir cuál. Si al describir lo que hace necesitas la palabra «y» —«calcula la media <em>y</em> la muestra <em>y</em> guarda el resultado»—, casi seguro que son tres funciones.</div>
+<div class="tabla_responsiva"><table class="cc1-table">
+<tr><th>Síntoma</th><th>Qué suele indicar</th></tr>
+<tr><td>La función no cabe en la pantalla</td><td>Hace demasiadas cosas; hay partes que pueden salir.</td></tr>
+<tr><td>Su nombre necesita un «y»</td><td>Tiene más de una responsabilidad.</td></tr>
+<tr><td>Recibe ocho parámetros</td><td>Probablemente esos datos deberían ir juntos en una estructura.</td></tr>
+<tr><td>Hay código repetido en dos sitios</td><td>Ese trozo repetido quiere ser una función.</td></tr>
+<tr><td>Cuesta ponerle nombre</td><td>Todavía no está claro qué hace exactamente.</td></tr>
+</table></div>
+
+<h2 id="separar">7. Separar cálculo, entrada y presentación</h2>
+<p>Es la decisión de diseño más rentable que aprenderás este curso. Un programa tiene tres clases de trabajo, y conviene no mezclarlas:</p>
+<div class="cc1-grid">
+<div class="cc1-card"><h3>Entrada</h3><p>Obtener los datos: del usuario, de un archivo, de la red. Funciones con <code>input()</code>.</p></div>
+<div class="cc1-card"><h3>Cálculo</h3><p>Transformar esos datos en el resultado. Funciones puras: reciben, calculan y devuelven.</p></div>
+<div class="cc1-card"><h3>Presentación</h3><p>Mostrar el resultado con formato. Funciones con <code>print()</code>.</p></div>
+</div>
+<pre tabindex="0" aria-label="Código Python desplazable horizontalmente"><code># Mal: todo mezclado. Imposible de probar sin teclear datos.
+def procesar():
+    n = int(input("Nota: "))
+    if n &gt;= 5:
+        print("Aprobado")
+    else:
+        print("Suspenso")
+
+# Bien: el cálculo está aislado y se puede comprobar solo.
+def calificar(nota):
+    return "Aprobado" if nota &gt;= 5 else "Suspenso"
+
+print(calificar(7))
+print(calificar(3))
+print(calificar(5))</code></pre>
+<pre tabindex="0" aria-label="Salida del programa"><code>Aprobado
+Suspenso
+Aprobado</code></pre>
+<div class="cc1-concept"><strong class="cc1-concept-tag">Por qué esto importa tanto</strong>La función <code>calificar()</code> se puede probar con veinte valores en un segundo, sin teclear nada. La versión mezclada exige ejecutar el programa y escribir a mano cada caso. Como verás en el <a href="tema21.html">Tema 21</a>, <strong>separar el cálculo es lo que hace posible probar un programa</strong>; sin esa separación, comprobar cualquier cosa se vuelve tan lento que se deja de hacer.</div>
+
+<h2 id="documentar">8. Documentar y nombrar</h2>
+<h3>8.1. Docstrings</h3>
+<p>Un <strong>docstring</strong> es una cadena de texto colocada como primera línea de la función. Explica qué hace, y Python la conserva de modo que se puede consultar con <code>help()</code>.</p>
+<pre tabindex="0" aria-label="Código Python desplazable horizontalmente"><code>def calcular_media(numeros):
+    """Devuelve la media aritmética de una lista de números.
+
+    Recibe una lista no vacía de int o float.
+    Con una lista vacía provocaría un error de división por cero.
+    """
+    return sum(numeros) / len(numeros)
+
+print(calcular_media.__doc__.splitlines()[0])</code></pre>
+<pre tabindex="0" aria-label="Salida del programa"><code>Devuelve la media aritmética de una lista de números.</code></pre>
+<div class="cc1-note">💡 Un docstring útil dice <strong>qué recibe, qué devuelve y qué pasa en los casos raros</strong>. No repite el código: nadie necesita leer «suma y divide» si eso ya se ve. Y fíjate en que el ejemplo documenta explícitamente el caso de la lista vacía; documentar un límite conocido vale tanto como resolverlo.</div>
+<h3>8.2. Nombres de función</h3>
+<div class="tabla_responsiva"><table class="cc1-table">
+<tr><th>Criterio</th><th>Bien</th><th>Mal</th></tr>
+<tr><td>Un verbo: la función <em>hace</em> algo</td><td><code>calcular_media()</code></td><td><code>media()</code>, <code>funcion1()</code></td></tr>
+<tr><td>Las que responden sí/no, como pregunta</td><td><code>es_par()</code>, <code>tiene_aprobado()</code></td><td><code>par()</code>, <code>check()</code></td></tr>
+<tr><td>Concreto, no genérico</td><td><code>leer_notas()</code></td><td><code>procesar()</code>, <code>hacer()</code></td></tr>
+<tr><td>En minúsculas con guiones bajos</td><td><code>precio_con_iva()</code></td><td><code>PrecioConIVA()</code></td></tr>
+</table></div>
+
+<h2 id="incremental">9. Un programa completo, paso a paso</h2>
+<p>Reescribamos el programa de estadísticas del <a href="tema18.html">Tema 18</a>, ahora con funciones. Se construye <strong>de forma incremental</strong>: cada función se escribe y se comprueba antes de pasar a la siguiente.</p>
+<h3>9.1. Las funciones de cálculo, probadas por separado</h3>
+<pre tabindex="0" aria-label="Código Python desplazable horizontalmente"><code>def calcular_media(notas):
+    """Devuelve la media de una lista no vacía de notas."""
+    return sum(notas) / len(notas)
+
+def contar_aprobados(notas, minimo=5):
+    """Devuelve cuántas notas alcanzan o superan el mínimo."""
+    aprobados = 0
+    for nota in notas:
+        if nota &gt;= minimo:
+            aprobados += 1
+    return aprobados
+
+def valorar(media):
+    """Devuelve una valoración cualitativa a partir de la media."""
+    if media &gt;= 7:
+        return "resultados buenos"
+    elif media &gt;= 5:
+        return "resultados suficientes"
+    else:
+        return "conviene revisar la unidad"
+
+# Comprobación inmediata, sin teclear nada:
+print(calcular_media([7, 4, 9, 6]))
+print(contar_aprobados([7, 4, 9, 6]))
+print(valorar(6.5))</code></pre>
+<pre tabindex="0" aria-label="Salida del programa"><code>6.5
+3
+resultados suficientes</code></pre>
+<div class="cc1-note">💡 Observa <code>aprobados += 1</code>: es una forma abreviada de <code>aprobados = aprobados + 1</code>. Existen también <code>-=</code>, <code>*=</code> y <code>/=</code>, y son de uso muy común.</div>
+<h3>9.2. Las funciones de entrada y de salida</h3>
+<pre tabindex="0" aria-label="Código Python desplazable horizontalmente"><code>NOTA_MINIMA = 0
+NOTA_MAXIMA = 10
+
+def leer_nota(numero):
+    """Pide una nota válida al usuario y la devuelve."""
+    nota = -1
+    while nota &lt; NOTA_MINIMA or nota &gt; NOTA_MAXIMA:
+        nota = float(input(f"Nota {numero}: "))
+        if nota &lt; NOTA_MINIMA or nota &gt; NOTA_MAXIMA:
+            print(f"Debe estar entre {NOTA_MINIMA} y {NOTA_MAXIMA}.")
+    return nota
+
+def leer_notas(cantidad):
+    """Devuelve una lista con las notas introducidas por el usuario."""
+    notas = []
+    for i in range(cantidad):
+        notas.append(leer_nota(i + 1))
+    return notas
+
+def mostrar_informe(notas):
+    """Muestra por pantalla las estadísticas de una lista de notas."""
+    media = calcular_media(notas)
+    aprobados = contar_aprobados(notas)
+    porcentaje = aprobados / len(notas) * 100
+    print()
+    print(f"Notas introducidas: {len(notas)}")
+    print(f"Media:              {media:.2f}")
+    print(f"Aprobados:          {aprobados} ({porcentaje:.1f} %)")
+    print(f"Valoración:         {valorar(media)}.")</code></pre>
+<h3>9.3. El programa principal</h3>
+<pre tabindex="0" aria-label="Código Python desplazable horizontalmente"><code>cantidad = int(input("¿Cuántas notas? "))
+notas = leer_notas(cantidad)
+mostrar_informe(notas)</code></pre>
+<div class="cc1-concept"><strong class="cc1-concept-tag">Tres líneas que se leen como una frase</strong>El programa principal ha quedado en tres líneas que cualquiera entiende sin bajar a los detalles: <em>pregunta cuántas, léelas, muestra el informe</em>. Toda la complejidad sigue ahí, pero ahora está repartida en piezas de cinco o seis líneas que se entienden y se comprueban por separado. <strong>Eso es la programación modular</strong> del <a href="tema09.html">Tema 9</a>, y es la respuesta completa a la pregunta guía.</div>
+<div class="cc1-think">🤔 <strong>Para pensar:</strong> compara esta versión con la del <a href="tema18.html">Tema 18</a>. Hacen exactamente lo mismo y esta es más larga en total. ¿Por qué merece la pena? Piensa en tres situaciones: cambiar el criterio de aprobado a 6, añadir la nota mínima al informe, y reutilizar el cálculo de la media en otro programa. ¿Cuánto trabajo costaría cada cosa en una versión y en la otra?</div>
+
+<h2 id="glosario">Glosario del tema</h2>
+<dl class="cc1-glosario">
+<dt>Función</dt><dd>Bloque de código con nombre propio que realiza una tarea y puede devolver un resultado.</dd>
+<dt><code>def</code></dt><dd>Palabra clave que define una función; definirla no la ejecuta.</dd>
+<dt>Llamada</dt><dd>Uso de una función escribiendo su nombre seguido de paréntesis.</dd>
+<dt>Parámetro</dt><dd>Nombre que aparece en la definición y recibirá un valor.</dd>
+<dt>Argumento</dt><dd>Valor concreto que se pasa a la función al llamarla.</dd>
+<dt><code>return</code></dt><dd>Instrucción que termina la función y entrega un valor a quien la llamó.</dd>
+<dt>Valor por defecto</dt><dd>Valor que toma un parámetro si no se indica al llamar.</dd>
+<dt>Variable local</dt><dd>Variable creada dentro de una función, que solo existe durante su ejecución.</dd>
+<dt>Encapsulación</dt><dd>Aislamiento del interior de una pieza respecto del resto del programa.</dd>
+<dt>Módulo</dt><dd>Archivo de la biblioteca con funciones agrupadas, que se incorpora con <code>import</code>.</dd>
+<dt>Biblioteca estándar</dt><dd>Conjunto de módulos que vienen incluidos con Python.</dd>
+<dt>Docstring</dt><dd>Cadena de documentación colocada como primera línea de una función.</dd>
+<dt>Una responsabilidad</dt><dd>Criterio según el cual cada función debe hacer una sola cosa.</dd>
+<dt>Programación modular</dt><dd>Organización de un programa en piezas independientes y reutilizables.</dd>
+</dl>
+
+<section class="summary"><h2 id="resumen">Resumen esencial</h2><ol>
+<li>Un programa deja de caber en la cabeza cuando hay que recordar demasiado a la vez; las funciones reparten esa carga.</li>
+<li>Definir una función no la ejecuta: hace falta llamarla.</li>
+<li><code>return</code> entrega un valor reutilizable; <code>print()</code> solo muestra y no deja nada.</li>
+<li>Las variables locales aíslan la función y permiten entenderla por separado.</li>
+<li>Todo lo que necesite una función entra por parámetros y todo lo que produzca sale por <code>return</code>.</li>
+<li>Antes de programar algo, comprueba si ya existe en la biblioteca estándar.</li>
+<li>Una función, una responsabilidad: si su nombre necesita un «y», son varias funciones.</li>
+<li>Separar cálculo, entrada y presentación es lo que hace posible probar un programa.</li>
+<li>Un docstring dice qué recibe, qué devuelve y qué ocurre en los casos raros.</li>
+</ol></section>
+
+<section aria-labelledby="fuentes">
+<h2 id="fuentes">Fuentes y recursos fiables</h2>
+<ul>
+<li id="fuente_1">[1] <a href="https://www.bocm.es/boletin/CM_Orden_BOCM/2023/05/31/BOCM-20230531-18.PDF">Orden 1736/2023, de 19 de mayo, Anexo IV</a> — currículo oficial de Ciencias de la Computación en Bachillerato (PDF).</li>
+<li id="fuente_2">[2] <a href="https://docs.python.org/es/3/tutorial/controlflow.html#defining-functions">Tutorial de Python — Definir funciones</a>.</li>
+<li id="fuente_3">[3] <a href="https://docs.python.org/es/3/library/index.html">Referencia de la biblioteca estándar de Python</a>.</li>
+<li id="fuente_4">[4] <a href="https://peps.python.org/pep-0257/">PEP 257</a> — convenciones para escribir docstrings.</li>
+<li id="fuente_5">[5] <a href="https://www.picuino.com/es/ley-ciencias-computacion-bach.html">Picuino — transcripción navegable del currículo</a>.</li>
+</ul>
+</section>
+</article></div></main>
+<nav class="topic-footer" aria-label="Navegación entre temas"><a href="tema19.html">← Tema 19</a><a href="tema21.html">Tema 21 →</a></nav>
+<footer class="site-footer">Ciencias de la Computación I · 1.º de Bachillerato · Comunidad de Madrid</footer>
+</body></html>

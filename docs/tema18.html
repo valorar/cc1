@@ -1,0 +1,356 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Tema 18 del Bloque E de Ciencias de la Computación I: cómo decide y cómo repite un programa, y cómo se combinan ambas cosas para resolver problemas reales.">
+<title>Tema 18. Estructuras de control: condicionales y bucles · CC1</title><link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/estilos.css"><script src="assets/navegacion.js" defer></script></head>
+<body><a class="skip" href="#contenido">Saltar al contenido</a>
+<div class="progress" aria-hidden="true"><span></span></div>
+<header class="site-header"><div class="header-inner">
+  <a class="brand" href="index.html"><span class="brand-mark">CC1</span><span>Ciencias de la Computación I<small>1.º de Bachillerato · 2026–2027</small></span></a>
+  <nav class="top-nav" aria-label="Navegación principal"><a href="index.html">Índice</a></nav>
+</div></header>
+<main id="contenido">
+<section class="hero"><div class="hero-inner"><div><p class="kicker">Tema 18 · Bloque E · Programación</p><h1>Estructuras de control: condicionales y bucles</h1><p class="hero-lead">Cómo decide y cómo repite un programa, y cómo se combinan ambas cosas para resolver problemas reales.</p></div><aside class="hero-note"><strong>Pregunta guía</strong><p>¿Cómo puede un programa de diez líneas procesar diez mil datos?</p></aside></div></section>
+<div class="layout"><nav class="toc" aria-label="Índice del tema"><strong>En este tema</strong><ol>
+<li><a href="#estructurada">Secuencia, selección e iteración</a></li>
+<li><a href="#sangria">Sentencias y sangría</a></li>
+<li><a href="#if">Selección con <code>if</code>, <code>elif</code> y <code>else</code></a></li>
+<li><a href="#compuestas">Condiciones compuestas y anidamiento</a></li>
+<li><a href="#for">Bucles con <code>for</code></a></li>
+<li><a href="#while">Bucles con <code>while</code></a></li>
+<li><a href="#break">Interrumpir un bucle: <code>break</code> y <code>continue</code></a></li>
+<li><a href="#acumuladores">Contadores y acumuladores</a></li>
+<li><a href="#completo">Combinar estructuras: un programa completo</a></li>
+<li><a href="#glosario">Glosario</a></li>
+<li><a href="#resumen">Resumen</a></li>
+<li><a href="#fuentes">Fuentes</a></li>
+</ol></nav><article class="paper">
+<p class="lesson-intro">Cómo decide y cómo repite un programa, y cómo se combinan ambas cosas para resolver problemas reales.</p>
+<div class="question"><strong>Antes de empezar:</strong> ¿cómo puede un programa de diez líneas procesar diez mil datos?</div>
+<div class="objectives"><strong>Al terminar serás capaz de…</strong><ul>
+<li>reconocer las tres estructuras de la programación estructurada</li>
+<li>escribir condicionales con <code>if</code>, <code>elif</code> y <code>else</code> y anidarlos cuando haga falta</li>
+<li>recorrer secuencias y rangos con <code>for</code></li>
+<li>repetir mientras se cumpla una condición con <code>while</code>, evitando bucles infinitos</li>
+<li>usar contadores y acumuladores para resumir conjuntos de datos</li>
+<li>combinar condicionales y bucles en un programa completo y comprobarlo</li>
+</ul></div>
+
+<h2 id="estructurada">1. Secuencia, selección e iteración</h2>
+<p>Hasta ahora tus programas se ejecutaban de arriba abajo, una línea tras otra. Eso es una <strong>secuencia</strong>, y con ella sola no se llega muy lejos. En el <a href="tema09.html">Tema 9</a> viste que la programación estructurada demostró algo notable: <strong>cualquier programa puede escribirse con solo tres construcciones</strong>.</p>
+<div class="cc1-grid">
+<div class="cc1-card"><h3>Secuencia</h3><p>Una instrucción después de otra, en orden. Es lo que has hecho hasta ahora.</p></div>
+<div class="cc1-card"><h3>Selección</h3><p>Elegir entre caminos alternativos según se cumpla o no una condición. En Python, <code>if</code>.</p></div>
+<div class="cc1-card"><h3>Iteración</h3><p>Repetir un bloque de instrucciones varias veces. En Python, <code>for</code> y <code>while</code>.</p></div>
+</div>
+<div class="cc1-concept"><strong class="cc1-concept-tag">Aquí está la respuesta a la pregunta guía</strong>Un programa de diez líneas procesa diez mil datos porque <strong>el código no crece con los datos</strong>. Un bucle de tres líneas se ejecuta diez, mil o un millón de veces sin cambiar una coma. Esa desproporción entre el tamaño del código y el del trabajo que realiza es lo que hace útil a un ordenador, y es exactamente lo que vas a aprender en este tema.</div>
+
+<h2 id="sangria">2. Sentencias y sangría</h2>
+<p>Una <strong>sentencia simple</strong> es una instrucción que se ejecuta y termina: una asignación, un <code>print()</code>. Una <strong>sentencia estructurada</strong> contiene otras dentro y controla si se ejecutan y cuántas veces.</p>
+<p>En Python, esa contención se marca con la <strong>sangría</strong>: los espacios al principio de la línea. No es una cuestión de estilo, como en otros lenguajes: <strong>en Python la sangría forma parte de la sintaxis</strong>.</p>
+<pre tabindex="0" aria-label="Código Python desplazable horizontalmente"><code>nota = 7
+
+if nota &gt;= 5:
+    print("Aprobado")        # dentro del if: solo si la condición es cierta
+    print("Enhorabuena")     # también dentro
+print("Fin del programa")    # fuera: se ejecuta siempre</code></pre>
+<pre tabindex="0" aria-label="Salida del programa"><code>Aprobado
+Enhorabuena
+Fin del programa</code></pre>
+<div class="tabla_responsiva"><table class="cc1-table">
+<tr><th>Regla</th><th>Detalle</th></tr>
+<tr><td>La cabecera termina en <code>:</code></td><td><code>if</code>, <code>for</code>, <code>while</code> y <code>def</code> siempre llevan dos puntos al final.</td></tr>
+<tr><td>El bloque va sangrado</td><td>Cuatro espacios es la convención universal en Python.</td></tr>
+<tr><td>Coherencia obligatoria</td><td>Todas las líneas del mismo bloque, con la misma sangría exacta.</td></tr>
+<tr><td>No mezclar tabuladores y espacios</td><td>Produce errores difíciles de ver, porque parecen idénticos en pantalla.</td></tr>
+</table></div>
+<div class="cc1-note">💡 A mucha gente le parece raro que los espacios sean significativos, y acaba siendo una de las mejores ideas de Python: <strong>la forma del programa coincide siempre con su estructura</strong>. En lenguajes con llaves, un código mal sangrado puede engañar a quien lo lee; en Python, lo que ves es lo que se ejecuta.</div>
+
+<h2 id="if">3. Selección con <code>if</code>, <code>elif</code> y <code>else</code></h2>
+<h3>3.1. La forma básica</h3>
+<pre tabindex="0" aria-label="Código Python desplazable horizontalmente"><code>nota = 4
+
+if nota &gt;= 5:
+    print("Aprobado")
+else:
+    print("Suspenso")</code></pre>
+<pre tabindex="0" aria-label="Salida del programa"><code>Suspenso</code></pre>
+<h3>3.2. Varias alternativas con <code>elif</code></h3>
+<p>Cuando hay más de dos casos, <code>elif</code> —contracción de <em>else if</em>— encadena condiciones. Python las evalúa <strong>en orden</strong> y ejecuta solo la primera que se cumple:</p>
+<pre tabindex="0" aria-label="Código Python desplazable horizontalmente"><code>nota = 7.5
+
+if nota &gt;= 9:
+    calificacion = "Sobresaliente"
+elif nota &gt;= 7:
+    calificacion = "Notable"
+elif nota &gt;= 6:
+    calificacion = "Bien"
+elif nota &gt;= 5:
+    calificacion = "Suficiente"
+else:
+    calificacion = "Insuficiente"
+
+print(f"Nota {nota}: {calificacion}")</code></pre>
+<pre tabindex="0" aria-label="Salida del programa"><code>Nota 7.5: Notable</code></pre>
+<div class="cc1-concept"><strong class="cc1-concept-tag">El orden importa</strong>Fíjate en que la segunda condición es <code>nota &gt;= 7</code> a secas, sin necesidad de añadir «y menor que 9». No hace falta: si el programa ha llegado hasta ahí, es porque la primera condición <em>no</em> se cumplió. Aprovechar eso hace el código mucho más corto y legible… pero obliga a <strong>ordenar las condiciones de la más restrictiva a la más general</strong>. Si pusieras <code>nota &gt;= 5</code> la primera, todo el mundo sacaría «Suficiente».</div>
+<div class="aviso"><strong>Un error de lógica que no da ningún aviso</strong>Invertir el orden de los <code>elif</code> produce un programa que se ejecuta perfectamente y responde mal siempre. Python no puede detectarlo: sintácticamente es correcto. Es el <strong>error de lógica</strong> del <a href="tema09.html">Tema 9</a>, y la única forma de encontrarlo es probar con ejemplos de cada tramo.</div>
+
+<h2 id="compuestas">4. Condiciones compuestas y anidamiento</h2>
+<h3>4.1. Combinar condiciones</h3>
+<pre tabindex="0" aria-label="Código Python desplazable horizontalmente"><code>nota = 6
+asistencia = 85
+
+if nota &gt;= 5 and asistencia &gt;= 80:
+    print("Apto")
+else:
+    print("No apto")</code></pre>
+<pre tabindex="0" aria-label="Salida del programa"><code>Apto</code></pre>
+<h3>4.2. Anidar condicionales</h3>
+<p>Un <code>if</code> puede contener otro dentro. Sirve cuando la segunda pregunta <strong>solo tiene sentido</strong> si la primera se cumplió:</p>
+<pre tabindex="0" aria-label="Código Python desplazable horizontalmente"><code>nota = 6
+asistencia = 60
+
+if nota &gt;= 5:
+    if asistencia &gt;= 80:
+        print("Apto")
+    else:
+        print("Nota suficiente, pero falta asistencia")
+else:
+    print("No apto por nota")</code></pre>
+<pre tabindex="0" aria-label="Salida del programa"><code>Nota suficiente, pero falta asistencia</code></pre>
+<div class="cc1-note">💡 El anidamiento se paga en legibilidad: cada nivel añade cuatro espacios y una cosa más que recordar. Si te encuentras con cuatro niveles, casi siempre hay una forma más plana de escribirlo, y en el <a href="tema20.html">Tema 20</a> verás la herramienta que lo resuelve: separar en funciones.</div>
+
+<h2 id="for">5. Bucles con <code>for</code></h2>
+<p>El bucle <code>for</code> recorre los elementos de una secuencia, uno a uno, ejecutando el bloque una vez por elemento.</p>
+<h3>5.1. Recorrer un rango</h3>
+<p>La función <code>range()</code> genera una sucesión de números:</p>
+<pre tabindex="0" aria-label="Código Python desplazable horizontalmente"><code>for i in range(5):
+    print(i, end=" ")
+print()
+
+for i in range(1, 6):
+    print(i, end=" ")
+print()
+
+for i in range(0, 21, 5):
+    print(i, end=" ")
+print()</code></pre>
+<pre tabindex="0" aria-label="Salida del programa"><code>0 1 2 3 4 
+1 2 3 4 5 
+0 5 10 15 20 </code></pre>
+<div class="cc1-concept"><strong class="cc1-concept-tag">El límite superior no se incluye</strong><code>range(5)</code> produce <strong>0, 1, 2, 3, 4</strong>: cinco valores empezando en cero y <em>sin llegar</em> al 5. Es la convención de casi todos los lenguajes y la fuente inagotable del llamado <em>error por uno</em>: un bucle que da una vuelta de más o de menos. Cuando un programa falla justo en el primer o el último elemento, mira aquí antes que en ningún otro sitio.</div>
+<h3>5.2. Recorrer una secuencia</h3>
+<pre tabindex="0" aria-label="Código Python desplazable horizontalmente"><code>notas = [7, 4, 9, 5, 8]
+
+for nota in notas:
+    if nota &gt;= 5:
+        print(nota, "aprobado")
+    else:
+        print(nota, "suspenso")</code></pre>
+<pre tabindex="0" aria-label="Salida del programa"><code>7 aprobado
+4 suspenso
+9 aprobado
+5 aprobado
+8 aprobado</code></pre>
+<p>También se recorren las cadenas de texto, carácter a carácter:</p>
+<pre tabindex="0" aria-label="Código Python desplazable horizontalmente"><code>for letra in "Python":
+    print(letra, end="-")
+print()</code></pre>
+<pre tabindex="0" aria-label="Salida del programa"><code>P-y-t-h-o-n-</code></pre>
+<div class="cc1-note">💡 Las listas son el contenido del <a href="tema19.html">Tema 19</a>. Aquí basta con que sepas que existen y que un <code>for</code> las recorre: es la combinación que hace posible procesar conjuntos de datos.</div>
+
+<h2 id="while">6. Bucles con <code>while</code></h2>
+<p><code>while</code> repite <strong>mientras</strong> una condición sea cierta. Se usa cuando no se sabe de antemano cuántas vueltas harán falta.</p>
+<pre tabindex="0" aria-label="Código Python desplazable horizontalmente"><code>saldo = 100
+mes = 0
+
+while saldo &gt; 0:
+    saldo = saldo - 30
+    mes = mes + 1
+    print(f"Mes {mes}: quedan {saldo} €")
+
+print(f"El saldo se agotó en {mes} meses.")</code></pre>
+<pre tabindex="0" aria-label="Salida del programa"><code>Mes 1: quedan 70 €
+Mes 2: quedan 40 €
+Mes 3: quedan 10 €
+Mes 4: quedan -20 €
+El saldo se agotó en 4 meses.</code></pre>
+<div class="cc1-concept"><strong class="cc1-concept-tag">Cuándo usar cada bucle</strong>Usa <strong><code>for</code></strong> cuando sepas sobre qué vas a iterar: los elementos de una lista, los números de un rango, las letras de un texto. Usa <strong><code>while</code></strong> cuando la repetición dependa de una condición que puede cambiar: hasta que el usuario escriba algo válido, hasta que se agote un saldo, hasta que se alcance una precisión. Regla práctica: si sabes contar las vueltas, <code>for</code>.</div>
+<h3>6.1. Bucles infinitos</h3>
+<div class="aviso"><strong>Todo <code>while</code> necesita una condición que pueda dejar de cumplirse</strong>Si dentro del bucle no cambia nada de lo que aparece en la condición, el bucle no terminará nunca. En un Notebook lo notarás porque la celda se queda ejecutando indefinidamente; se detiene con el botón de parada o interrumpiendo la ejecución. Antes de escribir un <code>while</code>, pregúntate siempre: <em>¿qué línea de dentro va a hacer que esto acabe?</em></div>
+<pre tabindex="0" aria-label="Código Python desplazable horizontalmente"><code># Bucle infinito: 'i' nunca cambia
+i = 0
+while i &lt; 5:
+    print("Hola")
+
+# Correcto: 'i' avanza en cada vuelta
+i = 0
+while i &lt; 5:
+    print("Hola")
+    i = i + 1</code></pre>
+<h3>6.2. El patrón de validación</h3>
+<p>El uso más frecuente de <code>while</code> en programas sencillos es insistir hasta obtener un dato correcto:</p>
+<pre tabindex="0" aria-label="Código Python desplazable horizontalmente"><code>nota = -1
+while nota &lt; 0 or nota &gt; 10:
+    nota = float(input("Introduce una nota de 0 a 10: "))
+    if nota &lt; 0 or nota &gt; 10:
+        print("Fuera de rango, inténtalo de nuevo.")
+
+print(f"Nota registrada: {nota}")</code></pre>
+
+<h2 id="break">7. Interrumpir un bucle: <code>break</code> y <code>continue</code></h2>
+<div class="tabla_responsiva"><table class="cc1-table">
+<tr><th>Instrucción</th><th>Qué hace</th></tr>
+<tr><td><code>break</code></td><td>Sale del bucle inmediatamente y continúa con lo que venga después.</td></tr>
+<tr><td><code>continue</code></td><td>Salta el resto de esta vuelta y pasa directamente a la siguiente.</td></tr>
+</table></div>
+<pre tabindex="0" aria-label="Código Python desplazable horizontalmente"><code>notas = [7, 4, 9, -1, 8, 5]
+
+for nota in notas:
+    if nota == -1:
+        print("Marca de fin encontrada; se detiene el recorrido.")
+        break
+    if nota &lt; 5:
+        continue          # los suspensos no se muestran
+    print("Aprobado con", nota)</code></pre>
+<pre tabindex="0" aria-label="Salida del programa"><code>Aprobado con 7
+Aprobado con 9
+Marca de fin encontrada; se detiene el recorrido.</code></pre>
+<div class="cc1-note">💡 Ambas son útiles con moderación. Un bucle lleno de <code>break</code> y <code>continue</code> se vuelve difícil de seguir, porque hay que rastrear todas las salidas posibles. Si te salen tres o cuatro, suele ser señal de que la condición del bucle debería estar planteada de otra forma.</div>
+
+<h2 id="acumuladores">8. Contadores y acumuladores</h2>
+<p>Dos patrones que aparecerán en casi todos tus programas y conviene reconocer de inmediato:</p>
+<div class="cc1-grid">
+<div class="cc1-card"><h3>Contador</h3><p>Una variable que empieza en <strong>0</strong> y aumenta de uno en uno cuando ocurre algo. Responde a «cuántos».</p></div>
+<div class="cc1-card"><h3>Acumulador</h3><p>Una variable que empieza en <strong>0</strong> y va sumando valores. Responde a «cuánto en total».</p></div>
+</div>
+<pre tabindex="0" aria-label="Código Python desplazable horizontalmente"><code>notas = [7, 4, 9, 5, 8, 3]
+
+suma = 0          # acumulador
+aprobados = 0     # contador
+maxima = notas[0] # mejor valor encontrado hasta ahora
+
+for nota in notas:
+    suma = suma + nota
+    if nota &gt;= 5:
+        aprobados = aprobados + 1
+    if nota &gt; maxima:
+        maxima = nota
+
+media = suma / len(notas)
+
+print(f"Notas evaluadas: {len(notas)}")
+print(f"Aprobados: {aprobados}")
+print(f"Nota máxima: {maxima}")
+print(f"Media: {media:.2f}")</code></pre>
+<pre tabindex="0" aria-label="Salida del programa"><code>Notas evaluadas: 6
+Aprobados: 4
+Nota máxima: 9
+Media: 6.00</code></pre>
+<div class="cc1-concept"><strong class="cc1-concept-tag">El algoritmo del <a href="tema01.html">Tema 1</a>, ya programado</strong>La parte de <code>maxima</code> es exactamente el algoritmo de «encontrar el mayor» que leíste en el <a href="tema01.html">Tema 1</a>: tomar el primero como mayor provisional, comparar con cada siguiente y sustituir si procede. Cinco pasos en español se han convertido en cuatro líneas de Python.</div>
+<div class="aviso"><strong>Inicializar antes del bucle</strong>Las tres variables se crean <strong>antes</strong> del <code>for</code>, no dentro. Si <code>suma = 0</code> estuviera dentro del bucle, se pondría a cero en cada vuelta y el resultado final sería siempre la última nota. Es un error clásico y silencioso: el programa funciona, pero responde mal.</div>
+<div class="cc1-note">💡 Fíjate también en <code>maxima = notas[0]</code>: si la lista estuviera vacía, esa línea fallaría. Es el caso límite que planteamos en el <a href="tema16.html">Tema 16</a>, y decidir qué hacer con él forma parte del trabajo.</div>
+
+<h2 id="completo">9. Combinar estructuras: un programa completo</h2>
+<p>Este programa reúne todo el tema: entrada validada con <code>while</code>, recorrido con <code>for</code>, contadores, acumuladores y selección múltiple.</p>
+<pre tabindex="0" aria-label="Código Python desplazable horizontalmente"><code># Estadísticas de las notas de un examen.
+NOTA_MINIMA = 0
+NOTA_MAXIMA = 10
+
+# 1. Cuántas notas se van a introducir (validado)
+cantidad = 0
+while cantidad &lt; 1:
+    cantidad = int(input("¿Cuántas notas? "))
+    if cantidad &lt; 1:
+        print("Debe ser al menos 1.")
+
+# 2. Lectura de las notas, validando cada una
+notas = []
+for i in range(cantidad):
+    nota = -1
+    while nota &lt; NOTA_MINIMA or nota &gt; NOTA_MAXIMA:
+        nota = float(input(f"Nota {i + 1}: "))
+        if nota &lt; NOTA_MINIMA or nota &gt; NOTA_MAXIMA:
+            print(f"Debe estar entre {NOTA_MINIMA} y {NOTA_MAXIMA}.")
+    notas.append(nota)
+
+# 3. Cálculo de las estadísticas
+suma = 0
+aprobados = 0
+for nota in notas:
+    suma = suma + nota
+    if nota &gt;= 5:
+        aprobados = aprobados + 1
+
+media = suma / cantidad
+porcentaje = aprobados / cantidad * 100
+
+# 4. Presentación de los resultados
+print()
+print(f"Notas introducidas: {cantidad}")
+print(f"Media:              {media:.2f}")
+print(f"Aprobados:          {aprobados} ({porcentaje:.1f} %)")
+
+if media &gt;= 7:
+    print("Valoración: resultados buenos.")
+elif media &gt;= 5:
+    print("Valoración: resultados suficientes.")
+else:
+    print("Valoración: conviene revisar la unidad.")</code></pre>
+<pre tabindex="0" aria-label="Ejemplo de ejecución"><code>¿Cuántas notas? 4
+Nota 1: 7
+Nota 2: 4
+Nota 3: 9
+Nota 4: 6
+
+Notas introducidas: 4
+Media:              6.50
+Aprobados:          3 (75.0 %)
+Valoración: resultados suficientes.</code></pre>
+<div class="cc1-concept"><strong class="cc1-concept-tag">Fíjate en la estructura</strong>El programa está dividido en cuatro bloques con un comentario cada uno: <strong>leer, validar, calcular y presentar</strong>. No es casualidad ni adorno: es la descomposición del <a href="tema16.html">Tema 16</a> aplicada. En el <a href="tema20.html">Tema 20</a> cada uno de esos bloques se convertirá en una función con nombre propio, y el programa cabrá en diez líneas legibles.</div>
+<div class="cc1-think">🤔 <strong>Para pensar:</strong> prueba este programa con casos límite. ¿Qué ocurre si introduces una sola nota? ¿Y si todas son un 5 exacto? ¿Y si escribes «siete» en lugar de 7? Los dos primeros casos deben funcionar; el tercero detendrá el programa con un <code>ValueError</code>. Que un caso límite falle no es necesariamente un fallo: lo que sí sería un fallo es <em>no saber</em> que falla.</div>
+
+<h2 id="glosario">Glosario del tema</h2>
+<dl class="cc1-glosario">
+<dt>Secuencia</dt><dd>Ejecución de instrucciones una tras otra en el orden escrito.</dd>
+<dt>Selección</dt><dd>Estructura que elige entre caminos alternativos según una condición.</dd>
+<dt>Iteración</dt><dd>Estructura que repite un bloque de instrucciones.</dd>
+<dt>Sangría</dt><dd>Espacios iniciales que en Python delimitan los bloques; forman parte de la sintaxis.</dd>
+<dt>Sentencia estructurada</dt><dd>Instrucción que contiene otras y controla su ejecución.</dd>
+<dt><code>elif</code></dt><dd>Rama adicional de un condicional, evaluada solo si fallaron las anteriores.</dd>
+<dt><code>range()</code></dt><dd>Función que genera una sucesión de enteros; el límite superior no se incluye.</dd>
+<dt>Error por uno</dt><dd>Fallo por dar una vuelta de más o de menos en un bucle.</dd>
+<dt>Bucle infinito</dt><dd>Bucle cuya condición nunca deja de cumplirse.</dd>
+<dt><code>break</code></dt><dd>Instrucción que sale inmediatamente del bucle.</dd>
+<dt><code>continue</code></dt><dd>Instrucción que salta al siguiente ciclo del bucle.</dd>
+<dt>Contador</dt><dd>Variable que cuenta cuántas veces ocurre algo.</dd>
+<dt>Acumulador</dt><dd>Variable que va sumando valores a lo largo de un recorrido.</dd>
+<dt>Inicialización</dt><dd>Dar valor de partida a una variable antes de entrar en el bucle.</dd>
+</dl>
+
+<section class="summary"><h2 id="resumen">Resumen esencial</h2><ol>
+<li>Con secuencia, selección e iteración se puede escribir cualquier programa.</li>
+<li>El código no crece con los datos: por eso diez líneas procesan diez mil valores.</li>
+<li>En Python la sangría es sintaxis: la forma del programa coincide con su estructura.</li>
+<li>Los <code>elif</code> se evalúan en orden, así que hay que ir de la condición más restrictiva a la más general.</li>
+<li>Un <code>elif</code> mal ordenado produce un error de lógica que Python no puede detectar.</li>
+<li><code>for</code> cuando sepas sobre qué iterar; <code>while</code> cuando la repetición dependa de una condición.</li>
+<li>El límite superior de <code>range()</code> no se incluye, y de ahí sale el error por uno.</li>
+<li>Todo <code>while</code> necesita algo dentro que pueda hacer falsa su condición.</li>
+<li>Contadores y acumuladores se inicializan antes del bucle, nunca dentro.</li>
+</ol></section>
+
+<section aria-labelledby="fuentes">
+<h2 id="fuentes">Fuentes y recursos fiables</h2>
+<ul>
+<li id="fuente_1">[1] <a href="https://www.bocm.es/boletin/CM_Orden_BOCM/2023/05/31/BOCM-20230531-18.PDF">Orden 1736/2023, de 19 de mayo, Anexo IV</a> — currículo oficial de Ciencias de la Computación en Bachillerato (PDF).</li>
+<li id="fuente_2">[2] <a href="https://docs.python.org/es/3/tutorial/controlflow.html">Tutorial de Python — Estructuras de control de flujo</a>.</li>
+<li id="fuente_3">[3] <a href="https://docs.python.org/es/3/reference/compound_stmts.html">Documentación de Python — Sentencias compuestas</a>.</li>
+<li id="fuente_4">[4] <a href="https://peps.python.org/pep-0008/">PEP 8</a> — guía de estilo de Python, origen de la convención de cuatro espacios.</li>
+<li id="fuente_5">[5] <a href="https://www.picuino.com/es/ley-ciencias-computacion-bach.html">Picuino — transcripción navegable del currículo</a>.</li>
+</ul>
+</section>
+</article></div></main>
+<nav class="topic-footer" aria-label="Navegación entre temas"><a href="tema17.html">← Tema 17</a><a href="tema19.html">Tema 19 →</a></nav>
+<footer class="site-footer">Ciencias de la Computación I · 1.º de Bachillerato · Comunidad de Madrid</footer>
+</body></html>

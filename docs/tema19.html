@@ -1,0 +1,336 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Tema 19 del Bloque E de Ciencias de la Computación I: cómo guardar muchos datos en una sola variable y cómo recorrerlos, buscarlos y transformarlos.">
+<title>Tema 19. Listas y cadenas: trabajar con conjuntos de datos · CC1</title><link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/estilos.css"><script src="assets/navegacion.js" defer></script></head>
+<body><a class="skip" href="#contenido">Saltar al contenido</a>
+<div class="progress" aria-hidden="true"><span></span></div>
+<header class="site-header"><div class="header-inner">
+  <a class="brand" href="index.html"><span class="brand-mark">CC1</span><span>Ciencias de la Computación I<small>1.º de Bachillerato · 2026–2027</small></span></a>
+  <nav class="top-nav" aria-label="Navegación principal"><a href="index.html">Índice</a></nav>
+</div></header>
+<main id="contenido">
+<section class="hero"><div class="hero-inner"><div><p class="kicker">Tema 19 · Bloque E · Programación</p><h1>Listas y cadenas: trabajar con conjuntos de datos</h1><p class="hero-lead">Cómo guardar muchos datos en una sola variable y cómo recorrerlos, buscarlos y transformarlos.</p></div><aside class="hero-note"><strong>Pregunta guía</strong><p>¿Cómo guardas las notas de treinta alumnos sin crear treinta variables?</p></aside></div></section>
+<div class="layout"><nav class="toc" aria-label="Índice del tema"><strong>En este tema</strong><ol>
+<li><a href="#porque">Por qué hacen falta las colecciones</a></li>
+<li><a href="#listas">Listas: creación, índices y recorrido</a></li>
+<li><a href="#modificar">Añadir, modificar y eliminar</a></li>
+<li><a href="#buscar">Buscar, ordenar y resumir</a></li>
+<li><a href="#acumular">Listas y bucles: construir resultados</a></li>
+<li><a href="#cadenas">Las cadenas también son secuencias</a></li>
+<li><a href="#metodos">Métodos de cadena</a></li>
+<li><a href="#codificacion">Codificación de caracteres: ASCII y Unicode</a></li>
+<li><a href="#tablas">Listas de listas: tablas sencillas</a></li>
+<li><a href="#elegir">Elegir la estructura adecuada</a></li>
+<li><a href="#glosario">Glosario</a></li>
+<li><a href="#resumen">Resumen</a></li>
+<li><a href="#fuentes">Fuentes</a></li>
+</ol></nav><article class="paper">
+<p class="lesson-intro">Cómo guardar muchos datos en una sola variable y cómo recorrerlos, buscarlos y transformarlos.</p>
+<div class="question"><strong>Antes de empezar:</strong> ¿cómo guardas las notas de treinta alumnos sin crear treinta variables?</div>
+<div class="objectives"><strong>Al terminar serás capaz de…</strong><ul>
+<li>crear listas, acceder por índice y recorrerlas con un bucle</li>
+<li>añadir, modificar, eliminar y buscar elementos</li>
+<li>ordenar y resumir una lista con las funciones habituales</li>
+<li>construir una lista nueva a partir de otra dentro de un bucle</li>
+<li>manipular cadenas con troceado y métodos</li>
+<li>explicar qué son ASCII y Unicode y por qué importan</li>
+<li>representar una tabla con listas anidadas y elegir la estructura adecuada</li>
+</ul></div>
+
+<h2 id="porque">1. Por qué hacen falta las colecciones</h2>
+<p>Con lo que sabes hasta ahora, guardar las notas de un grupo exigiría escribir <code>nota1</code>, <code>nota2</code>, <code>nota3</code>… hasta treinta. Y después habría que sumarlas una a una. Con cuarenta alumnos, habría que reescribir el programa.</p>
+<div class="cc1-concept"><strong class="cc1-concept-tag">Aquí está la respuesta a la pregunta guía</strong>Una <strong>lista</strong> guarda muchos valores bajo un único nombre. Combinada con el bucle <code>for</code> del <a href="tema18.html">Tema 18</a>, permite escribir un programa que funciona igual con tres notas que con tres mil, <strong>sin cambiar una línea</strong>. El texto oficial del currículo habla de «vectores»; en Python su realización natural son las listas.</div>
+
+<h2 id="listas">2. Listas: creación, índices y recorrido</h2>
+<p>Una lista se escribe entre corchetes, con los elementos separados por comas:</p>
+<pre tabindex="0" aria-label="Código Python desplazable horizontalmente"><code>notas = [7, 4, 9, 5, 8]
+nombres = ["Ana", "Luis", "Marta"]
+mezclada = [1, "dos", 3.0, True]
+vacia = []
+
+print(notas)
+print(len(notas))     # cuántos elementos tiene</code></pre>
+<pre tabindex="0" aria-label="Salida del programa"><code>[7, 4, 9, 5, 8]
+5</code></pre>
+<h3>2.1. Índices</h3>
+<p>Cada elemento ocupa una posición, y <strong>se empieza a contar desde cero</strong>:</p>
+<div class="tabla_responsiva"><table class="cc1-table">
+<tr><th>Elemento</th><td>7</td><td>4</td><td>9</td><td>5</td><td>8</td></tr>
+<tr><th>Índice positivo</th><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td></tr>
+<tr><th>Índice negativo</th><td>−5</td><td>−4</td><td>−3</td><td>−2</td><td>−1</td></tr>
+</table></div>
+<pre tabindex="0" aria-label="Código Python desplazable horizontalmente"><code>notas = [7, 4, 9, 5, 8]
+
+print(notas[0])     # primero
+print(notas[2])     # tercero
+print(notas[-1])    # último
+print(notas[1:4])   # troceado: del 1 al 3, sin incluir el 4</code></pre>
+<pre tabindex="0" aria-label="Salida del programa"><code>7
+9
+8
+[4, 9, 5]</code></pre>
+<div class="aviso"><strong>El último índice es <code>len - 1</code></strong>Una lista de 5 elementos tiene índices del 0 al 4. Escribir <code>notas[5]</code> produce un <code>IndexError</code>. Es el mismo <em>error por uno</em> del <a href="tema18.html">Tema 18</a>, y por eso <code>notas[-1]</code> resulta tan cómodo: da el último elemento sin tener que calcular nada.</div>
+<h3>2.2. Recorrer una lista</h3>
+<pre tabindex="0" aria-label="Código Python desplazable horizontalmente"><code>notas = [7, 4, 9]
+
+# Forma habitual: recorrer los valores
+for nota in notas:
+    print(nota)
+
+# Cuando además necesitas la posición
+for i, nota in enumerate(notas):
+    print(f"Nota {i + 1}: {nota}")</code></pre>
+<pre tabindex="0" aria-label="Salida del programa"><code>7
+4
+9
+Nota 1: 7
+Nota 2: 4
+Nota 3: 9</code></pre>
+
+<h2 id="modificar">3. Añadir, modificar y eliminar</h2>
+<p>A diferencia de las cadenas, las listas se pueden <strong>modificar</strong> después de creadas:</p>
+<pre tabindex="0" aria-label="Código Python desplazable horizontalmente"><code>notas = [7, 4, 9]
+
+notas[1] = 6            # modificar por índice
+notas.append(8)         # añadir al final
+notas.insert(0, 10)     # insertar en una posición
+print(notas)
+
+notas.remove(6)         # eliminar la primera aparición de un valor
+ultima = notas.pop()    # sacar el último y quedárselo
+print(notas, "| retirada:", ultima)</code></pre>
+<pre tabindex="0" aria-label="Salida del programa"><code>[10, 7, 6, 9, 8]
+[10, 7, 9] | retirada: 8</code></pre>
+<div class="tabla_responsiva"><table class="cc1-table">
+<tr><th>Operación</th><th>Qué hace</th></tr>
+<tr><td><code>lista.append(x)</code></td><td>Añade <code>x</code> al final.</td></tr>
+<tr><td><code>lista.insert(i, x)</code></td><td>Inserta <code>x</code> en la posición <code>i</code>.</td></tr>
+<tr><td><code>lista.remove(x)</code></td><td>Elimina la primera aparición del valor <code>x</code>.</td></tr>
+<tr><td><code>lista.pop()</code></td><td>Saca y devuelve el último elemento.</td></tr>
+<tr><td><code>lista.pop(i)</code></td><td>Saca y devuelve el elemento de la posición <code>i</code>.</td></tr>
+<tr><td><code>lista.clear()</code></td><td>Vacía la lista.</td></tr>
+</table></div>
+<div class="aviso"><strong>No modifiques una lista mientras la recorres</strong>Si eliminas elementos dentro de un <code>for</code> que está recorriendo esa misma lista, las posiciones se desplazan y el bucle se saltará elementos sin avisar. La solución habitual es <strong>construir una lista nueva</strong> con lo que quieres conservar, como verás en el apartado 5.</div>
+
+<h2 id="buscar">4. Buscar, ordenar y resumir</h2>
+<pre tabindex="0" aria-label="Código Python desplazable horizontalmente"><code>notas = [7, 4, 9, 5, 8, 4]
+
+print(9 in notas)          # ¿está el 9?
+print(notas.index(9))      # ¿en qué posición?
+print(notas.count(4))      # ¿cuántas veces aparece el 4?
+
+print(len(notas))          # cuántos elementos
+print(sum(notas))          # suma
+print(max(notas), min(notas))
+print(sum(notas) / len(notas))</code></pre>
+<pre tabindex="0" aria-label="Salida del programa"><code>True
+2
+2
+6
+37
+9 4
+6.166666666666667</code></pre>
+<div class="cc1-note">💡 Estas funciones sustituyen a los contadores y acumuladores que escribiste a mano en el <a href="tema18.html">Tema 18</a>. Escribirlos a mano sirvió para entender el mecanismo; ahora que lo entiendes, usa <code>sum()</code> y <code>max()</code>: son más cortos, más rápidos y más difíciles de equivocar.</div>
+<h3>4.1. Ordenar</h3>
+<pre tabindex="0" aria-label="Código Python desplazable horizontalmente"><code>notas = [7, 4, 9, 5]
+
+ordenadas = sorted(notas)          # devuelve una lista nueva
+print(ordenadas)
+print(notas)                       # la original no cambia
+
+print(sorted(notas, reverse=True)) # de mayor a menor
+
+notas.sort()                       # ordena la propia lista
+print(notas)</code></pre>
+<pre tabindex="0" aria-label="Salida del programa"><code>[4, 5, 7, 9]
+[7, 4, 9, 5]
+[9, 7, 5, 4]
+[4, 5, 7, 9]</code></pre>
+<div class="cc1-concept"><strong class="cc1-concept-tag">Dos familias de operaciones</strong>Fíjate en la diferencia, porque se repite por toda la biblioteca de Python: <code>sorted(lista)</code> <strong>devuelve una lista nueva</strong> y deja intacta la original; <code>lista.sort()</code> <strong>modifica la lista</strong> y no devuelve nada. Escribir <code>notas = notas.sort()</code> es un error clásico: deja <code>notas</code> valiendo <code>None</code>.</div>
+
+<h2 id="acumular">5. Listas y bucles: construir resultados</h2>
+<p>El patrón más útil de todo el tema: empezar con una lista vacía e ir añadiendo lo que interesa.</p>
+<pre tabindex="0" aria-label="Código Python desplazable horizontalmente"><code>notas = [7, 4, 9, 5, 8, 3]
+
+# Filtrar: quedarse con los que cumplen una condición
+aprobadas = []
+for nota in notas:
+    if nota &gt;= 5:
+        aprobadas.append(nota)
+
+# Transformar: aplicar un cálculo a cada elemento
+sobre_100 = []
+for nota in notas:
+    sobre_100.append(nota * 10)
+
+print("Aprobadas:", aprobadas)
+print("Sobre 100:", sobre_100)</code></pre>
+<pre tabindex="0" aria-label="Salida del programa"><code>Aprobadas: [7, 9, 5, 8]
+Sobre 100: [70, 40, 90, 50, 80, 30]</code></pre>
+<div class="cc1-concept"><strong class="cc1-concept-tag">Tres operaciones que lo resuelven casi todo</strong><strong>Filtrar</strong> (quedarse con algunos), <strong>transformar</strong> (aplicar un cálculo a cada uno) y <strong>resumir</strong> (reducir todos a un valor). Casi cualquier tratamiento de datos es una combinación de estas tres, y las tres se escriben con el mismo esqueleto: lista vacía, bucle, condición o cálculo, <code>append</code>.</div>
+
+<h2 id="cadenas">6. Las cadenas también son secuencias</h2>
+<p>Una cadena de texto es una secuencia de caracteres, así que casi todo lo de las listas vale para ella:</p>
+<pre tabindex="0" aria-label="Código Python desplazable horizontalmente"><code>palabra = "Computación"
+
+print(len(palabra))
+print(palabra[0])
+print(palabra[-1])
+print(palabra[0:5])     # troceado
+print(palabra[::-1])    # al revés
+print("uta" in palabra)</code></pre>
+<pre tabindex="0" aria-label="Salida del programa"><code>11
+C
+n
+Compu
+nóicatupmoC
+True</code></pre>
+<div class="aviso"><strong>Las cadenas no se pueden modificar</strong>Intentar <code>palabra[0] = "c"</code> produce un <code>TypeError</code>. Se dice que las cadenas son <strong>inmutables</strong>: no se cambian, se crean nuevas. Por eso todos los métodos del apartado siguiente <em>devuelven una cadena nueva</em> en lugar de alterar la original. Es la diferencia principal entre una lista y una cadena.</div>
+
+<h2 id="metodos">7. Métodos de cadena</h2>
+<pre tabindex="0" aria-label="Código Python desplazable horizontalmente"><code>texto = "  Ciencias de la Computación  "
+
+print(texto.strip())               # quita espacios de los extremos
+print(texto.strip().upper())
+print(texto.strip().lower())
+print(texto.strip().replace("Ciencias", "Ciencia"))
+print(texto.strip().startswith("Ciencias"))</code></pre>
+<pre tabindex="0" aria-label="Salida del programa"><code>Ciencias de la Computación
+CIENCIAS DE LA COMPUTACIÓN
+ciencias de la computación
+Ciencia de la Computación
+True</code></pre>
+<h3>7.1. Partir y unir</h3>
+<p>Los dos métodos que conectan el mundo del texto con el de las listas:</p>
+<pre tabindex="0" aria-label="Código Python desplazable horizontalmente"><code>linea = "Ana;7;Getafe"
+campos = linea.split(";")
+print(campos)
+print(campos[0], "sacó un", campos[1])
+
+palabras = ["datos", "en", "una", "lista"]
+print(" ".join(palabras))
+print("-".join(palabras))</code></pre>
+<pre tabindex="0" aria-label="Salida del programa"><code>['Ana', '7', 'Getafe']
+Ana sacó un 7
+datos en una lista
+datos-en-una-lista</code></pre>
+<div class="cc1-note">💡 Ese ejemplo es exactamente una línea de un archivo CSV como los del <a href="tema12.html">Tema 12</a>. Con <code>split()</code> y un bucle ya tendrías lo básico para procesar un archivo de datos; leer archivos desde Python es contenido de Ciencias de la Computación II.</div>
+<div class="tabla_responsiva"><table class="cc1-table">
+<tr><th>Método</th><th>Qué devuelve</th></tr>
+<tr><td><code>.strip()</code></td><td>La cadena sin espacios al principio ni al final.</td></tr>
+<tr><td><code>.upper()</code> / <code>.lower()</code></td><td>Todo en mayúsculas o en minúsculas.</td></tr>
+<tr><td><code>.replace(a, b)</code></td><td>Una cadena con todas las apariciones de <code>a</code> sustituidas por <code>b</code>.</td></tr>
+<tr><td><code>.split(sep)</code></td><td>Una <strong>lista</strong> con los trozos separados por <code>sep</code>.</td></tr>
+<tr><td><code>sep.join(lista)</code></td><td>Una <strong>cadena</strong> con los elementos unidos por <code>sep</code>.</td></tr>
+<tr><td><code>.isdigit()</code></td><td><code>True</code> si todos los caracteres son dígitos. Útil antes de convertir.</td></tr>
+</table></div>
+<pre tabindex="0" aria-label="Código Python desplazable horizontalmente"><code>respuesta = "42"
+if respuesta.isdigit():
+    print(int(respuesta) * 2)
+else:
+    print("Eso no es un número entero.")</code></pre>
+<pre tabindex="0" aria-label="Salida del programa"><code>84</code></pre>
+<div class="cc1-note">💡 Ese <code>isdigit()</code> resuelve el problema que quedó abierto en el <a href="tema17.html">Tema 17</a>: comprobar la entrada <em>antes</em> de convertirla, en lugar de que el programa se detenga con un <code>ValueError</code>.</div>
+
+<h2 id="codificacion">8. Codificación de caracteres: ASCII y Unicode</h2>
+<p>En el <a href="tema04.html">Tema 4</a> quedó pendiente una pregunta: si un ordenador solo guarda números, ¿cómo guarda una letra? La respuesta es un <strong>código</strong> que asigna un número a cada carácter.</p>
+<h3>8.1. ASCII</h3>
+<p><strong>ASCII</strong>, de 1963, asigna un número del 0 al 127 a las letras inglesas, los dígitos, los signos de puntuación y algunos caracteres de control. Cabe en 7 bits.</p>
+<pre tabindex="0" aria-label="Código Python desplazable horizontalmente"><code>print(ord("A"), ord("a"), ord("0"))
+print(chr(65), chr(97), chr(233))</code></pre>
+<pre tabindex="0" aria-label="Salida del programa"><code>65 97 48
+A a é</code></pre>
+<div class="cc1-curio">🔤 <strong>¿Sabías que…?</strong> Los códigos no son arbitrarios. La <code>A</code> es 65 y la <code>a</code> es 97: exactamente 32 de diferencia, que es 2<sup>5</sup>. Cambiar entre mayúscula y minúscula consistía en encender o apagar <strong>un solo bit</strong>. Y los dígitos empiezan en el 48, de modo que restando 48 al código se obtiene el valor numérico. Fueron decisiones de ingeniería tomadas cuando cada operación contaba.</div>
+<h3>8.2. Unicode</h3>
+<p>127 caracteres no dan ni para el español. Durante años cada país usó su propia extensión, y de ahí venían los textos llenos de símbolos raros al abrirlos en otro equipo. <strong>Unicode</strong> resolvió el problema asignando un número único a <em>todos</em> los caracteres de <em>todas</em> las escrituras: latino, griego, cirílico, árabe, chino, emoji.</p>
+<p>La forma habitual de almacenarlo es <strong>UTF-8</strong>, que usa un byte para los caracteres ASCII y hasta cuatro para el resto. Python 3 trabaja en Unicode de forma nativa:</p>
+<pre tabindex="0" aria-label="Código Python desplazable horizontalmente"><code>texto = "Año ñ é 中 🙂"
+print(len(texto))
+print(ord("ñ"), ord("中"))</code></pre>
+<pre tabindex="0" aria-label="Salida del programa"><code>11
+241 20013</code></pre>
+<div class="cc1-note">💡 Esto explica del todo la tercera trampa del CSV que viste en el <a href="tema12.html">Tema 12</a>: si un archivo se guarda con una codificación y se abre con otra, las tildes y las eñes se convierten en símbolos ilegibles. La solución es siempre la misma: <strong>UTF-8 en todas partes</strong>.</div>
+
+<h2 id="tablas">9. Listas de listas: tablas sencillas</h2>
+<p>Una lista puede contener otras listas, y eso permite representar una tabla: cada lista interior es una fila.</p>
+<pre tabindex="0" aria-label="Código Python desplazable horizontalmente"><code># Cada fila: nombre, nota de teoría, nota de práctica
+alumnado = [
+    ["Ana", 7, 8],
+    ["Luis", 4, 6],
+    ["Marta", 9, 9],
+]
+
+print(alumnado[0])       # una fila completa
+print(alumnado[0][0])    # fila 0, columna 0
+print(alumnado[1][2])    # fila 1, columna 2
+
+for fila in alumnado:
+    nombre = fila[0]
+    media = (fila[1] + fila[2]) / 2
+    estado = "apto" if media &gt;= 5 else "no apto"
+    print(f"{nombre:8s} media {media:.1f}  {estado}")</code></pre>
+<pre tabindex="0" aria-label="Salida del programa"><code>['Ana', 7, 8]
+Ana
+6
+Ana      media 7.5  apto
+Luis     media 5.0  apto
+Marta    media 9.0  apto</code></pre>
+<div class="aviso"><strong>El límite de esta representación</strong><code>fila[1]</code> no dice nada sobre qué contiene: hay que recordar que la columna 1 es la nota de teoría. Con tres columnas se lleva bien; con quince, es una fuente segura de errores. En Ciencias de la Computación II usarás diccionarios, donde cada dato se identifica por un nombre —<code>fila["teoria"]</code>— en lugar de por su posición.</div>
+
+<h2 id="elegir">10. Elegir la estructura adecuada</h2>
+<div class="tabla_responsiva"><table class="cc1-table">
+<tr><th>Necesitas…</th><th>Usa…</th><th>Porque…</th></tr>
+<tr><td>Un solo valor</td><td>Una variable</td><td>No hay nada que recorrer.</td></tr>
+<tr><td>Varios valores del mismo tipo, en orden</td><td>Una <strong>lista</strong></td><td>Se recorre, se amplía y se resume con facilidad.</td></tr>
+<tr><td>Texto</td><td>Una <strong>cadena</strong></td><td>Tiene métodos propios para partir, buscar y limpiar.</td></tr>
+<tr><td>Filas con varias columnas</td><td>Una <strong>lista de listas</strong></td><td>Cada fila es una lista, y se recorre con un bucle.</td></tr>
+<tr><td>Datos identificados por nombre</td><td>Diccionarios <em>(CC II)</em></td><td>Acceder por posición se vuelve inmanejable.</td></tr>
+</table></div>
+<div class="cc1-concept"><strong class="cc1-concept-tag">El criterio de fondo</strong>Elegir bien la estructura de datos <strong>simplifica el algoritmo antes de escribirlo</strong>. Muchos programas complicados lo son porque los datos están guardados de una forma que no encaja con lo que hay que hacer con ellos. Antes de empezar a escribir bucles, pregúntate cómo conviene tener organizados los datos.</div>
+<div class="cc1-think">🤔 <strong>Para pensar:</strong> vuelve al programa de estadísticas del <a href="tema18.html">Tema 18</a> y reescríbelo usando <code>sum()</code>, <code>len()</code>, <code>max()</code> y <code>sorted()</code>. ¿Cuántas líneas te ahorras? ¿Y qué has perdido, si es que has perdido algo? La respuesta a la segunda pregunta no es «nada»: entender el mecanismo de un acumulador te permite escribir el caso que ninguna función incorporada resuelve.</div>
+
+<h2 id="glosario">Glosario del tema</h2>
+<dl class="cc1-glosario">
+<dt>Lista</dt><dd>Colección ordenada y modificable de valores, escrita entre corchetes.</dd>
+<dt>Índice</dt><dd>Posición de un elemento dentro de una secuencia; empieza en cero.</dd>
+<dt>Índice negativo</dt><dd>Posición contada desde el final; <code>-1</code> es el último elemento.</dd>
+<dt>Troceado</dt><dd>Extracción de una porción de una secuencia mediante <code>[inicio:fin]</code>.</dd>
+<dt><code>append()</code></dt><dd>Método que añade un elemento al final de una lista.</dd>
+<dt>Filtrar</dt><dd>Construir una colección nueva con los elementos que cumplen una condición.</dd>
+<dt>Transformar</dt><dd>Construir una colección nueva aplicando un cálculo a cada elemento.</dd>
+<dt>Inmutable</dt><dd>Dicho de un valor que no puede modificarse; los métodos devuelven uno nuevo.</dd>
+<dt><code>split()</code></dt><dd>Método que parte una cadena y devuelve una lista.</dd>
+<dt><code>join()</code></dt><dd>Método que une los elementos de una lista en una cadena.</dd>
+<dt>ASCII</dt><dd>Código de 1963 que asigna un número del 0 al 127 a los caracteres básicos.</dd>
+<dt>Unicode</dt><dd>Norma que asigna un número único a los caracteres de todas las escrituras.</dd>
+<dt>UTF-8</dt><dd>Forma habitual de almacenar Unicode, con longitud variable de uno a cuatro bytes.</dd>
+<dt>Lista anidada</dt><dd>Lista cuyos elementos son a su vez listas; permite representar tablas.</dd>
+</dl>
+
+<section class="summary"><h2 id="resumen">Resumen esencial</h2><ol>
+<li>Una lista guarda muchos valores bajo un nombre y, con un bucle, hace que el programa funcione con cualquier cantidad de datos.</li>
+<li>Los índices empiezan en cero, el último es <code>len - 1</code> y <code>-1</code> es un atajo para el último.</li>
+<li>Las listas se modifican; conviene no hacerlo mientras se recorren.</li>
+<li><code>sorted()</code> devuelve una lista nueva y <code>.sort()</code> modifica la existente sin devolver nada.</li>
+<li>Filtrar, transformar y resumir resuelven casi cualquier tratamiento de datos, con el mismo esqueleto de bucle.</li>
+<li>Las cadenas son secuencias, pero inmutables: sus métodos devuelven una cadena nueva.</li>
+<li><code>split()</code> y <code>join()</code> conectan el mundo del texto con el de las listas.</li>
+<li>ASCII cubre 128 caracteres; Unicode los cubre todos, y UTF-8 es la forma habitual de guardarlo.</li>
+<li>Una lista de listas representa una tabla, pero acceder por posición se vuelve inmanejable al crecer.</li>
+</ol></section>
+
+<section aria-labelledby="fuentes">
+<h2 id="fuentes">Fuentes y recursos fiables</h2>
+<ul>
+<li id="fuente_1">[1] <a href="https://www.bocm.es/boletin/CM_Orden_BOCM/2023/05/31/BOCM-20230531-18.PDF">Orden 1736/2023, de 19 de mayo, Anexo IV</a> — currículo oficial de Ciencias de la Computación en Bachillerato (PDF).</li>
+<li id="fuente_2">[2] <a href="https://docs.python.org/es/3/tutorial/datastructures.html">Tutorial de Python — Estructuras de datos</a>.</li>
+<li id="fuente_3">[3] <a href="https://docs.python.org/es/3/library/stdtypes.html#string-methods">Documentación de Python — Métodos de cadena</a>.</li>
+<li id="fuente_4">[4] <a href="https://home.unicode.org/">Consorcio Unicode</a>.</li>
+<li id="fuente_5">[5] <a href="https://www.picuino.com/es/ley-ciencias-computacion-bach.html">Picuino — transcripción navegable del currículo</a>.</li>
+</ul>
+</section>
+</article></div></main>
+<nav class="topic-footer" aria-label="Navegación entre temas"><a href="tema18.html">← Tema 18</a><a href="tema20.html">Tema 20 →</a></nav>
+<footer class="site-footer">Ciencias de la Computación I · 1.º de Bachillerato · Comunidad de Madrid</footer>
+</body></html>

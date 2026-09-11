@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Tema 21 del Bloque E de Ciencias de la Computación I: dónde se escribe y se ejecuta un programa, qué ocurre cuando falla y cómo se demuestra que una corrección funciona.">
+<title>Tema 21. Entornos de programación, pruebas y depuración · CC1</title><link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/estilos.css"><script src="assets/navegacion.js" defer></script></head>
+<body><a class="skip" href="#contenido">Saltar al contenido</a>
+<div class="progress" aria-hidden="true"><span></span></div>
+<header class="site-header"><div class="header-inner">
+  <a class="brand" href="index.html"><span class="brand-mark">CC1</span><span>Ciencias de la Computación I<small>1.º de Bachillerato · 2026–2027</small></span></a>
+  <nav class="top-nav" aria-label="Navegación principal"><a href="index.html">Índice</a></nav>
+</div></header>
+<main id="contenido">
+<section class="hero"><div class="hero-inner"><div><p class="kicker">Tema 21 · Bloque E · Programación</p><h1>Entornos de programación, pruebas y depuración</h1><p class="hero-lead">Dónde se escribe y se ejecuta un programa, qué ocurre cuando falla y cómo se demuestra que una corrección funciona.</p></div><aside class="hero-note"><strong>Pregunta guía</strong><p>Tu programa se ejecuta sin errores pero da un resultado equivocado. ¿Por dónde empiezas?</p></aside></div></section>
+<div class="layout"><nav class="toc" aria-label="Índice del tema"><strong>En este tema</strong><ol>
+<li><a href="#entorno">Qué compone un entorno de programación</a></li>
+<li><a href="#notebook">Jupyter Notebook con Google Colab</a></li>
+<li><a href="#thonny">Thonny: el entorno local</a></li>
+<li><a href="#ejecucion">Compilar frente a interpretar</a></li>
+<li><a href="#errores">Los tres tipos de error</a></li>
+<li><a href="#traza">Leer un mensaje de error y su traza</a></li>
+<li><a href="#depurar">Depuración paso a paso con Thonny</a></li>
+<li><a href="#probar">Probar: casos normales, límite y no válidos</a></li>
+<li><a href="#metodo">Un método completo de depuración</a></li>
+<li><a href="#glosario">Glosario</a></li>
+<li><a href="#resumen">Resumen</a></li>
+<li><a href="#fuentes">Fuentes</a></li>
+</ol></nav><article class="paper">
+<p class="lesson-intro">Dónde se escribe y se ejecuta un programa, qué ocurre cuando falla y cómo se demuestra que una corrección funciona.</p>
+<div class="question"><strong>Antes de empezar:</strong> tu programa se ejecuta sin errores pero da un resultado equivocado. ¿Por dónde empiezas?</div>
+<div class="objectives"><strong>Al terminar serás capaz de…</strong><ul>
+<li>identificar los componentes de un entorno de programación</li>
+<li>comparar Jupyter Notebook y Thonny y elegir según la tarea</li>
+<li>explicar qué ocurre al ejecutar un programa compilado y uno interpretado</li>
+<li>distinguir errores de sintaxis, de ejecución y de lógica</li>
+<li>leer una traza de error y localizar la línea culpable</li>
+<li>depurar paso a paso con puntos de interrupción e inspección de variables</li>
+<li>diseñar casos de prueba normales, límite y no válidos</li>
+</ul></div>
+
+<h2 id="entorno">1. Qué compone un entorno de programación</h2>
+<p>Un <strong>entorno de programación</strong> reúne las herramientas necesarias para escribir, ejecutar y corregir programas. Sus componentes son siempre los mismos, aunque cambie el aspecto:</p>
+<div class="tabla_responsiva"><table class="cc1-table">
+<tr><th>Componente</th><th>Para qué sirve</th></tr>
+<tr><td><strong>Editor</strong></td><td>Escribir el código, con coloreado de sintaxis, sangría automática y avisos de error mientras escribes.</td></tr>
+<tr><td><strong>Motor de ejecución</strong></td><td>Ejecutar el programa: el intérprete de Python.</td></tr>
+<tr><td><strong>Consola</strong></td><td>Ver la salida, introducir datos y probar instrucciones sueltas.</td></tr>
+<tr><td><strong>Depurador</strong></td><td>Ejecutar paso a paso, detener el programa e inspeccionar el valor de las variables.</td></tr>
+<tr><td><strong>Gestión de bibliotecas</strong></td><td>Instalar y actualizar los módulos que el programa necesita.</td></tr>
+</table></div>
+<p>Cuando esos componentes vienen integrados en una sola aplicación se habla de un <strong>IDE</strong> (entorno de desarrollo integrado). Thonny lo es; un Notebook cubre casi todo salvo el depurador.</p>
+
+<h2 id="notebook">2. Jupyter Notebook con Google Colab</h2>
+<p>Es el entorno principal del curso y ya lo conoces del <a href="tema16.html">Tema 16</a>. Sus rasgos:</p>
+<div class="cc1-grid">
+<div class="cc1-card"><h3>Sin instalación</h3><p>Funciona en el navegador desde cualquier equipo del centro o de casa, con la misma sesión y los mismos archivos.</p></div>
+<div class="cc1-card"><h3>Texto y código juntos</h3><p>El mismo documento contiene la explicación y el programa ejecutable, con el resultado bajo cada celda.</p></div>
+<div class="cc1-card"><h3>Ejecución por celdas</h3><p>Se prueba un trozo pequeño sin ejecutar todo lo demás: ideal para explorar y para aprender.</p></div>
+<div class="cc1-card"><h3>Estado persistente</h3><p>Las variables sobreviven entre celdas, lo que ahorra recalcular… y provoca confusiones si se ejecutan en desorden.</p></div>
+</div>
+<div class="aviso"><strong>Sus dos limitaciones reales</strong>Un Notebook <strong>no tiene depurador paso a paso</strong> con la comodidad de un IDE, y su <strong>estado oculto</strong> permite que un documento parezca correcto cuando en realidad depende del orden en que ejecutaste las celdas. Por eso el curso usa un segundo entorno.</div>
+
+<h2 id="thonny">3. Thonny: el entorno local</h2>
+<p><strong>Thonny</strong> es un IDE de Python pensado expresamente para quien está aprendiendo. Se instala en el equipo, trae Python incluido y su interfaz no esconde nada de lo que hace falta.</p>
+<div class="tabla_responsiva"><table class="cc1-table">
+<tr><th></th><th>Jupyter Notebook (Colab)</th><th>Thonny</th></tr>
+<tr><td><strong>Dónde se ejecuta</strong></td><td>En un servidor remoto, desde el navegador.</td><td>En tu propio equipo, sin conexión.</td></tr>
+<tr><td><strong>Unidad de trabajo</strong></td><td>Celdas dentro de un archivo <code>.ipynb</code>.</td><td>Un programa completo en un archivo <code>.py</code>.</td></tr>
+<tr><td><strong>Ejecución</strong></td><td>Celda a celda, en el orden que elijas.</td><td>El archivo entero, siempre de arriba abajo.</td></tr>
+<tr><td><strong>Estado</strong></td><td>Persiste entre celdas.</td><td>Empieza limpio en cada ejecución.</td></tr>
+<tr><td><strong>Depurador</strong></td><td>Limitado.</td><td>Paso a paso, con puntos de interrupción e inspección de variables.</td></tr>
+<tr><td><strong>Mejor para</strong></td><td>Explorar, explicar, probar ideas.</td><td>Programas completos y, sobre todo, <strong>buscar errores</strong>.</td></tr>
+</table></div>
+<div class="cc1-concept"><strong class="cc1-concept-tag">Por qué dos entornos y no uno</strong>Porque resuelven problemas distintos. El Notebook es imbatible para aprender y para documentar; Thonny es imbatible para <strong>ver qué está haciendo realmente un programa</strong>. Y su ejecución siempre desde cero, en orden, elimina de raíz el problema del estado oculto: si un programa funciona en Thonny, funciona.</div>
+<div class="cc1-note">💡 Un archivo <code>.py</code> es texto plano: solo el programa, sin celdas ni resultados guardados. Es el formato con el que se distribuye el software real, y el que abrirá cualquier otro editor. Un <code>.ipynb</code>, en cambio, es un documento con el código, el texto y las salidas almacenadas.</div>
+
+<h2 id="ejecucion">4. Compilar frente a interpretar</h2>
+<p>En el <a href="tema09.html">Tema 9</a> viste las tres estrategias de traducción. Ahora que programas, conviene concretar qué ocurre exactamente al ejecutar tu código.</p>
+<div class="tabla_responsiva"><table class="cc1-table">
+<tr><th></th><th>Lenguaje compilado (C)</th><th>Python</th></tr>
+<tr><td><strong>Antes de ejecutar</strong></td><td>El compilador traduce todo el programa a código máquina y produce un ejecutable.</td><td>No hay paso previo: se lanza y se ejecuta.</td></tr>
+<tr><td><strong>Errores de sintaxis</strong></td><td>Se detectan todos al compilar, antes de ejecutar nada.</td><td>Se detectan al analizar el archivo, también antes de ejecutar.</td></tr>
+<tr><td><strong>Al ejecutar</strong></td><td>El procesador ejecuta directamente el código máquina.</td><td>El intérprete lee y ejecuta las instrucciones.</td></tr>
+<tr><td><strong>Se distribuye</strong></td><td>Un ejecutable, sin código fuente.</td><td>El código fuente; hace falta tener Python instalado.</td></tr>
+</table></div>
+<div class="cc1-note">💡 En realidad Python hace un paso intermedio: antes de ejecutar, traduce el código a una representación interna más eficiente y la guarda para no repetir el trabajo. Es lo que hay dentro de esas carpetas <code>__pycache__</code> que aparecen solas junto a tus archivos. La frontera entre compilado e interpretado, como se decía en el <a href="tema09.html">Tema 9</a>, es más borrosa de lo que parece.</div>
+
+<h2 id="errores">5. Los tres tipos de error</h2>
+<div class="tabla_responsiva"><table class="cc1-table">
+<tr><th>Tipo</th><th>Cuándo aparece</th><th>Cómo se manifiesta</th><th>Dificultad</th></tr>
+<tr><td><strong>Sintaxis</strong></td><td>Antes de ejecutar nada.</td><td><code>SyntaxError</code> con el número de línea.</td><td>Baja: el intérprete te lleva al sitio.</td></tr>
+<tr><td><strong>Ejecución</strong></td><td>Durante la ejecución.</td><td>El programa se detiene con una <strong>excepción</strong> y una traza.</td><td>Media: sabes dónde y qué pasó.</td></tr>
+<tr><td><strong>Lógica</strong></td><td>Nunca: el programa termina «bien».</td><td>El resultado es incorrecto, y nada avisa.</td><td><strong>Alta: hay que descubrirlo.</strong></td></tr>
+</table></div>
+<h3>5.1. Errores de sintaxis</h3>
+<pre tabindex="0" aria-label="Código Python desplazable horizontalmente"><code>if nota &gt;= 5      # falta los dos puntos
+    print("Aprobado")</code></pre>
+<h3>5.2. Errores de ejecución: las excepciones</h3>
+<p>Una <strong>excepción</strong> es un error que ocurre mientras el programa se ejecuta y que lo detiene. Los que más te encontrarás:</p>
+<div class="tabla_responsiva"><table class="cc1-table">
+<tr><th>Excepción</th><th>Qué significa</th><th>Causa típica</th></tr>
+<tr><td><code>NameError</code></td><td>Se usa un nombre que no existe.</td><td>Variable mal escrita o aún no creada.</td></tr>
+<tr><td><code>TypeError</code></td><td>Operación imposible entre esos tipos.</td><td>Sumar un texto y un número.</td></tr>
+<tr><td><code>ValueError</code></td><td>El tipo es correcto, el valor no.</td><td><code>int("hola")</code>.</td></tr>
+<tr><td><code>IndexError</code></td><td>Índice fuera de la lista.</td><td>Acceder a <code>lista[5]</code> en una lista de 5.</td></tr>
+<tr><td><code>ZeroDivisionError</code></td><td>División entre cero.</td><td>Calcular la media de una lista vacía.</td></tr>
+<tr><td><code>IndentationError</code></td><td>Sangría incoherente.</td><td>Mezclar espacios y tabuladores.</td></tr>
+</table></div>
+<div class="cc1-note">💡 Python permite <em>capturar</em> las excepciones para que el programa no se detenga y pueda reaccionar. Es contenido de Ciencias de la Computación II. En 1.º basta con saber reconocerlas, entender qué las provoca y evitarlas comprobando los datos antes, como con el <code>isdigit()</code> del <a href="tema19.html">Tema 19</a>.</div>
+<h3>5.3. Errores de lógica</h3>
+<pre tabindex="0" aria-label="Código Python desplazable horizontalmente"><code>def precio_con_descuento(precio, porcentaje):
+    # Falla lógicamente: suma el descuento en vez de restarlo.
+    return precio + precio * porcentaje / 100
+
+print(precio_con_descuento(80, 25))   # 100.0; se esperaba 60.0</code></pre>
+<pre tabindex="0" aria-label="Salida del programa"><code>100.0</code></pre>
+<div class="cc1-concept"><strong class="cc1-concept-tag">El error de lógica es el peligroso</strong>No hay mensaje, no hay línea señalada, no hay aviso. El programa hace exactamente lo que escribiste, y lo que escribiste no era lo que querías. <strong>Solo se detecta comprobando los resultados contra lo que esperabas</strong>, y por eso las pruebas no son un adorno: son la única herramienta que existe contra esta clase de error.</div>
+
+<h2 id="traza">6. Leer un mensaje de error y su traza</h2>
+<p>Cuando salta una excepción, Python imprime una <strong>traza</strong> (<em>traceback</em>) con toda la información necesaria. Mucha gente se asusta y no la lee; es un error, porque casi siempre dice exactamente qué pasa.</p>
+<pre tabindex="0" aria-label="Traza de error de Python"><code>Traceback (most recent call last):
+  File "notas.py", line 12, in &lt;module&gt;
+    print(calcular_media(notas))
+  File "notas.py", line 3, in calcular_media
+    return sum(numeros) / len(numeros)
+ZeroDivisionError: division by zero</code></pre>
+<div class="tabla_responsiva"><table class="cc1-table">
+<tr><th>Parte</th><th>Qué te dice</th></tr>
+<tr><td><code>Traceback (most recent call last)</code></td><td>Empieza la traza. <strong>Lo más reciente está al final</strong>: se lee de abajo arriba.</td></tr>
+<tr><td>La <strong>última línea</strong></td><td>El tipo de excepción y su explicación. Es lo primero que hay que leer.</td></tr>
+<tr><td>El <strong>bloque inmediatamente anterior</strong></td><td>El archivo, la línea y el código exactos donde ocurrió.</td></tr>
+<tr><td>Los <strong>bloques de arriba</strong></td><td>El camino de llamadas que llevó hasta allí: quién llamó a quién.</td></tr>
+</table></div>
+<div class="cc1-concept"><strong class="cc1-concept-tag">Cómo se lee una traza</strong>De abajo arriba y en dos pasos. Primero, <strong>la última línea</strong>: dice qué ha pasado —una división por cero—. Después, <strong>el bloque de encima</strong>: dice dónde —línea 3, dentro de <code>calcular_media</code>—. Con esas dos cosas ya sabes que <code>len(numeros)</code> valía cero, es decir, que le llegó una lista vacía. La traza no ha señalado el error: ha señalado dónde se manifestó. La <em>causa</em> está en quien pasó una lista vacía.</div>
+<div class="aviso"><strong>Dónde se manifiesta no es dónde está la causa</strong>Es la distinción que más tiempo ahorra al depurar. En el ejemplo, la línea 3 es correcta; el problema es que alguien llamó a la función con datos que no había previsto. Arreglar la línea 3 sin más taparía el síntoma. Es el mismo criterio del <a href="tema06.html">Tema 6</a>: identificar la fase en la que falla algo no es lo mismo que identificar su causa.</div>
+
+<h2 id="depurar">7. Depuración paso a paso con Thonny</h2>
+<p>Poner <code>print()</code> por todas partes funciona y es legítimo, pero es lento y hay que acordarse de quitarlos. Un <strong>depurador</strong> hace lo mismo mejor: detiene el programa donde quieras y te deja mirar dentro.</p>
+<div class="tabla_responsiva"><table class="cc1-table">
+<tr><th>Herramienta</th><th>Qué hace</th></tr>
+<tr><td><strong>Punto de interrupción</strong></td><td>Marca una línea donde el programa se detendrá al llegar.</td></tr>
+<tr><td><strong>Ejecutar paso a paso</strong></td><td>Avanza una instrucción cada vez, para ver el recorrido real.</td></tr>
+<tr><td><strong>Entrar en la función</strong></td><td>En lugar de saltarla, sigue la ejecución dentro de ella.</td></tr>
+<tr><td><strong>Inspector de variables</strong></td><td>Muestra el valor de cada variable <em>en ese instante</em>, y cómo cambia.</td></tr>
+<tr><td><strong>Continuar</strong></td><td>Reanuda hasta el siguiente punto de interrupción.</td></tr>
+</table></div>
+<div class="cc1-concept"><strong class="cc1-concept-tag">Por qué Thonny y no otro</strong>Thonny está diseñado para enseñar, y su depurador hace algo que los profesionales no: <strong>muestra cómo se evalúa una expresión por dentro</strong>, sustituyendo paso a paso cada parte por su valor. Ver cómo <code>2 + 3 * 4</code> se convierte primero en <code>2 + 12</code> y luego en <code>14</code> explica la precedencia del <a href="tema17.html">Tema 17</a> mejor que cualquier tabla.</div>
+<div class="cc1-note">💡 El depurador sirve para dos cosas distintas, y la segunda es la más valiosa: encontrar errores, sí, pero también <strong>entender un programa que no escribiste tú</strong>. Recorrer paso a paso un código ajeno viendo cambiar las variables es la forma más rápida de comprender qué hace.</div>
+
+<h2 id="probar">8. Probar: casos normales, límite y no válidos</h2>
+<p><strong>Probar</strong> es ejecutar el programa con datos elegidos a propósito y comparar el resultado con el esperado. Y para elegirlos bien hay tres categorías:</p>
+<div class="cc1-grid">
+<div class="cc1-card"><h3>Casos normales</h3><p>Datos típicos, los que el programa recibirá el 99 % de las veces. Comprueban que hace lo básico.</p></div>
+<div class="cc1-card"><h3>Casos límite</h3><p>Los bordes: cero, uno, vacío, el máximo, el mínimo, el valor justo de la frontera. <strong>Aquí falla casi todo.</strong></p></div>
+<div class="cc1-card"><h3>Casos no válidos</h3><p>Lo que no debería llegar: texto donde va un número, negativos, una lista vacía. Comprueban qué pasa cuando algo va mal.</p></div>
+</div>
+<h3>8.1. Una tabla de casos de prueba</h3>
+<p>Para la función <code>calificar(nota)</code> del <a href="tema20.html">Tema 20</a>, que devuelve «Aprobado» si la nota llega a 5:</p>
+<div class="tabla_responsiva"><table class="cc1-table">
+<tr><th>Entrada</th><th>Tipo de caso</th><th>Resultado esperado</th></tr>
+<tr><td><code>7</code></td><td>Normal, aprobado</td><td><code>"Aprobado"</code></td></tr>
+<tr><td><code>3</code></td><td>Normal, suspenso</td><td><code>"Suspenso"</code></td></tr>
+<tr><td><code>5</code></td><td><strong>Límite exacto</strong></td><td><code>"Aprobado"</code></td></tr>
+<tr><td><code>4.99</code></td><td><strong>Justo por debajo</strong></td><td><code>"Suspenso"</code></td></tr>
+<tr><td><code>0</code> y <code>10</code></td><td>Extremos del rango</td><td><code>"Suspenso"</code> y <code>"Aprobado"</code></td></tr>
+<tr><td><code>-3</code></td><td>No válido</td><td>Decidir y documentar qué debe pasar.</td></tr>
+</table></div>
+<div class="cc1-concept"><strong class="cc1-concept-tag">El caso que nunca se prueba</strong>Los alumnos prueban el 7 y el 3, y dan el programa por bueno. Los errores viven en el <strong>5 exacto</strong>: es donde se decide si la condición era <code>&gt;=</code> o <code>&gt;</code>, y ese detalle no se manifiesta con ningún otro valor. Cuando definas un caso de prueba, empieza siempre por la frontera.</div>
+<h3>8.2. Comprobar automáticamente con <code>assert</code></h3>
+<p>Escribir las comprobaciones en el propio programa permite repetirlas en un segundo cada vez que cambies algo:</p>
+<pre tabindex="0" aria-label="Código Python desplazable horizontalmente"><code>def calificar(nota):
+    """Devuelve 'Aprobado' si la nota alcanza el 5, y 'Suspenso' si no."""
+    return "Aprobado" if nota &gt;= 5 else "Suspenso"
+
+assert calificar(7) == "Aprobado"
+assert calificar(3) == "Suspenso"
+assert calificar(5) == "Aprobado"      # el caso frontera
+assert calificar(4.99) == "Suspenso"
+print("Todas las comprobaciones han pasado.")</code></pre>
+<pre tabindex="0" aria-label="Salida del programa"><code>Todas las comprobaciones han pasado.</code></pre>
+<p><code>assert</code> no hace nada si la condición se cumple, y detiene el programa con un <code>AssertionError</code> si falla. Es la forma más barata de tener pruebas: se escriben una vez y avisan solas.</p>
+<div class="cc1-note">💡 Esto es lo que hace tan rentable la separación del <a href="tema20.html">Tema 20</a>: una función de cálculo pura se comprueba con cuatro <code>assert</code>; una que además pide datos por teclado, no. <strong>Separar el cálculo es lo que hace posible probar.</strong></div>
+
+<h2 id="metodo">9. Un método completo de depuración</h2>
+<p>Aquí está la respuesta a la pregunta guía. Depurar no es mirar el código fijamente esperando la iluminación: es un procedimiento.</p>
+<div class="cc1-timeline">
+<div class="cc1-tl-item"><div class="cc1-tl-year">1 — Reproducir el fallo</div><p>Encuentra unos datos concretos con los que el error ocurra <strong>siempre</strong>. Un error que no sabes reproducir no lo puedes arreglar, y tampoco podrás comprobar si lo arreglaste.</p></div>
+<div class="cc1-tl-item"><div class="cc1-tl-year">2 — Escribir qué esperabas</div><p>Con esa entrada, qué salida debería dar y cuál da. Por escrito. Suena obvio y la mitad de las veces, al escribirlo, aparece el error.</p></div>
+<div class="cc1-tl-item"><div class="cc1-tl-year">3 — Reducir el caso</div><p>Simplifica los datos hasta el mínimo que siga fallando. Es mucho más fácil depurar con tres notas que con treinta.</p></div>
+<div class="cc1-tl-item"><div class="cc1-tl-year">4 — Localizar la zona</div><p>Divide el programa en dos y comprueba en el medio si los datos ya son incorrectos. Repite. Cada comprobación descarta la mitad del código, igual que la búsqueda del <a href="tema01.html">Tema 1</a>.</p></div>
+<div class="cc1-tl-item"><div class="cc1-tl-year">5 — Observar los valores reales</div><p>Con el depurador o con <code>print()</code>, mira qué valen las variables en ese punto. Casi siempre alguna no vale lo que dabas por hecho.</p></div>
+<div class="cc1-tl-item"><div class="cc1-tl-year">6 — Formular una hipótesis y comprobarla</div><p>«Creo que falla porque la lista llega vacía». Compruébala antes de tocar nada: si no era eso, habrás aprendido algo igualmente.</p></div>
+<div class="cc1-tl-item"><div class="cc1-tl-year">7 — Corregir una sola cosa</div><p>Un cambio cada vez. Si cambias tres y funciona, no sabrás cuál era, y volverá a pasarte.</p></div>
+<div class="cc1-tl-item"><div class="cc1-tl-year">8 — Volver a probar todo</div><p>El caso que fallaba y también los que ya funcionaban: una corrección puede romper otra cosa. Si tienes <code>assert</code>, esto cuesta un segundo.</p></div>
+</div>
+<div class="cc1-concept"><strong class="cc1-concept-tag">El mismo método de todo el curso</strong>Compara estos ocho pasos con el diagnóstico de un equipo que no arranca del <a href="tema06.html">Tema 6</a>: reproducir el síntoma, reducir posibilidades con evidencias y cambiar una sola cosa cada vez. <strong>Es el mismo procedimiento</strong>, aplicado a un programa en lugar de a una placa base. Depurar no es una habilidad de programador: es el método experimental.</div>
+<div class="aviso"><strong>Dos hábitos que ahorran horas</strong>El primero: cuando lleves veinte minutos atascado, <strong>explícale el problema en voz alta a alguien</strong>, aunque no sepa programar. Verbalizarlo obliga a ordenar lo que sabes y el error suele aparecer solo. El segundo: <strong>levántate y vuelve luego</strong>. Un error que resiste una hora de insistencia cae en dos minutos al día siguiente, y eso no es casualidad: mirar el mismo código repetidamente hace que dejes de leerlo y empieces a recordarlo.</div>
+<div class="cc1-think">🤔 <strong>Para pensar:</strong> con lo aprendido en todo el bloque, vuelve al programa de estadísticas del <a href="tema20.html">Tema 20</a> y prueba a llamar a <code>calcular_media([])</code>. Obtendrás un <code>ZeroDivisionError</code>. Ahora responde a tres preguntas: ¿dónde se manifiesta el error?, ¿dónde está su causa? y ¿qué debería hacer el programa en ese caso? La tercera no tiene una respuesta técnica: es una decisión de diseño, y tomarla es lo que separa un programa que funciona de uno que solo funciona a veces.</div>
+
+<h2 id="glosario">Glosario del tema</h2>
+<dl class="cc1-glosario">
+<dt>Entorno de programación</dt><dd>Conjunto de herramientas para escribir, ejecutar y corregir programas.</dd>
+<dt>IDE</dt><dd>Entorno de desarrollo integrado: editor, ejecución, consola y depurador en una sola aplicación.</dd>
+<dt>Thonny</dt><dd>IDE de Python orientado al aprendizaje, con depurador paso a paso.</dd>
+<dt>Archivo <code>.py</code></dt><dd>Programa de Python en texto plano, que se ejecuta entero y de arriba abajo.</dd>
+<dt>Excepción</dt><dd>Error que ocurre durante la ejecución y detiene el programa.</dd>
+<dt>Traza</dt><dd>Informe que Python imprime al producirse una excepción; se lee de abajo arriba.</dd>
+<dt>Error de lógica</dt><dd>Fallo que no produce ningún aviso: el programa termina y el resultado es incorrecto.</dd>
+<dt>Depurador</dt><dd>Herramienta que detiene el programa y permite inspeccionar sus variables.</dd>
+<dt>Punto de interrupción</dt><dd>Marca en una línea donde el depurador detendrá la ejecución.</dd>
+<dt>Caso de prueba</dt><dd>Conjunto de datos de entrada con su resultado esperado.</dd>
+<dt>Caso límite</dt><dd>Dato situado en la frontera de lo permitido: cero, vacío, el valor exacto de corte.</dd>
+<dt><code>assert</code></dt><dd>Instrucción que comprueba una condición y detiene el programa si no se cumple.</dd>
+<dt>Reproducir</dt><dd>Conseguir que un error ocurra siempre con unos datos concretos.</dd>
+<dt>Refactorizar</dt><dd>Mejorar la estructura del código sin cambiar lo que hace.</dd>
+</dl>
+
+<section class="summary"><h2 id="resumen">Resumen esencial</h2><ol>
+<li>Un entorno reúne editor, ejecución, consola, depurador y gestión de bibliotecas; cuando va todo junto es un IDE.</li>
+<li>El Notebook es mejor para explorar y explicar; Thonny, para ver qué hace realmente un programa y depurarlo.</li>
+<li>El estado oculto de un Notebook desaparece en Thonny, porque siempre ejecuta desde cero y en orden.</li>
+<li>Los errores de sintaxis paran antes de ejecutar; las excepciones, durante; los de lógica no paran nunca.</li>
+<li>Una traza se lee de abajo arriba: primero qué pasó, después dónde.</li>
+<li>Dónde se manifiesta un error no es dónde está su causa.</li>
+<li>Se prueba con casos normales, límite y no válidos, y los errores viven en la frontera exacta.</li>
+<li>Cuatro <code>assert</code> son pruebas de verdad, y solo son posibles si el cálculo está separado.</li>
+<li>Depurar es un método de ocho pasos, el mismo que diagnosticar una avería: reproducir, reducir, observar y cambiar una cosa cada vez.</li>
+</ol></section>
+
+<section aria-labelledby="fuentes">
+<h2 id="fuentes">Fuentes y recursos fiables</h2>
+<ul>
+<li id="fuente_1">[1] <a href="https://www.bocm.es/boletin/CM_Orden_BOCM/2023/05/31/BOCM-20230531-18.PDF">Orden 1736/2023, de 19 de mayo, Anexo IV</a> — currículo oficial de Ciencias de la Computación en Bachillerato (PDF).</li>
+<li id="fuente_2">[2] <a href="https://thonny.org/">Thonny — IDE de Python para aprender a programar</a>.</li>
+<li id="fuente_3">[3] <a href="https://docs.python.org/es/3/tutorial/errors.html">Tutorial de Python — Errores y excepciones</a>.</li>
+<li id="fuente_4">[4] <a href="https://docs.python.org/es/3/library/exceptions.html">Documentación de Python — Excepciones incorporadas</a>.</li>
+<li id="fuente_5">[5] <a href="https://colab.research.google.com/">Google Colab</a> — entorno de Notebooks usado en clase.</li>
+<li id="fuente_6">[6] <a href="https://www.picuino.com/es/ley-ciencias-computacion-bach.html">Picuino — transcripción navegable del currículo</a>.</li>
+</ul>
+</section>
+</article></div></main>
+<nav class="topic-footer" aria-label="Navegación entre temas"><a href="tema20.html">← Tema 20</a><a href="index.html">Índice →</a></nav>
+<footer class="site-footer">Ciencias de la Computación I · 1.º de Bachillerato · Comunidad de Madrid</footer>
+</body></html>
